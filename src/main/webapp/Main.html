@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>安迅驾校</title>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+   <link rel="stylesheet"
+	href="assets/bootstrap-table/bootstrap-table.css">
+<link rel="stylesheet"
+	href="assets/bootstrap-table/bootstrap-editable.css">
+<script src="assets/bootstrap-table/jquery.min.js"></script>
+<script src="assets/bootstrap-table/bootstrap.min.js"></script>
+<script src="assets/bootstrap-table/bootstrap-table.js"></script>
+<script src="assets/bootstrap-table/bootstrap-table-export.js"></script>
+<script src="assets/bootstrap-table/tableExport.js"></script>
+<script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>
+<script src="assets/bootstrap-table/bootstrap-editable.js"></script>
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/checkbox3.min.css" rel="stylesheet" >
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i> 安迅驾校</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+					 <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="chart.html">新增客户信息</a>
+                            </li>
+                            <li>
+                                <a href="morris-chart.html">修改客户信息</a>
+                            </li>
+                             <li>
+                                <a href="morris-chart.html">客户信息</a>
+                            </li>
+							</ul>
+						</li>	
+						 <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="chart.html">Charts JS</a>
+                            </li>
+                            <li>
+                                <a href="morris-chart.html">Morris Chart</a>
+                            </li>
+							</ul>
+						</li>	
+						 <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="chart.html">Charts JS</a>
+                            </li>
+                            <li>
+                                <a href="morris-chart.html">Morris Chart</a>
+                            </li>
+							</ul>
+						</li>	
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Second Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+        </nav>
+        <!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+        <!-- /. PAGE WRAPPER  -->
+        <div class="header"> 
+        <h1 class="page-header">用户列表信息</h1>
+        </div>
+		<div id="page-inner"> 
+		<div class="row">
+            <div class="col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title">个人信息</div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                  <div class="table-responsive">
+                                   <div id="toolbar" class="btn-group">
+            <button id="plus" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="edit" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+            </button>
+            <button id="delete" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+        </div> 
+               <table id="table" data-id-field="foodId"data-striped="true"
+					data-toolbar="#toolbar"
+					data-search="true" data-show-refresh="true" data-show-toggle="true"
+					data-pagination="true" data-show-columns="true" data-height="80%"
+					data-click-to-select="true">
+                                   <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-align="left" data-field="id">id</th>
+                                            <th data-align="left" data-field="userName">姓名</th>
+                                            <th data-align="left" data-field="campusName">曾用名</th>
+                                            <th>年龄</th>
+                                            <th>性别</th>
+                                            <th>学历</th>
+                                            <th>婚姻状况</th>
+                                            <th>证件号</th>
+                                            <th>供养人数</th>
+                                            <th>子女数目</th>
+                                            <th>户籍地址</th>
+                                            <th>房产状况</th>
+                                            <th>现住地址</th>
+                                            <th>手机号</th>
+                                            <th>固话</th>
+                                            <th>微信</th>
+                                             <th>QQ</th>
+                                            <th>社保基数/公积金基数</th>
+                                            <th>最高额度信用卡</th>
+                                            <th>近六个月的电话详单</th>
+                                            <th>划账银行卡开户行</th>
+                                        </tr>
+                                    </thead>
+                                   </table>
+                                  </div>
+                                </div>
+                            </div> 
+            </div>
+    </div>
+
+
+
+   <!-- 警告对话框 -->	
+	<div class="modal fade" id="alertdialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header blue">
+                   <div >
+                    	<strong id="alertchar" style="font-size:20px"></strong>
+                   </div>
+        
+                   <div class="modal-footer">
+			           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			           <button type="button" id="commitFoodDataButton" class="btn btn-primary">确定</button>
+	               </div> 
+              </div>
+         </div>
+       </div>
+   </div>
+         
+        
+   <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			<button type="button" id="commitFoodDataButton" class="btn btn-primary">确定</button>
+	</div>   
+
+    
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+         <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+    <script src="assets/js/select2.full.min.js"></script>
+     <!-- DATA TABLE SCRIPTS -->
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+    
+   <script type="text/javascript"> 
+   
+   	$("#table").bootstrapTable({
+		url : "clientinfo/getAll.do"
+	 });	           
+   
+	
+	$('#plus').click(function() {
+		window.location.href="AddInfo.html";
+	});
+
+	
+	$('#edit').on('click',function() {
+		var array = $('#table').bootstrapTable('getSelections');
+		tag=1;
+
+		if (array.length > 1) {
+			$('#alertchar').text('编辑操作不能同时选中多条记录！');
+			$('#commitFoodDataButton').hide();
+			$('#alertdialog').modal("show");
+		} else if (array.length == 0) {
+			$('#alertchar').text('请先选中某条记录！');
+			$('#commitFoodDataButton').hide();
+			$('#alertdialog').modal("show");
+		} else {
+			$("#myModalLabel").text("编辑公众号");
+			$("#myModal").modal('show');
+
+			alert(array[0].id);
+			
+			/*
+			var status=document.getElementsByName("status")
+			status[1-array[0].status].checked=true;
+            */
+		}
+	});
+   	
+	
+	$('#delete').on('click',function() {
+		var array = $('#table').bootstrapTable('getSelections');
+		tag=1;
+
+		if (array.length > 1) {
+			$('#alertchar').text('删除操作不能同时选中多条记录！');
+			$('#commitFoodDataButton').hide();
+			$('#alertdialog').modal("show");
+		} else if (array.length == 0) {
+			$('#alertchar').text('请先选中要删除的记录！');
+			$('#commitFoodDataButton').hide();
+			$('#alertdialog').modal("show");
+		} else {
+			$("#myModalLabel").text("编辑公众号");
+			$("#myModal").modal('show');
+
+			var id=array[0].id;
+	
+	var foodtext='是否确定要删除 '+id+' ? ';
+	
+	$('#alertchar').text(foodtext);
+	$('#commitFoodDataButton').show();
+	$('#alertdialog').modal("show");
+	
+	$('#commitFoodDataButton').click(function(){
+		//做删除的访问请求
+		$.post("clientinfo/delete.do", {
+			id : id
+		}, function(text) {
+			var json = eval('(' + text + ')');
+			if (json == 1) {				
+				/*
+				for ( var i = array.length - 1; i >= 0; i--) {
+					$('#table').bootstrapTable('remove', {
+						field : 'foodId',
+						values : [ array[i].foodId ]
+					});
+				   }
+					*/
+					
+					/*
+					 * 刷新页面
+					 */
+					var url="clientinfo/getAll.do";
+
+			    	$(" #table").bootstrapTable('refresh',{
+						url : url
+					});
+			    	
+				$('#alertchar').text("删除成功");
+				setTimeout(function(){
+				 $('#alertdialog').modal("hide");
+				},1000);
+			 } else {
+				$('#alertchar').text("删除失败");
+				setTimeout(function(){
+					 $('#alertdialog').modal("hide");
+					},1000);
+			 }
+		  });
+	   });
+	        
+	
+		}
+	});
+	
+   	</script>
+</body>
+
+</html>

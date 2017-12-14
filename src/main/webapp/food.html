@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<div id="aaa"></div>
+<body>
+<script type='text/javascript' src="js/jquery.js"></script>
+	<script type='text/javascript' src="js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	$.get("../../zc/clientinfo/getAll.do?limit=10&offset=0&sort=null&order=null&search=null",
+			{},
+			function(text){
+				
+				$("#aaa").append(text);
+			
+		     });
+	</script>
+</body>
+</html>
