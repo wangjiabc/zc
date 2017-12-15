@@ -21,6 +21,7 @@ public class SelectExe {
 			}
 			
 			sql=(String) map.get("sql");
+			System.out.println(sql);
 			List params=(List) map.get("params");
 			
 			List list= getJdbcTemplate.query(sql,params.toArray(),new RowMappers(object.getClass()));

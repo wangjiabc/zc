@@ -1,12 +1,22 @@
 package com.voucher.manage.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.aspectj.util.FileUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
@@ -16,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
@@ -133,7 +144,7 @@ public class ClientInfoController {
 	}
 	
 	@RequestMapping(value = "/getAll")
-	public @ResponseBody List getAllClientInfo(Integer limit,Integer offset,String sort,String order,
+	public @ResponseBody Map getAllClientInfo(@RequestParam Integer limit,@RequestParam Integer offset,String sort,String order,
 			String search,HttpServletRequest request) {
 		
 	
@@ -151,9 +162,7 @@ public class ClientInfoController {
 		
 		Map map=userDao.getAllClientInfo(limit, offset, null, order, search);
 		
-		List list=(List) map.get("rows");
-		
-		return list;
+		return map;
 	}
 	
 	
@@ -165,29 +174,123 @@ public class ClientInfoController {
 	}
 	
 	@RequestMapping(value="inputImage")
-	public void uploadFilesSpecifyPath(HttpServletRequest request, String Filedata) throws Exception {  
-	    MultipartFile mf = null;  
-	    File mff = null;  
-	  /*  if (!(request instanceof MultipartHttpServletRequest)) {  
-	        String errorMsg = "your post form is not support ENCTYPE='multipart/form-data' ";  
+	public void uploadFilesSpecifyPath(@RequestParam("file") MultipartFile[] file,@RequestParam Integer id,HttpServletRequest request,HttpServletResponse response) throws Exception {  
+		 long startTime=System.currentTimeMillis();   //获取开始时间  
+	      /*  if(!file.isEmpty()){  
+	            try {  
+	                //定义输出流 将文件保存在D盘    file.getOriginalFilename()为获得文件的名字   
+	                FileOutputStream os = new FileOutputStream("C:\\Users\\WangJing\\Desktop\\bb\\2\\"+file.getOriginalFilename());  
+	                InputStream in = file.getInputStream();  
+	                int b = 0;  
+	                while((b=in.read())!=-1){ //读取文件   
+	                    os.write(b);  
+	                }  
+	                os.flush(); //关闭流   
+	                in.close();  
+	                os.close();  
+	                  
+	            } catch (FileNotFoundException e) {  
+	                e.printStackTrace();  
+	            } catch (IOException e) {  
+	                e.printStackTrace();  
+	            }  
+	        }  */
+		 
+		 System.out.println("id="+id);
+		 
+		 if(file!=null&&file.length>0){
+	            //组合image名称，“;隔开”
+	            List<String> fileName =new ArrayList<String>();
+                System.out.println("length="+file.length);
+	            try {
+	                for (int i = 0; i < file.length; i++) {
+	                    if (!file[i].isEmpty()) {
 
-	        throw new RuntimeException(errorMsg);  
-	    }  */
-	    MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;  
-	    List<MultipartFile> multipartFiles = multipartRequest.getFiles(Filedata);  
-	    if (null != multipartFiles && multipartFiles.size() > 0) {  
-	        mf = multipartFiles.get(0);  
-	       System.out.println(Filedata);
-	        File source = new File("C:\\Users\\WangJing\\Desktop\\bb\\2\\a");  
-	        try {  
-	            mf.transferTo(source);  
-	            mff = source;  
-	        } catch (Exception e) {  
-	            String errorMsg = "Upload file " + source.getAbsoluteFile() + " Error!" + e.getMessage();  
-	            throw new RuntimeException(errorMsg);  
-	  
-	        }  
-	    }  
+	                        //上传文件，随机名称，";"分号隔开
+	                       // fileName.add(FileUtil.uploadImage(request, "/upload/"+"/", file[i], true));
+	                    	fileName.add(uploadImage(request, "/upload/"+"/", file[i], true));
+	                    }
+	                }
+
+	                //上传成功
+	                if(fileName!=null&&fileName.size()>0){
+	                    System.out.println("上传成功！");
+	                 //   Constants.printJson(response, fileName);;
+	                }else {
+	                  //  Constants.printJson(response, "上传失败！文件格式错误！");
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	              //  Constants.printJson(response, "上传出现异常！异常出现在：class.UploadController.insert()");
+	            }
+	        }else {
+	         //   Constants.printJson(response, "没有检测到文件！");
+	        }
+	    
+		 
+		 
+	        long endTime=System.currentTimeMillis(); //获取结束时间  
+	        System.out.println("上传文件共使用时间："+(endTime-startTime));  
  
-	}  
+	} 
+	
+	
+	/**
+     * 上传图片
+     *  原名称
+     * @param request 请求
+     * @param path_deposit 存放位置(路径)
+     * @param file 文件
+     * @param isRandomName 是否随机名称
+     * @return 完整文件路径
+     */
+    public  String uploadImage(HttpServletRequest request,String path_deposit,MultipartFile file,boolean isRandomName) {
+        //上传
+        try {
+            String[] typeImg={"gif","png","jpg"};
+
+            if(file!=null){
+                String origName=file.getOriginalFilename();// 文件原名称
+                System.out.println("上传的文件原名称:"+origName);
+                // 判断文件类型
+                String type=origName.indexOf(".")!=-1?origName.substring(origName.lastIndexOf(".")+1, origName.length()):null;
+                if (type!=null) {
+                    boolean booIsType=false;
+                    for (int i = 0; i < typeImg.length; i++) {
+                        if (typeImg[i].equals(type.toLowerCase())) {
+                            booIsType=true;
+                        }
+                    }
+                    //类型正确
+                    if (booIsType) {
+                        //存放图片文件的路径
+                        String path=request.getSession().getServletContext().getRealPath(path_deposit);
+                        //组合名称
+                        String fileSrc=""; 
+                        //是否随机名称
+                        if(isRandomName){
+                            origName=UUID.randomUUID().toString()+origName.substring(origName.lastIndexOf("."));
+                        }
+                        //判断是否存在目录
+                        File targetFile=new File(path,origName);
+                        System.out.println(path);
+                        if(!targetFile.exists()){
+                            targetFile.mkdirs();//创建目录
+                        }
+                        //上传
+                        file.transferTo(targetFile);
+                        //完整路径
+                        fileSrc=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+path_deposit+origName;
+                        System.out.println("图片上传成功:"+fileSrc);
+                        return fileSrc;
+                    }
+                }
+            }
+            return null;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+	
 }

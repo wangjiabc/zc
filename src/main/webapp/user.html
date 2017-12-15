@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>用户管理</title>
-
-<link rel="stylesheet"
+<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>用户管理</title>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+   <link rel="stylesheet"
 	href="assets/bootstrap-table/bootstrap-table.css">
 <link rel="stylesheet"
 	href="assets/bootstrap-table/bootstrap-editable.css">
@@ -16,8 +20,23 @@
 <script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>
 <script src="assets/bootstrap-table/bootstrap-editable.js"></script>
 <script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="admin.js"></script>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/checkbox3.min.css" rel="stylesheet" >
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,60 +45,116 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.min.js"></script>
 <![endif]-->
-<style>
-.ml10 {
-	margin-left: 10px;
-}
 
-#operate-success {
-
-	font-size: 16px;
-	background-color: #8AC007;
-	color: #FBFBFB;
-	visibility: hidden
-}
-</style>
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="page-header">
-			<h1>用户管理&nbsp;&nbsp;</h1>
-		</div>
-		<div style="text-align: center;">
-			<span id="operate-success">设置成功</span>
-		</div>
-		<div>
-			<table id="table" data-toggle="table" data-show-export="false"
-				data-url="/zc/clientinfo/getAll.do" data-search="true"
+ <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中财财务</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="user.html"><i class="fa fa-user fa-fw"></i> 用户管理</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 用户设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+					 <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="chart.html">新增客户信息</a>
+                            </li>
+                            <li>
+                                <a href="morris-chart.html">修改客户信息</a>
+                            </li>
+                             <li>
+                                <a href="morris-chart.html">客户信息</a>
+                            </li>
+						</ul>
+						</li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+        <!-- /. PAGE WRAPPER  -->
+        <div class="header"> 
+        <h1 class="page-header">用户管理</h1>
+        </div>
+		<div id="page-inner"> 
+		<div class="row">
+            <div class="col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title">用户权限管理</div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                  <div class="table-responsive">
+                                  
+              <table id="table"  class="table table-striped table-bordered table-hover" data-toggle="table" data-show-export="false"
+				data-url="/zc/user/getAllUser.do" data-search="true"
 				data-show-refresh="true" data-show-toggle="true"
 				data-side-pagination="server" data-pagination="true"
 				data-show-columns="true">
-				<thead>
-					<tr>
-						<!-- <th data-field="state" data-checkbox="true"></th> -->
-						<th data-field="nickname">昵称</th>
-						<th data-field="openId">openId</th>
-						<th data-field="imgUrl">头像</th>
-						<th data-field="sex" data-formatter="statusSex">性别</th>
-						<th data-field="place" data-formatter="statusFormatter" data-sortable="true">系统职务</th>
-						<th data-field="action" data-formatter="actionFormatter"
-							   data-events="actionEvents">权限修改</th>
-					    <th data-field="name">姓名</th>
-						<th data-field="headship">实际职务</th>
-						<th data-field="email">Email</th>
-						<th data-field="phone">手机号</th>
-						<th data-field="address">家庭住址</th>
-						<th data-field="subScribe">关注</th>
-						<th data-field="subscribeTime" data-sortable="true">关注时间</th>												
-						<th data-field="country" data-visible="false">国家</th>
-						<th data-field="province" data-visible="false">省份</th>
-						<th data-field="city" data-visible="false">城市</th>
-						<th data-field="groupId" data-visible="false">分组ID</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-	</div>
+                                   <thead>
+                                        <tr>
+										<!-- <th data-field="state" data-checkbox="true"></th> -->
+										<th data-field="nickname">昵称</th>
+										<th data-field="openId">openId</th>
+										<th data-field="imgUrl">头像</th>
+										<th data-field="sex" data-formatter="statusSex">性别</th>
+										<th data-field="place" data-formatter="statusFormatter" data-sortable="true">系统职务</th>
+										<th data-field="action" data-formatter="actionFormatter"
+											   data-events="actionEvents">权限修改</th>
+									    <th data-field="name">姓名</th>
+										<th data-field="headship">实际职务</th>
+										<th data-field="email">Email</th>
+										<th data-field="phone">手机号</th>
+										<th data-field="address">家庭住址</th>
+										<th data-field="subScribe">关注</th>
+										<th data-field="subscribeTime" data-sortable="true">关注时间</th>												
+										<th data-field="country" data-visible="false">国家</th>
+										<th data-field="province" data-visible="false">省份</th>
+										<th data-field="city" data-visible="false">城市</th>
+										<th data-field="groupId" data-visible="false">分组ID</th>
+									</tr>
+                                    </thead>
+                                   </table>
+                                  </div>
+                                </div>
+                            </div> 
+			            </div>
+			    </div>
+	
 	<script>
 	var campusId=1;
 	
@@ -111,10 +186,7 @@
 					'</a>',
 					'<a class="admin ml8 fa fa-user" href="javascript:void(0)" title="设为安全人员">',
 					'&nbsp;&nbsp;',
-					'</a>',
-					'<a class="common ml8 fa fa-user-circle" href="javascript:void(0)" title="设置普通员工">',
-					'&nbsp;&nbsp;',
-					'</a>' ].join('');
+					'</a>'].join('');
 
 	}
    
@@ -157,28 +229,6 @@
 							index : index,
 							row : {
 								type : 1
-							}
-						});
-						$('#table').bootstrapTable('refresh', {silent: true});
-					}
-
-				});
-			},
-			'click .common' : function(e, value, row, index) {
-				//alert("superAdmin");
-				$.post("../../voucher/user/upAtionFormatter.do", {
-					openId : row.openId,
-					place:0,
-					campusId:campusId,
-				}, function(text) {
-					if (text == -1 || text == 0) {
-						setSuccess("设置为普通员工失败。");
-					} else {
-						setSuccess("设置为普通员工成功。");
-						$('#table').bootstrapTable('updateRow', {
-							index : index,
-							row : {
-								type : 0
 							}
 						});
 						$('#table').bootstrapTable('refresh', {silent: true});

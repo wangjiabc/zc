@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>中泸投资</title>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/checkbox3.min.css" rel="stylesheet" >
+    <link href="assets/js/form-validator/form-validator.css" rel="stylesheet" >
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+    <link rel="stylesheet" href="assets/css/fileinput.min.css">  
+      <script src="assets/js/jquery-1.10.2.js"></script>
+    <!-- <script src="assets/js/jquery-3.2.1.min.js"></script> -->
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+         <!-- Custom Js -->
+    <!-- <script src="assets/js/custom-scripts.js"></script> -->
+    <script src="assets/js/select2.full.min.js"></script>
+    <script src="assets/js/form-validator/form-validator.js"></script>
+    <!-- 文件上传 -->
+    <script src="assets/js/fileinput.min.js"></script>
+    <script src="assets/js/fileinput_locale_zh.js"></script>
+</head>
+
+
+
+<body>
+
+
+    <input type="file" name="file" class="file"  id="zx_img1" style="padding: 0px;" placeholder="&nbsp;上传文件">
+     <input type="file" name="file" class="file"  id="zx_img2" style="padding: 0px;" placeholder="&nbsp;上传文件">
+       <input type="file" name="file" class="file"  id="zx_img3" style="padding: 0px;" placeholder="&nbsp;上传文件">
+</div>
+    
+    <button id="aaa" >开始上传</button>  
+</div>  
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+
+  var id=245;
+
+  $("#aaa").click(function(){
+    var fileObj1 = document.getElementById("zx_img1").files[0]; // 获取文件对象  
+    var fileObj2 = document.getElementById("zx_img2").files[0];
+    var fileObj3 = document.getElementById("zx_img3").files[0];
+    var FileController = "/zc/clientinfo/inputImage.do?"+id; // 接收上传文件的后台地址  
+              
+    if(fileObj1){  
+ 
+         // FormData 对象  
+             var form = new FormData();   
+             form.append("file", fileObj1);// 文件对象     
+             form.append("id",id);
+             // XMLHttpRequest 对象  
+             var xhr = new XMLHttpRequest();      
+             xhr.open("post", FileController, true);      
+             xhr.onload = function () {   
+                 alert(xhr.responseText);     
+             };   
+             xhr.send(form);  
+               if(fileObj2){
+            	   var form = new FormData();   
+                   form.append("file", fileObj2);// 文件对象     
+            
+                   // XMLHttpRequest 对象  
+                   var xhr = new XMLHttpRequest();      
+                   xhr.open("post", FileController, true);      
+                   xhr.onload = function () {   
+                       alert(xhr.responseText);     
+                   };   
+                   xhr.send(form);  
+               } 
+              if(fileObj3){
+            	  var form = new FormData();   
+                  form.append("file", fileObj3);// 文件对象     
+           
+                  // XMLHttpRequest 对象  
+                  var xhr = new XMLHttpRequest();      
+                  xhr.open("post", FileController, true);      
+                  xhr.onload = function () {   
+                      alert(xhr.responseText);     
+                  };   
+                  xhr.send(form);  
+               }
+    }else{  
+        alert("未选择文件");  
+    }  
+    
+  });
+
+</script>

@@ -64,7 +64,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 	}
 
 	@Override
-	public List<Users> getAllFullUser(Integer limit, Integer offset, String sort,
+	public Map getAllFullUser(Integer limit, Integer offset, String sort,
 			String order, String search) {
 		// TODO Auto-generated method stub
 		Users users=new Users();
@@ -73,6 +73,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		users.setOffset(offset);
 		users.setSort(sort);
 		users.setOrder(order);
+		users.setNotIn("id");
 		
         if(search!=null){
         	search="%"+search+"%";
@@ -81,28 +82,19 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
         }
 				
 		
-		return SelectExe.get(this.getJdbcTemplate(), users);
+         Map<String, Object> map=new HashMap<>();
+		
+	    List<Users> users2=SelectExe.get(this.getJdbcTemplate(), users);
+
+	    map.put("rows", users2);
+	    
+		int total=(int) SelectExe.getCount(this.getJdbcTemplate(), users).get("");
+		
+		map.put("total", total);
+		System.out.println("map="+map);
+		return map;
 	}
 
-	@Override
-	public Integer getUserCount(String search) {
-		// TODO Auto-generated method stub
-        Users users=new Users();
-		
-		
-        if(search!=null){
-        	search="%"+search+"%";
-        	String[] where={"campusAdmin like ",search};
-        	users.setWhere(where);
-        }
-        
-		
-		Map map=SelectExe.getCount(this.getJdbcTemplate(), users);
-		
-		Integer total=(Integer) map.get("");
-        
-		return total;
-	}
 
 	@Override
 	public Integer insertIntoClientInfo(ClientInfo clientInfo) {
