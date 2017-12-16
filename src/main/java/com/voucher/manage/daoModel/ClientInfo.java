@@ -12,6 +12,12 @@ public class ClientInfo implements Serializable{
     @SQLInteger(name="id")
 	private Integer id;
 
+    @SQLString(name="GUID")
+	private String GUID;
+
+    @SQLString(name="campusAdmin")
+	private String campusAdmin;
+    
     @SQLString(name="borrowUse")
 	private String borrowUse;
 
@@ -224,6 +230,22 @@ public class ClientInfo implements Serializable{
 		return id;
 	}
 
+	public void setGUID(String GUID){
+		this.GUID = GUID;
+	}
+
+	public String getGUID(){
+		return GUID;
+	}
+
+	public void setCampusAdmin(String campusAdmin){
+		this.campusAdmin = campusAdmin;
+	}
+
+	public String getCampusAdmin(){
+		return campusAdmin;
+	}
+	
 	public void setBorrowUse(String borrowUse){
 		this.borrowUse = borrowUse;
 	}

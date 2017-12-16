@@ -248,6 +248,7 @@
                             </div>
                           </div>
                           </div>
+                          <div id="image"></div>
                           <div class="container kv-main col-sm-12">
                             <input type="file" name="file" class="file"  id="zx_img1" style="padding: 0px;" placeholder="&nbsp;上传文件">
     						<input type="file" name="file" class="file"  id="zx_img2" style="padding: 0px;" placeholder="&nbsp;上传文件">
@@ -730,8 +731,17 @@
         //         ],
         //     });
         // }
-      $(function () {
-         $('#insuranceInfo-form').bootstrapValidator({
+    
+    function getQueryString(name) {
+  	  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  	  var r = window.location.search.substr(1).match(reg);
+  	  if (r != null) return unescape(r[2]); return null;
+    }
+        
+    
+     $(function () {
+    	 
+        $('#insuranceInfo-form').bootstrapValidator({
 　　　　　　　　message: 'This value is not valid',
             　feedbackIcons: {
                 　　　　　　　　valid: 'glyphicon glyphicon-ok',
@@ -1304,7 +1314,7 @@
         });
     });
      
-      var options = {
+    /*  var options = {
     		    url: 'clientinfo/inputImage.do',
     		    type: 'post',
     		    dataType: 'text',
@@ -1314,9 +1324,20 @@
     		        $("#responseText").text(data);
     		    }
     		};
+      */
       
+ var uuid=getQueryString("uuid");
       
-	
+      $.ajax({
+			type:"post",
+			url:"clientinfo/get.do",
+			data:{uuid:uuid},
+			success:function(data){
+				 var obj = $.parseJSON(data);
+				 console.log(obj);
+				 console.log(obj.userName);
+			}
+      });
    
 	function checkInfo(){
      $('#userinfo-form').bootstrapValidator('validate');
@@ -1403,18 +1424,15 @@
 		$.ajax({
 			type:"get",
 			async: false,
-			url:"clientinfo/insert.do",
-			data:{clientInfoData:clientInfodata}
-			,
+			url:"clientinfo/update.do",
+			data:{clientInfoData:clientInfodata,
+				uuid:uuid},
 			success:function(data){
 				var obj = $.parseJSON(data);
 				if(obj.data=="error"){
 					alert("请确认信息填写完整");
 					return false;
-				}else{
-					alert("添加成功");
-					var uuid=obj.data;
-					
+				}else{					
 					var fileObj1 = document.getElementById("zx_img1").files[0]; // 获取文件对象  
 				    var fileObj2 = document.getElementById("zx_img2").files[0];
 				    var fileObj3 = document.getElementById("zx_img3").files[0];
@@ -1485,7 +1503,7 @@
 				                  xhr.send(form);  
 				               }
 				    
-					
+				              alert("添加成功");
 					return uuid;
 				}
 			}
@@ -1495,7 +1513,22 @@
 		
 	}
 	
-	
+	$.ajax({
+		type:"post",
+		async: false,
+		url:"/zc/clientinfo/imageUrl.do",
+		data:{clientInfo_GUID:uuid},
+		success:function(data){
+			var obj = $.parseJSON(data);
+			for(var i=0;i<obj.length;i++){
+				var cc=new Image();
+				cc.src="/zc"+obj[i];
+				cc.width=100;
+				cc.height=100;
+				document.getElementById("image").appendChild(cc);
+			}
+		 }
+		});
 	
 function addInfo(){
 		
@@ -1503,6 +1536,11 @@ function addInfo(){
 
 		return false;
 	}
+	
+
+    
+
+    
 	
 	</script>
 </body>

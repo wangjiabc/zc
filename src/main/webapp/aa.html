@@ -46,29 +46,50 @@
 </div>
     
     <button id="aaa" >开始上传</button>  
+   
 </div>  
 
+ 		<div id="image"></div>
 </body>
 </html>
 
 
 <script type="text/javascript">
 
+ 	var uuid="b616118c-0b31-4bda-8a9c-b526aafc2f45";
+ 	var clientInfo_GUID=uuid;
+ 	$.ajax({
+		type:"post",
+		async: false,
+		url:"/zc/clientinfo/imageUrl.do",
+		data:{clientInfo_GUID:uuid},
+		success:function(data){
+			var obj = $.parseJSON(data);
+			for(var i=0;i<obj.length;i++){
+				var cc=new Image();
+				cc.src="/zc"+obj[i];
+				cc.width=100;
+				cc.height=100;
+				cc.padding=10;
+				document.getElementById("image").appendChild(cc);
+			}
+		 }
+		});
 
-  var id=245;
+
 
   $("#aaa").click(function(){
     var fileObj1 = document.getElementById("zx_img1").files[0]; // 获取文件对象  
     var fileObj2 = document.getElementById("zx_img2").files[0];
     var fileObj3 = document.getElementById("zx_img3").files[0];
-    var FileController = "/zc/clientinfo/inputImage.do?"+id; // 接收上传文件的后台地址  
+    var FileController = "/zc/clientinfo/inputImage.do?uuid="+uuid; // 接收上传文件的后台地址  
               
     if(fileObj1){  
  
          // FormData 对象  
              var form = new FormData();   
              form.append("file", fileObj1);// 文件对象     
-             form.append("id",id);
+             form.append("uuid",uuid);
              // XMLHttpRequest 对象  
              var xhr = new XMLHttpRequest();      
              xhr.open("post", FileController, true);      

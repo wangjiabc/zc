@@ -45,7 +45,7 @@ public class SellerController {
 				&& !password.trim().equals("")) {
 			Users users = userDao.selectUsersByCampusAdmin(campusAdmin);
 			if (users != null) {
-				if (users.getPassword().equals(Md5.GetMD5Code(password))) {
+				if (users.getPassword().equals(Md5.GetMD5Code(password))&&users.getState()==1) {
 					map.put(Constants.STATUS, Constants.SUCCESS);
 					map.put(Constants.MESSAGE, "登陆成功");
 					map.put("type", users.getType());
@@ -53,9 +53,12 @@ public class SellerController {
 					session.setAttribute("type", users.getType());
 					session.setAttribute("campusAdmin",
 							users.getCampusAdmin());
-					session.setAttribute("cityId", users.getCityId());
+					session.setAttribute("state", users.getState());
 					Date date = new Date();
-				//	sellerService.updateLastLoginTime(date, campusAdmin);
+					userDao.updateLastLoginTime(users,date);
+				}else if(users.getPassword().equals(Md5.GetMD5Code(password))){
+					map.put(Constants.STATUS, Constants.FAILURE);
+					map.put(Constants.MESSAGE, "你的帐户没有登陆权限");
 				} else {
 					map.put(Constants.STATUS, Constants.FAILURE);
 					map.put(Constants.MESSAGE, "用户名或者密码错误");

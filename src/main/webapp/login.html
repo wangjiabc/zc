@@ -22,7 +22,8 @@
 			$.post("../../zc/seller/toLogin.do",
 				{campusAdmin:phone,password:password},
 				function(text){
-					var json=eval('('+text+')');
+					var json=$.parseJSON(text);
+					console.log(json);
 					if (json.status=="success") {
 								//将用户名和密码存到cookie
 									document.cookie = "campusAdmin="+phone;
@@ -46,7 +47,7 @@
 									},"json");
 
 						}else{
-                            $("#message").html("对不起，你没有登陆权限！");
+                            $("#message").html(json.message);
 						}
 
 				});

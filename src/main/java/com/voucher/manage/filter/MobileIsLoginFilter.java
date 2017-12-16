@@ -50,7 +50,7 @@ public class MobileIsLoginFilter implements Filter{
 		            return;
 		        }
 		        
-		        String openId=( String ) hrequest.getSession().getAttribute("openId");
+		        Integer type=(Integer) hrequest.getSession().getAttribute("type");
 		        
 		        HttpServletRequest httpRequest = (HttpServletRequest) request;
 				WebApplicationContext wac = WebApplicationContextUtils    //controller以外的包初始化类
@@ -59,20 +59,18 @@ public class MobileIsLoginFilter implements Filter{
 		        
 			//	usersMapper=wac.getBean(UsersMapper.class);
 				
-		        if (openId==null) {
+		        if (type!=0) {
 		        //	HttpSession session = hrequest.getSession();
 		        //	  session.invalidate();       
+		        	System.out.println("redirectPath="+redirectPath);
 		        	wrapper.sendRedirect(redirectPath);
 		            return;
 		        }else {
-		        	System.out.println("mobileIsLoginFilter openid="+openId);
-		      //  	Users users=usersMapper.getUserByOnlyOpenId(openId);
-		        	System.out.println("mobileIsLoginFilter openId ="+openId);
-		      /*     if(users.getPlace()>=1){  //通过place判断用户的访问权限，数字越大权限越高
-		             chain.doFilter(request, response);
-		            }else{
-		        	 wrapper.sendRedirect(redirectPath);
-		        	}*/
+		        	
+		        	System.out.println("mobileIsLoginFilter type="+type);
+		        	
+		        	chain.doFilter(request, response);   //通过验证
+		   
 		            return;
 		        }   
 	    }   

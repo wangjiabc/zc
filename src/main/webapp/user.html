@@ -67,12 +67,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="user.html"><i class="fa fa-user fa-fw"></i> 用户管理</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 用户设置</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -128,24 +123,13 @@
                                    <thead>
                                         <tr>
 										<!-- <th data-field="state" data-checkbox="true"></th> -->
-										<th data-field="nickname">昵称</th>
-										<th data-field="openId">openId</th>
-										<th data-field="imgUrl">头像</th>
-										<th data-field="sex" data-formatter="statusSex">性别</th>
-										<th data-field="place" data-formatter="statusFormatter" data-sortable="true">系统职务</th>
+										<th data-align="left" data-field="campusAdmin">姓名</th>
+										<th data-align="left" data-field="telePhone">手机号</th>
+										<th data-align="left" data-field="address">家庭住址</th>
+									    <th data-align="left" data-field="lastLoginDate2">最后登陆时间</th>
+									    <th data-align="left" data-field="state" data-formatter="actionStatus">登陆权限</th>								
 										<th data-field="action" data-formatter="actionFormatter"
-											   data-events="actionEvents">权限修改</th>
-									    <th data-field="name">姓名</th>
-										<th data-field="headship">实际职务</th>
-										<th data-field="email">Email</th>
-										<th data-field="phone">手机号</th>
-										<th data-field="address">家庭住址</th>
-										<th data-field="subScribe">关注</th>
-										<th data-field="subscribeTime" data-sortable="true">关注时间</th>												
-										<th data-field="country" data-visible="false">国家</th>
-										<th data-field="province" data-visible="false">省份</th>
-										<th data-field="city" data-visible="false">城市</th>
-										<th data-field="groupId" data-visible="false">分组ID</th>
+											   data-events="actionEvents">权限修改</th>				    
 									</tr>
                                     </thead>
                                    </table>
@@ -168,23 +152,30 @@
 		}
 	  }
 	
+	function actionStatus(value, row, index){
+        if (value == "1") {
+			return "<img src='img/right.jpg' width='15px' height='13px' title='允许'></i>";
+		}else if(value=="2"){
+			return "<img src='img/wrong.jpg' width='13px' height='13px' title='不允许'></i>";
+		}
+	}
+
+	
    function statusFormatter(value, row, index) {
-	if (value == "0")
-		return "普通员工";
-	else if (value == "1") {
-		return "安全人员";
+	if (value == "1") {
+		return "允许";
 	}else if (value == "2") {
-		return "领导";
+		return "不允许";
 	}
   }
 
    function actionFormatter(value, row, index) {
 
 			return [
-					'<a class="superAdmin ml8 fa fa-user-plus" href="javascript:void(0)" title="设为领导">',
+					'<a class="superAdmin ml8 fa fa-user-plus" href="javascript:void(0)" title="设为允许登陆">',
 					'&nbsp;&nbsp;',
 					'</a>',
-					'<a class="admin ml8 fa fa-user" href="javascript:void(0)" title="设为安全人员">',
+					'<a class="admin ml8 fa fa-user" href="javascript:void(0)" title="设为不允许登陆">',
 					'&nbsp;&nbsp;',
 					'</a>'].join('');
 
@@ -193,10 +184,10 @@
    window.actionEvents = {
 			'click .superAdmin' : function(e, value, row, index) {
 				//alert("admin");
-				$.post("../../voucher/user/upAtionFormatter.do", {
-					openId : row.openId,
-					place:2,
-                   campusId:campusId,
+				$.post("../../zc/user/upAtionFormatter.do", {
+					campusAdmin : row.campusAdmin,
+					state:1,
+  
 				}, function(text) {
 					
 					if (text == -1 || text == 0) {
@@ -216,10 +207,9 @@
 			},
 			'click .admin' : function(e, value, row, index) {
 				//alert("common");
-				$.post("../../voucher/user/upAtionFormatter.do", {
-					openId : row.openId,
-					place:1,
-					campusId:campusId,
+				$.post("../../zc/user/upAtionFormatter.do", {
+					campusAdmin : row.campusAdmin,
+					state:2,
 				}, function(text) {
 					if (text == -1 || text == 0) {
 						setSuccess("设置为安全人员失败。");

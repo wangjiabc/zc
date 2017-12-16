@@ -1,5 +1,6 @@
 package com.voucher.manage.daoImpl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,13 +9,30 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.voucher.manage.dao.UserDAO;
 import com.voucher.manage.daoModel.ClientInfo;
+import com.voucher.manage.daoModel.Image;
 import com.voucher.manage.daoModel.Users;
 import com.voucher.manage.daoSQL.DeleteExe;
 import com.voucher.manage.daoSQL.InsertExe;
 import com.voucher.manage.daoSQL.SelectExe;
+import com.voucher.manage.daoSQL.UpdateExe;
+import com.voucher.manage.tools.TransMapToString;
 
 public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 
+	@Override
+	public Integer updateState(String campusAdmin, Integer state) {
+		// TODO Auto-generated method stub
+		Users users=new Users();
+		
+		users.setState(state);
+		
+		String[] where={"campusAdmin =", campusAdmin};
+		
+		users.setWhere(where);
+		
+		return UpdateExe.get(this.getJdbcTemplate(), users);
+	}
+	
 	@Override
 	public Integer selectRepeatAdmin(String username) {
 		// TODO Auto-generated method stub
@@ -104,7 +122,13 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 	}
 
 	@Override
-	public Map getAllClientInfo(Integer limit, Integer offset, String sort, String order, String search) {
+	public Integer updateClientInfoByGUID(ClientInfo clientInfo) {
+		// TODO Auto-generated method stub
+		return UpdateExe.get(this.getJdbcTemplate(), clientInfo);
+	}
+	
+	@Override
+	public Map getAllClientInfo(Integer limit, Integer offset, String sort, String order, Map<String, String> search) {
 		// TODO Auto-generated method stub
 		ClientInfo clientInfo=new ClientInfo();
 		
@@ -112,7 +136,11 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		clientInfo.setOffset(offset);
 		clientInfo.setNotIn("id");
 		
-
+		if(!search.isEmpty()){
+		    String[] where=TransMapToString.get(search);
+		    clientInfo.setWhere(where);
+		}
+		
 
 		Map<String, Object> map=new HashMap<>();
 		
@@ -138,6 +166,66 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		
 		return DeleteExe.get(this.getJdbcTemplate(), clientInfo);
 	}
- 
+
+	@Override
+	public Integer insertIntoImage(Image image) {
+		// TODO Auto-generated method stub
+		return InsertExe.get(this.getJdbcTemplate(), image);
+	}
+
+	@Override
+	public List<Image> selectImageByGUID(String clientInfo_GUID) {
+		// TODO Auto-generated method stub
+		Image image=new Image();
+		image.setClientInfo_GUID(clientInfo_GUID);
+		image.setLimit(1000);
+		image.setOffset(0);
+		image.setNotIn("id");
+		
+		String[] where={"clientInfo_GUID = ",clientInfo_GUID};
+		
+		image.setWhere(where);
+		
+		return SelectExe.get(this.getJdbcTemplate(), image);
+	}
+
+	@Override
+	public ClientInfo getClientInfo(String uuid) {
+		// TODO Auto-generated method stub
+		ClientInfo clientInfo=new ClientInfo();
+		
+		clientInfo.setLimit(10);
+		clientInfo.setOffset(0);
+		clientInfo.setNotIn("id");
+		
+		String[] where={"GUID = ",uuid};
+		clientInfo.setWhere(where);
+		
+		ClientInfo clientInfo2=null;
+		try{
+		  List<ClientInfo> list=SelectExe.get(this.getJdbcTemplate(), clientInfo);
+		  clientInfo2=list.get(0);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return clientInfo2;
+	}
+
+	@Override
+	public Integer updateLastLoginTime(Users users, Date date) {
+		// TODO Auto-generated method stub
+		Users users2=new Users();
+		
+		users2.setLastLoginDate(date);
+		
+		String[] where={"campusAdmin =",users.getCampusAdmin()};
+		
+		users2.setWhere(where);
+		
+		return UpdateExe.get(this.getJdbcTemplate(), users2);
+	}
+
 
 }

@@ -3,8 +3,11 @@ package com.voucher.manage.daoModel;
 import java.util.Date;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 import com.voucher.manage.daoSQL.annotations.*;
+
+import javafx.beans.property.SimpleStringProperty;
 
 @DBTable(name="[ZC].[dbo].[Users]")
 public class Users implements Serializable{
@@ -23,6 +26,9 @@ public class Users implements Serializable{
     @SQLInteger(name="type")
 	private Integer type;
 
+    @SQLInteger(name="state")
+	private Integer state;
+    
     @SQLInteger(name="cityId")
 	private Integer cityId;
 
@@ -35,6 +41,8 @@ public class Users implements Serializable{
     @SQLDateTime(name="lastLoginDate")
 	private Date lastLoginDate;
 
+    private String lastLoginDate2;
+    
     @SQLDateTime(name="registerTime")
 	private Date registerTime;
 
@@ -65,6 +73,15 @@ public class Users implements Serializable{
 		return password;
 	}
 
+	
+	public void setState(Integer state){
+		this.state = state;
+	}
+
+	public Integer getState(){
+		return state;
+	}
+	
 	public void setType(Integer type){
 		this.type = type;
 	}
@@ -197,6 +214,16 @@ public class Users implements Serializable{
 
 	public String getWhereTerm(){
 		return whereTerm;
+	}
+
+	public String getLastLoginDate2() {
+		SimpleDateFormat sdf  =   new  SimpleDateFormat( " yyyy-MM-dd HH:mm:ss " ); 
+		String datestr = sdf.format(lastLoginDate); 
+		return datestr;
+	}
+
+	public void setLastLoginDate2(String lastLoginDate2) {
+		this.lastLoginDate2 = lastLoginDate2;
 	}
 
 }

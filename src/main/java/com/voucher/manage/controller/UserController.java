@@ -93,5 +93,11 @@ public class UserController {
 		return (Short) request.getSession().getAttribute("type");
 	}
 	
+	@RequestMapping(value="/upAtionFormatter")
+	public @ResponseBody Integer upAtionFormatter(@RequestParam String campusAdmin,@RequestParam Integer state,
+			HttpServletRequest request){
+		 return userDao.updateState(campusAdmin, state);
+	}
+	
 
 }
