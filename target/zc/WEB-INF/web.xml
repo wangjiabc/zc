@@ -118,13 +118,13 @@
 		</init-param>
 		<init-param>
 			<param-name>redirectPath</param-name>
-			<param-value>/mobile/1/restrict.html</param-value>
+			<param-value>/restrict.html</param-value>
 		</init-param>
 	</filter>
 	
 	<filter-mapping>
 		<filter-name>MobileSessionFilter</filter-name>
-		<url-pattern>/safety/*</url-pattern>
+		<url-pattern>/user.html</url-pattern>
 	</filter-mapping>
 
 	<!-- 对普通员工和安全人员栏截 -->

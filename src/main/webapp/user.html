@@ -84,15 +84,15 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="chart.html">新增客户信息</a>
+                                <a href="Main.html">客户列表信息</a>
                             </li>
                             <li>
-                                <a href="morris-chart.html">修改客户信息</a>
+                                <a href="AddInfo.html">添加客户信息</a>
                             </li>
-                             <li>
-                                <a href="morris-chart.html">客户信息</a>
+                            <li>
+                                <a href="user.html">员工管理信息</a>
                             </li>
-						</ul>
+          							</ul>
 						</li>
                 </ul>
             </div>
@@ -101,7 +101,7 @@
 		<div id="page-wrapper">
         <!-- /. PAGE WRAPPER  -->
         <div class="header"> 
-        <h1 class="page-header">用户管理</h1>
+        <h1 class="page-header">员工权限管理</h1>
         </div>
 		<div id="page-inner"> 
 		<div class="row">
@@ -126,10 +126,10 @@
 										<th data-align="left" data-field="campusAdmin">姓名</th>
 										<th data-align="left" data-field="telePhone">手机号</th>
 										<th data-align="left" data-field="address">家庭住址</th>
-									    <th data-align="left" data-field="lastLoginDate2">最后登陆时间</th>
-									    <th data-align="left" data-field="state" data-formatter="actionStatus">登陆权限</th>								
-										<th data-field="action" data-formatter="actionFormatter"
-											   data-events="actionEvents">权限修改</th>				    
+									    <th data-align="left" data-field="lastLoginDate" data-formatter="actionTime">最后登陆时间</th>
+									    <th data-align="left" data-field="state" data-formatter="actionStatus">登陆权限</th>	
+									    <th data-field="action" data-formatter="actionFormatter"
+											   data-events="actionEvents">权限修改</th>				    			    
 									</tr>
                                     </thead>
                                    </table>
@@ -153,13 +153,23 @@
 	  }
 	
 	function actionStatus(value, row, index){
-        if (value == "1") {
+		if (value == "1") {
 			return "<img src='img/right.jpg' width='15px' height='13px' title='允许'></i>";
 		}else if(value=="2"){
 			return "<img src='img/wrong.jpg' width='13px' height='13px' title='不允许'></i>";
 		}
 	}
 
+	function actionTime(value, row, index){
+	    var date = new Date(value); 
+	    Y = date.getFullYear() + '-';
+	    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+	    D = date.getDate() + ' ';
+	    h = date.getHours() + ':';
+	    m = date.getMinutes() + ':';
+	    s = date.getSeconds(); 
+		return Y+M+D+h+m+s;
+	}
 	
    function statusFormatter(value, row, index) {
 	if (value == "1") {

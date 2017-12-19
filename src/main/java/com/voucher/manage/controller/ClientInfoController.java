@@ -60,18 +60,34 @@ public class ClientInfoController {
 		ClientInfo clientInfo=new ClientInfo();	
 		Gson gson = new Gson();
 		
+		Map map=new HashMap<>();
+		
 		try {
 			jsonObject= new JSONObject(clientInfoData);
 	//		clientInfo=gson.fromJson(clientInfoData,ClientInfo.class);
 			clientInfo.setUserName(jsonObject.getString("username"));
 			clientInfo.setUserOldname(jsonObject.getString("oldname"));
-			clientInfo.setUserAge(Integer.parseInt(jsonObject.getString("userage")));
+
+			try{
+			 clientInfo.setUserAge(Integer.parseInt(jsonObject.getString("userage")));
+				clientInfo.setUserProvideNum(Integer.parseInt(jsonObject.getString("userProvideNum")));
+				clientInfo.setUserChildrenNum(Integer.parseInt(jsonObject.getString("userChildrenNum")));
+				clientInfo.setInstime(Integer.parseInt(jsonObject.getString("Instime")));
+				clientInfo.setInsNum(Integer.parseInt(jsonObject.getString("insNum")));
+				clientInfo.setAttatchNum(Integer.parseInt(jsonObject.getString("attatchNum")));
+				clientInfo.setPayTerm(Integer.parseInt(jsonObject.getString("payTerm")));
+				clientInfo.setApplyMoney(Integer.parseInt(jsonObject.getString("applyMoney")));
+				clientInfo.setWeekRepayment(Integer.parseInt(jsonObject.getString("weekRepayment")));
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 			clientInfo.setUserSex(jsonObject.getString("usersex"));
 			clientInfo.setUserEducation(jsonObject.getString("userEducation"));
 			clientInfo.setUserMarriage(jsonObject.getString("userMarriage"));
 			clientInfo.setUseridCard(jsonObject.getString("useridCard"));
-			clientInfo.setUserProvideNum(Integer.parseInt(jsonObject.getString("userProvideNum")));
-			clientInfo.setUserChildrenNum(Integer.parseInt(jsonObject.getString("userChildrenNum")));
+
+
 			clientInfo.setUsercrAdress(jsonObject.getString("usercrAdress"));
 			clientInfo.setUserHouseState(jsonObject.getString("userHouseState"));
 			clientInfo.setUserNowAdress(jsonObject.getString("userNowAdress"));
@@ -84,12 +100,11 @@ public class ClientInfoController {
 			clientInfo.setUserPhoneMonad(jsonObject.getString("userPhoneMonad"));
 			clientInfo.setUserBankOpen(jsonObject.getString("userBankOpen"));
 			clientInfo.setInsCompany(jsonObject.getString("insCompany"));
-			clientInfo.setInsNum(Integer.parseInt(jsonObject.getString("insNum")));
-			clientInfo.setAttatchNum(Integer.parseInt(jsonObject.getString("attatchNum")));
+	
 			clientInfo.setPayOntime(jsonObject.getString("payOntime"));
 			clientInfo.setPayMode(jsonObject.getString("payMode"));
 			clientInfo.setInsMoney(jsonObject.getString("insMoney"));
-			clientInfo.setPayTerm(Integer.parseInt(jsonObject.getString("payTerm")));
+
 			clientInfo.setUnitName(jsonObject.getString("unitName"));
 			clientInfo.setUnitAddress(jsonObject.getString("unitAddress"));
 			clientInfo.setUnitPhone(jsonObject.getString("unitPhone"));
@@ -104,8 +119,7 @@ public class ClientInfoController {
 			clientInfo.setPayDay(jsonObject.getString("payDay"));
 			clientInfo.setOtherIncome(jsonObject.getString("otherIncome"));
 			clientInfo.setBorrowUse(jsonObject.getString("borrowUse"));
-			clientInfo.setApplyMoney(Integer.parseInt(jsonObject.getString("applyMoney")));
-			clientInfo.setWeekRepayment(Integer.parseInt(jsonObject.getString("weekRepayment")));
+			
 			clientInfo.setApplyTime(jsonObject.getString("applyTime"));
 
 			clientInfo.setKinshipName(jsonObject.getString("kinshipName"));
@@ -131,9 +145,11 @@ public class ClientInfoController {
 //					jsonObject.getString("source"),jsonObject.getString("borrowType") , jsonObject.getString("manager"),jsonObject.getString("workPhoneNum") , jsonObject.getString("number"), jsonObject.getString("interviewPerson"),jsonObject.getString("userName") , jsonObject.getString("userOldname"), jsonObject.getString("userAge"), jsonObject.getString("userSex"), 
 //					jsonObject.getString("userEducation"), jsonObject.getString("userMarriage"),jsonObject.getString("useridCard") , jsonObject.getString("userProvideNum"), jsonObject.getString("userChildrenNum"), jsonObject.getString("usercrAdress"), jsonObject.getString("userHouseState"),jsonObject.getString("userNowAdress") ,
 //					jsonObject.getString("userPhoneNum"), jsonObject.getString("userTelNum"), jsonObject.getString("userWechat"), jsonObject.getString("userqqNum"), jsonObject.getString("userSocialBase"), jsonObject.getString("userCreditCard"), jsonObject.getString("userPhoneMonad"), jsonObject.getString("userBankOpen"));
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			map.put("data", "error");
+			return map;
 		}
 
 		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
@@ -149,8 +165,7 @@ public class ClientInfoController {
 		System.out.println("type="+type+"      state="+state);
 		
 		MyTestUtil.print(clientInfo);
-
-		Map map=new HashMap<>();
+		
 		try{
 		  userDao.insertIntoClientInfo(clientInfo);
 		}catch (Exception e) {
@@ -176,18 +191,34 @@ public class ClientInfoController {
 		ClientInfo clientInfo=new ClientInfo();	
 		Gson gson = new Gson();
 		
+		Map map=new HashMap<>();
+		
 		try {
 			jsonObject= new JSONObject(clientInfoData);
 	//		clientInfo=gson.fromJson(clientInfoData,ClientInfo.class);
 			clientInfo.setUserName(jsonObject.getString("username"));
 			clientInfo.setUserOldname(jsonObject.getString("oldname"));
-			clientInfo.setUserAge(Integer.parseInt(jsonObject.getString("userage")));
+
+			try{
+			 clientInfo.setUserAge(Integer.parseInt(jsonObject.getString("userage")));
+				clientInfo.setUserProvideNum(Integer.parseInt(jsonObject.getString("userProvideNum")));
+				clientInfo.setUserChildrenNum(Integer.parseInt(jsonObject.getString("userChildrenNum")));
+				clientInfo.setInstime(Integer.parseInt(jsonObject.getString("Instime")));
+				clientInfo.setInsNum(Integer.parseInt(jsonObject.getString("insNum")));
+				clientInfo.setAttatchNum(Integer.parseInt(jsonObject.getString("attatchNum")));
+				clientInfo.setPayTerm(Integer.parseInt(jsonObject.getString("payTerm")));
+				clientInfo.setApplyMoney(Integer.parseInt(jsonObject.getString("applyMoney")));
+				clientInfo.setWeekRepayment(Integer.parseInt(jsonObject.getString("weekRepayment")));
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 			clientInfo.setUserSex(jsonObject.getString("usersex"));
 			clientInfo.setUserEducation(jsonObject.getString("userEducation"));
 			clientInfo.setUserMarriage(jsonObject.getString("userMarriage"));
 			clientInfo.setUseridCard(jsonObject.getString("useridCard"));
-			clientInfo.setUserProvideNum(Integer.parseInt(jsonObject.getString("userProvideNum")));
-			clientInfo.setUserChildrenNum(Integer.parseInt(jsonObject.getString("userChildrenNum")));
+
+
 			clientInfo.setUsercrAdress(jsonObject.getString("usercrAdress"));
 			clientInfo.setUserHouseState(jsonObject.getString("userHouseState"));
 			clientInfo.setUserNowAdress(jsonObject.getString("userNowAdress"));
@@ -200,12 +231,11 @@ public class ClientInfoController {
 			clientInfo.setUserPhoneMonad(jsonObject.getString("userPhoneMonad"));
 			clientInfo.setUserBankOpen(jsonObject.getString("userBankOpen"));
 			clientInfo.setInsCompany(jsonObject.getString("insCompany"));
-			clientInfo.setInsNum(Integer.parseInt(jsonObject.getString("insNum")));
-			clientInfo.setAttatchNum(Integer.parseInt(jsonObject.getString("attatchNum")));
+	
 			clientInfo.setPayOntime(jsonObject.getString("payOntime"));
 			clientInfo.setPayMode(jsonObject.getString("payMode"));
 			clientInfo.setInsMoney(jsonObject.getString("insMoney"));
-			clientInfo.setPayTerm(Integer.parseInt(jsonObject.getString("payTerm")));
+
 			clientInfo.setUnitName(jsonObject.getString("unitName"));
 			clientInfo.setUnitAddress(jsonObject.getString("unitAddress"));
 			clientInfo.setUnitPhone(jsonObject.getString("unitPhone"));
@@ -220,8 +250,7 @@ public class ClientInfoController {
 			clientInfo.setPayDay(jsonObject.getString("payDay"));
 			clientInfo.setOtherIncome(jsonObject.getString("otherIncome"));
 			clientInfo.setBorrowUse(jsonObject.getString("borrowUse"));
-			clientInfo.setApplyMoney(Integer.parseInt(jsonObject.getString("applyMoney")));
-			clientInfo.setWeekRepayment(Integer.parseInt(jsonObject.getString("weekRepayment")));
+			
 			clientInfo.setApplyTime(jsonObject.getString("applyTime"));
 
 			clientInfo.setKinshipName(jsonObject.getString("kinshipName"));
@@ -247,9 +276,11 @@ public class ClientInfoController {
 //					jsonObject.getString("source"),jsonObject.getString("borrowType") , jsonObject.getString("manager"),jsonObject.getString("workPhoneNum") , jsonObject.getString("number"), jsonObject.getString("interviewPerson"),jsonObject.getString("userName") , jsonObject.getString("userOldname"), jsonObject.getString("userAge"), jsonObject.getString("userSex"), 
 //					jsonObject.getString("userEducation"), jsonObject.getString("userMarriage"),jsonObject.getString("useridCard") , jsonObject.getString("userProvideNum"), jsonObject.getString("userChildrenNum"), jsonObject.getString("usercrAdress"), jsonObject.getString("userHouseState"),jsonObject.getString("userNowAdress") ,
 //					jsonObject.getString("userPhoneNum"), jsonObject.getString("userTelNum"), jsonObject.getString("userWechat"), jsonObject.getString("userqqNum"), jsonObject.getString("userSocialBase"), jsonObject.getString("userCreditCard"), jsonObject.getString("userPhoneMonad"), jsonObject.getString("userBankOpen"));
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			map.put("data", "error");
+			return map;
 		}
 
 		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
@@ -265,8 +296,7 @@ public class ClientInfoController {
 		
 		String[] where={"GUID =",uuid};
         clientInfo.setWhere(where);
-        
-		Map map=new HashMap<>();
+        		
 		try{
 		  userDao.updateClientInfoByGUID(clientInfo);
 		}catch (Exception e) {
@@ -344,7 +374,7 @@ public class ClientInfoController {
 	}
 	
 	@RequestMapping(value="inputImage")
-	public void uploadFilesSpecifyPath(@RequestParam("file") MultipartFile[] file,@RequestParam String uuid,HttpServletRequest request,HttpServletResponse response) throws Exception {  
+	public @ResponseBody Integer uploadFilesSpecifyPath(@RequestParam("file") MultipartFile[] file,@RequestParam String uuid,HttpServletRequest request,HttpServletResponse response) throws Exception {  
 		 long startTime=System.currentTimeMillis();   //获取开始时间  
 	      /*  if(!file.isEmpty()){  
 	            try {  
@@ -384,7 +414,9 @@ public class ClientInfoController {
 
 	                //上传成功
 	                if(fileName!=null&&fileName.size()>0){
+	                	System.out.println(fileName);
 	                    System.out.println("上传成功！");
+	                    return 1;
 	                 //   Constants.printJson(response, fileName);;
 	                }else {
 	                  //  Constants.printJson(response, "上传失败！文件格式错误！");
@@ -401,6 +433,8 @@ public class ClientInfoController {
 		 
 	        long endTime=System.currentTimeMillis(); //获取结束时间  
 	        System.out.println("上传文件共使用时间："+(endTime-startTime));  
+	        
+	        return 0;
  
 	} 
 	
@@ -417,14 +451,13 @@ public class ClientInfoController {
     public  String uploadImage(HttpServletRequest request,String path_deposit,MultipartFile file,String clientInfo_GUID,boolean isRandomName) {
         //上传
         try {
-            String[] typeImg={"gif","png","jpg"};
+            String[] typeImg={"gif","png","jpg","jpeg"};
 
             if(file!=null){
                 String origName=file.getOriginalFilename();// 文件原名称
                 System.out.println("上传的文件原名称:"+origName);
                 // 判断文件类型
                 String type=origName.indexOf(".")!=-1?origName.substring(origName.lastIndexOf(".")+1, origName.length()):null;
-                if (type!=null) {
                     boolean booIsType=false;
                     for (int i = 0; i < typeImg.length; i++) {
                         if (typeImg[i].equals(type.toLowerCase())) {
@@ -470,7 +503,6 @@ public class ClientInfoController {
                         return fileSrc;
                     }
                 }
-            }
             return null;
         }catch (Exception e) {
             e.printStackTrace();

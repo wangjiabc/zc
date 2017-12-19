@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <title>中泸投资</title>
+    <title>中泸财务</title>
     <!-- Bootstrap Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -33,22 +33,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中泸投资</strong></a>
+                <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中财财务</strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
-                <li class="dropdown">
+               <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -61,13 +56,16 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
 					           <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 用户信息<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="Main.html">用户列表信息</a>
+                                <a href="Main.html">客户列表信息</a>
                             </li>
                             <li>
-                                <a href="AddInfo.html">添加用户信息</a>
+                                <a href="AddInfo.html">添加客户信息</a>
+                            </li>
+                            <li>
+                                <a href="user.html">员工管理信息</a>
                             </li>
           							</ul>
           					</li>	
@@ -114,7 +112,7 @@
     								        <label for="inputEmail3" class="col-sm-3 control-label">性别</label>
            									 <div class="col-sm-9">
               								<label class="radio-inline">
-        									       <input type="radio" name="usersex" id="usersex" value="男"> 男
+        									       <input type="radio" name="usersex" checked="checked" id="usersex" value="男"> 男
         									    </label>
             									<label class="radio-inline">
             									  <input type="radio" name="usersex" id="usersex" value="女"> 女
@@ -246,7 +244,7 @@
                             <label for="inputEmail3" class="col-sm-3 control-label">近六个月的电话详单</label>
                              <div class="col-sm-9">
                               <label class="radio-inline">
-                              <input type="radio" name="userPhoneMonad" id="userPhoneMonad" value="有"> 有
+                              <input type="radio" name="userPhoneMonad" checked="checkeed" id="userPhoneMonad" value="有"> 有
                               </label>
                               <label class="radio-inline">
                               <input type="radio" name="userPhoneMonad" id="userPhoneMonad" value="无"> 无
@@ -254,11 +252,11 @@
                           </div>
                           </div>
                           <div class="container kv-main col-sm-12">
-                          <form id="fileupload-form" enctype="multipart/form-data">
-                          <div class="form-group">
-                              <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-preview-file-icon="">
-                          </div>
-                          </form>
+                            <input type="file" name="file" class="file"  id="zx_img1" style="padding: 0px;" placeholder="&nbsp;上传文件">
+    						<input type="file" name="file" class="file"  id="zx_img2" style="padding: 0px;" placeholder="&nbsp;上传文件">
+      						<input type="file" name="file" class="file"  id="zx_img3" style="padding: 0px;" placeholder="&nbsp;上传文件">
+      						<input type="file" name="file" class="file"  id="zx_img4" style="padding: 0px;" placeholder="&nbsp;上传文件">
+      						<input type="file" name="file" class="file"  id="zx_img5" style="padding: 0px;" placeholder="&nbsp;上传文件">
                           </div>
                       </div>
 									</form>
@@ -653,7 +651,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="card-title">
-                                        <div class="title">紧急联系人信息</div>
+                                        <div class="title">同事联系人信息</div>
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -748,7 +746,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -756,7 +754,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -764,7 +762,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -772,7 +770,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -780,14 +778,14 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },payMode: {
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -795,7 +793,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -803,7 +801,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 }
@@ -821,7 +819,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -829,7 +827,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -837,7 +835,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -845,7 +843,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         },numeric: {
                           message: '请输入数字'
                         }
@@ -855,7 +853,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -863,14 +861,14 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },workTime: {
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         },numeric: {
                           message: '请输入数字'
                         }
@@ -880,7 +878,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -888,7 +886,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -896,7 +894,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -904,7 +902,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -912,7 +910,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -920,7 +918,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 }
@@ -938,7 +936,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -946,7 +944,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -954,7 +952,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -962,7 +960,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 }
@@ -980,7 +978,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -988,7 +986,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -996,7 +994,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1004,15 +1002,24 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
-                        }
+                            message: '请填入信息'
+                        },
+                     stringLength: {
+                         min: 11,
+                         max: 11,
+                         message: '请输入11位手机号码'
+                     },
+                     regexp: {
+                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                         message: '请输入正确的手机号码'
+                     }
                     }
                 },
                 kinshipAddress: {
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 }
@@ -1030,7 +1037,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1038,7 +1045,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1046,7 +1053,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1054,15 +1061,24 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
-                        }
+                            message: '请填入信息'
+                        },
+                     stringLength: {
+                         min: 11,
+                         max: 11,
+                         message: '请输入11位手机号码'
+                     },
+                     regexp: {
+                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                         message: '请输入正确的手机号码'
+                     }
                     }
                 },
                 emergencyAddress: {
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 }
@@ -1080,7 +1096,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1088,7 +1104,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1096,7 +1112,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1104,15 +1120,24 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
-                        }
+                            message: '请填入信息'
+                        },
+                     stringLength: {
+                         min: 11,
+                         max: 11,
+                         message: '请输入11位手机号码'
+                     },
+                     regexp: {
+                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                         message: '请输入正确的手机号码'
+                     }
                     }
                 },
                 colleagueAddress: {
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 }
@@ -1130,14 +1155,14 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },oldname: {
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1145,7 +1170,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入年龄'
+                            message: '请填入信息'
                         },
                         numeric: {
                           message: '请输入数字'
@@ -1156,7 +1181,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1164,15 +1189,16 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入身份证号'
+                            message: '请填入信息'
                         }
+
                     }
                 },
                  userProvideNum: {
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入年龄'
+                            message: '请填入信息'
                         },
                         numeric:{
                           message: '请输入数字'
@@ -1183,7 +1209,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入子女数目'
+                            message: '请填入信息'
                         },
                         numeric: {
                           message: '请输入数字'
@@ -1194,7 +1220,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入户籍地址'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1202,7 +1228,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入子女数目'
+                            message: '请填入信息'
                         },
                         numeric: {
                           message: '请输入数字'
@@ -1213,7 +1239,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入户籍地址'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1221,18 +1247,27 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入年龄'
+                            message: '请填入信息'
                         },
                         numeric: {
                           message: '请输入数字'
-                        }
+                        },
+                     stringLength: {
+                         min: 11,
+                         max: 11,
+                         message: '请输入11位手机号码'
+                     },
+                     regexp: {
+                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                         message: '请输入正确的手机号码'
+                     }
                     }
                 },
                 userTelNum: {
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         },numeric: {
                           message: '请输入数字'
                         }
@@ -1242,7 +1277,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         },numeric: {
                           message: '请输入数字'
                         }
@@ -1252,7 +1287,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         },numeric: {
                           message: '请输入数字'
                         }
@@ -1262,7 +1297,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1270,7 +1305,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1278,7 +1313,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 },
@@ -1286,7 +1321,7 @@
                     message: '验证失败',
                     validators: {
                         notEmpty: {
-                            message: '请输入用户名'
+                            message: '请填入信息'
                         }
                     }
                 }    
@@ -1321,14 +1356,7 @@
     		};
       
       
-	function addInfo(){
-		
-		checkInfo();
-		
-		$.ajax(options);
-		
-		return false;
-	}
+	
    
 	function checkInfo(){
      $('#userinfo-form').bootstrapValidator('validate');
@@ -1414,16 +1442,91 @@
 		
 		$.ajax({
 			type:"get",
+			async: false,
 			url:"clientinfo/insert.do",
 			data:{clientInfoData:clientInfodata}
 			,
 			success:function(data){
-				if(data=="1"){
-					alert("添加成功");
-				return true;
-				}else{
+				var obj = $.parseJSON(data);
+				if(obj.data=="error"){
 					alert("请确认信息填写完整");
 					return false;
+				}else{
+					alert("添加成功");
+					var uuid=obj.data;
+					
+					var fileObj1 = document.getElementById("zx_img1").files[0]; // 获取文件对象  
+				    var fileObj2 = document.getElementById("zx_img2").files[0];
+				    var fileObj3 = document.getElementById("zx_img3").files[0];
+				    var fileObj4 = document.getElementById("zx_img4").files[0];
+				    var fileObj5 = document.getElementById("zx_img5").files[0];
+				    var FileController = "/zc/clientinfo/inputImage.do?uuid="+uuid; // 接收上传文件的后台地址  
+				              
+				    if(fileObj1){  
+				 
+				         // FormData 对象  
+				             var form = new FormData();   
+				             form.append("file", fileObj1);// 文件对象     
+				             form.append("uuid",uuid);
+				             // XMLHttpRequest 对象  
+				             var xhr = new XMLHttpRequest();      
+				             xhr.open("post", FileController, true);      
+				             xhr.onload = function () {   
+	   
+				             };   
+				             xhr.send(form); 
+				         }
+				               if(fileObj2){
+				            	   var form = new FormData();   
+				                   form.append("file", fileObj2);// 文件对象     
+				                   form.append("uuid",uuid);
+				                   // XMLHttpRequest 对象  
+				                   var xhr = new XMLHttpRequest();      
+				                   xhr.open("post", FileController, true);      
+				                   xhr.onload = function () {   
+	   
+				                   };   
+				                   xhr.send(form);  
+				               } 
+				              if(fileObj3){
+				            	  var form = new FormData();   
+				                  form.append("file", fileObj3);// 文件对象     
+				                  form.append("uuid",uuid);
+				                  // XMLHttpRequest 对象  
+				                  var xhr = new XMLHttpRequest();      
+				                  xhr.open("post", FileController, true);      
+				                  xhr.onload = function () {   
+				    
+				                  };   
+				                  xhr.send(form);  
+				               }
+				              if(fileObj4){
+				            	  var form = new FormData();   
+				                  form.append("file", fileObj4);// 文件对象     
+				                  form.append("uuid",uuid);
+				                  // XMLHttpRequest 对象  
+				                  var xhr = new XMLHttpRequest();      
+				                  xhr.open("post", FileController, true);      
+				                  xhr.onload = function () {   
+			  
+				                  };   
+				                  xhr.send(form);  
+				               }
+				              if(fileObj5){
+				            	  var form = new FormData();   
+				                  form.append("file", fileObj5);// 文件对象     
+				                  form.append("uuid",uuid);
+				                  // XMLHttpRequest 对象  
+				                  var xhr = new XMLHttpRequest();      
+				                  xhr.open("post", FileController, true);      
+				                  xhr.onload = function () {   
+	   
+				                  };   
+				                  xhr.send(form);  
+				               }
+				    
+					
+					return uuid;
 				}
 			}
 		})
@@ -1433,6 +1536,13 @@
 	}
 	
 	
+	
+function addInfo(){
+		
+		checkInfo();
+
+		return false;
+	}
 	
 	</script>
 </body>

@@ -44,25 +44,21 @@ public class UserController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String type,campusAdmin;
 		
+		Map searchMap=new HashMap<>();
 		
 		if(search!=null&&!search.trim().equals("")){
 			search="%"+search+"%";
+			searchMap.put("campusAdmin like ",search);
 		}		
+         
+		searchMap.put("type >", "0");
 		
-	/*	Cookie[] cookies = request.getCookies();  
-		if(cookies!=null){
-			for(Cookie i:cookies){
-				if(i.getName().equalsIgnoreCase("campusId"))
-					campusId=Integer.parseInt(i.getValue());
-			}
-		}*/
-			
 		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
 		type=session.getAttribute("type").toString();
 		campusAdmin=session.getAttribute("campusAdmin").toString();
 		System.out.println(type);
         if(type.equals("0")){
-        	map=userDao.getAllFullUser(limit, offset, sort, order, search);
+        	map=userDao.getAllFullUser(limit, offset, sort, order, searchMap);
         }else{
 		    return map;
         }

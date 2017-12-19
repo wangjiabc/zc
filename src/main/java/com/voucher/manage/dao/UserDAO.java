@@ -21,7 +21,7 @@ public interface UserDAO {
 	public Users selectUsersByCampusAdmin(String username);
 	
 	public Map getAllFullUser(Integer limit, Integer offset, String sort,
-			String order,String search);
+			String order,Map searchMap);
 		
 	public Integer insertIntoClientInfo(ClientInfo clientInfo);
 	

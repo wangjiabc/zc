@@ -17,7 +17,7 @@ public class ClientInfo implements Serializable{
 
     @SQLString(name="campusAdmin")
 	private String campusAdmin;
-    
+
     @SQLString(name="borrowUse")
 	private String borrowUse;
 
@@ -116,6 +116,9 @@ public class ClientInfo implements Serializable{
 
     @SQLString(name="workTime")
 	private String workTime;
+
+    @SQLInteger(name="instime")
+	private Integer instime;
 
     @SQLString(name="industry")
 	private String industry;
@@ -245,7 +248,7 @@ public class ClientInfo implements Serializable{
 	public String getCampusAdmin(){
 		return campusAdmin;
 	}
-	
+
 	public void setBorrowUse(String borrowUse){
 		this.borrowUse = borrowUse;
 	}
@@ -508,6 +511,14 @@ public class ClientInfo implements Serializable{
 
 	public String getWorkTime(){
 		return workTime;
+	}
+
+	public void setInstime(Integer instime){
+		this.instime = instime;
+	}
+
+	public Integer getInstime(){
+		return instime;
 	}
 
 	public void setIndustry(String industry){

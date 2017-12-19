@@ -6,21 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <title>安迅驾校</title>
+    <title>中财财务</title>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
    <link rel="stylesheet"
 	href="assets/bootstrap-table/bootstrap-table.css">
 <link rel="stylesheet"
 	href="assets/bootstrap-table/bootstrap-editable.css">
 <script src="assets/bootstrap-table/jquery.min.js"></script>
-<script src="assets/bootstrap-table/bootstrap.min.js"></script>
+
 <script src="assets/bootstrap-table/bootstrap-table.js"></script>
 <script src="assets/bootstrap-table/bootstrap-table-export.js"></script>
 <script src="assets/bootstrap-table/tableExport.js"></script>
 <script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>
 <script src="assets/bootstrap-table/bootstrap-editable.js"></script>
 <script src="js/bootstrap-table-zh-CN.min.js"></script>
-<script type="text/javascript" src="./bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 
     <!-- Bootstrap Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -47,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i> 安迅驾校</strong></a>
+                <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中财财务</strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -57,12 +56,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -74,66 +68,27 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-					 <li>
+					           <li>
                         <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="chart.html">新增客户信息</a>
+                                <a href="Main.html">客户列表信息</a>
                             </li>
                             <li>
-                                <a href="morris-chart.html">修改客户信息</a>
-                            </li>
-                             <li>
-                                <a href="morris-chart.html">客户信息</a>
-                            </li>
-							</ul>
-						</li>	
-						 <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="chart.html">Charts JS</a>
+                                <a href="AddInfo.html">添加客户信息</a>
                             </li>
                             <li>
-                                <a href="morris-chart.html">Morris Chart</a>
+                                <a href="user.html">员工管理信息</a>
                             </li>
-							</ul>
-						</li>	
-						 <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="chart.html">Charts JS</a>
-                            </li>
-                            <li>
-                                <a href="morris-chart.html">Morris Chart</a>
-                            </li>
-							</ul>
-						</li>	
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                </ul>
-
-                            </li>
-                        </ul>
-                    </li>
+          							</ul>
+          					</li>	
                 </ul>
         </nav>
         <!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
         <!-- /. PAGE WRAPPER  -->
         <div class="header"> 
-        <h1 class="page-header">用户列表信息</h1>
+        <h1 class="page-header">客户列表信息</h1>
         </div>
 		<div id="page-inner"> 
 		<div class="row">
@@ -146,7 +101,7 @@
                                 </div>
                                 <div class="panel-body">
                                   <div class="table-responsive">
-                                   <div id="toolbar" class="btn-group">
+           <div id="toolbar" class="btn-group">
             <button id="plus" type="button" class="btn btn-default">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
             </button>
@@ -157,35 +112,84 @@
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
             </button>
         </div> 
-               <table id="table" data-id-field="foodId"data-striped="true"
-					data-toolbar="#toolbar"
-					data-search="true" data-show-refresh="true" data-show-toggle="true"
-					data-pagination="true" data-show-columns="true" data-height="80%"
-					data-click-to-select="true">
+              <table id="table"  class="table " data-toggle="table"  data-toolbar="#toolbar"
+				data-url="/zc/clientinfo/getAll.do" data-search="true"
+				data-show-refresh="true" data-show-toggle="true"
+				data-side-pagination="server" data-pagination="true"
+				data-show-columns="true">
                                    <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>
                                             <th data-align="left" data-field="id">id</th>
+                                            <th data-align="left" data-field="guid" data-visible="false">GUID</th>
                                             <th data-align="left" data-field="userName">姓名</th>
-                                            <th data-align="left" data-field="campusName">曾用名</th>
-                                            <th>年龄</th>
-                                            <th>性别</th>
-                                            <th>学历</th>
-                                            <th>婚姻状况</th>
-                                            <th>证件号</th>
-                                            <th>供养人数</th>
-                                            <th>子女数目</th>
-                                            <th>户籍地址</th>
-                                            <th>房产状况</th>
-                                            <th>现住地址</th>
-                                            <th>手机号</th>
-                                            <th>固话</th>
-                                            <th>微信</th>
-                                             <th>QQ</th>
-                                            <th>社保基数/公积金基数</th>
-                                            <th>最高额度信用卡</th>
-                                            <th>近六个月的电话详单</th>
-                                            <th>划账银行卡开户行</th>
+                                            <th data-align="left" data-field="userOldname">曾用名</th>
+                                            <th data-align="left" data-field="userAge">年龄</th>
+                                            <th data-align="left" data-field="userSex">性别</th>
+                                            <th data-align="left" data-field="userEducation">学历</th>
+                                            <th data-align="left" data-field="userMarriage">婚姻状况</th>
+                                            <th data-align="left" data-field="useridCard">证件号</th>
+                                            <th data-align="left" data-field="userProvideNum">供养人数</th>
+                                            <th data-align="left" data-field="userChildrenNum">子女数目</th>
+                                            <th data-align="left" data-field="usercrAdress">户籍地址</th>
+                                            <th data-align="left" data-field="userHouseState">房产状况</th>
+                                            <th data-align="left" data-field="userNowAdress">现住地址</th>
+                                            <th data-align="left" data-field="userPhoneNum">手机号</th>
+                                            <th data-align="left" data-field="userTelNum">固话</th>
+                                            <th data-align="left" data-field="userWechat">微信</th>
+                                             <th data-align="left" data-field="userqqNum">QQ</th>
+                                            <th data-align="left" data-field="userSocialBase">社保基数/公积金基数</th>
+                                            <th data-align="left" data-field="userCreditCard">最高额度信用卡</th>
+                                            <th data-align="left" data-field="userPhoneMonad">近六个月的电话详单</th>
+                                            <th data-align="left" data-field="userBankOpen">划账银行卡开户行</th>
+
+                                            <th data-align="left" data-field="insCompany">投保公司</th>
+                                            <th data-align="left" data-field="insNum">保单号码</th>
+                                            <th data-align="left" data-field="instime">投保期限</th>
+                                            <th data-align="left" data-field="attatchNum">附加个数</th>
+                                            <th data-align="left" data-field="payOntime">缴费准时性</th>
+                                            <th data-align="left" data-field="payMode">缴费方式</th>
+                                            <th data-align="left" data-field="insMoney">年缴保费</th>
+                                            <th data-align="left" data-field="payTerm">已缴期数</th>
+
+                                            <th data-align="left" data-field="unitName">单位全称</th>
+                                            <th data-align="left" data-field="unitAddress">单位地址</th>
+                                            <th data-align="left" data-field="unitPhone">单位电话</th>
+                                            <th data-align="left" data-field="postcode">邮编</th>
+                                            <th data-align="left" data-field="department">部门</th>
+                                            <th data-align="left" data-field="duty">职务</th>
+                                            <th data-align="left" data-field="workTime">现单位工作年限</th>
+                                             <th data-align="left" data-field="industry">所属行业</th>
+                                            <th data-align="left" data-field="unitNature">单位性质</th>
+                                            <th data-align="left" data-field="workNature">工作性质</th>
+                                            <th data-align="left" data-field="monthSalary">月基本薪资</th>
+                                            <th data-align="left" data-field="salaryStyle">薪资方式</th>
+                                            <th data-align="left" data-field="payDay">月发薪日</th>
+                                            <th data-align="left" data-field="otherIncome">其他月收入</th>
+
+                                            <th data-align="left" data-field="borrowUse">贷款用途</th>
+                                            <th data-align="left" data-field="applyMoney">您希望申请的金额</th>
+                                            <th data-align="left" data-field="weekRepayment">您可接受每周还款额</th>
+                                            <th data-align="left" data-field="applyTime">申请期限</th>
+
+                                            <th data-align="left" data-field="kinshipName">亲属姓名</th>
+                                            <th data-align="left" data-field="kinshipRelation">亲属关系</th>
+                                            <th data-align="left" data-field="kinshipUnitName">亲属单位名称</th>
+                                            <th data-align="left" data-field="kinshipPhoneNum">亲属联系电话</th>
+                                            <th data-align="left" data-field="kinshipAddress">亲属家庭住址</th>
+
+                                            <th data-align="left" data-field="emergencyName">紧急联系人姓名</th>
+                                            <th data-align="left" data-field="emergencyRelation">紧急联系人关系</th>
+                                            <th data-align="left" data-field="emergencyUnitName">紧急联系人单位名称</th>
+                                            <th data-align="left" data-field="emergencyPhoneNum">紧急联系人联系电话</th>
+                                            <th data-align="left" data-field="emergencyAddress">紧急联系人家庭住址</th>
+
+                                            <th data-align="left" data-field="colleagueName">同事姓名</th>
+                                            <th data-align="left" data-field="colleagueRelation">同事关系</th>
+                                            <th data-align="left" data-field="colleagueUnitName">同事单位名称</th>
+                                            <th data-align="left" data-field="colleaguePhoneNum">同事联系电话</th>
+                                            <th data-align="left" data-field="colleagueAddress">同事家庭住址</th>
+
                                         </tr>
                                     </thead>
                                    </table>
@@ -215,12 +219,6 @@
        </div>
    </div>
          
-        
-   <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			<button type="button" id="commitFoodDataButton" class="btn btn-primary">确定</button>
-	</div>   
-
     
       <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
@@ -234,11 +232,6 @@
     <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
     
    <script type="text/javascript"> 
-   
-   	$("#table").bootstrapTable({
-		url : "clientinfo/getAll.do"
-	 });	           
-   
 	
 	$('#plus').click(function() {
 		window.location.href="AddInfo.html";
@@ -261,8 +254,7 @@
 			$("#myModalLabel").text("编辑公众号");
 			$("#myModal").modal('show');
 
-			alert(array[0].id);
-			
+			top.location.href="UserDetail.html?uuid="+array[0].guid;
 			/*
 			var status=document.getElementsByName("status")
 			status[1-array[0].status].checked=true;

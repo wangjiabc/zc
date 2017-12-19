@@ -83,7 +83,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 
 	@Override
 	public Map getAllFullUser(Integer limit, Integer offset, String sort,
-			String order, String search) {
+			String order, Map searchMap) {
 		// TODO Auto-generated method stub
 		Users users=new Users();
 		
@@ -93,14 +93,10 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		users.setOrder(order);
 		users.setNotIn("id");
 		
-        if(search!=null){
-        	search="%"+search+"%";
-        	String[] where={"campusAdmin like ",search};
-        	users.setWhere(where);
-        }
-				
+		String[] where=TransMapToString.get(searchMap);	
+		users.setWhere(where);
 		
-         Map<String, Object> map=new HashMap<>();
+        Map<String, Object> map=new HashMap<>();
 		
 	    List<Users> users2=SelectExe.get(this.getJdbcTemplate(), users);
 
