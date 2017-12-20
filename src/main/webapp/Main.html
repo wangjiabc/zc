@@ -69,7 +69,7 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-					           <li>
+					<li>
                         <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -78,11 +78,14 @@
                             <li>
                                 <a href="AddInfo.html">添加客户信息</a>
                             </li>
+                            <li>
+                                <a href="query.html">查询客户信息</a>
+                            </li>
                             <li id="userhide">
                                 <a href="user.html">员工管理信息</a>
                             </li>
-          							</ul>
-          					</li>	
+          				 </ul>
+          			 </li>	
                 </ul>
         </nav>
         <!-- /. NAV SIDE  -->
@@ -262,8 +265,8 @@
 
 			 var val=document.getElementById("table").rows[hang].cells[1]; //取得所在列的值
 		     var id=val.innerHTML; 
-alert(id);
-		  //   window.location.href="UserDetail.html?id="+id;
+			 
+		    window.location.href="UserDetail.html?id="+id;
 	}
    
 	$('#plus').click(function() {

@@ -210,6 +210,55 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 	}
 
 	@Override
+	public ClientInfo getClientInfoById(String id) {
+		// TODO Auto-generated method stub
+		ClientInfo clientInfo=new ClientInfo();
+		
+		clientInfo.setLimit(10);
+		clientInfo.setOffset(0);
+		clientInfo.setNotIn("id");
+		
+		String[] where={"id = ",id};
+		clientInfo.setWhere(where);
+		
+		ClientInfo clientInfo2=null;
+		try{
+		  List<ClientInfo> list=SelectExe.get(this.getJdbcTemplate(), clientInfo);
+		  clientInfo2=list.get(0);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return clientInfo2;
+	}
+	
+	@Override
+	public ClientInfo getClientInfoQuery(String username, String userPhoneNum, String useridCard) {
+		// TODO Auto-generated method stub
+        ClientInfo clientInfo=new ClientInfo();
+		
+		clientInfo.setLimit(10);
+		clientInfo.setOffset(0);
+		clientInfo.setNotIn("id");
+		
+		String[] where={"userName = ",username," userPhoneNum = ",userPhoneNum,
+				" useridCard =",useridCard};
+		clientInfo.setWhere(where);
+		
+		ClientInfo clientInfo2=null;
+		try{
+		  List<ClientInfo> list=SelectExe.get(this.getJdbcTemplate(), clientInfo);
+		  clientInfo2=list.get(0);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return clientInfo2;
+	}
+	
+	@Override
 	public Integer updateLastLoginTime(Users users, Date date) {
 		// TODO Auto-generated method stub
 		Users users2=new Users();
@@ -222,6 +271,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		
 		return UpdateExe.get(this.getJdbcTemplate(), users2);
 	}
+
 
 
 }

@@ -1307,26 +1307,26 @@
 //                        }
 //                    }
 //                },
-//                userPhoneNum: {
-//                    message: '验证失败',
-//                    validators: {
-//                        notEmpty: {
-//                            message: '请填入信息'
-//                        },
-//                        numeric: {
-//                          message: '请输入数字'
-//                        },
-//                     stringLength: {
-//                         min: 11,
-//                         max: 11,
-//                         message: '请输入11位手机号码'
-//                     },
-//                     regexp: {
-//                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
-//                         message: '请输入正确的手机号码'
-//                     }
-//                    }
-//                },
+                userPhoneNum: {
+                   message: '验证失败',
+                    validators: {
+                       notEmpty: {
+                           message: '请填入信息'
+                       },
+                       numeric: {
+                          message: '请输入数字'
+                       },
+                     stringLength: {
+                         min: 11,
+                         max: 11,
+                         message: '请输入11位手机号码'
+                     },
+                     regexp: {
+                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                         message: '请输入正确的手机号码'
+                     }
+                    }
+                },
 //                userTelNum: {
 //                    message: '验证失败',
 //                    validators: {
@@ -1432,6 +1432,7 @@
 
         clientInfo.username = $("#username").val().toString();
         clientInfo.useridCard = $("#useridCard").val().toString();
+        clientInfo.userPhoneNum = $("#userPhoneNum").val().toString();
         
         if(clientInfo.username==""){
         	alert("用户名不能为空");
@@ -1440,6 +1441,11 @@
         
         if(clientInfo.useridCard==""){
         	alert("身份证号码不能为空");
+        	return false;
+        }
+        
+        if(clientInfo.userPhoneNum==""){
+        	alert("手机号码不能为空");
         	return false;
         }
         
@@ -1453,7 +1459,7 @@
         clientInfo.usercrAdress = $("#usercrAdress").val().toString();
         clientInfo.userHouseState = $("#userHouseState").val().toString();
         clientInfo.userNowAdress = $("#userNowAdress").val().toString();
-        clientInfo.userPhoneNum = $("#userPhoneNum").val().toString();
+        
         clientInfo.userTelNum = $("#userTelNum").val().toString();
         clientInfo.userWechat = $("#userWechat").val().toString();
         clientInfo.userqqNum = $("#userqqNum").val().toString();

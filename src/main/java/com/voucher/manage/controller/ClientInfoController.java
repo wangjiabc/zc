@@ -347,6 +347,29 @@ public class ClientInfoController {
 		return clientInfo;
 	}
 	
+	@RequestMapping(value="/getById")
+	public @ResponseBody ClientInfo getClientInfoById(@RequestParam String id,HttpServletRequest request){
+		ClientInfo clientInfo=userDao.getClientInfoById(id);
+		
+		return clientInfo;
+	}
+	
+	@RequestMapping(value="/getQuery")
+	public @ResponseBody Map getClientInfoQuery(@RequestParam String username,@RequestParam String userPhoneNum, 
+			@RequestParam String useridCard,HttpServletRequest request){
+		ClientInfo clientInfo=userDao.getClientInfoQuery(username, userPhoneNum, useridCard);
+		
+		Map map=new HashMap<>();
+		
+		if(clientInfo!=null){
+			map.put("state", "succeed");
+			map.put("id", clientInfo.getId());
+		}else{
+			map.put("state", "false");
+		}
+		
+		return map;
+	}
 	
 	@RequestMapping(value="/delete")
 	public @ResponseBody Integer delete(@RequestParam Integer id){

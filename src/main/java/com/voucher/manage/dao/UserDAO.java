@@ -32,6 +32,10 @@ public interface UserDAO {
 	
 	public ClientInfo getClientInfo(String uuid);
 	
+	public ClientInfo getClientInfoById(String id);
+	
+	public ClientInfo getClientInfoQuery(String username,String userPhoneNum,String useridCard);
+	
 	public Integer deleteClientInfo(Integer id);
 	
 	public Integer insertIntoImage(Image image);

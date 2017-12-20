@@ -1378,12 +1378,12 @@
      };
      */
 
-    var uuid=getQueryString("uuid");
+    var id=getQueryString("id");
 
     $.ajax({
         type:"get",
-        url:"clientinfo/get.do",
-        data:{uuid:uuid},
+        url:"clientinfo/getById.do",
+        data:{id:id},
         success:function(data){
             var obj = $.parseJSON(data);
             console.log("kinsh9p="+obj.userSex);
@@ -1450,6 +1450,39 @@
             $("#colleagueUnitName").val(obj.colleagueUnitName);
             $("#colleaguePhoneNum").val(obj.colleaguePhoneNum);
             $("#colleagueAddress").val(obj.colleagueAddress);
+            
+            var uuid=obj.guid;
+            
+            $.ajax({
+        		type:"post",
+        		async: false,
+        		url:"/zc/clientinfo/imageUrl.do",
+        		data:{clientInfo_GUID:uuid},
+        		success:function(data){
+        			var obj = $.parseJSON(data);
+        			for(var i=0;i<obj.length;i++){
+        				var cc=new Image();
+        				cc.src="/zc"+obj[i];
+        				cc.width=100;
+        				cc.height=100;
+        				
+        				var span=document.createElement('span');
+        				span.innerHTML=" \u00A0 \u00A0 ";
+        				
+        				document.getElementById("image").appendChild(span);
+        				
+        				document.getElementById("image").appendChild(cc);	
+        				
+        				document.getElementById("image").appendChild(span);
+        				
+        			}
+        			
+        			var p=document.createElement('p');
+        			
+        			document.getElementById("image").appendChild(p);
+        		 }
+        		});
+            
         }
     });
 
@@ -1535,37 +1568,9 @@
 
     }
 
-
-    $.ajax({
-		type:"post",
-		async: false,
-		url:"/zc/clientinfo/imageUrl.do",
-		data:{clientInfo_GUID:uuid},
-		success:function(data){
-			var obj = $.parseJSON(data);
-			for(var i=0;i<obj.length;i++){
-				var cc=new Image();
-				cc.src="/zc"+obj[i];
-				cc.width=100;
-				cc.height=100;
-				
-				var span=document.createElement('span');
-				span.innerHTML=" \u00A0 \u00A0 ";
-				
-				document.getElementById("image").appendChild(span);
-				
-				document.getElementById("image").appendChild(cc);	
-				
-				document.getElementById("image").appendChild(span);
-				
-			}
-			
-			var p=document.createElement('p');
-			
-			document.getElementById("image").appendChild(p);
-		 }
-		});
-
+/*
+    
+*/
     function addInfo(){
 
         checkInfo();
