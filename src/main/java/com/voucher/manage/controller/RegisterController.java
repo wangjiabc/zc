@@ -182,7 +182,7 @@ public class RegisterController {
    @RequestMapping("insert")
    public @ResponseBody Map<String, Object>
    insert(@RequestParam String username,@RequestParam String password,
-		   @RequestParam Integer telephone,@RequestParam String email,
+		   @RequestParam String telephone,@RequestParam String email,
 		   @RequestParam String regtlx){
 	   Map<String, Object> map=new HashMap<>();
 	   

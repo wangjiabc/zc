@@ -1,0 +1,54 @@
+[DEBUG][2017-12-23 20:40:13,379][org.apache.http.client.protocol.RequestAddCookies]CookieSpec selected: best-match
+[DEBUG][2017-12-23 20:40:13,396][org.apache.http.client.protocol.RequestAuthCache]Auth cache not set in the context
+[DEBUG][2017-12-23 20:40:13,399][org.apache.http.impl.conn.PoolingHttpClientConnectionManager]Connection request: [route: {s}->https://api.limuzhengxin.com:443][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 400]
+[DEBUG][2017-12-23 20:40:13,432][org.apache.http.impl.conn.PoolingHttpClientConnectionManager]Connection leased: [id: 0][route: {s}->https://api.limuzhengxin.com:443][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 400]
+[DEBUG][2017-12-23 20:40:13,438][org.apache.http.impl.execchain.MainClientExec]Opening connection {s}->https://api.limuzhengxin.com:443
+[DEBUG][2017-12-23 20:40:13,456][org.apache.http.impl.conn.HttpClientConnectionOperator]Connecting to api.limuzhengxin.com/119.145.148.89:443
+[DEBUG][2017-12-23 20:40:13,938][org.apache.http.impl.conn.HttpClientConnectionOperator]Connection established 192.168.1.106:54859<->119.145.148.89:443
+[DEBUG][2017-12-23 20:40:13,938][org.apache.http.impl.execchain.MainClientExec]Executing request POST /mobile_report/v1/task HTTP/1.1
+[DEBUG][2017-12-23 20:40:13,938][org.apache.http.impl.execchain.MainClientExec]Target auth state: UNCHALLENGED
+[DEBUG][2017-12-23 20:40:13,939][org.apache.http.impl.execchain.MainClientExec]Proxy auth state: UNCHALLENGED
+[DEBUG][2017-12-23 20:40:13,940][org.apache.http.headers]http-outgoing-0 >> POST /mobile_report/v1/task HTTP/1.1
+[DEBUG][2017-12-23 20:40:13,941][org.apache.http.headers]http-outgoing-0 >> Content-Length: 181
+[DEBUG][2017-12-23 20:40:13,941][org.apache.http.headers]http-outgoing-0 >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+[DEBUG][2017-12-23 20:40:13,941][org.apache.http.headers]http-outgoing-0 >> Host: api.limuzhengxin.com
+[DEBUG][2017-12-23 20:40:13,941][org.apache.http.headers]http-outgoing-0 >> Connection: Keep-Alive
+[DEBUG][2017-12-23 20:40:13,941][org.apache.http.headers]http-outgoing-0 >> User-Agent: Apache-HttpClient/4.3.4 (java 1.5)
+[DEBUG][2017-12-23 20:40:13,941][org.apache.http.headers]http-outgoing-0 >> Accept-Encoding: gzip,deflate
+[DEBUG][2017-12-23 20:40:13,941][org.apache.http.wire]http-outgoing-0 >> "POST /mobile_report/v1/task HTTP/1.1[\r][\n]"
+[DEBUG][2017-12-23 20:40:13,942][org.apache.http.wire]http-outgoing-0 >> "Content-Length: 181[\r][\n]"
+[DEBUG][2017-12-23 20:40:13,942][org.apache.http.wire]http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+[DEBUG][2017-12-23 20:40:13,942][org.apache.http.wire]http-outgoing-0 >> "Host: api.limuzhengxin.com[\r][\n]"
+[DEBUG][2017-12-23 20:40:13,942][org.apache.http.wire]http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+[DEBUG][2017-12-23 20:40:13,943][org.apache.http.wire]http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.3.4 (java 1.5)[\r][\n]"
+[DEBUG][2017-12-23 20:40:13,943][org.apache.http.wire]http-outgoing-0 >> "Accept-Encoding: gzip,deflate[\r][\n]"
+[DEBUG][2017-12-23 20:40:13,943][org.apache.http.wire]http-outgoing-0 >> "[\r][\n]"
+[DEBUG][2017-12-23 20:40:13,943][org.apache.http.wire]http-outgoing-0 >> "apiKey=2626504090684141&callBackUrl=&accessType=api&username=15884790116&password=MzE0MTU5&identityName=1&identityCardNo=510&otherInfo=&sign=4770da287b0d1c94c7c43659a2659a84d8b5761f"
+[DEBUG][2017-12-23 20:40:14,147][org.apache.http.wire]http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,154][org.apache.http.wire]http-outgoing-0 << "Date: Sat, 23 Dec 2017 12:40:18 GMT[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,155][org.apache.http.wire]http-outgoing-0 << "Content-Type: application/json;charset=UTF-8[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,157][org.apache.http.wire]http-outgoing-0 << "Access-Control-Allow-Origin: *[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,158][org.apache.http.wire]http-outgoing-0 << "Access-Control-Allow-Methods: POST[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,159][org.apache.http.wire]http-outgoing-0 << "Access-Control-Allow-Headers: Access-Control[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,162][org.apache.http.wire]http-outgoing-0 << "Allow: POST[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,162][org.apache.http.wire]http-outgoing-0 << "X-Cache: MISS from D[0xe7][0xbd][0x91][0xe5][0x9f][0x9f][0xe5][0xb9][0xbf][0xe4][0xb8][0x9c][0xe4][0xba][0x91][\r][\n]"
+[DEBUG][2017-12-23 20:40:14,162][org.apache.http.wire]http-outgoing-0 << "Transfer-Encoding: chunked[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,163][org.apache.http.wire]http-outgoing-0 << "Connection: keep-alive[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,163][org.apache.http.wire]http-outgoing-0 << "[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,172][org.apache.http.headers]http-outgoing-0 << HTTP/1.1 200 OK
+[DEBUG][2017-12-23 20:40:14,173][org.apache.http.headers]http-outgoing-0 << Date: Sat, 23 Dec 2017 12:40:18 GMT
+[DEBUG][2017-12-23 20:40:14,173][org.apache.http.headers]http-outgoing-0 << Content-Type: application/json;charset=UTF-8
+[DEBUG][2017-12-23 20:40:14,173][org.apache.http.headers]http-outgoing-0 << Access-Control-Allow-Origin: *
+[DEBUG][2017-12-23 20:40:14,173][org.apache.http.headers]http-outgoing-0 << Access-Control-Allow-Methods: POST
+[DEBUG][2017-12-23 20:40:14,173][org.apache.http.headers]http-outgoing-0 << Access-Control-Allow-Headers: Access-Control
+[DEBUG][2017-12-23 20:40:14,174][org.apache.http.headers]http-outgoing-0 << Allow: POST
+[DEBUG][2017-12-23 20:40:14,175][org.apache.http.headers]http-outgoing-0 << X-Cache: MISS from Dç½åå¹¿ä¸äº
+[DEBUG][2017-12-23 20:40:14,175][org.apache.http.headers]http-outgoing-0 << Transfer-Encoding: chunked
+[DEBUG][2017-12-23 20:40:14,175][org.apache.http.headers]http-outgoing-0 << Connection: keep-alive
+[DEBUG][2017-12-23 20:40:14,183][org.apache.http.impl.execchain.MainClientExec]Connection can be kept alive indefinitely
+[DEBUG][2017-12-23 20:40:14,190][org.apache.http.wire]http-outgoing-0 << "3c[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,190][org.apache.http.wire]http-outgoing-0 << "{"code":"1013","msg":"[0xe8][0xba][0xab][0xe4][0xbb][0xbd][0xe8][0xaf][0x81][0xe5][0x8f][0xb7][0xe6][0xa0][0xbc][0xe5][0xbc][0x8f][0xe4][0xb8][0x8d][0xe6][0xad][0xa3][0xe7][0xa1][0xae][0xe6][0x88][0x96][0xe6][0x97][0xa0][0xe6][0x95][0x88]"}[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,193][org.apache.http.wire]http-outgoing-0 << "0[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,193][org.apache.http.wire]http-outgoing-0 << "[\r][\n]"
+[DEBUG][2017-12-23 20:40:14,193][org.apache.http.impl.conn.PoolingHttpClientConnectionManager]Connection [id: 0][route: {s}->https://api.limuzhengxin.com:443] can be kept alive indefinitely
+[DEBUG][2017-12-23 20:40:14,193][org.apache.http.impl.conn.PoolingHttpClientConnectionManager]Connection released: [id: 0][route: {s}->https://api.limuzhengxin.com:443][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 400]

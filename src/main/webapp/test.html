@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+          <div id="a"></div>
+            <button id="start" >start</button>
+            
+							<div id="control" class="control-group">
+								<label class="control-label" for="phone">输入短信</label>
+								<div class="controls">
+									<input type="text" id="sms" placeholder="短信">
+								</div>
+								<button id="input">input</button>
+							</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script type="text/javascript">
+ var control=document.getElementById("control");
+ 
+ control.style.display="none";
+
+ function status(json){
+	 if(json.code=="0006"){		 
+    	 code=json.code;
+    	 control.style.display="";
+    	 $("#input").on("click",function(){
+    		 var input=$("#sms").val();
+    		 $.post("/zc/credit/input.do", {
+    			 s:input
+    		 },function(text){
+    			 alert("2="+text);
+    			 control.style.display="none";
+    			 $.post("/zc/credit/status.do", {
+        		 },function(text){
+        			 var json=$.parseJSON(text);
+        			 status(json);   		     
+        	    });
+    		 });
+    	 });
+     }else{
+    	 alert(json.msg);
+     }
+ }
+ 
+  
+ $("#start").click(function(){
+	 
+ $.post("/zc/credit/taskMobile.do", {
+	/* 
+	 username : "13688215543",
+     password :"510213",
+     identityName : "陆薪桦",
+     identityCardNo : "510502199508242213"
+     */
+	 username : "18383065362",
+     password :"314159",
+     identityName : "钟群",
+     identityCardNo : "510502198706236821"
+  },function(text){    
+     var json=$.parseJSON(text);
+     $("#a").text(json.msg);
+     if(json.code=="0010"){
+    	 alert(json.msg);
+    	 var token=json.token;
+    	 
+    	  $.post("/zc/credit/status.do", {
+    		 },function(text){
+    			 var json=$.parseJSON(text);
+    			 status(json);   		     
+    	   });
+    	  
+     }else{
+    	 alert(json.msg);
+     }
+   });
+ 
+ });
+</script>

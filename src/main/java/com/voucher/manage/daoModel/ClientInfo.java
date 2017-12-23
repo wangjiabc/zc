@@ -1,6 +1,7 @@
 package com.voucher.manage.daoModel;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.voucher.manage.daoSQL.annotations.*;
 
@@ -36,6 +37,9 @@ public class ClientInfo implements Serializable{
     @SQLString(name="colleagueRelation")
 	private String colleagueRelation;
 
+    @SQLString(name="remark")
+	private String remark;
+    
     @SQLString(name="colleagueUnitName")
 	private String colleagueUnitName;
 
@@ -241,6 +245,12 @@ public class ClientInfo implements Serializable{
 		return GUID;
 	}
 
+	@SQLDateTime(name="updateTime")
+	private Date updateTime;
+
+    @SQLDateTime(name="insertTime")
+	private Date insertTime;
+	
 	public void setCampusAdmin(String campusAdmin){
 		this.campusAdmin = campusAdmin;
 	}
@@ -879,5 +889,29 @@ public class ClientInfo implements Serializable{
 		return whereTerm;
 	}
 
+	public void setRemark(String remark){
+		this.remark = remark;
+	}
+
+	public String getRemark(){
+		return remark;
+	}
+	
+	public void setUpdateTime(Date updateTime){
+		this.updateTime = updateTime;
+	}
+
+	public Date getUpdateTime(){
+		return updateTime;
+	}
+
+	public void setInsertTime(Date insertTime){
+		this.insertTime = insertTime;
+	}
+
+	public Date getInsertTime(){
+		return insertTime;
+	}
+	
 }
 

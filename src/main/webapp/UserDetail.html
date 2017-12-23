@@ -25,7 +25,7 @@
 </head>
 
 <body>
-<div id="wrapper">
+<div id="wrapper" style="margin-top: -10px;">
     <nav class="navbar navbar-default top-navbar" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -44,7 +44,9 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                	<li><a href="/zc/updateUser.html"><i class="fa fa-sign-out fa-fw"></i> 密码设置</a>
+                    </li>
+                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -65,7 +67,7 @@
                         <li>
                             <a href="AddInfo.html">添加客户信息</a>
                         </li>
-                        <li>
+                        <li id="userhide">
                             <a href="user.html">员工管理信息</a>
                         </li>
                     </ul>
@@ -251,6 +253,17 @@
                                                 <input type="radio" name="userPhoneMonad" value="无"> 无
                                         </label>
                                             </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label class="col-sm-3 control-label">备注</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="remark"
+                                                   id="remark" placeholder="备注信息">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-9">
                                     </div>
                                 </div>
                                 <div id="image"></div>
@@ -724,8 +737,11 @@
 <script src="assets/js/fileinput.min.js"></script>
 <script src="assets/js/fileinput_locale_zh.js"></script>
 <script type="text/javascript">
-
+//    var p = "13212341234";
+//    console.log(p.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'));
     $('input').attr("readonly","readonly");
+//    $("#userPhoneNum").html($("#userPhoneNum").substring(0,3)+"****"+$("#userPhoneNum").substring(8,11));
+
     //初始化图像信息
     // function initPortrait(ctrlName, id) {
     //     var control = $('#' + ctrlName);
@@ -739,6 +755,20 @@
     //     });
     // }
 
+    function getcookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+
+    var type = getcookie('type');
+
+    if (type != 0) {
+        $("#userhide").hide();
+    }
+    
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
@@ -1394,12 +1424,13 @@
             $("#userEducation").val(obj.userEducation);
             $("#userMarriage").val(obj.userMarriage);
             $("#useridCard").val(obj.useridCard);
+            $("#remark").val(obj.remark);
             $("#userProvideNum").val(obj.userProvideNum);
             $("#userChildrenNum").val(obj.userChildrenNum);
             $("#usercrAdress").val(obj.usercrAdress);
             $("#userHouseState").val(obj.userHouseState);
             $("#userNowAdress").val(obj.userNowAdress);
-            $("#userPhoneNum").val(obj.userPhoneNum);
+            $("#userPhoneNum").val(String(obj.userPhoneNum).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'));
             $("#userTelNum").val(obj.userTelNum);
             $("#userWechat").val(obj.userWechat);
             $("#userqqNum").val(obj.userqqNum);
@@ -1433,22 +1464,23 @@
             $("#applyMoney").val(obj.applyMoney);
             $("#weekRepayment").val(obj.weekRepayment);
             $("#applyTime").val(obj.applyTime);
+
             $("#kinshipName").val(obj.kinshipName);
             $("#kinshipRelation").val(obj.kinshipRelation);
             $("#kinshipUnitName").val(obj.kinshipUnitName);
-            $("#kinshipPhoneNum").val(obj.kinshipPhoneNum);
+            $("#kinshipPhoneNum").val(String(obj.kinshipPhoneNum).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'));
             $("#kinshipAddress").val(obj.kinshipAddress);
 
             $("#emergencyName").val(obj.emergencyName);
             $("#emergencyRelation").val(obj.emergencyRelation);
             $("#emergencyUnitName").val(obj.emergencyUnitName);
-            $("#emergencyPhoneNum").val(obj.emergencyPhoneNum);
+            $("#emergencyPhoneNum").val(String(obj.emergencyPhoneNum).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'));
             $("#emergencyAddress").val(obj.emergencyAddress);
 
             $("#colleagueName").val(obj.colleagueName);
             $("#colleagueRelation").val(obj.colleagueRelation);
             $("#colleagueUnitName").val(obj.colleagueUnitName);
-            $("#colleaguePhoneNum").val(obj.colleaguePhoneNum);
+            $("#colleaguePhoneNum").val(String(obj.colleaguePhoneNum).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'));
             $("#colleagueAddress").val(obj.colleagueAddress);
             
             var uuid=obj.guid;

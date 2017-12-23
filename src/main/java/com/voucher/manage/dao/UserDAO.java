@@ -14,6 +14,8 @@ public interface UserDAO {
 	
 	public Integer updateState(String campusAdmin,Integer state);
 	
+	public Integer updatePassWord(String campusAdmin, String password); 
+	
 	public Integer selectRepeatAdmin(String username);
 	
 	public Integer insertIntoUser(Users users);

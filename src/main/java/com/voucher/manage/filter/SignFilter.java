@@ -40,8 +40,8 @@ public class SignFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		@SuppressWarnings("unchecked")
-		HashMap<String, String[]> map = (HashMap<String, String[]>) request
-				.getParameterMap();
+	//	HashMap<String, String[]> map = (HashMap<String, String[]>) request
+	//			.getParameterMap();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		JSON.toJSONString(resultMap);
 
