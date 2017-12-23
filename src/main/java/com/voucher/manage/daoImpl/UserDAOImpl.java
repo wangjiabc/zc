@@ -274,7 +274,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		clientInfo.setOffset(0);
 		clientInfo.setNotIn("id");
 		
-		String[] where={"userName = ",username," userPhoneNum = ",userPhoneNum,
+		String[] where={"userName = ",username,
 				" useridCard =",useridCard};
 		clientInfo.setWhere(where);
 		
