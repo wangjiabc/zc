@@ -12,7 +12,10 @@ public interface UserDAO {
 
 	public Integer updateLastLoginTime(Users users,Date date);
 	
+	
 	public Integer updateState(String campusAdmin,Integer state);
+	
+	public Integer updatePassWord(String campusAdmin, String password); 
 	
 	public Integer selectRepeatAdmin(String username);
 	
