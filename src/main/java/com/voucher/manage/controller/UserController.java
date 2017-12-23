@@ -25,7 +25,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.voucher.manage.dao.UserDAO;
 import com.voucher.manage.daoModel.Users;
-import com.voucher.manage.tools.Md5;
 import com.voucher.manage.tools.MyTestUtil;
 import com.voucher.sqlserver.context.Connect;
 
@@ -96,24 +95,5 @@ public class UserController {
 		 return userDao.updateState(campusAdmin, state);
 	}
 	
-	@RequestMapping(value="/updatePassword")
-	public @ResponseBody Integer updatePassword(@RequestParam String oldPassword,
-			@RequestParam String password,HttpServletRequest request){
-		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
-		String campusAdmin=(String) session.getAttribute("campusAdmin");
-		
-		Users users = userDao.selectUsersByCampusAdmin(campusAdmin);
-		
-		int i;
-		
-		if (users.getPassword().equals(Md5.GetMD5Code(oldPassword))){
-			String passwordMd5=Md5.GetMD5Code(password);
-			i=userDao.updatePassWord(campusAdmin, passwordMd5);
-			return i;
-		}else{
-			i=0;
-			return i;
-		}
-	}
 
 }

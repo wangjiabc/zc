@@ -34,20 +34,6 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 	}
 	
 	@Override
-	public Integer updatePassWord(String campusAdmin, String password) {
-		// TODO Auto-generated method stub
-		Users users=new Users();
-		
-		users.setPassword(password);
-		
-		String[] where={"campusAdmin =", campusAdmin};
-		
-		users.setWhere(where);
-		
-		return UpdateExe.get(this.getJdbcTemplate(), users);
-	}
-	
-	@Override
 	public Integer selectRepeatAdmin(String username) {
 		// TODO Auto-generated method stub
 		Users users=new Users();
@@ -145,25 +131,6 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		clientInfo.setLimit(limit);
 		clientInfo.setOffset(offset);
 		clientInfo.setNotIn("id");
-		clientInfo.setSort("id");
-		clientInfo.setOrder("desc");
-		
-		
-		if(sort!=null&&sort.equals("id")){
-			sort="id";
-			clientInfo.setSort(sort);
-		}
-		
-		if(order!=null&&order.equals("asc")){
-			order="asc";
-			clientInfo.setOrder(order);
-		}
-		
-		if(order!=null&&order.equals("desc")){
-			order="desc";
-			clientInfo.setOrder(order);
-		}
-	
 		
 		if(!search.isEmpty()){
 		    String[] where=TransMapToString.get(search);
@@ -275,7 +242,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		clientInfo.setOffset(0);
 		clientInfo.setNotIn("id");
 		
-		String[] where={"userName = ",username,
+		String[] where={"userName = ",username," userPhoneNum = ",userPhoneNum,
 				" useridCard =",useridCard};
 		clientInfo.setWhere(where);
 		

@@ -3,13 +3,11 @@ package com.voucher.manage.controller;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -45,9 +43,7 @@ import com.voucher.sqlserver.context.Connect;
 @Controller
 @RequestMapping("/clientinfo")
 public class ClientInfoController {
-	
-	public final static String filePath=System.getProperty("user.home")+"\\Desktop\\pasoft\\ZC\\";
-	
+
     ApplicationContext applicationContext=new Connect().get();
 	
 	UserDAO userDao=(UserDAO) applicationContext.getBean("dao");
@@ -90,7 +86,7 @@ public class ClientInfoController {
 			clientInfo.setUserEducation(jsonObject.getString("userEducation"));
 			clientInfo.setUserMarriage(jsonObject.getString("userMarriage"));
 			clientInfo.setUseridCard(jsonObject.getString("useridCard"));
-			clientInfo.setRemark(jsonObject.getString("remark"));
+
 
 			clientInfo.setUsercrAdress(jsonObject.getString("usercrAdress"));
 			clientInfo.setUserHouseState(jsonObject.getString("userHouseState"));
@@ -127,7 +123,7 @@ public class ClientInfoController {
 			clientInfo.setApplyTime(jsonObject.getString("applyTime"));
 
 			clientInfo.setKinshipName(jsonObject.getString("kinshipName"));
-			clientInfo.setKinshipRelation(jsonObject.getString("kinshipRelation"));
+//			clientInfo.setKinshipRelation(jsonObject.getString("kinshipRelation"));
 			clientInfo.setKinshipUnitName(jsonObject.getString("kinshipUnitName"));
 			clientInfo.setKinshipPhoneNum(jsonObject.getString("kinshipPhoneNum"));
 			clientInfo.setKinshipAddress(jsonObject.getString("kinshipAddress"));
@@ -156,7 +152,7 @@ public class ClientInfoController {
 			return map;
 		}
 
-		HttpSession session=request.getSession();  //取得session的type变量，判断是否为管理员
+		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
 		campusAdmin=(String) session.getAttribute("campusAdmin");
 		type=(Integer) session.getAttribute("type");
 		state=(Integer) session.getAttribute("state");
@@ -167,9 +163,6 @@ public class ClientInfoController {
 		clientInfo.setCampusAdmin(campusAdmin);
 				
 		System.out.println("type="+type+"      state="+state);
-		
-		Date date=new Date();
-		clientInfo.setInsertTime(date);
 		
 		MyTestUtil.print(clientInfo);
 		
@@ -224,7 +217,7 @@ public class ClientInfoController {
 			clientInfo.setUserEducation(jsonObject.getString("userEducation"));
 			clientInfo.setUserMarriage(jsonObject.getString("userMarriage"));
 			clientInfo.setUseridCard(jsonObject.getString("useridCard"));
-            clientInfo.setRemark(jsonObject.getString("remark"));
+
 
 			clientInfo.setUsercrAdress(jsonObject.getString("usercrAdress"));
 			clientInfo.setUserHouseState(jsonObject.getString("userHouseState"));
@@ -261,7 +254,7 @@ public class ClientInfoController {
 			clientInfo.setApplyTime(jsonObject.getString("applyTime"));
 
 			clientInfo.setKinshipName(jsonObject.getString("kinshipName"));
-			clientInfo.setKinshipRelation(jsonObject.getString("kinshipRelation"));
+//			clientInfo.setKinshipRelation(jsonObject.getString("kinshipRelation"));
 			clientInfo.setKinshipUnitName(jsonObject.getString("kinshipUnitName"));
 			clientInfo.setKinshipPhoneNum(jsonObject.getString("kinshipPhoneNum"));
 			clientInfo.setKinshipAddress(jsonObject.getString("kinshipAddress"));
@@ -301,9 +294,6 @@ public class ClientInfoController {
 				
 		System.out.println("type="+type+"      state="+state);
 		
-		Date date=new Date();
-		clientInfo.setUpdateTime(date);
-		
 		String[] where={"GUID =",uuid};
         clientInfo.setWhere(where);
         		
@@ -325,17 +315,13 @@ public class ClientInfoController {
 			String search,HttpServletRequest request) {
 		Integer type=(Integer) request.getSession().getAttribute("type");
 	    String campusAdmin=(String) request.getSession().getAttribute("campusAdmin");
-		
-	    
-	    if(order!=null&&order.equals("asc")){
+		if(order!=null&&order.equals("asc")){
 			order="asc";
 		}
 	
 		if(order!=null&&order.equals("desc")){
 			order="desc";
 		}
-		
-		System.out.println("sort="+sort+"   order="+order);
 		
 		Map searchMap=new HashMap<>();
 		
@@ -349,7 +335,7 @@ public class ClientInfoController {
 		}
 		
 		System.out.println("search="+search);
-		Map map=userDao.getAllClientInfo(limit, offset, sort, order, searchMap);
+		Map map=userDao.getAllClientInfo(limit, offset, null, order, searchMap);
 		
 		return map;
 	}
@@ -536,11 +522,7 @@ public class ClientInfoController {
 						}
                         //完整路径
                         fileSrc=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+path_deposit+origName;
-                        
-                        copyFile(path+origName, filePath+origName);
-                        
-                        System.out.println("图片上传成功:"+path+origName);                       
-                        System.out.println("图片上传成功2:"+filePath+origName);
+                        System.out.println("图片上传成功:"+fileSrc);
                         return fileSrc;
                     }
                 }
@@ -551,30 +533,4 @@ public class ClientInfoController {
         }
     }
 	
-    
-    
-    public void copyFile(String oldPath, String newPath) { 
-        try { 
-            int bytesum = 0; 
-            int byteread = 0; 
-            File oldfile = new File(oldPath); 
-            if (oldfile.exists()) { //文件存在时 
-                InputStream inStream = new FileInputStream(oldPath); //读入原文件 
-                FileOutputStream fs = new FileOutputStream(newPath); 
-                byte[] buffer = new byte[1444]; 
-                int length; 
-                while ( (byteread = inStream.read(buffer)) != -1) { 
-                    bytesum += byteread; //字节数 文件大小 
-                    System.out.println(bytesum); 
-                    fs.write(buffer, 0, byteread); 
-                } 
-                inStream.close(); 
-            } 
-        } 
-        catch (Exception e) { 
-            System.out.println("复制单个文件操作出错"); 
-            e.printStackTrace(); 
-        } 
-    } 
-    
 }

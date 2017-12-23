@@ -32,8 +32,8 @@ public class Users implements Serializable{
     @SQLInteger(name="cityId")
 	private Integer cityId;
 
-    @SQLString(name="telePhone")
-	private String telePhone;
+    @SQLInteger(name="telePhone")
+	private Integer telePhone;
 
     @SQLString(name="address")
 	private String address;
@@ -96,11 +96,11 @@ public class Users implements Serializable{
 		return cityId;
 	}
 
-	public void setTelePhone(String telePhone){
+	public void setTelePhone(Integer telePhone){
 		this.telePhone = telePhone;
 	}
 
-	public String getTelePhone(){
+	public Integer getTelePhone(){
 		return telePhone;
 	}
 
