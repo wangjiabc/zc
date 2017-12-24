@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-          <div id="a"></div>
+		<div id="a"></div>
             <button id="start" >start</button>
             
 							<div id="control" class="control-group">
@@ -17,13 +17,40 @@
 							</div>
 </body>
 </html>
-<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script src="assets/js/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
+
  var control=document.getElementById("control");
  
  control.style.display="none";
-
+ 
+ $("#start").click(function(){
+	 
+	 $.post("/zc/credit/taskMobile.do", {
+		
+		 
+	  },function(text){    
+	     var json=$.parseJSON(text);
+	     $("#a").text(json.msg);
+	     if(json.code=="0010"){
+	    	 alert(json.msg);
+	    	 var token=json.token;
+	    	 
+	    	  $.post("/zc/credit/status.do", {
+	    		 },function(text){
+	    			 var json=$.parseJSON(text);
+	    			 status(json);   		     
+	    	   });
+	    	  
+	     }else{
+	    	 alert(json.msg);
+	     }
+	   });
+	 
+	 });
+ 
  function status(json){
 	 if(json.code=="0006"){		 
     	 code=json.code;
@@ -42,42 +69,22 @@
         	    });
     		 });
     	 });
+     }else if(json.code=="0009"){
+    	   status(json);
+     }else if(json.code=="0200"){
+    	 $.post("/zc/credit/status.do", {
+		 },function(text){
+			 var json=$.parseJSON(text);
+			 status(json);   		     
+	    });
+     }else if(json.code=="0000"){
+    	 $.post("/zc/credit/getReport.do", {
+		 },function(text){
+			 alert(text);  		     
+	    }); 
      }else{
-    	 alert(json.msg);
+    	  alert(json);
      }
  }
  
-  
- $("#start").click(function(){
-	 
- $.post("/zc/credit/taskMobile.do", {
-	/* 
-	 username : "13688215543",
-     password :"510213",
-     identityName : "陆薪桦",
-     identityCardNo : "510502199508242213"
-     */
-	 username : "18383065362",
-     password :"314159",
-     identityName : "钟群",
-     identityCardNo : "510502198706236821"
-  },function(text){    
-     var json=$.parseJSON(text);
-     $("#a").text(json.msg);
-     if(json.code=="0010"){
-    	 alert(json.msg);
-    	 var token=json.token;
-    	 
-    	  $.post("/zc/credit/status.do", {
-    		 },function(text){
-    			 var json=$.parseJSON(text);
-    			 status(json);   		     
-    	   });
-    	  
-     }else{
-    	 alert(json.msg);
-     }
-   });
- 
- });
 </script>

@@ -44,7 +44,7 @@ public class AbstractCredit {
     public static final String accessType = "api";//api:api接入、h5:h5接入、sdk:sdk接入、默认api
     public static final String ts = System.currentTimeMillis() + ""; //用户请求提交的时间戳(毫秒) 如:1404955893000
     
-    public final long timeInterval = 5000;//轮训时间 默认5秒
+    public final static long timeInterval = 5000;//轮训时间 默认5秒
 
     public static String token = null;
 
@@ -69,7 +69,7 @@ public class AbstractCredit {
             if("0010".equals(code)) {//受理成功
 
                 token = rootNode.get("token").textValue();
-                timer();//每5秒查询一次数据请求
+        //        timer();//每5秒查询一次数据请求
                 return json;
             } else {
                 System.out.println("查询失败");
@@ -84,7 +84,7 @@ public class AbstractCredit {
      * @throws
      * @Description:定时器
      */
-    public void timer() {
+  /*  public void timer() {
         System.out.println("轮循 start");
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -107,7 +107,7 @@ public class AbstractCredit {
                 }
             }
         }, 0, timeInterval);
-    }
+    }*/
 
     /**
      * @param @param  token
