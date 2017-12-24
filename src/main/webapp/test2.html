@@ -29,8 +29,7 @@
  $("#start").click(function(){
 	 
 	 $.post("/zc/credit/taskMobile.do", {
-		
-		 
+
 	  },function(text){    
 	     var json=$.parseJSON(text);
 	     $("#a").text(json.msg);
