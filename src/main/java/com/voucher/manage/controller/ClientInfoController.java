@@ -1,12 +1,8 @@
 package com.voucher.manage.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,9 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
-import org.aspectj.util.FileUtil;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -30,10 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
 import com.voucher.manage.dao.UserDAO;
 import com.voucher.manage.daoModel.ClientInfo;
@@ -143,12 +133,7 @@ public class ClientInfoController {
 			clientInfo.setColleagueUnitName(jsonObject.getString("colleagueUnitName"));
 			clientInfo.setColleaguePhoneNum(jsonObject.getString("colleaguePhoneNum"));
 			clientInfo.setColleagueAddress(jsonObject.getString("colleagueAddress"));
-//			clientInfo=new ClientInfo(jsonObject.getString("borrowUse"),Integer.parseInt(jsonObject.getString("applyMoney")),Integer.parseInt(jsonObject.getString("weekRepayment")), jsonObject.getString("applyTime"),jsonObject.getString("colleagueName"),jsonObject.getString("colleagueRelation") ,
-//					jsonObject.getString("payMode"), jsonObject.getString("insMoney"), jsonObject.getString("payTerm"), jsonObject.getString("unitName"),jsonObject.getString("unitAddress") , jsonObject.getString("unitPhone"),jsonObject.getString("postcode") , jsonObject.getString("department"), jsonObject.getString("duty"),jsonObject.getString("workTime") , 
-//					jsonObject.getString("industry"), jsonObject.getString("unitNature"),jsonObject.getString("workNature") , jsonObject.getString("monthSalary"),jsonObject.getString("payDay") , jsonObject.getString("otherIncome"), jsonObject.getString("receptionType"), jsonObject.getString("receptionPerson"), jsonObject.getString("jobNum"),
-//					jsonObject.getString("source"),jsonObject.getString("borrowType") , jsonObject.getString("manager"),jsonObject.getString("workPhoneNum") , jsonObject.getString("number"), jsonObject.getString("interviewPerson"),jsonObject.getString("userName") , jsonObject.getString("userOldname"), jsonObject.getString("userAge"), jsonObject.getString("userSex"), 
-//					jsonObject.getString("userEducation"), jsonObject.getString("userMarriage"),jsonObject.getString("useridCard") , jsonObject.getString("userProvideNum"), jsonObject.getString("userChildrenNum"), jsonObject.getString("usercrAdress"), jsonObject.getString("userHouseState"),jsonObject.getString("userNowAdress") ,
-//					jsonObject.getString("userPhoneNum"), jsonObject.getString("userTelNum"), jsonObject.getString("userWechat"), jsonObject.getString("userqqNum"), jsonObject.getString("userSocialBase"), jsonObject.getString("userCreditCard"), jsonObject.getString("userPhoneMonad"), jsonObject.getString("userBankOpen"));
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -277,12 +262,7 @@ public class ClientInfoController {
 			clientInfo.setColleagueUnitName(jsonObject.getString("colleagueUnitName"));
 			clientInfo.setColleaguePhoneNum(jsonObject.getString("colleaguePhoneNum"));
 			clientInfo.setColleagueAddress(jsonObject.getString("colleagueAddress"));
-//			clientInfo=new ClientInfo(jsonObject.getString("borrowUse"),Integer.parseInt(jsonObject.getString("applyMoney")),Integer.parseInt(jsonObject.getString("weekRepayment")), jsonObject.getString("applyTime"),jsonObject.getString("colleagueName"),jsonObject.getString("colleagueRelation") ,
-//					jsonObject.getString("payMode"), jsonObject.getString("insMoney"), jsonObject.getString("payTerm"), jsonObject.getString("unitName"),jsonObject.getString("unitAddress") , jsonObject.getString("unitPhone"),jsonObject.getString("postcode") , jsonObject.getString("department"), jsonObject.getString("duty"),jsonObject.getString("workTime") , 
-//					jsonObject.getString("industry"), jsonObject.getString("unitNature"),jsonObject.getString("workNature") , jsonObject.getString("monthSalary"),jsonObject.getString("payDay") , jsonObject.getString("otherIncome"), jsonObject.getString("receptionType"), jsonObject.getString("receptionPerson"), jsonObject.getString("jobNum"),
-//					jsonObject.getString("source"),jsonObject.getString("borrowType") , jsonObject.getString("manager"),jsonObject.getString("workPhoneNum") , jsonObject.getString("number"), jsonObject.getString("interviewPerson"),jsonObject.getString("userName") , jsonObject.getString("userOldname"), jsonObject.getString("userAge"), jsonObject.getString("userSex"), 
-//					jsonObject.getString("userEducation"), jsonObject.getString("userMarriage"),jsonObject.getString("useridCard") , jsonObject.getString("userProvideNum"), jsonObject.getString("userChildrenNum"), jsonObject.getString("usercrAdress"), jsonObject.getString("userHouseState"),jsonObject.getString("userNowAdress") ,
-//					jsonObject.getString("userPhoneNum"), jsonObject.getString("userTelNum"), jsonObject.getString("userWechat"), jsonObject.getString("userqqNum"), jsonObject.getString("userSocialBase"), jsonObject.getString("userCreditCard"), jsonObject.getString("userPhoneMonad"), jsonObject.getString("userBankOpen"));
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

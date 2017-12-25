@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>中泸财务</title>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet"
+          href="assets/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet"
+          href="assets/bootstrap-table/bootstrap-editable.css">
+    <script src="assets/bootstrap-table/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap-table/bootstrap.min.css">
+    <script src="assets/bootstrap-table/bootstrap-table.js"></script>
+    <script src="assets/bootstrap-table/bootstrap-table-export.js"></script>
+    <script src="assets/bootstrap-table/tableExport.js"></script>
+    <script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>
+
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+    <script src="assets/js/select2.full.min.js"></script>
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="assets/js/form-validator/form-validator.js"></script>
+
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="assets/css/checkbox3.min.css" rel="stylesheet">
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中泸财务</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                    </li>
+                    <li><a href=" "><i class="fa fa-gear fa-fw"></i> 密码设置</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="Main.html">客户列表信息</a>
+                        </li>
+                        <li>
+                            <a href="AddInfo.html">添加客户信息</a>
+                        </li>
+                        <li id="userhide">
+                            <a href="user.html">员工管理信息</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <!-- /. PAGE WRAPPER  -->
+        <div class="header">
+            <h1 class="page-header">征信查询</h1>
+        </div>
+
+
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="card-title">
+                                <div class="title">运营商信用报告查询</div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" id="userinfo-form">
+                                <div id="a"></div>
+                                <div class="row">
+                                    <div class="form-group col-sm-2">
+                                        <label class="col-sm-3 control-label">用户名</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="username"
+                                                   id="username" placeholder="用户名">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label class="col-sm-3 control-label">服务密码</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="password" id="password"
+                                                   placeholder="服务密码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label class="col-sm-3 control-label">手机号</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="identityName"
+                                                   id="identityName"
+                                                   placeholder="填入手机号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label class="col-sm-3 control-label">身份证号</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="identityName"
+                                                   id="identityCardNo"
+                                                   placeholder="身份证号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <button type="button" id="start" class="btn btn-success">查询</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="control" class="form-group col-sm-6">
+                                        <label class="control-label col-sm-3" for="phone">输入短信验证码</label>
+                                        <div class="controls col-sm-4">
+                                            <input class="form-control" type="text" id="sms" placeholder="短信验证码">
+                                        </div>
+                                        <div class="controls col-sm-4">
+                                            <button type="button" id="input" class="btn btn-success">ipnut</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    $('#dialog').show();
+    var control = document.getElementById("control");
+
+    control.style.display = "none";
+
+    $("#start").click(function () {
+
+        $.post("/zc/credit/taskMobile.do", {
+
+            
+        }, function (text) {
+            var json = $.parseJSON(text);
+            $("#a").text(json.msg);
+            if (json.code == "0010") {
+            	
+                alert(json.msg);
+                var token = json.token;
+                var startButton = document.getElementById("start");
+                startButton.style.display = "none";
+                
+                $.post("/zc/credit/status.do", {}, function (text) {
+                    var json = $.parseJSON(text);
+                    status(json);
+                });
+
+            } else {
+                alert(json.msg);
+            }
+        });
+
+    });
+
+    function status(json) {
+        if (json.code == "0006") {
+            code = json.code;
+            control.style.display = "";
+            $("#input").on("click", function () {
+                var input = $("#sms").val();
+                $.post("/zc/credit/input.do", {
+                    s: input
+                }, function (text) {
+                    control.style.display = "none";
+                    $.post("/zc/credit/status.do", {}, function (text) {
+                        var json = $.parseJSON(text);
+                        status(json);
+                    });
+                });
+            });
+        } else if (json.code == "0009") {
+            status(json);
+        } else if (json.code == "0200") {
+            $.post("/zc/credit/status.do", {}, function (text) {
+                var json = $.parseJSON(text);
+                status(json);
+            });
+        } else if (json.code == "0000") {
+                alert(json.msg);
+        } else {
+            alert(json.msg);
+        }
+    }
+
+</script>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.voucher.manage.daoModel.ClientInfo;
 import com.voucher.manage.daoModel.Image;
+import com.voucher.manage.daoModel.MoblieReport;
 import com.voucher.manage.daoModel.Users;
 
 public interface UserDAO {
@@ -43,4 +44,9 @@ public interface UserDAO {
 	public Integer insertIntoImage(Image image);
 	
 	public List<Image> selectImageByGUID(String clientInfo_GUID);
+	
+	public Integer insertMobileReport(MoblieReport moblieReport);
+	
+	public Map selectAllMobileReport(MoblieReport moblieReport);
+	
 }

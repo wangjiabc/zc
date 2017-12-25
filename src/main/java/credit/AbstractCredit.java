@@ -319,7 +319,7 @@ public class AbstractCredit {
      * @throws
      * @Description:运营商报告结果查询
      */
-    public void getReport() {
+    public String getReport() {
         List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
 
         reqParam.add(new BasicNameValuePair("apiKey", apiKey));//API授权
@@ -328,6 +328,7 @@ public class AbstractCredit {
         reqParam.add(new BasicNameValuePair("sign", getSign(reqParam)));//请求参数签名
         String json = httpClient.doPost(apiUrlReport, reqParam);
         System.out.println("运营商报告结果集:" + json);
+        return json;
     }
     
     /**

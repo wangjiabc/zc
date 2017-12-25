@@ -1,10 +1,20 @@
 package com.voucher.manage.controller;
 
+import java.sql.Clob;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.startup.Tool;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.voucher.manage.dao.UserDAO;
+import com.voucher.manage.daoModel.MoblieReport;
+import com.voucher.manage.tools.LocalFile;
+import com.voucher.sqlserver.context.Connect;
 
 import common.JsonUtils;
 import common.StringUtils;
@@ -22,6 +36,14 @@ import credit.MobileDemo;
 @RequestMapping("/credit")
 public class CreditController {
 
+	ApplicationContext applicationContext=new Connect().get();
+	
+	UserDAO userDao=(UserDAO) applicationContext.getBean("dao");
+	
+	public final static String path="\\Desktop\\pasoft\\ZC\\report\\";
+	
+	public final static String filePath=System.getProperty("user.home")+path;
+	
 	private MobileDemo mobileDemo=new MobileDemo();
 	
 	public BlockingQueue<String> queue;
@@ -30,7 +52,8 @@ public class CreditController {
 	
 	@RequestMapping(value = "/taskMobile")
 	public @ResponseBody JSONObject taskMobile(@RequestParam String username,@RequestParam String password,
-			@RequestParam String identityName,@RequestParam String identityCardNo){
+			@RequestParam String identityName,@RequestParam String identityCardNo,
+			HttpServletRequest request){
 		   String json;
 		   JSONObject jsonObject;
 		   
@@ -43,7 +66,10 @@ public class CreditController {
 			   
 			   queue2=new ArrayBlockingQueue<>(1);
 			   
-			   timer();
+			   HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
+			   String campusAdmin=(String) session.getAttribute("campusAdmin");
+			   
+			   timer(campusAdmin,username,password,identityName,identityCardNo);
 			   
 			   return jsonObject;
 		   } catch (Exception e) {
@@ -62,30 +88,13 @@ public class CreditController {
 		  String json=null;
 		   JSONObject jsonObject = null;
 		   
-		   int i=0;
-		   
-		   while(true){		   
-			   json= AbstractCredit.httpClient.doPost(AbstractCredit.apiUrlStatus, mobileDemo.getReqParam());		   
-		       
-		       JsonNode rootNode = JsonUtils.toJsonNode(json);
-		        String token = JsonUtils.getJsonValue(rootNode, "token");
-		        String code =JsonUtils.getJsonValue(rootNode, "code");	 
-		        
-		        System.out.println(i+" status code="+code+" token="+token);
-		        
-		       try {
-				 Thread.sleep(1000);
-		       } catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		       }
-		       
-		       if(!code.equals("")||i>100){
-		    	   break;
-		       }
-		       
-		       i++;
+		   try {
+			 json=queue2.take();
+		   } catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		   }
+		  
 		   jsonObject=JSONObject.parseObject(json);
 		   
 		   return jsonObject;
@@ -110,31 +119,61 @@ public class CreditController {
 		   		   
 	 }
 	
+		
+	
 	@RequestMapping(value = "/getReport")
-	public @ResponseBody Integer getReport(){
+	public @ResponseBody JSONObject getReport(@RequestParam String userName,HttpServletRequest request){
 		try{
-			mobileDemo.getReport();
-			return 1;
+
+			MoblieReport moblieReport=new MoblieReport();
+			
+			moblieReport.setLimit(10);
+			moblieReport.setOffset(0);
+			moblieReport.setNotIn("id");
+			
+			String[] where={"userName =",userName};
+			
+			moblieReport.setWhere(where);
+			
+			Map map=userDao.selectAllMobileReport(moblieReport);
+			
+			List<MoblieReport> list=(List<MoblieReport>) map.get("rows");
+			
+			moblieReport=list.get(0);
+			
+			String fileName=moblieReport.getGUID()+".json";
+			
+			String report=LocalFile.getDatafromFile(filePath, fileName);
+			
+			JSONObject jsonObject=JSONObject.parseObject(report);
+			
+			return jsonObject;
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return 0;
+			
+			JSONObject jsonObject=JSONObject.parseObject(e.getMessage());
+			
+			return jsonObject;
 		}
 	}
 	
 	
-	
-	public void timer() {
+	public void timer(String campusAdmin,String username,String password,
+			String identityName,String identityCardNo) {
         System.out.println("轮循 start");
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
-
-            public void run() {
+        long startTime=System.currentTimeMillis();   //获取开始时间 
+        
+        public void run() {
 
                 try {
                     //循环取的状态，查询结果
                     //停止循环(发送短信失败或信息查询成功)
-                    if (roundRobin()) {
+                    if (roundRobin(startTime,campusAdmin,username,password,
+                				identityName,identityCardNo)) {
 
                         System.out.println("轮循 end");
                         System.out.println("获取信息结束");
@@ -149,7 +188,8 @@ public class CreditController {
         }, 0, AbstractCredit.timeInterval);
     }
 	
-	 public boolean roundRobin() throws Exception {
+	 public boolean roundRobin(long startTime,String campusAdmin,String username,String password,
+				String identityName,String identityCardNo) throws Exception {
 
 	        //状态查询
 	        String json = AbstractCredit.httpClient.doPost(AbstractCredit.apiUrlStatus, mobileDemo.getReqParam());
@@ -157,6 +197,8 @@ public class CreditController {
 	        String token = JsonUtils.getJsonValue(rootNode, "token");
 	        String code =JsonUtils.getJsonValue(rootNode, "code");
 	        String msg = JsonUtils.getJsonValue(rootNode, "msg");
+	        long endTime=System.currentTimeMillis(); //获取结束时间  
+	        System.out.println("程序运行时间： "+(endTime-startTime)+"ms"); 
 	        System.out.println("循环取的状态:" + code);
 	        System.out.println("循环取的信息:" + json);
 	             
@@ -230,7 +272,7 @@ public class CreditController {
 	                }
 	            } else if ("0000".startsWith(code)) {//成功
 	            	 System.out.println("运营商报告结果查询开始 >>>>>");
-	                 mobileDemo.getReport();
+	                 String report=mobileDemo.getReport();	                 
 	                 System.out.println("运营商报告结果查询结束 >>>>>");
 
 	            /*     System.out.println("运营商报告原始数据结果查询开始 >>>>>");
@@ -238,6 +280,30 @@ public class CreditController {
 	                 System.out.println("运营商报告原始数据结果查询结束 >>>>>");
                   */
 
+	                MoblieReport moblieReport=new MoblieReport();
+	      			
+	      			UUID uuid=UUID.randomUUID();
+	      			
+	      			moblieReport.setCampusAdmin(campusAdmin);
+	      			moblieReport.setUserName(identityName);
+	      			moblieReport.setUserPhoneNum(username);
+	      			moblieReport.setPassword(password);
+	      			moblieReport.setUseridCard(identityCardNo);
+	      			
+	      			moblieReport.setGUID(uuid.toString());
+	      			
+	      			moblieReport.setFilepath(path);
+	      			
+	      			Date date=new Date();
+	      			
+	      			moblieReport.setDatetime(date);
+	      			
+	      			LocalFile.saveDataToFile(filePath,uuid.toString(),report);
+	      			
+	      			userDao.insertMobileReport(moblieReport);
+	                 
+	                queue2.put(json);
+	                 
 	                //发送对象结果查询
 	                return true;
 	            }
@@ -248,6 +314,7 @@ public class CreditController {
 	            }
 	        }
 	        
+	        queue2.put(json);
 	      //其他异常停止循环
 	        return true;
 	 }

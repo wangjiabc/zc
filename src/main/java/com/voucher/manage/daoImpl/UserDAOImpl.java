@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import com.voucher.manage.dao.UserDAO;
 import com.voucher.manage.daoModel.ClientInfo;
 import com.voucher.manage.daoModel.Image;
+import com.voucher.manage.daoModel.MoblieReport;
 import com.voucher.manage.daoModel.Users;
 import com.voucher.manage.daoSQL.DeleteExe;
 import com.voucher.manage.daoSQL.InsertExe;
@@ -302,6 +303,28 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 		users2.setWhere(where);
 		
 		return UpdateExe.get(this.getJdbcTemplate(), users2);
+	}
+
+	@Override
+	public Integer insertMobileReport(MoblieReport moblieReport) {
+		// TODO Auto-generated method stub
+		return InsertExe.get(this.getJdbcTemplate(), moblieReport);
+	}
+
+	@Override
+	public Map selectAllMobileReport(MoblieReport moblieReport) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<>();
+		
+		List<MoblieReport> moblieReports=SelectExe.get(this.getJdbcTemplate(), moblieReport);
+
+	    map.put("rows", moblieReports);
+	    
+		int total=(int) SelectExe.getCount(this.getJdbcTemplate(), moblieReport).get("");
+		
+		map.put("total", total);
+		
+		return map;
 	}
 
 
