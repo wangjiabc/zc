@@ -46,8 +46,6 @@ public class AbstractCredit {
     
     public final static long timeInterval = 5000;//轮训时间 默认5秒
 
-    public static String token = null;
-
     /**
      * 共同处理流程
      * @param reqParam
@@ -211,7 +209,7 @@ public class AbstractCredit {
      * @param reqParam
      * @return
      */
-    public String getSign(List<BasicNameValuePair> reqParam) {
+    public static String getSign(List<BasicNameValuePair> reqParam) {
 
         StringBuffer sbb = new StringBuffer();
         int index = 1;
@@ -264,19 +262,6 @@ public class AbstractCredit {
         return ret;
     }
 
-    /**
-     * 获取共同提交参数
-     *
-     * @return
-     */
-    public List<BasicNameValuePair> getReqParam() {
-        List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
-        reqParam.add(new BasicNameValuePair("apiKey", apiKey));//API授权
-        reqParam.add(new BasicNameValuePair("token", token));
-        reqParam.add(new BasicNameValuePair("sign", getSign(reqParam)));//请求参数签名
-        return reqParam;
-    }
-
 
     /**
      * @param @return
@@ -303,11 +288,12 @@ public class AbstractCredit {
     	List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
         reqParam.add(new BasicNameValuePair("apiKey", apiKey));//API授权
         reqParam.add(new BasicNameValuePair("token", token));//请求标识
-
-        reqParam.add(new BasicNameValuePair("sign", sign));//请求参数签名
+        reqParam.add(new BasicNameValuePair("input", s));//短信验证码        
+        reqParam.add(new BasicNameValuePair("sign", getSign(reqParam)));//请求参数签名
+       // reqParam.add(new BasicNameValuePair("sign", sign));//请求参数签名
     	
         String json = httpClient.doPost(apiUrlInput, reqParam);
-        return JsonUtils.getJsonValue(json, "code");
+        return json;
     }
 
 
@@ -329,20 +315,6 @@ public class AbstractCredit {
         return json;
     }
     
-    /**
-     * @param
-     * @throws
-     * @Description:查询的结果集(结果查询)
-     */
-    public void getData() {
-        List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
-        reqParam.add(new BasicNameValuePair("apiKey", apiKey));//API授权
-        reqParam.add(new BasicNameValuePair("token", token));//请求标识
-
-        reqParam.add(new BasicNameValuePair("sign", getSign(reqParam)));//请求参数签名
-        String json = httpClient.doPost(apiUrlData, reqParam);
-        System.out.println("查询结果集:" + json);
-    }
 
     /**
      * 获取业务类型

@@ -177,13 +177,6 @@
 </body>
 </html>
 <script type="text/javascript">
-/*
- function getQueryString(name) {
-	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-	var r = window.location.search.substr(1).match(reg);
-	if (r != null) return unescape(r[2]); return null;
-  }
-*/
 
 function getQueryString(key){
     var reg = new RegExp("(^|&)"+key+"=([^&]*)(&|$)");
@@ -227,12 +220,54 @@ function getQueryString(key){
             	
                 alert(json.msg);
                 var token = json.token;
+                console.log("token="+token);
                 var startButton = document.getElementById("start");
                 startButton.style.display = "none";
                 
-                $.post("/zc/credit/status.do", {}, function (text) {
-                    status(text);
+                $("#input").on("click", function () {
+                    var input = $("#sms").val();
+                    control.style.display = "none"; 
+                    $("#sms").val("");
+                    $.post("/zc/credit/input.do", {                    
+                        json:text,
+                        s: input
+                    }, function (text) {
+                    	var json = $.parseJSON(text);
+                    	alert(json.msg);
+                    });
                 });
+                       
+                setTimeout(function(){	  
+              		$.post("/zc/credit/status.do", {
+                        token:token,
+                    	username:userPhoneNum,
+            			identityName:username,
+            			identityCardNo:identityCardNo,
+            			password:password
+                    }, function (text) {
+                    	var json = $.parseJSON(text);
+                    	if(json.code!=""){
+                         if (json.code == "0006") {
+                        	control.style.display = "";
+                         }else if(json.code == "0200"){
+                            alert(json.msg);
+                         }else if (json.code == "0000") {
+                            alert("获取报告成功");
+                          /*  window.location.href = "mobileReportList.html?useridCard=" + useridCard+
+                    		"&userName="+userName+"&userPhoneNum="+userPhoneNum;
+                          */
+                            var uuid=json.uuid;
+                            window.location.href = "mobileReport.html?uuid="+uuid;
+                          }else{
+                        	  alert(json.msg);
+                              $("#a").text(json.msg);
+                          }
+                        }
+                    });
+              		
+              		 setTimeout(arguments.callee,3000);
+              		 
+              	  },50);
 
             } else {
                 alert(json.msg);
@@ -242,39 +277,5 @@ function getQueryString(key){
 
     });
 
-    function status(text) {
-    	var json = $.parseJSON(text);
-        if (json.code == "0006") {
-            code = json.code;
-            control.style.display = "";
-            $("#input").on("click", function () {
-                var input = $("#sms").val();
-                $("#sms").val("");
-                $.post("/zc/credit/input.do", {                    
-                    json:text,
-                    s: input
-                }, function (text) {
-                    control.style.display = "none";
-                    $.post("/zc/credit/status.do", {}, function (text) {
-                        var json = $.parseJSON(text);
-                        status(json);
-                    });
-                });
-            });
-        } else if (json.code == "0009") {
-            status(json);
-        } else if (json.code == "0200") {
-            $.post("/zc/credit/status.do", {}, function (text) {               
-                status(text);
-            });
-        } else if (json.code == "0000") {
-                alert("获取报告成功");
-                window.location.href = "mobileReportList.html?useridCard=" + useridCard+
-        		"&userName="+userName+"&userPhoneNum="+userPhoneNum;
-        } else {
-            alert(json.msg);
-            $("#a").text(json.msg);
-        }
-    }
 
 </script>

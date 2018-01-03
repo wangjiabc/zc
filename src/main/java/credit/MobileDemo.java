@@ -3,6 +3,8 @@ package credit;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,20 +32,16 @@ public class MobileDemo extends AbstractCredit {
     public static void main(String[] args) throws Exception {
 
         //启动信服务
-        MobileDemo service  = new MobileDemo();
-         String username = "15884790116";//账号---需客户指定
-         String password = "3";//密码---需客户指定
-         String identityName="1";
-         String identityCardNo="510";
-        service.process(username,password,identityName,identityCardNo);
 
     }
 
 
-	public String process(String username,String password,String identityName,String identityCardNo) throws Exception{
+	public JSONObject process(String username,String password,String identityName,String identityCardNo) throws Exception{
 
         System.out.println("开始获取运营商信息");
 
+        JSONObject jsonObject=new JSONObject();
+        
         try {
 
             //提交受理请求对象
@@ -63,11 +61,13 @@ public class MobileDemo extends AbstractCredit {
             System.out.println(reqParam);
             String json=doProcess(reqParam);
             System.out.println(json);
-            return json;
+            jsonObject=JSONObject.parseObject(json);
+            return jsonObject;
         }catch (Exception ex){
             System.out.println("开始获取运营商信息异常：" + ex);
             ex.printStackTrace();
-            return "{'code':'0044','msg':'获取运营商信息异常'}";           
+            jsonObject.put("msg", "获取运营商信息异常");
+            return jsonObject;           
         }
 	}
 

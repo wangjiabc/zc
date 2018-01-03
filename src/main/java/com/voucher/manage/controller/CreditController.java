@@ -5,19 +5,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.UUID;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +26,6 @@ import com.voucher.manage.tools.LocalFile;
 import com.voucher.sqlserver.context.Connect;
 
 import common.JsonUtils;
-import common.StringUtils;
 import credit.AbstractCredit;
 import credit.MobileDemo;
 
@@ -40,13 +33,15 @@ import credit.MobileDemo;
 @RequestMapping("/credit")
 public class CreditController {
 
-	ApplicationContext applicationContext=new Connect().get();
+	public final static String path="\\Desktop\\pasoft\\ZC\\report\\";
 	
+	public final static String filePath=System.getProperty("user.home")+path;
+	
+	ApplicationContext applicationContext=new Connect().get();	
 	UserDAO userDao=(UserDAO) applicationContext.getBean("dao");		
-	
 	UserDAOImpl userDAOImpl=new UserDAOImpl();
 
-	@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "prototype")
+
 	@RequestMapping(value = "/taskMobile")
 	public @ResponseBody JSONObject taskMobile(@RequestParam String username,@RequestParam String password,
 			@RequestParam String identityName,@RequestParam String identityCardNo,
@@ -57,28 +52,10 @@ public class CreditController {
 		   MobileDemo mobileDemo=new MobileDemo();
 		   
 		   try {
-			   json=mobileDemo.process(username, password, identityName, identityCardNo);
-			   System.out.println("json==="+json);
-			   jsonObject=JSONObject.parseObject(json);
-			   
-			   HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
-			   String campusAdmin=(String) session.getAttribute("campusAdmin");
-			   
-			   JsonNode rootNode = JsonUtils.toJsonNode(json);
-			   String sign = JsonUtils.getJsonValue(rootNode, "sign");
-		        String token = JsonUtils.getJsonValue(rootNode, "token");
-		        String code =JsonUtils.getJsonValue(rootNode, "code");
-		       
-		        List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
-		        reqParam.add(new BasicNameValuePair("apiKey", AbstractCredit.apiKey));//API授权
-		        reqParam.add(new BasicNameValuePair("token", token));//请求标识
-		        reqParam.add(new BasicNameValuePair("sign", sign));//请求参数签名
-		        
-		       //受理成功才启动线程
-			   if(code.equals("0010"))
-		        userDAOImpl.timer(reqParam,campusAdmin,username,password,identityName,identityCardNo);
-			   
+			   jsonObject=mobileDemo.process(username, password, identityName, identityCardNo);
+			   	   
 			   return jsonObject;
+			   
 		   } catch (Exception e) {
 			// TODO Auto-generated catch block
 			   e.printStackTrace();
@@ -91,38 +68,83 @@ public class CreditController {
 	
 	
 	@RequestMapping(value = "/status")
-	public  @ResponseBody JSONObject  status(){
-		  String json=null;
-		   JSONObject jsonObject = null;
+	public  @ResponseBody JSONObject  status(@RequestParam String token,
+			@RequestParam String username,@RequestParam String password,
+			@RequestParam String identityName,@RequestParam String identityCardNo,
+			HttpServletRequest request){
+		   JSONObject jsonObject = new JSONObject();
 		   
-		   try {
-			 json=userDAOImpl.queue2.take();
-		   } catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		   }
+		   List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
+	        reqParam.add(new BasicNameValuePair("apiKey", AbstractCredit.apiKey));//API授权
+	        reqParam.add(new BasicNameValuePair("token", token));//请求标识
+	        reqParam.add(new BasicNameValuePair("sign", AbstractCredit.getSign(reqParam)));//请求参数签名
+		   
+		   String json = AbstractCredit.httpClient.doPost(AbstractCredit.apiUrlStatus, reqParam);
+	       JsonNode rootNode = JsonUtils.toJsonNode(json);
+	       String code =JsonUtils.getJsonValue(rootNode, "code");
+	       String msg = JsonUtils.getJsonValue(rootNode, "msg");
 		  
-		   jsonObject=JSONObject.parseObject(json);
+	       jsonObject=JSONObject.parseObject(json);
+	      
+	      if (code.startsWith("0")) {
+	       if ("0000".startsWith(code)) {//成功
+          	 System.out.println("运营商报告结果查询开始 >>>>>");
+               String report=AbstractCredit.getReport(reqParam);	                 
+               System.out.println("运营商报告结果查询结束 >>>>>");
+
+          /*     System.out.println("运营商报告原始数据结果查询开始 >>>>>");
+               mobileDemo.getData();
+               System.out.println("运营商报告原始数据结果查询结束 >>>>>");
+            */
+
+              MoblieReport moblieReport=new MoblieReport();
+    			
+    		   UUID uuid=UUID.randomUUID();
+    			
+    		   HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
+ 			   String campusAdmin=(String) session.getAttribute("campusAdmin");
+    			
+    			moblieReport.setCampusAdmin(campusAdmin);
+    			moblieReport.setUserName(identityName);
+    			moblieReport.setUserPhoneNum(username);
+    			moblieReport.setPassword(password);
+    			moblieReport.setUseridCard(identityCardNo);
+    			
+    			moblieReport.setGUID(uuid.toString());
+    			
+    			moblieReport.setFilepath(path);
+    			
+    			Date date=new Date();
+    			
+    			moblieReport.setDatetime(date);
+    			
+    			LocalFile.saveDataToFile(filePath,uuid.toString(),report);
+    			
+    			userDao.insertMobileReport(moblieReport);
+    			
+    			jsonObject.put("uuid", uuid);
+               
+            }
+	      }
 		   
 		   return jsonObject;
 	}
 		
 	
 	@RequestMapping(value = "/input")
-	public @ResponseBody String input(@RequestParam String json,@RequestParam String s){
-		   String code;
-		   System.out.println("s="+s);
+	public @ResponseBody JSONObject input(@RequestParam String json,@RequestParam String s){
+		   String result;
+		   JSONObject jsonObject = new JSONObject();
 		   
 		   try {
-			  code=AbstractCredit.sendInput(json,s);
-			   System.out.println("code="+code);
-			   userDAOImpl.queue.put(code);
-			   return "code";
+			   result=AbstractCredit.sendInput(json,s);
+               jsonObject=JSONObject.parseObject(result);
+			   return jsonObject;
 		   	} catch (Exception e) {
 			// TODO Auto-generated catch block
 		   		e.printStackTrace();
-		   		 code="0044";
-				 return code;
+		   		 jsonObject.put("msg", "输入短信错误");
+				 return jsonObject;
 		   }
 		   		   
 	 }
@@ -138,28 +160,21 @@ public class CreditController {
 			moblieReport.setOffset(0);
 			moblieReport.setNotIn("id");
 			
-			String[] where={"GUID =", uuid};
-			
-			moblieReport.setWhere(where);
-			
-			List<MoblieReport> list=userDao.getReport(moblieReport);
-			
+			String[] where={"GUID =", uuid};			
+			moblieReport.setWhere(where);			
+			List<MoblieReport> list=userDao.getReport(moblieReport);			
 			moblieReport=list.get(0);
 			
-			String fileName=moblieReport.getGUID()+".json";
-			
-			String report=LocalFile.getDatafromFile(userDAOImpl.filePath, fileName);
-			
+			String fileName=moblieReport.getGUID()+".json";			
+			String report=LocalFile.getDatafromFile(filePath, fileName);			
 			JSONObject jsonObject=JSONObject.parseObject(report);
 			
 			return jsonObject;
 			
 		}catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
-			
-			JSONObject jsonObject=JSONObject.parseObject(e.getMessage());
-			
+			e.printStackTrace();			
+			JSONObject jsonObject=JSONObject.parseObject(e.getMessage());			
 			return jsonObject;
 		}
 	}
