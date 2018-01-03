@@ -113,33 +113,17 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="card-title">
-                                <div class="title">运营商信用报告查询</div>
+                                <div id="a" class="title">运营商信用报告查询(  注意:查询期间禁止刷新页面 ! )</div>
                             </div>
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal" id="userinfo-form">
-                                <div id="a"></div>
                                 <div class="row">
                                     <div class="form-group col-sm-2">
                                         <label class="col-sm-3 control-label">用户名</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" name="username"
                                                    id="username" placeholder="用户名">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-2">
-                                        <label class="col-sm-3 control-label">服务密码</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="password" id="password"
-                                                   placeholder="服务密码">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-3 control-label">手机号</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="identityName"
-                                                   id="identityName"
-                                                   placeholder="填入手机号">
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-3">
@@ -150,6 +134,21 @@
                                                    placeholder="身份证号">
                                         </div>
                                     </div>
+                                    <div class="form-group col-sm-3">
+                                        <label class="col-sm-3 control-label">手机号</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="identityName"
+                                                   id="userPhoneNum"
+                                                   placeholder="填入手机号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label class="col-sm-3 control-label">服务密码</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="password" id="password"
+                                                   placeholder="服务密码">
+                                        </div>
+                                    </div>                                                       
                                     <div class="form-group col-sm-2">
                                         <button type="button" id="start" class="btn btn-success">查询</button>
                                     </div>
@@ -178,16 +177,49 @@
 </body>
 </html>
 <script type="text/javascript">
-    $('#dialog').show();
-    var control = document.getElementById("control");
+/*
+ function getQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null) return unescape(r[2]); return null;
+  }
+*/
 
-    control.style.display = "none";
+function getQueryString(key){
+    var reg = new RegExp("(^|&)"+key+"=([^&]*)(&|$)");
+    var result = window.location.search.substr(1).match(reg);
+    return result?decodeURIComponent(result[2]):null;
+  }
 
+  var useridCard=getQueryString("useridCard");
+  var userName=getQueryString("userName");
+  var userPhoneNum=getQueryString("userPhoneNum");
+
+  $("#username").val(userName);  
+  $("#identityCardNo").val(useridCard);
+  $("#userPhoneNum").val(userPhoneNum);
+  
+   var control = document.getElementById("control");
+
+    control.style.display = "none";   
+    
     $("#start").click(function () {
-
-        $.post("/zc/credit/taskMobile.do", {
-
-            
+  	
+        var username=$("#username").val().toString(); 
+        var userPhoneNum=$("#userPhoneNum").val().toString(); 
+        var identityCardNo=$("#identityCardNo").val().toString(); 
+        var password=$("#password").val().toString(); 
+        
+        if(password==""){
+        	alert("密码不能为空!");
+        	return false;
+        }
+        
+        $.post("/zc/credit/taskMobile.do", {            
+        	username:userPhoneNum,
+			identityName:username,
+			identityCardNo:identityCardNo,
+			password:password
         }, function (text) {
             var json = $.parseJSON(text);
             $("#a").text(json.msg);
@@ -199,24 +231,27 @@
                 startButton.style.display = "none";
                 
                 $.post("/zc/credit/status.do", {}, function (text) {
-                    var json = $.parseJSON(text);
-                    status(json);
+                    status(text);
                 });
 
             } else {
                 alert(json.msg);
+                $("#a").text(json.msg);
             }
         });
 
     });
 
-    function status(json) {
+    function status(text) {
+    	var json = $.parseJSON(text);
         if (json.code == "0006") {
             code = json.code;
             control.style.display = "";
             $("#input").on("click", function () {
                 var input = $("#sms").val();
-                $.post("/zc/credit/input.do", {
+                $("#sms").val("");
+                $.post("/zc/credit/input.do", {                    
+                    json:text,
                     s: input
                 }, function (text) {
                     control.style.display = "none";
@@ -229,14 +264,16 @@
         } else if (json.code == "0009") {
             status(json);
         } else if (json.code == "0200") {
-            $.post("/zc/credit/status.do", {}, function (text) {
-                var json = $.parseJSON(text);
-                status(json);
+            $.post("/zc/credit/status.do", {}, function (text) {               
+                status(text);
             });
         } else if (json.code == "0000") {
-                alert(json.msg);
+                alert("获取报告成功");
+                window.location.href = "mobileReportList.html?useridCard=" + useridCard+
+        		"&userName="+userName+"&userPhoneNum="+userPhoneNum;
         } else {
             alert(json.msg);
+            $("#a").text(json.msg);
         }
     }
 

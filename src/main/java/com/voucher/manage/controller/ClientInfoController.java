@@ -361,6 +361,35 @@ public class ClientInfoController {
 		return map;
 	}
 	
+	@RequestMapping(value="/getAllQuery")
+	public @ResponseBody Map getClientInfoAllQuery(@RequestParam String username,
+			@RequestParam String useridCard,@RequestParam Integer limit,@RequestParam Integer offset,String sort,String order,
+			String search,HttpServletRequest request){
+		if(order!=null&&order.equals("asc")){
+			order="asc";
+		}
+	
+		if(order!=null&&order.equals("desc")){
+			order="desc";
+		}
+		
+		Map searchMap=new HashMap<>();
+		
+		searchMap.put("[ZC].[dbo].[clientInfo].useridCard = ", useridCard);
+		searchMap.put("[ZC].[dbo].[clientInfo].username = ", username);
+		
+		if(search!=null&&!search.trim().equals("")){
+			search="%"+search+"%";  
+			searchMap.put("[ZC].[dbo].[clientInfo].userName like ", search);
+		}		
+
+		
+		System.out.println("search="+search);
+		Map map=userDao.getAllClientInfo(limit, offset, null, order, searchMap);
+		
+		return map;
+	}
+	
 	@RequestMapping(value="/delete")
 	public @ResponseBody Integer delete(@RequestParam Integer id){
 				

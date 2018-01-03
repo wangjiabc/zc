@@ -32,7 +32,7 @@ public class MobileDemo extends AbstractCredit {
         //启动信服务
         MobileDemo service  = new MobileDemo();
          String username = "15884790116";//账号---需客户指定
-         String password = "314159";//密码---需客户指定
+         String password = "3";//密码---需客户指定
          String identityName="1";
          String identityCardNo="510";
         service.process(username,password,identityName,identityCardNo);
@@ -62,6 +62,7 @@ public class MobileDemo extends AbstractCredit {
             reqParam.add(new BasicNameValuePair("sign", getSign(reqParam)));//请求参数签名
             System.out.println(reqParam);
             String json=doProcess(reqParam);
+            System.out.println(json);
             return json;
         }catch (Exception ex){
             System.out.println("开始获取运营商信息异常：" + ex);

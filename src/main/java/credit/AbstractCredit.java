@@ -58,24 +58,8 @@ public class AbstractCredit {
         //提交受理请求
         String json = httpClient.doPost(apiUrlTask, reqParam);
         System.out.println("json=" + json);
-        if(StringUtils.isBlank(json)) {
-            System.out.println("查询失败");
-            return json;
-        } else {
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readValue(json, JsonNode.class);
-            String code = rootNode.get("code").textValue();
-
-            if("0010".equals(code)) {//受理成功
-
-                token = rootNode.get("token").textValue();
-        //        timer();//每5秒查询一次数据请求
-                return json;
-            } else {
-                System.out.println("查询失败");
-                return json;
-            }
-        }
+        
+        return json;
 
     }
 
@@ -116,7 +100,7 @@ public class AbstractCredit {
      * @throws
      * @Description:循环取的状态，查询结果
      */
-    public boolean roundRobin() throws Exception {
+  /*  public boolean roundRobin() throws Exception {
 
         //状态查询
         String json = httpClient.doPost(apiUrlStatus, getReqParam());
@@ -220,7 +204,7 @@ public class AbstractCredit {
         //其他异常停止循环
         return true;
     }
-
+*/
     /**
      * 签名转化
      *
@@ -300,15 +284,28 @@ public class AbstractCredit {
      * @throws
      * @Description:信息输入
      */
-    public String sendInput(String s) throws Exception {
+    public static String sendInput(String json1,String s) throws Exception {
       //  Scanner s = new Scanner(System.in);
-        System.out.println("请输入上述提示信息："+s);
+      /*  System.out.println("请输入上述提示信息："+s);
         List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
         reqParam.add(new BasicNameValuePair("apiKey", apiKey));//API授权
         reqParam.add(new BasicNameValuePair("token", token));//请求标识
         reqParam.add(new BasicNameValuePair("input", s));//短信验证码/图片验证码/独立密码
 
         reqParam.add(new BasicNameValuePair("sign", getSign(reqParam)));//请求参数签名
+        */
+    	
+    	JsonNode rootNode = JsonUtils.toJsonNode(json1);
+		String sign = JsonUtils.getJsonValue(rootNode, "sign");
+	    String token = JsonUtils.getJsonValue(rootNode, "token");
+	    String code =JsonUtils.getJsonValue(rootNode, "code");
+    	
+    	List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
+        reqParam.add(new BasicNameValuePair("apiKey", apiKey));//API授权
+        reqParam.add(new BasicNameValuePair("token", token));//请求标识
+
+        reqParam.add(new BasicNameValuePair("sign", sign));//请求参数签名
+    	
         String json = httpClient.doPost(apiUrlInput, reqParam);
         return JsonUtils.getJsonValue(json, "code");
     }
@@ -319,14 +316,15 @@ public class AbstractCredit {
      * @throws
      * @Description:运营商报告结果查询
      */
-    public String getReport() {
-        List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
+    public static String getReport(List<BasicNameValuePair> reqParam) {
+       // List<BasicNameValuePair> reqParam = new ArrayList<BasicNameValuePair>();
 
-        reqParam.add(new BasicNameValuePair("apiKey", apiKey));//API授权
-        reqParam.add(new BasicNameValuePair("token", token));//请求标识
+       // reqParam.add(new BasicNameValuePair("apiKey", apiKey));//API授权
+       // reqParam.add(new BasicNameValuePair("token", token));//请求标识
 
-        reqParam.add(new BasicNameValuePair("sign", getSign(reqParam)));//请求参数签名
-        String json = httpClient.doPost(apiUrlReport, reqParam);
+       // reqParam.add(new BasicNameValuePair("sign", getSign(reqParam)));//请求参数签名
+       
+    	String json = httpClient.doPost(apiUrlReport, reqParam);
         System.out.println("运营商报告结果集:" + json);
         return json;
     }

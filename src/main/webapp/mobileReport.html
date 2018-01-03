@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>中泸财务</title>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <!--<link rel="stylesheet"-->
+    <!--href="assets/bootstrap-table/bootstrap-table.css">-->
+    <!--<link rel="stylesheet"-->
+    <!--href="assets/bootstrap-table/bootstrap-editable.css">-->
+    <script src="assets/bootstrap-table/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap-table/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/manage.css">
+    <!--<script src="assets/bootstrap-table/bootstrap-table.js"></script>-->
+    <!--<script src="assets/bootstrap-table/bootstrap-table-export.js"></script>-->
+    <!--<script src="assets/bootstrap-table/tableExport.js"></script>-->
+    <!--<script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>-->
+
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+    <!--<script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>-->
+    <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+    <script src="assets/js/select2.full.min.js"></script>
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="assets/css/checkbox3.min.css" rel="stylesheet">
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+    <style>
+        .table td {
+            line-height: 28px;
+            display: inline-block;
+        }
+
+        .table tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中泸财务</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                    </li>
+                    <li><a href=" "><i class="fa fa-gear fa-fw"></i> 密码设置</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="Main.html">客户列表信息</a>
+                        </li>
+                        <li>
+                            <a href="AddInfo.html">添加客户信息</a>
+                        </li>
+                        <li id="userhide">
+                            <a href="user.html">员工管理信息</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <!-- /. PAGE WRAPPER  -->
+        <div class="header">
+            <h1 class="page-header">征信查询</h1>
+        </div>
+
+
+        <div id="page-inner">
+        <!--  
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="card-title">
+                                <div class="title">运营商信用报告查询</div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" id="userinfo-form">
+                                <div id="a"></div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label class="col-sm-3 control-label">用户姓名</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="username"
+                                                   id="username" placeholder="用户姓名">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label class="col-sm-3 control-label">身份证号</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="identityName"
+                                                   id="identityCardNo"
+                                                   placeholder="身份证号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label class="col-sm-3 control-label">手机号</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="identityName"
+                                                   id="identityName"
+                                                   placeholder="填入手机号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label class="col-sm-3 control-label">服务密码</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="password" id="password"
+                                                   placeholder="服务密码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-1">
+                                        <button type="button" id="start" class="btn btn-success">查询</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="control" class="form-group col-sm-6">
+                                        <label class="control-label col-sm-3" for="phone">输入短信验证码</label>
+                                        <div class="controls col-sm-4">
+                                            <input class="form-control" type="text" id="sms" placeholder="短信验证码">
+                                        </div>
+                                        <div class="controls col-sm-4">
+                                            <button type="button" id="input" class="btn btn-success">ipnut</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           --> 
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="card-title">
+                                <h2>运营商信用报告</h2>
+                            </div>
+                        </div>
+                        <div class="panel-body" id="template">
+                            <div id="dialog" style="margin: auto;left: 300px;height: 60px;width: 300px;display: none;">
+                                <p style="text-align: center; vertical-align: central;">
+                                    请等待，正在查询数据 <img style="margin-left: 20px;" src="assets/img/loading.gif"/>
+                                </p>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa" data-toggle="collapse">基本信息</div>
+                                        <div id="aa" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr>
+                                                    <th colspan="16">姓名</th>
+                                                    <td colspan="18" id="name">{{ basicInfo.name }}</td>
+                                                    <th colspan="15">性别</th>
+                                                    <td colspan="18" id="gender">{{ basicInfo.gender }}</td>
+                                                    <th colspan="15">年龄</th>
+                                                    <td colspan="18" id="age">{{ basicInfo.age }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16">地址</th>
+                                                    <td colspan="84" id="nativeAddress">{{ basicInfo.nativeAddress }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16">身份证号</th>
+                                                    <td colspan="84" id="identityNo">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               class="child_table" style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>{{ basicInfo.identityNo }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>身份证号是否命中风险清单
+                                                                    <span class="unmingzhong ml_20"></span></td>
+
+
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16">手机号</th>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               class="child_table" style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr style="position:relative;">
+                                                                <td colspan="3" id="mobile">
+                                                                    {{ basicInfo.mobile }}
+                                                                    <span class="valid ml_20">已实名认证</span>
+                                                                </td>
+                                                                <td colspan="2" style="position:absolute;left:50%;">入网时间
+                                                                    <span class="ml_10" id="regTime">{{ basicInfo.regTime }}</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="5">手机号是否命中风险清单
+
+
+                                                                    <span class="unmingzhong ml_20">未命中</span>
+
+
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td colspan="5">
+                                                                    姓名与运营商数据是否匹配
+                                                                    <span class="valid ml_20" v-for="">{{basicInfoCheck[3].resultDesc}}</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="5">
+                                                                    身份证号与运营商数据是否匹配
+                                                                    <span class="unknow ml_20" id="idcard_match" v-for="">{{basicInfoCheck[2].resultDesc}}</span>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16">紧急联系人</th>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               class="child_table mt_14"
+                                                               style="table-layout: fixed;margin-top: 0px;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td style="padding-right: 10px;">{{contactInfo.name}}</td>
+                                                                <td style="text-align: center;position: relative;padding:0 10px;"
+                                                                    class="phoneLine">{{contactInfo.mobile}}
+                                                                </td>
+
+
+                                                                <td style="text-align: center;position: relative;padding:0 10px;">
+                                                                    {{contactInfo.relationship}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="14">有该联系人通话记录，通话次数<span class="col_green">{{contactInfo.callCnt}}</span>
+                                                                    ，通话时长<span class="col_green">{{contactInfo.callTime}}</span>秒
+                                                                    ，通话排名 第<span class="col_green">{{contactInfo.callRank}}</span>位
+                                                                    ，<span class="col_green">{{contactInfo.isHitRiskList}}</span>风险清单
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa1" data-toggle="collapse">关联信息</div>
+                                        <div id="aa1" class="mt_10 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0" class="Modify_table">
+
+                                                <tbody>
+                                                <tr>
+                                                    <th colspan="16">
+                                                        手机号关联的<br>
+                                                        身份证号
+                                                    </th>
+                                                    <td colspan="84" id="identiyNos">{{relationInfo.identiyNos}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16">
+                                                        身份证号关联的<br>
+                                                        手机号
+                                                    </th>
+                                                    <td colspan="84">
+
+
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2" id="mobiles">{{relationInfo.mobiles}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16">
+                                                        身份证号关联的<br>
+                                                        家庭地址
+                                                    </th>
+                                                    <td colspan="84" id="homeAddresses">
+                                                        {{relationInfo.homeAddresses}}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa2" data-toggle="collapse">用户画像</div>
+                                        <div id="aa2" class="mt_10 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0" class="Modify_table">
+                                                <tbody>
+                                                <tr>
+                                                    <th colspan="16" rowspan="4"
+                                                        style="padding-top: 0;padding-bottom: 0;vertical-align: middle;">
+                                                        风险情况
+                                                    </th>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr v-for="item in riskListCheck">
+                                                                <td colspan="2">风险清单</td>
+                                                                <td colspan="3" class="col_999">
+                                                                    <span id="riskListCnt" class="fs_16 col_000">{{item.reuslt}}</span>&nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="5" class="col_999">{{item.desc}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">信贷逾期</td>
+                                                                <td colspan="3" class="col_999">
+                                                                    <span class="fs_16 col_000" id="overdueLoanCnt">{{personas.riskProfile.overdueLoanCnt}}</span>&nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="5" class="col_999">本人身份证或手机号命中信贷逾期的情况</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">多头借贷</td>
+                                                                <td colspan="3" class="col_999">
+                                                                    <span class="fs_16 col_red" id="multiLendCnt">{{personas.riskProfile.multiLendCnt}}</span>&nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="5" class="col_999">本人身份证或手机号命中多平台借贷申请情况
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">风险通话</td>
+                                                                <td colspan="3" class="col_999">
+                                                                    <span class="fs_16 col_000" id="riskCallCnt">{{personas.riskProfile.riskCallCnt}}</span>&nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="5" class="col_999">本手机号与网贷、110等电话联系次数统计
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16" rowspan="4"
+                                                        style="padding-top: 0;padding-bottom: 0;vertical-align: middle;">
+                                                        社交情况
+                                                    </th>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">最常联系区域</td>
+                                                                <td colspan="3" class="fs_16" id="freContactArea">{{personas.socialContactProfile.freContactArea}}
+                                                                </td>
+                                                                <td colspan="5" class="col_999">180天内与本人手机通话次数按区域分前3位
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">联系人号码总数</td>
+                                                                <td colspan="3" class="col_999">
+																		<span class="fs_16 col_333" id="contactNumCnt">{{personas.socialContactProfile.contactNumCnt}}
+																		</span>&nbsp;&nbsp;个
+                                                                </td>
+                                                                <td colspan="5" class="col_999">180天内与本人手机通话的号码总数</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">互通号码总数</td>
+                                                                <td colspan="3" class="col_999">
+																		<span class="fs_16 col_333" id="interflowContactCnt">{{personas.socialContactProfile.interflowContactCnt}}
+																		</span>&nbsp;&nbsp;个
+                                                                </td>
+                                                                <td colspan="5" class="col_999">180天内与本人手机相互通过话的号码总数
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">联系人风险名单总数</td>
+                                                                <td colspan="3" class="col_999">
+																		<span class="fs_16 col_333" id="contactRishCnt">{{personas.socialContactProfile.contactRishCnt}}
+																		</span>&nbsp;&nbsp;个
+                                                                </td>
+                                                                <td colspan="5" class="col_999">
+                                                                    180天内与本人手机号通话的号码命中风险名单的总数
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16" rowspan="4"
+                                                        style="padding-top: 0;padding-bottom: 0;vertical-align: middle;">
+                                                        通话情况
+                                                    </th>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">日均通话次数</td>
+                                                                <td colspan="3" class="col_999">
+																		<span class="fs_16 col_333" id="avgCallCnt">{{personas.callProfile.avgCallCnt}}
+																		</span>&nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="5" class="col_999">180天内总通话次数按日平均</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">日均通话时长</td>
+                                                                <td colspan="3" class="col_999">
+																		<span class="fs_16 col_333" id="avgCallTime">{{personas.callProfile.avgCallTime}}
+																		</span>&nbsp;&nbsp;分钟
+                                                                </td>
+                                                                <td colspan="5" class="col_999">180天内总通话时长按日平均</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">手机静默次数</td>
+                                                                <td colspan="3" class="col_999">
+
+
+                                                                    <span class="fs_16 col_333 col_red" id="silenceCnt"></span>{{personas.callProfile.silenceCnt}}
+                                                                    &nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="5" class="col_999">
+                                                                    180天内超过24小时持续无通话无短信的总次数
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%" style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <p>夜间通话次数</p>
+                                                                    <p>平均时长</p>
+                                                                </td>
+                                                                <td colspan="3" class="col_999">
+                                                                    <p><span class="fs_16 col_333 col_red" id="nightCallCnt"></span>{{personas.callProfile.nightCallCnt}}
+                                                                        &nbsp;&nbsp;次</p>
+                                                                    <p>
+                                                                        <span class="fs_16 col_333 col_red" id="nightCallTime"></span>{{personas.callProfile.nightCallTime}}
+                                                                        &nbsp;&nbsp;分钟</p>
+                                                                </td>
+                                                                <td colspan="5" class="col_999">
+                                                                    统计23:30-5:30的通话次数和平均时长（按次平均）
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="16"
+                                                        style="padding-top: 0;padding-bottom: 0;vertical-align: middle;">
+                                                        消费情况
+                                                    </th>
+                                                    <td colspan="84">
+                                                        <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                               style="table-layout: fixed;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="2">月均消费</td>
+                                                                <td colspan="3" class="col_999">
+																		<span class="fs_16 col_333" id="avgFeeMonth">{{personas.consumptionProfile.avgFeeMonth}}
+																		</span>&nbsp;&nbsp;元
+                                                                </td>
+                                                                <td colspan="5" class="col_999">6个月内总消费按月平均</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa3" data-toggle="collapse">风险清单检测</div>
+                                        <div id="aa3" class="mt_20 text_center fs_26 panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td colspan="26">描述</td>
+                                                    <td colspan="74">
+                                                        结果
+                                                    </td>
+                                                </tr>
+                                                <tr v-for="item in riskListCheck">
+                                                    <th colspan="26" rowspan="1" style="padding-top: 0;padding-bottom: 0;vertical-align: middle;">{{item.desc}}
+                                                    </th>
+                                                    <td colspan="74">{{item.reuslt}}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa4" data-toggle="collapse">信贷逾期</div>
+                                        <div id="aa4" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                <tbody>
+                                                <tr>
+                                                    <td colspan="26">类别</td>
+                                                    <td colspan="74">
+                                                        内容
+                                                    </td>
+                                                </tr>
+                                                <tr v-for="item in overdueLoanCheck">
+                                                    <th colspan="26" rowspan="1" style="padding-top: 0;padding-bottom: 0;vertical-align: middle;">{{item.desc}}
+                                                    </th>
+                                                    <td colspan="74">逾期金额:{{item.details.overdueAmt}}<span class="ml_10 col_red">逾期天数:{{item.details.overdueDays}}</span>
+                                                        <span class="ml_10 col_red">逾期日期:{{item.details.overdueTime}}</span>
+                                                    </td>
+                                                </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa5" data-toggle="collapse">多头借贷</div>
+                                        <div id="aa5" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr>
+                                                    <td colspan="26">类别</td>
+                                                    <td colspan="74">
+                                                        内容
+                                                    </td>
+                                                </tr>
+                                                <tr v-for="item in multiLendCheck">
+                                                    <th colspan="26" rowspan="1" style="padding-top: 0;padding-bottom: 0;vertical-align: middle;">{{item.desc}}
+                                                    </th>
+                                                    <td colspan="74">借贷平台类型:{{item.details.lendType}}<span class="ml_10 col_red">借贷次数:{{item.details.lendCnt}}</span>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa6" data-toggle="collapse">风险电话检测</div>
+                                        <div id="aa6" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                <tbody>
+                                                <tr v-for="item in riskCallCheck">
+                                                    <th colspan="26">{{item.desc}}</th>
+                                                    <td colspan="74">
+                                                        <div class="dis_line" style="width: 180px;">
+                                                            {{item.hitDesc}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa7" data-toggle="collapse">通话概况</div>
+                                        <div id="aa7" class="mt_10 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <table border="0" cellspacing="0" cellpadding="0"
+                                                               class="small_table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="col_000">日均通话次数</td>
+                                                                <td colspan="2" class="col_000">日均通话时长</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col_999">
+																		<span class="fs_20 col_green">{{callAnalysis.avgCallCnt}}
+																		    </span>
+                                                                    &nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="2" class="col_999">
+																		<span class="fs_20 col_green">{{callAnalysis.avgCallTime}}
+																		 </span>
+                                                                    &nbsp;分钟
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td>
+                                                        <table border="0" cellspacing="0" cellpadding="0"
+                                                               class="small_table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="col_000">日均主叫次数</td>
+                                                                <td colspan="2" class="col_000">日均主叫时长</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col_999">
+																		<span class="fs_20 col_green">{{callAnalysis.avgCallingCnt}}
+																		   </span>
+                                                                    &nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="2" class="col_999">
+																		<span class="fs_20 col_green">{{callAnalysis.avgCallingTime}}
+																		  </span>
+                                                                    &nbsp;分钟
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table border="0" cellspacing="0" cellpadding="0"
+                                                               class="small_table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="col_000">日均被叫次数</td>
+                                                                <td colspan="2" class="col_000">日均被叫时长</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col_999">
+																		<span class="fs_20 col_green">{{callAnalysis.avgCalledCnt}}
+																		</span>
+                                                                    &nbsp;&nbsp;次
+                                                                </td>
+                                                                <td colspan="2" class="col_999">
+																		<span class="fs_20 col_green">{{callAnalysis.avgCalledTime}}
+																		   </span>
+                                                                    &nbsp;分钟
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td>
+                                                        <table border="0" cellspacing="0" cellpadding="0"
+                                                               class="small_table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td colspan="3" class="col_000">本地通话占比</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3" class="col_999">
+																		<span class="fs_20 col_green">{{callAnalysis.locCallPct}}
+																		  </span>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa8" data-toggle="collapse">活跃情况</div>
+                                        <div id="aa8" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr>
+                                                    <td colspan="3">项目</td>
+                                                    <td colspan="2">近1月</td>
+                                                    <td colspan="2">近3月</td>
+                                                    <td colspan="2">近6月</td>
+                                                    <td colspan="2">月均</td>
+                                                </tr>
+                                                <tr v-for="item in activeCallAnalysis">
+                                                    <th colspan="3">{{ item.desc }}</th>
+                                                    <td colspan="2">{{ item.lately1m }}</td>
+                                                    <td colspan="2">{{ item.lately3m }}</td>
+                                                    <td colspan="2">{{ item.lately6m }}</td>
+                                                    <td colspan="2">{{ item.avgMonth }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa9" data-toggle="collapse">静默情况</div>
+                                        <div id="aa9" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr>
+                                                    <th colspan="11">总静默次数</th>
+                                                    <th colspan="15">总静默时长(小时)</th>
+                                                    <th colspan="18">最长一次静默开始时间</th>
+                                                    <th colspan="19">最长一次静默时长(小时)</th>
+                                                    <th colspan="18">最近一次静默开始时间</th>
+                                                    <th colspan="19">最近一次静默时长(小时)</th>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td colspan="11">{{silenceAnalysis.silenceCnt}}</td>
+                                                    <td colspan="15">{{parseInt(silenceAnalysis.silenceTime/60/60)}}</td>
+                                                    <td colspan="18">{{silenceAnalysis.longestSilenceStart}}</td>
+                                                    <td colspan="19">{{parseInt(silenceAnalysis.longestSilenceTime/60/60)}}</td>
+                                                    <td colspan="18">{{silenceAnalysis.lastSilenceStart}}</td>
+                                                    <td colspan="19">{{parseInt(silenceAnalysis.lastSilenceTime/60/60)}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa10" data-toggle="collapse">通话时间分析</div>
+                                        <div id="aa10" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr>
+                                                    <th colspan="13">时间段</th>
+                                                    <th colspan="7" style="padding-right: 0;">通话<br>次数</th>
+                                                    <th colspan="8" style="padding-right: 0;">通话<br>号码数</th>
+                                                    <th colspan="8">最常联系号码</th>
+                                                    <th colspan="8">联系次数</th>
+                                                    <th colspan="10" style="padding-right: 0;">平均通话<br>时长(分钟)</th>
+                                                    <th colspan="10">主叫次数</th>
+                                                    <th colspan="10">主叫时长<br>(分钟)</th>
+                                                    <th colspan="10">被叫次数</th>
+                                                    <th colspan="10">被叫时长<br>(分钟)</th>
+                                                </tr>
+
+                                                <tr v-for="item in callDurationAnalysis">
+                                                    <td colspan="13">{{item.desc}}</td>
+                                                    <td colspan="7" style="padding-right: 0;">{{item.callCnt}}</td>
+                                                    <td colspan="8" style="padding-right: 0;">{{item.callNumCnt}}</td>
+                                                    <td colspan="8">{{item.freqContactNum}}</td>
+                                                    <td colspan="8">{{item.freqContactNumCnt}}</td>
+                                                    <td colspan="10" style="padding-right: 0;">{{item.avgCallTime}}</td>
+                                                    <td colspan="10">{{item.callingCnt}}</td>
+                                                    <td colspan="10">{{parseInt(item.callingTime/60)}}</td>
+                                                    <td colspan="10">{{item.calledCnt}}</td>
+                                                    <td colspan="10">{{parseInt(item.calledTime/60)}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa11" data-toggle="collapse">消费能力</div>
+                                        <div id="aa11" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr>
+                                                    <td colspan="4">项目</td>
+                                                    <td colspan="3">近1月</td>
+                                                    <td colspan="3">近3月</td>
+                                                    <td colspan="3">近6月</td>
+                                                    <td colspan="3">平均</td>
+                                                </tr>
+
+                                                <tr v-for="item in consumptionAnalysis">
+                                                    <th colspan="4">{{item.desc}}</th>
+                                                    <th colspan="3">{{item.lately1m}}</th>
+                                                    <th colspan="3">{{item.lately3m}}</th>
+                                                    <th colspan="3">{{item.lately6m}}</th>
+                                                    <th colspan="3">{{item.avgMonth}}</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa12" data-toggle="collapse">出行信息</div>
+                                        <div id="aa12" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr>
+                                                    <th colspan="4">出发时间</th>
+                                                    <th colspan="3">回程时间</th>
+                                                    <th colspan="3">出发地</th>
+                                                    <th colspan="3">目的地</th>
+                                                </tr>
+                                                <tr v-for="departureDate in tripAnalysis">
+                                                <th colspan="4">{{departureDate.departureDate}}</th>
+                                                <th colspan="3">{{departureDate.returnDate}}</th>
+                                                <th colspan="3">{{departureDate.departurePlace}}</th>
+                                                <th colspan="3">{{departureDate.destinationPlace}}</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa13" data-toggle="collapse">社交关系概况</div>
+                                        <div id="aa13" class="mt_10 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+
+                                                <tbody>
+                                                <tr v-for="item in socialContactAnalysis">
+
+                                                    <td colspan="20">
+                                                        <table border="0" cellspacing="0" cellpadding="0"
+                                                               class="small_table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="col_000">
+                                                                    <div class="small_table_td_name">
+                                                                        {{item.desc}}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col_999">
+                                                                    <span class="fs_20 col_green">{{item.content}}</span>
+                                                                    &nbsp;&nbsp;个
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col_999">{{item.contentDesc}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa14" data-toggle="collapse">通话区域分析</div>
+                                        <div id="aa14" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0" class="padNone">
+
+                                                <tbody>
+                                                <tr>
+                                                    <th colspan="10">通话地</th>
+                                                    <th colspan="8">通话次数</th>
+                                                    <th colspan="8">通话号码数</th>
+                                                    <th colspan="8">通话时长(分钟)</th>
+                                                    <th colspan="8">主叫次数</th>
+                                                    <th colspan="8">主叫时长(分钟)</th>
+                                                    <th colspan="8">被叫次数</th>
+                                                    <th colspan="8">被叫时长(分钟)</th>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td colspan="10">泸州</td>
+                                                    <td colspan="8">249</td>
+                                                    <td colspan="8">28</td>
+                                                    <td colspan="8">333.40</td>
+                                                    <td colspan="8">112</td>
+                                                    <td colspan="8">147.48</td>
+                                                    <td colspan="8">137</td>
+                                                    <td colspan="8">185.92</td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title" href="#aa15" data-toggle="collapse">通话联系人分析</div>
+                                        <div id="aa15" class="mt_14 credit_table panel-collapse collapse in">
+                                            <table border="0" cellspacing="0" cellpadding="0" class="padNone">
+                                                <tbody>
+                                                <tr>
+                                                    <th colspan="14">号码</th>
+                                                    <th colspan="15">互联网标识</th>
+                                                    <th colspan="8">风险名单</th>
+                                                    <th colspan="8">归属地</th>
+                                                    <th colspan="5">通话<br>次数</th>
+                                                    <th colspan="8">通话时长(分)</th>
+                                                    <th colspan="5">主叫次数</th>
+                                                    <th colspan="8">主叫时长(分)</th>
+                                                    <th colspan="16">最近一次通话时间</th>
+                                                    <th colspan="8">最近一次通话时长</th>
+                                                </tr>
+
+
+                                                <tr  v-for="callNum in contactAnalysis">
+                                                    <td colspan="14">{{callNum.callNum}}</td>
+                                                    <td colspan="15">{{callNum.callTag}}</td>
+                                                    <td colspan="8">{{callNum.isHitRiskList}}</td>
+                                                    <td colspan="8">{{callNum.attribution}}</td>
+                                                    <td colspan="5">{{callNum.callCnt}}</td>
+                                                    <td colspan="8">{{parseInt(callNum.callTime/60)}}</td>
+                                                    <td colspan="5">{{callNum.callingCnt}}</td>
+                                                    <td colspan="8">{{parseInt(callNum.callingTime/60)}}</td>
+                                                    <td colspan="16">{{callNum.lastStart}}</td>
+                                                    <td colspan="8">{{callNum.lastTime}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>
+<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+<script type="text/javascript">
+     //    $('#dialog').show();
+
+      function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) return unescape(r[2]); return null;
+  		}
+     
+     var uuid=getQueryString("uuid");
+     
+ 	  $.post("/zc/credit/getReport.do", {            
+        uuid:uuid
+      }, function (text) {
+          var json = $.parseJSON(text);
+  		  var data = json.data;
+  		  var app3 = new Vue({
+    	    el: '#template',
+     	   data: data
+   		 })
+      });
+
+
+    var control = document.getElementById("control");
+    control.style.display = "none";
+    $("#start").click(function () {
+
+        $.post("/zc/credit/taskMobile.do", {
+
+            username: "13688215543",
+            password: "510213",
+            identityName: "陆薪桦",
+            identityCardNo: "510502199508242213"
+
+            /*
+            username : "18383065362",
+            password :"314159",
+            identityName : "钟群",
+            identityCardNo : "510502198706236821"
+           */
+            /*
+            username : "15884790116",
+            password :"314159",
+            identityName : "王靖",
+            identityCardNo : "510502198111290714"
+            */
+        }, function (text) {
+            var json = $.parseJSON(text);
+            $("#a").text(json.msg);
+            if (json.code == "0010") {
+                alert(json.msg);
+                var token = json.token;
+
+                $.post("/zc/credit/status.do", {}, function (text) {
+                    var json = $.parseJSON(text);
+                    status(json);
+                });
+
+            } else {
+                alert(json.msg);
+            }
+        });
+
+    });
+
+    function status(json) {
+        if (json.code == "0006") {
+            code = json.code;
+            control.style.display = "";
+            $("#input").on("click", function () {
+                var input = $("#sms").val();
+                $.post("/zc/credit/input.do", {
+                    s: input
+                }, function (text) {
+                    alert("2=" + text);
+                    control.style.display = "none";
+                    $.post("/zc/credit/status.do", {}, function (text) {
+                        var json = $.parseJSON(text);
+                        status(json);
+                    });
+                });
+            });
+        } else if (json.code == "0009") {
+            status(json);
+        } else if (json.code == "0200") {
+            $.post("/zc/credit/status.do", {}, function (text) {
+                var json = $.parseJSON(text);
+                status(json);
+            });
+        } else if (json.code == "0000") {
+            $.post("/zc/credit/getReport.do", {}, function (text) {
+                alert(text);
+            });
+        } else if (json.code == "200") {
+            $('#dialog').hide();
+        } else {
+            alert(json);
+        }
+    }
+
+</script>
