@@ -16,6 +16,7 @@ import com.voucher.manage.daoSQL.DeleteExe;
 import com.voucher.manage.daoSQL.InsertExe;
 import com.voucher.manage.daoSQL.SelectExe;
 import com.voucher.manage.daoSQL.UpdateExe;
+import com.voucher.manage.tools.MyTestUtil;
 import com.voucher.manage.tools.TransMapToString;
 
 public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
@@ -135,6 +136,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 	@Override
 	public Integer updateClientInfoByGUID(ClientInfo clientInfo) {
 		// TODO Auto-generated method stub
+		MyTestUtil.print(clientInfo);
 		return UpdateExe.get(this.getJdbcTemplate(), clientInfo);
 	}
 	

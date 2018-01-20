@@ -68,15 +68,15 @@
                 </a>
                 <ul class="dropdown-menu dropdown-tasks">
                     <li>
-                        <a href="successRepayment.html">
+                        <a href="#">
                             <div>
                                 <p>
-                                    <strong>已完成</strong>
-                                    <span class="pull-right text-muted" id="success">60%</span>
+                                    <strong>Task 1</strong>
+                                    <span class="pull-right text-muted">60% Complete</span>
                                 </p>
                                 <div class="progress progress-striped active">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                        <span class="sr-only"></span>
+                                        <span class="sr-only">60% Complete (success)</span>
                                     </div>
                                 </div>
                             </div>
@@ -84,15 +84,15 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="needRepayment.html">
+                        <a href="#">
                             <div>
                                 <p>
-                                    <strong>正常还款</strong>
-                                    <span class="pull-right text-muted" id="progress">28%</span>
+                                    <strong>Task 2</strong>
+                                    <span class="pull-right text-muted">28% Complete</span>
                                 </p>
                                 <div class="progress progress-striped active">
                                     <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
-                                        <span class="sr-only"></span>
+                                        <span class="sr-only">28% Complete</span>
                                     </div>
                                 </div>
                             </div>
@@ -100,34 +100,65 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="overdueRepayment.html">
+                        <a href="#">
                             <div>
                                 <p>
-                                    <strong>已逾期</strong>
-                                    <span class="pull-right text-muted" id="message3">85%</span>
+                                    <strong>Task 3</strong>
+                                    <span class="pull-right text-muted">60% Complete</span>
                                 </p>
                                 <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-                                        <span class="sr-only"></span>
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (warning)</span>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <p>
+                                    <strong>Task 4</strong>
+                                    <span class="pull-right text-muted">85% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                        <span class="sr-only">85% Complete (danger)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>See All Tasks</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
                 </ul>
                 <!-- /.dropdown-tasks -->
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i><span class="nav-counter" id="message2"></span>
+                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i><span class="nav-counter">0</span>
                 </a>
                 <ul class="dropdown-menu dropdown-alerts">
                     <li>
-                        <a href="overdueRepayment.html">
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i> New Comment
+                                <span class="pull-right text-muted small">4 min</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
                             <div>
                                 <i class="fa fa-envelope fa-fw"></i> 逾期消息
-                                <span class="pull-right text-muted small" id="message"></span>
+                                <span class="pull-right text-muted small">3 条</span>
                             </div>
                         </a>
                     </li>
@@ -195,7 +226,7 @@
     <div id="page-wrapper">
         <!-- /. PAGE WRAPPER  -->
         <div class="header">
-            <h1 class="page-header">客户列表信息</h1>
+            <h1 class="page-header">未通过贷款客户信息管理</h1>
         </div>
 
 
@@ -262,7 +293,7 @@
                                     </button>
                                 </div>
                                 <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
-                                       data-url="/zc/clientinfo/getAll.do" data-search="true"
+                                       data-url="/zc/clientinfo/getAll.do?search2=0" data-search="true"
                                        data-show-refresh="true" data-show-toggle="true"
                                        data-side-pagination="server" data-pagination="true"
                                        data-show-columns="true" data-sort-order="desc">
@@ -280,7 +311,6 @@
                                         <th data-align="left" data-field="useridCard">证件号</th>
                                         <th data-align="left" data-field="userPhoneNum">手机号</th>
                                         <th data-align="left" data-field="guid" data-formatter="actionReport">操作</th>
-                                        <th data-align="left" data-field="status" data-formatter="actionStatus">贷款状态</th>
                                         <th data-align="left" data-field="campusAdmin">录入人员</th>
                                         <th data-align="left" data-field="updateTime" data-formatter="actionTime" data-visible="false">更新时间</th>
                                         <th data-align="left" data-field="insertTime" data-formatter="actionTime" data-sortable="true">录入时间</th>
@@ -412,36 +442,6 @@
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
 <script type="text/javascript">
-
-	$.get("loan/overdueRepayment.do", {
-		}, function(text) {
-			var obj = $.parseJSON(text);
-			var all=obj.all;
-			var count=obj.count;
-  			$("#message").html(count);
-  			$("#message2").html(count);
-  			$("#message3").html((count/all)*100+"%");
-  			$(".progress-bar-danger").width((count/all)*100+"%");
-		});
-
-	$.get("loan/needRepayment.do", {
-	}, function(text) {
-		var obj = $.parseJSON(text);
-		var all=obj.all;
-		var count=obj.count;
-			$("#progress").html((count/all)*100+"%");
-			$(".progress-bar-info").width((count/all)*100+"%");
-	});
-	
-	$.get("loan/successRepayment.do", {
-	}, function(text) {
-		var obj = $.parseJSON(text);
-		var all=obj.all;
-		var count=obj.count;
-			$("#success").html((count/all)*100+"%");
-			$(".progress-bar-success").width((count/all)*100+"%");
-	});
-	
     $(function () {
         $('#userinfo-form').bootstrapValidator({
             message: 'This value is not valid',
@@ -542,7 +542,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">办理产品</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="interest" onchange="select()">
+                                <select class="form-control" id="interest">
                                 </select>
 
                             </div>
@@ -569,61 +569,6 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="GUID" readonly="readonly"
                                        placeholder="备注信息">
-                            </div>
-                        </div>
-                        
-                        <div class="modal-header">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">产品详情</label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">本金</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="money" readonly="readonly"
-                                       placeholder="本金">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">每期偿还本金</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="stage" readonly="readonly"
-                                       placeholder="每期偿还本金">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">每期利息</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="interes" readonly="readonly"
-                                       placeholder="每期利息">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">期数</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nper" readonly="readonly"
-                                       placeholder="期数">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">每期天数</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cycle" readonly="readonly"
-                                       placeholder="每期天数">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">还款总额</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="should_repay" readonly="readonly"
-                                       placeholder="还款总额">
                             </div>
                         </div>
                         
@@ -660,27 +605,6 @@
         $("#userhide").hide();
     }
 
-    function select(){
-    	var objS = document.getElementById("interest");
-    	var pro_GUID = objS.options[objS.selectedIndex].value;
-    	
-    	$.get("loan/getProduct.do",
-				function(text) {
-					var json = $.parseJSON(text);
-					for ( var i = 0; i < json.length; i++) {
-						if(pro_GUID==json[i].pro_GUID){
-							$("#money").val(json[i].money);
-							$("#stage").val(json[i].stage);
-							$("#interes").val(json[i].interest);
-							$("#nper").val(json[i].nper);
-							$("#cycle").val(json[i].cycle);
-							$("#should_repay").val(json[i].should_repay);
-						}
-					}
-		});
-    	
-    }
-    
     function commitDataButton(){
     	var username = $('#addName').val().toString();
         var pro_GUID = $('#interest').val().toString();
@@ -719,19 +643,6 @@
     	});
     }
     
-    
-    function actionStatus(value, row, index){
-    	if (value == "0"){
-    		return "<span>未贷款</span>";
-    	}else if (value == "1") {
-    		return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
-    	}else if(value=="2"){
-    		return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
-    	}else if(value=="3"){
-    		return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
-    	}
-    }
-    
     function actionDetail(value, row, index) {
         return [
             '<a  href="javascript:void(0)" onclick="detail(this);" title="点击查看用户详情">',
@@ -765,8 +676,7 @@
             // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             // '</a>&nbsp;',
             '<button type="button" title="点击查看征信报告" onclick="report(this);" class="btn btn-primary">征信报告</button>&nbsp;',
-            '<button type="button" title="点击新增贷款业务" onclick="loanModel(this);" class="btn btn-success">办理贷款</button>&nbsp;',
-            '<button type="button" title="点击办理还款业务" onclick="repayment(this);" class="btn btn-danger">办理还款</button>'
+            '<button type="button" title="点击新增贷款业务" onclick="loanModel(this);" class="btn btn-success">办理贷款</button>&nbsp;'
         ].join('');
     }
     
@@ -795,7 +705,7 @@
         
         var obj = document.getElementById("interest");
         
-        var val = document.getElementById("table").rows[hang].cells[12]; //取得所在列的值
+        var val = document.getElementById("table").rows[hang].cells[11]; //取得所在列的值
         var GUID = val.innerHTML;
         
         
@@ -804,18 +714,10 @@
 					obj.options.length = 0;//清楚modal的数据
 					var json = $.parseJSON(text);
 					for ( var i = 0; i < json.length; i++) {
-						
-						var option = document.createElement("option");
-					  	option.innerHTML=json[i].proName;
-					  	option.setAttribute("value",json[i].pro_GUID);
-					  	obj.options.add(option);
-						
-						/*
 						obj.options
 						.add(new Option(
 							json[i].proName,
 							json[i].pro_GUID));
-						*/
 					}
 		});
         
@@ -825,11 +727,10 @@
         $('#phoneNum').val(userPhoneNum);
         $('#GUID').val(GUID);
     }
-    
     function repayment(temp){
         var hang = $(temp.parentNode).parent().prevAll().length + 1;
-        var guid =document.getElementById("table").rows[hang].cells[12].innerHTML;
-        window.location.href = "allRepayment.html?guid="+guid;
+        var username =document.getElementById("table").rows[hang].cells[3].innerHTML;
+        window.location.href = "Repayment.html?username="+username;
     }
     
     

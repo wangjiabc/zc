@@ -124,7 +124,7 @@
 	
 	<filter-mapping>
 		<filter-name>MobileSessionFilter</filter-name>
-		<url-pattern>/user.html</url-pattern>
+		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
 
 	<!-- 对普通员工和安全人员栏截 -->

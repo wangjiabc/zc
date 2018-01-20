@@ -7,33 +7,33 @@
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
     <title>用户管理</title>
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="../assets/js/jquery-3.2.1.min.js"></script>
    <link rel="stylesheet"
-	href="assets/bootstrap-table/bootstrap-table.css">
+	href="../assets/bootstrap-table/bootstrap-table.css">
 <link rel="stylesheet"
-	href="assets/bootstrap-table/bootstrap-editable.css">
-<script src="assets/bootstrap-table/jquery.min.js"></script>
-<script src="assets/bootstrap-table/bootstrap.min.js"></script>
-<script src="assets/bootstrap-table/bootstrap-table.js"></script>
-<script src="assets/bootstrap-table/bootstrap-table-export.js"></script>
-<script src="assets/bootstrap-table/tableExport.js"></script>
-<script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>
-<script src="assets/bootstrap-table/bootstrap-editable.js"></script>
-<script src="js/bootstrap-table-zh-CN.min.js"></script>
-<script type="text/javascript" src="./bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="admin.js"></script>
+	href="../assets/bootstrap-table/bootstrap-editable.css">
+<script src="../assets/bootstrap-table/jquery.min.js"></script>
+<script src="../assets/bootstrap-table/bootstrap.min.js"></script>
+<script src="../assets/bootstrap-table/bootstrap-table.js"></script>
+<script src="../assets/bootstrap-table/bootstrap-table-export.js"></script>
+<script src="../assets/bootstrap-table/tableExport.js"></script>
+<script src="../assets/bootstrap-table/bootstrap-table-editable.js"></script>
+<script src="../assets/bootstrap-table/bootstrap-editable.js"></script>
+<script src="../js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../admin.js"></script>
     <!-- Bootstrap Styles-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/css/checkbox3.min.css" rel="stylesheet" >
+    <link href="../assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="../assets/css/checkbox3.min.css" rel="stylesheet" >
     <!-- Morris Chart Styles-->
-    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="../assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
-    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="../assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+    <link rel="stylesheet" href="../assets/js/Lightweight-Chart/cssCharts.css"> 
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -45,7 +45,27 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.min.js"></script>
 <![endif]-->
-
+ <script src="../js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <!-- Bootstrap Js -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="../assets/js/jquery.metisMenu.js"></script>
+    <!-- Custom Js -->
+    <script src="../assets/js/custom-scripts.js"></script>
+    <script src="../assets/js/select2.full.min.js"></script>
+    <!-- Bootstrap Styles-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="../assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="../assets/css/checkbox3.min.css" rel="stylesheet">
+    <!-- Morris Chart Styles-->
+    <link href="../assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="../assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="../assets/js/Lightweight-Chart/cssCharts.css">
 </head>
 <body>
  <div id="wrapper">
@@ -80,25 +100,44 @@
 
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-					 <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="Main.html">客户列表信息</a>
-                            </li>
-                            <li>
-                                <a href="AddInfo.html">添加客户信息</a>
-                            </li>
-                            <li>
-                                <a href="user.html">员工管理信息</a>
-                            </li>
-          							</ul>
-						</li>
-                </ul>
-            </div>
-        </nav>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="../Main.html">客户列表信息</a>
+                        </li>
+                        <li>
+                            <a href="../AddInfo.html">添加客户信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 贷款管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="../passLoanDeal.html">已 通 过</a></li>
+                        <li><a href="../notLoanDeal.html">未 通 过</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 还款管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="../needRepayment.html">未 完 成</a></li>
+                        <li><a href="../successRepayment.html">已 完 成</a></li>
+                        <li><a href="../overdueRepayment.html">已 逾 期</a></li>
+                    </ul>
+                </li>
+                <li id="userhide">
+                    <a href="#"><i class="fa fa-sitemap"></i> 系统设置<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                             <li ><a href="user.html">员工管理信息</a></li>
+                             <li><a href="ProductSet.html"></i> 产 品 设 置</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
         <!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
         <!-- /. PAGE WRAPPER  -->
@@ -156,9 +195,9 @@
 	
 	function actionStatus(value, row, index){
 		if (value == "1") {
-			return "<img src='img/right.jpg' width='15px' height='13px' title='允许'></i>";
+			return "<img src='../img/right.jpg' width='15px' height='13px' title='允许'></i>";
 		}else if(value=="2"){
-			return "<img src='img/wrong.jpg' width='13px' height='13px' title='不允许'></i>";
+			return "<img src='../img/wrong.jpg' width='13px' height='13px' title='不允许'></i>";
 		}
 	}
 

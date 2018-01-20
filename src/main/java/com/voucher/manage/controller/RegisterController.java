@@ -63,7 +63,7 @@ public class RegisterController {
 		Map<String, Object> map=new HashMap<>();
 		
 		int repeat=userDao.selectRepeatAdmin(username);
-
+		System.out.println("repeat="+repeat);
 		if(username.equals("")){
 			map.put("data", "用户名不能空");
 			return map;
@@ -83,7 +83,7 @@ public class RegisterController {
 			return map;
 	    }
 	    
-		if(repeat==1){
+		if(repeat>=1){
 			map.put("data", "该用户名已被注册，请使用其他用户名注册");
 			return map;
 		}else{

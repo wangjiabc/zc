@@ -1,7 +1,8 @@
 package com.voucher.manage.daoModel;
 
-import java.io.Serializable;
 import java.util.Date;
+
+import java.io.Serializable;
 
 import com.voucher.manage.daoSQL.annotations.*;
 
@@ -11,7 +12,7 @@ public class ClientInfo implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @SQLInteger(name="id")
-	private Integer id;
+   	private Integer id;
 
     @SQLString(name="GUID")
 	private String GUID;
@@ -37,17 +38,20 @@ public class ClientInfo implements Serializable{
     @SQLString(name="colleagueRelation")
 	private String colleagueRelation;
 
-    @SQLString(name="remark")
-	private String remark;
-    
     @SQLString(name="colleagueUnitName")
 	private String colleagueUnitName;
 
     @SQLString(name="colleaguePhoneNum")
 	private String colleaguePhoneNum;
 
+    @SQLString(name="remark")
+	private String remark;
+
     @SQLString(name="colleagueAddress")
 	private String colleagueAddress;
+
+    @SQLString(name="lzzlcwA123")
+	private String lzzlcwA123;
 
     @SQLString(name="emergencyName")
 	private String emergencyName;
@@ -229,6 +233,15 @@ public class ClientInfo implements Serializable{
     @SQLString(name="userBankOpen")
 	private String userBankOpen;
 
+    @SQLDateTime(name="updateTime")
+	private Date updateTime;
+
+    @SQLDateTime(name="insertTime")
+	private Date insertTime;
+
+    @SQLInteger(name="status")
+	private Integer status;
+
 	public void setId(Integer id){
 		this.id = id;
 	}
@@ -245,12 +258,6 @@ public class ClientInfo implements Serializable{
 		return GUID;
 	}
 
-	@SQLDateTime(name="updateTime")
-	private Date updateTime;
-
-    @SQLDateTime(name="insertTime")
-	private Date insertTime;
-	
 	public void setCampusAdmin(String campusAdmin){
 		this.campusAdmin = campusAdmin;
 	}
@@ -323,12 +330,28 @@ public class ClientInfo implements Serializable{
 		return colleaguePhoneNum;
 	}
 
+	public void setRemark(String remark){
+		this.remark = remark;
+	}
+
+	public String getRemark(){
+		return remark;
+	}
+
 	public void setColleagueAddress(String colleagueAddress){
 		this.colleagueAddress = colleagueAddress;
 	}
 
 	public String getColleagueAddress(){
 		return colleagueAddress;
+	}
+
+	public void setLzzlcwA123(String lzzlcwA123){
+		this.lzzlcwA123 = lzzlcwA123;
+	}
+
+	public String getLzzlcwA123(){
+		return lzzlcwA123;
 	}
 
 	public void setEmergencyName(String emergencyName){
@@ -811,6 +834,30 @@ public class ClientInfo implements Serializable{
 		return userBankOpen;
 	}
 
+	public void setUpdateTime(Date updateTime){
+		this.updateTime = updateTime;
+	}
+
+	public Date getUpdateTime(){
+		return updateTime;
+	}
+
+	public void setInsertTime(Date insertTime){
+		this.insertTime = insertTime;
+	}
+
+	public Date getInsertTime(){
+		return insertTime;
+	}
+
+	public void setStatus(Integer status){
+		this.status = status;
+	}
+
+	public Integer getStatus(){
+		return status;
+	}
+
 
 
 
@@ -889,29 +936,5 @@ public class ClientInfo implements Serializable{
 		return whereTerm;
 	}
 
-	public void setRemark(String remark){
-		this.remark = remark;
-	}
-
-	public String getRemark(){
-		return remark;
-	}
-	
-	public void setUpdateTime(Date updateTime){
-		this.updateTime = updateTime;
-	}
-
-	public Date getUpdateTime(){
-		return updateTime;
-	}
-
-	public void setInsertTime(Date insertTime){
-		this.insertTime = insertTime;
-	}
-
-	public Date getInsertTime(){
-		return insertTime;
-	}
-	
 }
 

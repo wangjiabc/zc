@@ -58,6 +58,10 @@ http://www.springframework.org/schema/context
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
    </bean>
   
+   <bean id="loanDao" class="com.voucher.manage.daoImpl.LoanDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+   </bean>
+  
    <!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

@@ -49,7 +49,7 @@ class DBUtils {
   
 public class AutoSqlServer { 
 	//包名
-	private String packageName="package com.voucher.manage.daoModel.TTT;\n\n";
+	private String packageName="package com.voucher.manage.daoModel;\n\n";
 	
     private String[] colNames;//列名数组  
     private String[] colType;//列名类型数组  

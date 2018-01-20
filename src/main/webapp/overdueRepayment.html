@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>中泸财务</title>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet"
+          href="assets/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet"
+          href="assets/bootstrap-table/bootstrap-editable.css">
+    <script src="assets/bootstrap-table/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap-table/bootstrap.min.css">
+    <script src="assets/bootstrap-table/bootstrap-table.js"></script>
+    <script src="assets/bootstrap-table/bootstrap-table-export.js"></script>
+    <script src="assets/bootstrap-table/tableExport.js"></script>
+    <script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>
+
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+    <script src="assets/js/select2.full.min.js"></script>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="assets/css/checkbox3.min.css" rel="stylesheet">
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中泸财务</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="/zc/updateUser.html"><i class="fa fa-sign-out fa-fw"></i> 密码设置</a>
+                    </li>
+                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="Main.html">客户列表信息</a>
+                        </li>
+                        <li>
+                            <a href="AddInfo.html">添加客户信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 贷款管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="passLoanDeal.html">已 通 过</a></li>
+                        <li><a href="notLoanDeal.html">未 通 过</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 还款管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="needRepayment.html">未 完 成</a></li>
+                        <li><a href="successRepayment.html">已 完 成</a></li>
+                        <li><a href="overdueRepayment.html">已 逾 期</a></li>
+                    </ul>
+                </li>
+                <li id="userhide">
+                    <a href="#"><i class="fa fa-sitemap"></i> 系统设置<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                             <li ><a href="admin/user.html">员工管理信息</a></li>
+                             <li><a href="admin/ProductSet.html"></i> 产 品 设 置</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <!-- /. PAGE WRAPPER  -->
+        <div class="header">
+            <h1 class="page-header">逾期还款信息管理</h1>
+        </div>
+
+
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div id="toolbar" class="btn-group">
+                                </div>
+                                 <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
+                                       data-url="loan/getAllRepayment.do?search2=3" data-search="true"
+                                       data-show-refresh="true" data-show-toggle="true"
+                                       data-side-pagination="server" data-pagination="true"
+                                       data-show-columns="true" data-sort-order="desc">
+                                    <thead>
+                                    <tr>
+                                      <th data-field="state" data-checkbox="true"></th>
+                                        <th data-align="left" data-field="id">id</th>
+                                        <th data-align="left" data-field="loan_GUID">贷款ID</th>
+                                        <th data-align="left" data-field="proName">产品名称</th>
+                                        <th data-align="left" data-field="userName">姓名</th>
+                                        <th data-align="left" data-field="useridCard">身份证</th>
+                                        <th data-align="left" data-field="userPhoneNum">手机号</th>
+                                        <th data-align="left" data-field="campusAdmin">贷款人员</th>
+                                        <th data-align="left" data-field="guid" data-formatter="actionReport">操作</th>
+                                        <th data-align="left" data-field="money">应还本金</th>
+                                        <th data-align="left" data-field="interest">应还利息</th>
+                                        <th data-align="left" data-field="shouldtime" data-formatter="actionTime">还款开始日期</th>
+                                        <th data-align="left" data-field="repaytime" data-formatter="actionTime">还款结束日期</th>
+                                        <th data-align="left" data-field="datetime" data-formatter="actionTime">申请日期</th>                               
+                                        <th data-align="left" data-field="status" data-formatter="actionStatus">贷款状态</th>
+
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- 删除对话框 -->
+<div class="modal fade" id="deldialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                警 告
+            </div>
+            <div class="modal-body">确定要删除这条语句？</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" id="deleteBtn" class="btn btn-danger">确 定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- 警告对话框 -->
+<div class="modal fade" id="alertdialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header blue">
+                <div>
+                    <strong id="alertchar" style="font-size:20px"></strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button type="button" id="commitFoodDataButton" class="btn btn-primary">添 加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+function getcookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+
+var type = getcookie('type');
+
+if (type != 0) {
+    $("#userhide").hide();
+}
+
+function getQueryString(key){
+    var reg = new RegExp("(^|&)"+key+"=([^&]*)(&|$)");
+    var result = window.location.search.substr(1).match(reg);
+    return result?decodeURIComponent(result[2]):null;
+  }
+
+  var loan_GUID=getQueryString("loan_GUID");
+ 
+    var url="loan/getAllRepayment.do?search2=3";
+  
+   $(" #table").bootstrapTable({
+		url : url
+	});
+ 
+    $('#queryUser').click(function () {
+        $('#userinfo-form').bootstrapValidator('validate');
+        if ($('#userinfo-form').bootstrapValidator('validate') == false) {
+            return;
+        }
+
+        var username = $("#username").val().toString();
+        var userPhoneNum = $("#userPhoneNum").val().toString();
+        var useridCard = $("#useridCard").val().toString();
+
+        $.ajax({
+            type: "get",
+            url: "clientinfo/getQuery.do",
+            data: {
+                username: username,
+                userPhoneNum: userPhoneNum,
+                useridCard: useridCard
+            },
+            success: function (data) {
+                var obj = $.parseJSON(data);
+                var state = obj.state;
+                if (state == "false") {
+                    alert("输入错误");
+                } else {
+                    var id = obj.id;
+                    window.location.href = "UserQuery.html?username=" + username+
+                        "&useridCard="+useridCard;
+                }
+            }
+        });
+    });
+
+function actionStatus(value, row, index){
+	if (value == "0"){
+		return "<span>未贷款</span>";
+	}else if (value == "1") {
+		return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
+	}else if(value=="2"){
+		return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
+	}else if(value=="3"){
+		return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
+	}
+}
+
+function actionReport(value, row, index) {
+    return [
+        // '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
+        // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
+        // '</a>&nbsp;',
+        '<button type="button" title="还款" onclick="repayment(this);" class="btn btn-danger">还款</button>'
+    ].join('');
+}
+
+
+function repayment(temp){
+	var hang = $(temp.parentNode).parent().prevAll().length + 1;
+	var loan_GUID =document.getElementById("table").rows[hang].cells[2].innerHTML;
+	var shouldtime =document.getElementById("table").rows[hang].cells[11].innerHTML;
+	var repaytime =document.getElementById("table").rows[hang].cells[12].innerHTML;
+	
+	$.post("loan/updateRepayment.do", {
+		 loan_GUID:loan_GUID,
+		 shouldtime:shouldtime,
+		 repaytime:repaytime
+ 	}, function(text) {
+ 		if(text==1){
+ 			alert("操作成功!");
+ 			$("#table").bootstrapTable('refresh',{
+ 				url : url
+			});
+ 		}else{
+ 			alert("操作失败!");
+ 		}
+ 	});
+
+}
+
+function actionTime(value, row, index){
+    var date = new Date(value);
+    Y = date.getFullYear() + '-';
+    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    D = date.getDate() + ' ';
+    h = date.getHours() + ':';
+    m = date.getMinutes() + ':';
+    s = date.getSeconds();
+    return Y+M+D+h+m+s;
+}
+
+
+</script>
+</body>
+
+</html>

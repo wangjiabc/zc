@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -28,9 +29,6 @@
     <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
     <script src="assets/js/select2.full.min.js"></script>
-    <!-- DATA TABLE SCRIPTS -->
-    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
     <!-- Bootstrap Styles-->
     <link href="assets/css/bootstrap.css" rel="stylesheet"/>
     <!-- FontAwesome Styles-->
@@ -66,9 +64,9 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                    <li><a href="/zc/updateUser.html"><i class="fa fa-sign-out fa-fw"></i> 密码设置</a>
                     </li>
-                    <li><a href=" "><i class="fa fa-gear fa-fw"></i> 密码设置</a>
+                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -120,107 +118,137 @@
     <div id="page-wrapper">
         <!-- /. PAGE WRAPPER  -->
         <div class="header">
-            <h1 class="page-header">运营商信用报告</h1>
+            <h1 class="page-header">已完成还款信息管理</h1>
         </div>
 
 
         <div id="page-inner">
+            <div class="row">
+                <div class="col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                        <div id="toolbar" class="btn-group">
-                                    <button id="plus" type="button" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增征信报告
-                                    </button>
+                            <div class="table-responsive">
+                                <div id="toolbar" class="btn-group">
                                 </div>
-                                <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
-                                        data-search="true"
+                                 <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
+                                       data-url="loan/getAllRepayment.do?search2=1" data-search="true"
                                        data-show-refresh="true" data-show-toggle="true"
                                        data-side-pagination="server" data-pagination="true"
                                        data-show-columns="true" data-sort-order="desc">
                                     <thead>
                                     <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
                                         <th data-align="left" data-field="id">id</th>
+                                        <th data-align="left" data-field="loan_GUID">贷款ID</th>
+                                        <th data-align="left" data-field="proName">产品名称</th>
                                         <th data-align="left" data-field="userName">姓名</th>
-                                        <th data-align="left" data-field="guid">GUID</th>                                        
-                                        <th data-align="left" data-field="useridCard">证件号</th>
-                                        <th data-align="left" data-field="userPhoneNum">电话</th>
-                                        <th data-align="left" data-field="campusAdmin">录入人员</th>
-                                        <th data-align="left" data-field="guid" data-formatter="actionDetail">详情</th>
-                                        <th data-align="left" data-field="datetime" data-formatter="actionTime" data-sortable="true">查询时间</th>
+                                        <th data-align="left" data-field="useridCard">身份证</th>
+                                        <th data-align="left" data-field="userPhoneNum">手机号</th>
+                                        <th data-align="left" data-field="campusAdmin">贷款人员</th>
+                                        <th data-align="left" data-field="money">应还本金</th>
+                                        <th data-align="left" data-field="interest">应还利息</th>
+                                        <th data-align="left" data-field="repaytime" data-formatter="actionTime">应还款日期</th>
+                                        <th data-align="left" data-field="givetime" data-formatter="actionTime">实际还款日期</th>
+                                        <th data-align="left" data-field="datetime" data-formatter="actionTime">申请日期</th>                               
+                                        <th data-align="left" data-field="status" data-formatter="actionStatus">贷款状态</th>
+
                                     </tr>
                                     </thead>
                                 </table>
                             </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- 删除对话框 -->
+<div class="modal fade" id="deldialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                警 告
+            </div>
+            <div class="modal-body">确定要删除这条语句？</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" id="deleteBtn" class="btn btn-danger">确 定</button>
+            </div>
         </div>
     </div>
 </div>
 </div>
+<!-- 警告对话框 -->
+<div class="modal fade" id="alertdialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header blue">
+                <div>
+                    <strong id="alertchar" style="font-size:20px"></strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button type="button" id="commitFoodDataButton" class="btn btn-primary">添 加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+
 <script type="text/javascript">
-/*
- function getQueryString(name) {
-	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-	var r = window.location.search.substr(1).match(reg);
-	if (r != null) return unescape(r[2]); return null;
- }
-*/
+    function getcookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
 
-function getQueryString(key){
-    var reg = new RegExp("(^|&)"+key+"=([^&]*)(&|$)");
-    var result = window.location.search.substr(1).match(reg);
-    return result?decodeURIComponent(result[2]):null;
-  }
+    var type = getcookie('type');
 
- var useridCard=getQueryString("useridCard");
- var userName=getQueryString("userName");
- var userPhoneNum=getQueryString("userPhoneNum");
- 
- console.log(userName);
- 
- var url="/zc/credit/getReportByIdCard.do?useridCard="+useridCard;
+    if (type != 0) {
+        $("#userhide").hide();
+    }
 
- $("#table").bootstrapTable({
-	url : url
- });
- 
- function actionDetail(value, row, index) {
-     return [
-         '<a  href="javascript:void(0)" onclick="detail(this);" title="点击查看用户详情">',
-         '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
-         '</a>'].join('');
- }
+    function actionStatus(value, row, index){
+    	if (value == "0"){
+    		return "<span>未贷款</span>";
+    	}else if (value == "1") {
+    		return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
+    	}else if(value=="2"){
+    		return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
+    	}else if(value=="3"){
+    		return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
+    	}
+    }
+    
+    function actionReport(value, row, index) {
+        return [
+            // '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
+            // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
+            // '</a>&nbsp;',
+            '<button type="button" title="还款" onclick="repayment(this);" class="btn btn-danger">还款</button>'
+        ].join('');
+    }
 
- function detail(temp) {
-     var hang = $(temp.parentNode).parent().prevAll().length + 1;  //jquery获取td所在的行和列
-     //var lie = $(temp.parentNode).prevAll().length+1;
-     //alert("第"+hang+"行"+"	"+"第"+lie+"列");
 
-     var val = document.getElementById("table").rows[hang].cells[2]; //取得所在列的值
-     var uuid = val.innerHTML;
-     
-     window.location.href = "mobileReport.html?uuid=" + uuid;
- }
+    function actionTime(value, row, index){
+        var date = new Date(value);
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+    }
 
- 
- function actionTime(value, row, index){
-	    var date = new Date(value); 
-	    Y = date.getFullYear() + '-';
-	    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-	    D = date.getDate() + ' ';
-	    h = date.getHours() + ':';
-	    m = date.getMinutes() + ':';
-	    s = date.getSeconds(); 
-		return Y+M+D+h+m+s;
-	}
- 
-  $("#plus").click(function(){
-	
-	  window.location.href = "creditReport.html?useridCard=" + useridCard+
-		"&userName="+userName+"&userPhoneNum="+userPhoneNum;
-	  
-  })
-  
 </script>
+</body>
+
+</html>
