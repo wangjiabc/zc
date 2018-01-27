@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="" name="description"/>
     <meta content="webthemez" name="author"/>
-    <title>中泸财务</title>
+    <title>中财财务</title>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet"
           href="assets/bootstrap-table/bootstrap-table.css">
@@ -39,351 +39,204 @@
     <link href="assets/css/font-awesome.css" rel="stylesheet"/>
     <link href="assets/css/checkbox3.min.css" rel="stylesheet">
     <!-- Morris Chart Styles-->
-    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+
     <!-- Custom Styles-->
-    <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <link href="assets/css/custom-styles1.css" rel="stylesheet"/>
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
 
 </head>
-
 <body>
-<div id="wrapper">
-   <nav class="navbar navbar-default top-navbar" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中泸财务</strong></a>
-        </div>
-
-        <ul class="nav navbar-top-links navbar-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-tasks">
-                    <li>
-                        <a href="successRepayment.html">
-                            <div>
-                                <p>
-                                    <strong>已完成</strong>
-                                    <span class="pull-right text-muted" id="success">60%</span>
-                                </p>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                        <span class="sr-only"></span>
-                                    </div>
+<div class="header">
+    <h1 class="page-header">客户列表信息</h1>
+</div>
+<div id="page-inner">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">查询</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="userinfo-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-3 control-label">姓名</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="username"
+                                           id="username" placeholder="填入姓名">
                                 </div>
                             </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="needRepayment.html">
-                            <div>
-                                <p>
-                                    <strong>正常还款</strong>
-                                    <span class="pull-right text-muted" id="progress">28%</span>
-                                </p>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
-                                        <span class="sr-only"></span>
-                                    </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-3 control-label">身份证</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="useridCard" id="useridCard"
+                                           placeholder="填入身份证号">
                                 </div>
                             </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="overdueRepayment.html">
-                            <div>
-                                <p>
-                                    <strong>已逾期</strong>
-                                    <span class="pull-right text-muted" id="message3">85%</span>
-                                </p>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-                                        <span class="sr-only"></span>
-                                    </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-3 control-label">手机号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="userPhoneNum"
+                                           id="userPhoneNum"
+                                           placeholder="填入手机号">
                                 </div>
                             </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                </ul>
-                <!-- /.dropdown-tasks -->
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i><span class="nav-counter" id="message2"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="overdueRepayment.html">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> 逾期消息
-                                <span class="pull-right text-muted small" id="message"></span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-alerts -->
-            </li>
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
 
-                <ul class="dropdown-menu dropdown-user">
-                 <li><a href="/zc/updateUser.html"><i class="fa fa-sign-out fa-fw"></i> 密码设置</a>
-                    </li>
-                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        </ul>
-    </nav>
-    <!--/. NAV TOP  -->
-    <nav class="navbar-default navbar-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav" id="main-menu">
-                <li>
-                    <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="Main.html">客户列表信息</a>
-                        </li>
-                        <li>
-                            <a href="AddInfo.html">添加客户信息</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-sitemap"></i> 贷款管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="passLoanDeal.html">已 通 过</a></li>
-                        <li><a href="notLoanDeal.html">未 通 过</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-sitemap"></i> 还款管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="needRepayment.html">未 完 成</a></li>
-                        <li><a href="successRepayment.html">已 完 成</a></li>
-                        <li><a href="overdueRepayment.html">已 逾 期</a></li>
-                    </ul>
-                </li>
-                <li id="userhide">
-                    <a href="#"><i class="fa fa-sitemap"></i> 系统设置<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                             <li ><a href="admin/user.html">员工管理信息</a></li>
-                             <li><a href="admin/ProductSet.html"></i> 产 品 设 置</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- /. NAV SIDE  -->
-    <div id="page-wrapper">
-        <!-- /. PAGE WRAPPER  -->
-        <div class="header">
-            <h1 class="page-header">客户列表信息</h1>
-        </div>
-
-
-        <div id="page-inner">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">查询</div>
+                            <div class="form-group col-sm-3">
+                                <button type="button" id="queryUser" class="btn btn-success">查询</button>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="userinfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-3 control-label">姓名</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="username"
-                                                   id="username" placeholder="填入姓名">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-3 control-label">身份证</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="useridCard" id="useridCard"
-                                                   placeholder="填入身份证号">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-3 control-label">手机号</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="userPhoneNum"
-                                                   id="userPhoneNum"
-                                                   placeholder="填入手机号">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-sm-3">
-                                        <button type="button" id="queryUser" class="btn btn-success">查询</button>
-                                    </div>
-                                </div>
-                            </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">个人信息</div>
+                    </div>
+                </div>
+                <div class="panel-body" id="template">
+                    <div class="table-responsive">
+                        <div id="toolbar" class="btn-group">
+                            <button id="plus" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                            </button>
+                            <button id="delete" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>删除
+                            </button>
+                            <button id="edit" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                            </button>
                         </div>
+                        <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
+                               data-url="/zc/clientinfo/getAll.do" data-search="true"
+                               data-show-refresh="true" data-show-toggle="true"
+                               data-side-pagination="server" data-pagination="true"
+                               data-show-columns="true" data-sort-order="desc">
+                            <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-align="left" data-field="id" data-sortable="true">id</th>
+                                <th data-align="left" data-field="userName" data-formatter="actionDetail">姓名</th>
+                                <th data-align="left" data-field="userOldname" data-visible="false">曾用名</th>
+                                <th data-align="left" data-field="userAge">年龄</th>
+                                <th data-align="left" data-field="userSex">性别</th>
+                                <th data-align="left" data-field="userEducation" data-visible="false">学历</th>
+                                <th data-align="left" data-field="userMarriage" data-visible="false">婚姻状况</th>
+                                <th data-align="left" data-field="useridCard">证件号</th>
+                                <th data-align="left" data-field="userPhoneNum">手机号</th>
+                                <th data-align="left" data-field="guid" data-formatter="actionReport">操作</th>
+                                <th data-align="left" data-field="status" data-formatter="actionStatus">借款状态</th>
+                                <th data-align="left" data-field="campusAdmin">录入人员</th>
+                                <th data-align="left" data-field="updateTime" data-formatter="actionTime"
+                                    data-visible="false">更新时间
+                                </th>
+                                <th data-align="left" data-field="insertTime" data-formatter="actionTime"
+                                    data-sortable="true">录入时间
+                                </th>
+                                <th data-align="left" data-field="guid" data-sortable="true">客户ID</th>
+                                <th data-align="left" data-field="userProvideNum" data-visible="false">供养人数</th>
+                                <th data-align="left" data-field="userChildrenNum" data-visible="false">子女数目
+                                </th>
+                                <th data-align="left" data-field="usercrAdress" data-visible="false">户籍地址</th>
+                                <th data-align="left" data-field="userHouseState" data-visible="false">房产状况</th>
+                                <th data-align="left" data-field="userNowAdress" data-visible="false">现住地址</th>
+                                <th data-align="left" data-field="userTelNum" data-visible="false">固话</th>
+                                <th data-align="left" data-field="userWechat" data-visible="false">微信</th>
+                                <th data-align="left" data-field="userqqNum" data-visible="false">QQ</th>
+                                <th data-align="left" data-field="userSocialBase" data-visible="false">
+                                    社保基数/公积金基数
+                                </th>
+                                <th data-align="left" data-field="userCreditCard" data-visible="false">最高额度信用卡
+                                </th>
+                                <th data-align="left" data-field="userPhoneMonad" data-visible="false">
+                                    近六个月的电话详单
+                                </th>
+                                <th data-align="left" data-field="userBankOpen" data-visible="false">划账银行卡开户行
+                                </th>
+
+                                <th data-align="left" data-field="insCompany" data-visible="false">投保公司</th>
+                                <th data-align="left" data-field="insNum" data-visible="false">保单号码</th>
+                                <th data-align="left" data-field="instime" data-visible="false">投保期限</th>
+                                <th data-align="left" data-field="attatchNum" data-visible="false">附加个数</th>
+                                <th data-align="left" data-field="payOntime" data-visible="false">缴费准时性</th>
+                                <th data-align="left" data-field="payMode" data-visible="false">缴费方式</th>
+                                <th data-align="left" data-field="insMoney" data-visible="false">年缴保费</th>
+                                <th data-align="left" data-field="payTerm" data-visible="false">已缴期数</th>
+
+                                <th data-align="left" data-field="unitName" data-visible="false">单位全称</th>
+                                <th data-align="left" data-field="unitAddress" data-visible="false">单位地址</th>
+                                <th data-align="left" data-field="unitPhone" data-visible="false">单位电话</th>
+                                <th data-align="left" data-field="postcode" data-visible="false">邮编</th>
+                                <th data-align="left" data-field="department" data-visible="false">部门</th>
+                                <th data-align="left" data-field="duty" data-visible="false">职务</th>
+                                <th data-align="left" data-field="workTime" data-visible="false">现单位工作年限</th>
+                                <th data-align="left" data-field="industry" data-visible="false">所属行业</th>
+                                <th data-align="left" data-field="unitNature" data-visible="false">单位性质</th>
+                                <th data-align="left" data-field="workNature" data-visible="false">工作性质</th>
+                                <th data-align="left" data-field="monthSalary" data-visible="false">月基本薪资</th>
+                                <th data-align="left" data-field="salaryStyle" data-visible="false">薪资方式</th>
+                                <th data-align="left" data-field="payDay" data-visible="false">月发薪日</th>
+                                <th data-align="left" data-field="otherIncome " data-visible="false">其他月收入</th>
+
+                                <th data-align="left" data-field="borrowUse" data-visible="false">借款用途</th>
+                                <th data-align="left" data-field="applyMoney" data-visible="false">您希望申请的金额</th>
+                                <th data-align="left" data-field="weekRepayment" data-visible="false">
+                                    您可接受每周还款额
+                                </th>
+                                <th data-align="left" data-field="applyTime" data-visible="false">申请期限</th>
+
+                                <th data-align="left" data-field="kinshipName" data-visible="false">亲属姓名</th>
+                                <th data-align="left" data-field="kinshipRelation" data-visible="false">亲属关系
+                                </th>
+                                <th data-align="left" data-field="kinshipUnitName" data-visible="false">亲属单位名称
+                                </th>
+                                <th data-align="left" data-field="kinshipPhoneNum" data-visible="false">亲属联系电话
+                                </th>
+                                <th data-align="left" data-field="kinshipAddress" data-visible="false">亲属家庭住址
+                                </th>
+
+                                <th data-align="left" data-field="emergencyName" data-visible="false">紧急联系人姓名
+                                </th>
+                                <th data-align="left" data-field="emergencyRelation" data-visible="false">
+                                    紧急联系人关系
+                                </th>
+                                <th data-align="left" data-field="emergencyUnitName" data-visible="false">
+                                    紧急联系人单位名称
+                                </th>
+                                <th data-align="left" data-field="emergencyPhoneNum" data-visible="false">
+                                    紧急联系人联系电话
+                                </th>
+                                <th data-align="left" data-field="emergencyAddress" data-visible="false">
+                                    紧急联系人家庭住址
+                                </th>
+
+                                <th data-align="left" data-field="colleagueName" data-visible="false">同事姓名</th>
+                                <th data-align="left" data-field="colleagueRelation" data-visible="false">同事关系
+                                </th>
+                                <th data-align="left" data-field="colleagueUnitName" data-visible="false">
+                                    同事单位名称
+                                </th>
+                                <th data-align="left" data-field="colleaguePhoneNum" data-visible="false">
+                                    同事联系电话
+                                </th>
+                                <th data-align="left" data-field="colleagueAddress" data-visible="false">
+                                    同事家庭住址
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">个人信息</div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <div id="toolbar" class="btn-group">
-                                    <button id="plus" type="button" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-                                    </button>
-                                    <button id="edit" type="button" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-                                    </button>
-                                </div>
-                                <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
-                                       data-url="/zc/clientinfo/getAll.do" data-search="true"
-                                       data-show-refresh="true" data-show-toggle="true"
-                                       data-side-pagination="server" data-pagination="true"
-                                       data-show-columns="true" data-sort-order="desc">
-                                    <thead>
-                                    <tr>
-                                        <th data-field="state" data-checkbox="true"></th>
-                                        <th data-align="left" data-field="id" data-sortable="true">id</th>
-                                        <th data-align="left" data-field="guid" data-formatter="actionDetail">详情</th>
-                                        <th data-align="left" data-field="userName">姓名</th>
-                                        <th data-align="left" data-field="userOldname" data-visible="false">曾用名</th>
-                                        <th data-align="left" data-field="userAge">年龄</th>
-                                        <th data-align="left" data-field="userSex">性别</th>
-                                        <th data-align="left" data-field="userEducation" data-visible="false">学历</th>
-                                        <th data-align="left" data-field="userMarriage" data-visible="false">婚姻状况</th>
-                                        <th data-align="left" data-field="useridCard">证件号</th>
-                                        <th data-align="left" data-field="userPhoneNum">手机号</th>
-                                        <th data-align="left" data-field="guid" data-formatter="actionReport">操作</th>
-                                        <th data-align="left" data-field="status" data-formatter="actionStatus">贷款状态</th>
-                                        <th data-align="left" data-field="campusAdmin">录入人员</th>
-                                        <th data-align="left" data-field="updateTime" data-formatter="actionTime" data-visible="false">更新时间</th>
-                                        <th data-align="left" data-field="insertTime" data-formatter="actionTime" data-sortable="true">录入时间</th>
-                                        <th data-align="left" data-field="guid" data-sortable="true">客户ID</th>
-                                        <th data-align="left" data-field="userProvideNum" data-visible="false">供养人数</th>
-                                        <th data-align="left" data-field="userChildrenNum" data-visible="false">子女数目
-                                        </th>
-                                        <th data-align="left" data-field="usercrAdress" data-visible="false">户籍地址</th>
-                                        <th data-align="left" data-field="userHouseState" data-visible="false">房产状况</th>
-                                        <th data-align="left" data-field="userNowAdress" data-visible="false">现住地址</th>              
-                                        <th data-align="left" data-field="userTelNum" data-visible="false">固话</th>
-                                        <th data-align="left" data-field="userWechat" data-visible="false">微信</th>
-                                        <th data-align="left" data-field="userqqNum" data-visible="false">QQ</th>
-                                        <th data-align="left" data-field="userSocialBase" data-visible="false">
-                                            社保基数/公积金基数
-                                        </th>
-                                        <th data-align="left" data-field="userCreditCard" data-visible="false">最高额度信用卡
-                                        </th>
-                                        <th data-align="left" data-field="userPhoneMonad" data-visible="false">
-                                            近六个月的电话详单
-                                        </th>
-                                        <th data-align="left" data-field="userBankOpen" data-visible="false">划账银行卡开户行
-                                        </th>
-
-                                        <th data-align="left" data-field="insCompany" data-visible="false">投保公司</th>
-                                        <th data-align="left" data-field="insNum" data-visible="false">保单号码</th>
-                                        <th data-align="left" data-field="instime" data-visible="false">投保期限</th>
-                                        <th data-align="left" data-field="attatchNum" data-visible="false">附加个数</th>
-                                        <th data-align="left" data-field="payOntime" data-visible="false">缴费准时性</th>
-                                        <th data-align="left" data-field="payMode" data-visible="false">缴费方式</th>
-                                        <th data-align="left" data-field="insMoney" data-visible="false">年缴保费</th>
-                                        <th data-align="left" data-field="payTerm" data-visible="false">已缴期数</th>
-
-                                        <th data-align="left" data-field="unitName" data-visible="false">单位全称</th>
-                                        <th data-align="left" data-field="unitAddress" data-visible="false">单位地址</th>
-                                        <th data-align="left" data-field="unitPhone" data-visible="false">单位电话</th>
-                                        <th data-align="left" data-field="postcode" data-visible="false">邮编</th>
-                                        <th data-align="left" data-field="department" data-visible="false">部门</th>
-                                        <th data-align="left" data-field="duty" data-visible="false">职务</th>
-                                        <th data-align="left" data-field="workTime" data-visible="false">现单位工作年限</th>
-                                        <th data-align="left" data-field="industry" data-visible="false">所属行业</th>
-                                        <th data-align="left" data-field="unitNature" data-visible="false">单位性质</th>
-                                        <th data-align="left" data-field="workNature" data-visible="false">工作性质</th>
-                                        <th data-align="left" data-field="monthSalary" data-visible="false">月基本薪资</th>
-                                        <th data-align="left" data-field="salaryStyle" data-visible="false">薪资方式</th>
-                                        <th data-align="left" data-field="payDay" data-visible="false">月发薪日</th>
-                                        <th data-align="left" data-field="otherIncome " data-visible="false">其他月收入</th>
-
-                                        <th data-align="left" data-field="borrowUse" data-visible="false">贷款用途</th>
-                                        <th data-align="left" data-field="applyMoney" data-visible="false">您希望申请的金额</th>
-                                        <th data-align="left" data-field="weekRepayment" data-visible="false">
-                                            您可接受每周还款额
-                                        </th>
-                                        <th data-align="left" data-field="applyTime" data-visible="false">申请期限</th>
-
-                                        <th data-align="left" data-field="kinshipName" data-visible="false">亲属姓名</th>
-                                        <th data-align="left" data-field="kinshipRelation" data-visible="false">亲属关系
-                                        </th>
-                                        <th data-align="left" data-field="kinshipUnitName" data-visible="false">亲属单位名称
-                                        </th>
-                                        <th data-align="left" data-field="kinshipPhoneNum" data-visible="false">亲属联系电话
-                                        </th>
-                                        <th data-align="left" data-field="kinshipAddress" data-visible="false">亲属家庭住址
-                                        </th>
-
-                                        <th data-align="left" data-field="emergencyName" data-visible="false">紧急联系人姓名
-                                        </th>
-                                        <th data-align="left" data-field="emergencyRelation" data-visible="false">
-                                            紧急联系人关系
-                                        </th>
-                                        <th data-align="left" data-field="emergencyUnitName" data-visible="false">
-                                            紧急联系人单位名称
-                                        </th>
-                                        <th data-align="left" data-field="emergencyPhoneNum" data-visible="false">
-                                            紧急联系人联系电话
-                                        </th>
-                                        <th data-align="left" data-field="emergencyAddress" data-visible="false">
-                                            紧急联系人家庭住址
-                                        </th>
-
-                                        <th data-align="left" data-field="colleagueName" data-visible="false">同事姓名</th>
-                                        <th data-align="left" data-field="colleagueRelation" data-visible="false">同事关系
-                                        </th>
-                                        <th data-align="left" data-field="colleagueUnitName" data-visible="false">
-                                            同事单位名称
-                                        </th>
-                                        <th data-align="left" data-field="colleaguePhoneNum" data-visible="false">
-                                            同事联系电话
-                                        </th>
-                                        <th data-align="left" data-field="colleagueAddress" data-visible="false">
-                                            同事家庭住址
-                                        </th>
-
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 </div>
@@ -413,35 +266,32 @@
 
 <script type="text/javascript">
 
-	$.get("loan/overdueRepayment.do", {
-		}, function(text) {
-			var obj = $.parseJSON(text);
-			var all=obj.all;
-			var count=obj.count;
-  			$("#message").html(count);
-  			$("#message2").html(count);
-  			$("#message3").html((count/all)*100+"%");
-  			$(".progress-bar-danger").width((count/all)*100+"%");
-		});
+    $.get("loan/overdueRepayment.do", {}, function (text) {
+        var obj = $.parseJSON(text);
+        var all = obj.all;
+        var count = obj.count;
+        $("#message").html(count);
+        $("#message2").html(count);
+        $("#message3").html((count / all) * 100 + "%");
+        $(".progress-bar-danger").width((count / all) * 100 + "%");
+    });
 
-	$.get("loan/needRepayment.do", {
-	}, function(text) {
-		var obj = $.parseJSON(text);
-		var all=obj.all;
-		var count=obj.count;
-			$("#progress").html((count/all)*100+"%");
-			$(".progress-bar-info").width((count/all)*100+"%");
-	});
-	
-	$.get("loan/successRepayment.do", {
-	}, function(text) {
-		var obj = $.parseJSON(text);
-		var all=obj.all;
-		var count=obj.count;
-			$("#success").html((count/all)*100+"%");
-			$(".progress-bar-success").width((count/all)*100+"%");
-	});
-	
+    $.get("loan/needRepayment.do", {}, function (text) {
+        var obj = $.parseJSON(text);
+        var all = obj.all;
+        var count = obj.count;
+        $("#progress").html((count / all) * 100 + "%");
+        $(".progress-bar-info").width((count / all) * 100 + "%");
+    });
+
+    $.get("loan/successRepayment.do", {}, function (text) {
+        var obj = $.parseJSON(text);
+        var all = obj.all;
+        var count = obj.count;
+        $("#success").html((count / all) * 100 + "%");
+        $(".progress-bar-success").width((count / all) * 100 + "%");
+    });
+
     $(function () {
         $('#userinfo-form').bootstrapValidator({
             message: 'This value is not valid',
@@ -496,8 +346,8 @@
                     alert("输入错误");
                 } else {
                     var id = obj.id;
-                    window.location.href = "UserQuery.html?username=" + username+
-                    		"&useridCard="+useridCard;
+                    window.location.href = "UserQuery.html?username=" + username +
+                        "&useridCard=" + useridCard;
                 }
             }
         });
@@ -527,7 +377,7 @@
 <div class="modal fade" id="loanDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">新增贷款办理</div>
+            <div class="modal-header">新增借款办理</div>
             <div class="modal-body">
 
                 <form class="form-horizontal" id="product-form">
@@ -547,7 +397,7 @@
 
                             </div>
                         </div>
-                         
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">身份证</label>
                             <div class="col-sm-10">
@@ -555,7 +405,7 @@
                                        placeholder="备注信息">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">手机号码</label>
                             <div class="col-sm-10">
@@ -563,7 +413,7 @@
                                        placeholder="备注信息">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">客户ID</label>
                             <div class="col-sm-10">
@@ -571,62 +421,60 @@
                                        placeholder="备注信息">
                             </div>
                         </div>
-                        
+
                         <div class="modal-header">
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">产品详情</label>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">本金</label>
+                            <label class="col-sm-2 control-label">金额</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="money" readonly="readonly"
-                                       placeholder="本金">
+                                <input type="text" class="form-control" id="money" placeholder="借款金额">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">每期偿还本金</label>
+                            <label class="col-sm-2 control-label">产品周期</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="stage" readonly="readonly"
-                                       placeholder="每期偿还本金">
+                                <input type="text" class="form-control" id="stage" readonly="readonly">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">每期利息</label>
+                            <label class="col-sm-2 control-label">每期服务费</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="interes" readonly="readonly"
-                                       placeholder="每期利息">
+                                       placeholder="每期服务费">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">期数</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nper" readonly="readonly"
-                                       placeholder="期数">
+                                <input type="text" class="form-control" id="nper" placeholder="期数">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">每期天数</label>
+                            <label class="col-sm-2 control-label">还款类型</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cycle" readonly="readonly"
-                                       placeholder="每期天数">
+                                <select class="form-control" id="repayStatus" onchange="select()">
+                                    <option>先息后本</option>
+                                    <option>等额本息</option>
+                                </select>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">还款总额</label>
+                            <label class="col-sm-2 control-label">产品创建日期</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="should_repay" readonly="readonly"
-                                       placeholder="还款总额">
+                                <input type="text" class="form-control" id="should_repay" readonly="readonly">
                             </div>
                         </div>
-                        
+
                     </div>
                 </form>
                 <div class="modal-footer">
@@ -638,13 +486,18 @@
     </div>
 </div>
 
-
+<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
 <script type="text/javascript">
-	
-	$.post("loan/upOverdueRepayment.do", { //更新逾期状态
-		}, function(text) {
-		
-	 });
+    var permission = 0;
+    if (permission == 0) {
+        $('#delete').hide();
+    } else if (permission == 0) {
+        $('#delete').show();
+    }
+    $.post("loan/upOverdueRepayment.do", { //更新逾期状态
+    }, function (text) {
+
+    });
 
     function getcookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
@@ -660,82 +513,83 @@
         $("#userhide").hide();
     }
 
-    function select(){
-    	var objS = document.getElementById("interest");
-    	var pro_GUID = objS.options[objS.selectedIndex].value;
-    	
-    	$.get("loan/getProduct.do",
-				function(text) {
-					var json = $.parseJSON(text);
-					for ( var i = 0; i < json.length; i++) {
-						if(pro_GUID==json[i].pro_GUID){
-							$("#money").val(json[i].money);
-							$("#stage").val(json[i].stage);
-							$("#interes").val(json[i].interest);
-							$("#nper").val(json[i].nper);
-							$("#cycle").val(json[i].cycle);
-							$("#should_repay").val(json[i].should_repay);
-						}
-					}
-		});
-    	
+    function select() {
+        var objS = document.getElementById("interest");
+        var pro_GUID = objS.options[objS.selectedIndex].value;
+
+        $.get("loan/getProduct.do",
+            function (text) {
+                var json = $.parseJSON(text);
+                for (var i = 0; i < json.length; i++) {
+                    if (pro_GUID == json[i].pro_GUID) {
+                        $("#money").val(json[i].money);
+                        $("#stage").val(json[i].stage);
+                        $("#interes").val(json[i].interest);
+                        $("#nper").val(json[i].nper);
+                        $("#cycle").val(json[i].cycle);
+                        $("#should_repay").val(json[i].should_repay);
+                    }
+                }
+            });
+
     }
-    
-    function commitDataButton(){
-    	var username = $('#addName').val().toString();
+
+    function commitDataButton() {
+        var username = $('#addName').val().toString();
         var pro_GUID = $('#interest').val().toString();
         var useridCard = $('#idCard').val().toString();
         var userPhoneNum = $('#phoneNum').val().toString();
-        var GUID =  $('#GUID').val().toString();
-        
-        var loanDeal=new Object();
-        
-        loanDeal.username=username;
-        loanDeal.pro_GUID=pro_GUID;
-        loanDeal.useridCard=useridCard;
-        loanDeal.userPhoneNum=userPhoneNum;
-        loanDeal.GUID=GUID;
+        var GUID = $('#GUID').val().toString();
 
-        
-    	var loanDealData=JSON.stringify(loanDeal);
-    	
+        var loanDeal = new Object();
+
+        loanDeal.username = username;
+        loanDeal.pro_GUID = pro_GUID;
+        loanDeal.useridCard = useridCard;
+        loanDeal.userPhoneNum = userPhoneNum;
+        loanDeal.GUID = GUID;
+
+
+        var loanDealData = JSON.stringify(loanDeal);
+
         $.post("loan/insertLoanDeal.do", {
-        	loanDealData : loanDealData
-    	}, function(text) {
-              if(text==1){
-            	  alert("添加成功");
-            	  
-            	  var url="/zc/clientinfo/getAll.do";
+            loanDealData: loanDealData
+        }, function (text) {
+            if (text == 1) {
+                alert("添加成功");
 
-            	  $('#loanDialog').modal("hide");
-            	  
-    		       $(" #table").bootstrapTable('refresh',{
-    				 url : url
-    			   });
-    		        
-              }else{
-            	  alert("添加失败");
-              }
-    	});
+                var url = "/zc/clientinfo/getAll.do";
+
+                $('#loanDialog').modal("hide");
+
+                $(" #table").bootstrapTable('refresh', {
+                    url: url
+                });
+
+            } else {
+                alert("添加失败");
+            }
+        });
     }
-    
-    
-    function actionStatus(value, row, index){
-    	if (value == "0"){
-    		return "<span>未贷款</span>";
-    	}else if (value == "1") {
-    		return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
-    	}else if(value=="2"){
-    		return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
-    	}else if(value=="3"){
-    		return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
-    	}
+
+
+    function actionStatus(value, row, index) {
+        if (value == "0") {
+            return "<span>未借款</span>";
+        } else if (value == "1") {
+            return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
+        } else if (value == "2") {
+            return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
+        } else if (value == "3") {
+            return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
+        }
     }
-    
+
+
     function actionDetail(value, row, index) {
         return [
             '<a  href="javascript:void(0)" onclick="detail(this);" title="点击查看用户详情">',
-            '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
+            value,
             '</a>'].join('');
     }
 
@@ -758,19 +612,18 @@
             '</a>'].join('');
     }
     */
-    
+
     function actionReport(value, row, index) {
         return [
             // '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
             // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             // '</a>&nbsp;',
             '<button type="button" title="点击查看征信报告" onclick="report(this);" class="btn btn-primary">征信报告</button>&nbsp;',
-            '<button type="button" title="点击新增贷款业务" onclick="loanModel(this);" class="btn btn-success">办理贷款</button>&nbsp;',
-            '<button type="button" title="点击办理还款业务" onclick="repayment(this);" class="btn btn-danger">办理还款</button>'
+            '<button type="button" title="点击上传图片" onclick="" class="btn btn-success">上传图片</button>&nbsp;'
         ].join('');
     }
-    
-    
+
+
     function report(temp) {
         var hang = $(temp.parentNode).parent().prevAll().length + 1;  //jquery获取td所在的行和列
         //var lie = $(temp.parentNode).prevAll().length+1;
@@ -779,60 +632,60 @@
         var val = document.getElementById("table").rows[hang].cells[6]; //取得所在列的值
         var useridCard = val.innerHTML;
         val = document.getElementById("table").rows[hang].cells[3]; //取得所在列的值
-        var userName=val.innerHTML;
+        var userName = val.innerHTML;
         val = document.getElementById("table").rows[hang].cells[7]; //取得所在列的值
-        var userPhoneNum=val.innerHTML;
+        var userPhoneNum = val.innerHTML;
 
-        window.location.href = "mobileReportList.html?useridCard=" + useridCard+
-        		"&userName="+userName+"&userPhoneNum="+userPhoneNum;
+        window.location.href = "mobileReportList.html?useridCard=" + useridCard +
+            "&userName=" + userName + "&userPhoneNum=" + userPhoneNum;
     }
-    
-    function loanModel(temp){
+
+    function loanModel(temp) {
         var hang = $(temp.parentNode).parent().prevAll().length + 1;
-        var username =document.getElementById("table").rows[hang].cells[3].innerHTML;
-        var useridCard =document.getElementById("table").rows[hang].cells[6].innerHTML; 
-        var userPhoneNum =document.getElementById("table").rows[hang].cells[7].innerHTML;
-        
+        var username = document.getElementById("table").rows[hang].cells[3].innerHTML;
+        var useridCard = document.getElementById("table").rows[hang].cells[6].innerHTML;
+        var userPhoneNum = document.getElementById("table").rows[hang].cells[7].innerHTML;
+
         var obj = document.getElementById("interest");
-        
+
         var val = document.getElementById("table").rows[hang].cells[12]; //取得所在列的值
         var GUID = val.innerHTML;
-        
-        
+
+
         $.get("loan/getProduct.do",
-				function(text) {
-					obj.options.length = 0;//清楚modal的数据
-					var json = $.parseJSON(text);
-					for ( var i = 0; i < json.length; i++) {
-						
-						var option = document.createElement("option");
-					  	option.innerHTML=json[i].proName;
-					  	option.setAttribute("value",json[i].pro_GUID);
-					  	obj.options.add(option);
-						
-						/*
-						obj.options
-						.add(new Option(
-							json[i].proName,
-							json[i].pro_GUID));
-						*/
-					}
-		});
-        
+            function (text) {
+                obj.options.length = 0;//清楚modal的数据
+                var json = $.parseJSON(text);
+                for (var i = 0; i < json.length; i++) {
+
+                    var option = document.createElement("option");
+                    option.innerHTML = json[i].proName;
+                    option.setAttribute("value", json[i].pro_GUID);
+                    obj.options.add(option);
+
+                    /*
+                    obj.options
+                    .add(new Option(
+                        json[i].proName,
+                        json[i].pro_GUID));
+                    */
+                }
+            });
+
         $('#loanDialog').modal("show");
         $('#addName').val(username);
         $('#idCard').val(useridCard);
         $('#phoneNum').val(userPhoneNum);
         $('#GUID').val(GUID);
     }
-    
-    function repayment(temp){
+
+    function repayment(temp) {
         var hang = $(temp.parentNode).parent().prevAll().length + 1;
-        var guid =document.getElementById("table").rows[hang].cells[12].innerHTML;
-        window.location.href = "allRepayment.html?guid="+guid;
+        var guid = document.getElementById("table").rows[hang].cells[12].innerHTML;
+        window.location.href = "allRepayment.html?guid=" + guid;
     }
-    
-    
+
+
     $('#plus').click(function () {
         window.location.href = "AddInfo.html";
     });
@@ -863,16 +716,16 @@
     });
 
 
-    function actionTime(value, row, index){
-	    var date = new Date(value); 
-	    Y = date.getFullYear() + '-';
-	    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-	    D = date.getDate() + ' ';
-	    h = date.getHours() + ':';
-	    m = date.getMinutes() + ':';
-	    s = date.getSeconds(); 
-		return Y+M+D+h+m+s;
-	}
+    function actionTime(value, row, index) {
+        var date = new Date(value);
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y + M + D + h + m + s;
+    }
 
 </script>
 </body>
