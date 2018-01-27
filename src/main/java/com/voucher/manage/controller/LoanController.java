@@ -93,16 +93,8 @@ public class LoanController {
 			
 			productInfo.setProName(jsonObject.getString("name"));
 			productInfo.setPro_GUID(uuid.toString());
-			productInfo.setMoney(jsonObject.getDouble("money"));
-			productInfo.setNper(jsonObject.getInt("nper"));
-			productInfo.setCycle(jsonObject.getInt("cycle"));
+			productInfo.setRepay_type(jsonObject.getDouble("repay_type"));
 			productInfo.setInterest(jsonObject.getDouble("interest"));
-
-			Double stage=jsonObject.getDouble("money")/jsonObject.getInt("nper");
-			Double should_repay=jsonObject.getDouble("money")+jsonObject.getInt("nper")*jsonObject.getDouble("interest");
-			
-			productInfo.setStage(stage);
-			productInfo.setShould_repay(should_repay);
 			
 			Date date=new Date();
 			
@@ -167,9 +159,11 @@ public class LoanController {
 		  String pro_GUID;
 		  Double money; //本金
 		  Double interest; //利息
-		  int nper;   //期数
-		  int cycle;  //周期长度
-		  
+		  int nper = 0;   //期数
+		  int cycle = 0;  //周期长度
+		  Double stage; //每期本金
+		  Double should_repay;//全部应还金额
+		  Double nper_interest;//每期应还金额
 		  LoanDeal loanDeal=new LoanDeal();
 		  Repayment repayment=new Repayment();
 		  
@@ -200,11 +194,15 @@ public class LoanController {
 			  searchMap.put("[ProductInfo].pro_GUID=", pro_GUID);
 			  List list=(List) loanDao.getAllProduct(1, 0, null, null, searchMap).get("rows");
 			  productInfo=(ProductInfo) list.get(0);
-			  
-			  money=productInfo.getMoney();
-			  interest=productInfo.getInterest();
-			  
+
 			  GUID=jsonObject.getString("GUID");
+			  money=jsonObject.getDouble("money");
+			  nper=jsonObject.getInt("nper");
+			  cycle=jsonObject.getInt("cycle");
+			  stage=money/nper;
+			  interest=money*productInfo.getInterest()/10000;
+			  should_repay=money+nper*cycle*interest;
+			  nper_interest=cycle*interest;
 			  
 			  loanDeal.setGUID(jsonObject.getString("GUID"));
 			  loanDeal.setUserName(jsonObject.getString("username"));
@@ -213,13 +211,14 @@ public class LoanController {
 			  loanDeal.setPro_GUID(pro_GUID);
 			  loanDeal.setProName(productInfo.getProName());
 			  loanDeal.setMoney(money);
-			  loanDeal.setStage(productInfo.getStage());
+			  loanDeal.setStage(stage);
 			  loanDeal.setInterest(interest);
-			  loanDeal.setNper(productInfo.getNper());
-			  loanDeal.setCycle(productInfo.getCycle());
-			  loanDeal.setShould_repay(productInfo.getShould_repay());
+			  loanDeal.setNper(nper);
+			  loanDeal.setCycle(cycle);
+			  loanDeal.setShould_repay(should_repay);
 			  loanDeal.setDatetime(date);
 			  loanDeal.setStatus(2);
+			  loanDeal.setRemark(jsonObject.getString("remark"));
 			  
 			  repayment.setGUID(jsonObject.getString("GUID"));
 			  repayment.setUserName(jsonObject.getString("username"));
@@ -228,8 +227,10 @@ public class LoanController {
 			  repayment.setPro_GUID(pro_GUID);
 			  repayment.setProName(productInfo.getProName());
 			  repayment.setMoney(money);
-			  repayment.setStage(productInfo.getStage());
+			  repayment.setStage(stage);
 			  repayment.setInterest(interest);
+			  repayment.setCycle(cycle);
+			  repayment.setNper_interest(nper_interest);
 			  repayment.setDatetime(date);
 			  repayment.setStatus(2);
 			  
@@ -238,14 +239,11 @@ public class LoanController {
 		    e.printStackTrace();
 		  }
 		  
-		  nper=productInfo.getNper();
-		  cycle=productInfo.getCycle();
 		  
 		  int status=0;
 		  int i=0;
 		  
-		  System.out.println("nper="+nper+"        cycle="+cycle);
-		  
+
 		  for(;i<nper;i++){			  
 			  
 			  shouldtime=calendar.getTime();

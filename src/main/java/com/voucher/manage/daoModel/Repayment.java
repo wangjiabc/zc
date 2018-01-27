@@ -47,6 +47,12 @@ public class Repayment implements Serializable{
     @SQLDouble(name="interest")
 	private Double interest;
 
+    @SQLInteger(name="cycle")
+	private Integer cycle;
+
+    @SQLDouble(name="nper_interest")
+	private Double nper_interest;
+
     @SQLDouble(name="repay")
 	private Double repay;
 
@@ -162,6 +168,22 @@ public class Repayment implements Serializable{
 
 	public Double getInterest(){
 		return interest;
+	}
+
+	public void setCycle(Integer cycle){
+		this.cycle = cycle;
+	}
+
+	public Integer getCycle(){
+		return cycle;
+	}
+
+	public void setNper_interest(Double nper_interest){
+		this.nper_interest = nper_interest;
+	}
+
+	public Double getNper_interest(){
+		return nper_interest;
 	}
 
 	public void setRepay(Double repay){

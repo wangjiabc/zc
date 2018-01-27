@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>用户管理</title>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles1.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <style>
+        #flot-placeholder{
+            width: 745px;
+            height: 362px;
+        }
+        #flot-placeholder1{
+            width: 745px;
+            height: 362px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1 class="page-header">财务统计</h1>
+</div>
+<div id="page-inner">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    放款金额
+                </div>
+                <div class="panel-body">
+                    <div id="flot-placeholder1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    合同金额
+                </div>
+                <div class="panel-body">
+                    <div id="flot-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery Js -->
+<script src="assets/js/jquery-1.10.2.js"></script>
+<script src="js/jquery.flot.min.js"></script>
+<script src="js/jquery.flot.pie.js"></script>
+<script>
+    var data = [
+        { label: "签约合同金额",  data: 70},
+        { label: "剩余合同金额",  data: 30},
+    ];
+    var data1 = [
+        { label: "实际放款金额",  data: 70},
+        { label: "剩余本金",  data: 30},
+    ];
+
+    $.plot($("#flot-placeholder1"), data1, {
+        series: {
+            pie: {
+                show: true,
+                radius: 1, //半径
+                label: {
+                    show: true,
+                    radius: 2/3,
+                    formatter: function(label, series){
+                        return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
+                    },
+                    threshold: 0.03  //这个值小于0.03，也就是3%时，label就会隐藏
+                }
+            }
+        }
+    });
+    $.plot($("#flot-placeholder"), data, {
+        series: {
+            pie: {
+                show: true,
+                radius: 1, //半径
+                label: {
+                    show: true,
+                    radius: 2/3,
+                    formatter: function(label, series){
+                        return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
+                    },
+                    threshold: 0.03  //这个值小于0.03，也就是3%时，label就会隐藏
+                }
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="" name="description"/>
     <meta content="webthemez" name="author"/>
-    <title>中泸财务</title>
+    <title>中财财务</title>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet"
           href="assets/bootstrap-table/bootstrap-table.css">
@@ -39,9 +39,9 @@
     <link href="assets/css/font-awesome.css" rel="stylesheet"/>
     <link href="assets/css/checkbox3.min.css" rel="stylesheet">
     <!-- Morris Chart Styles-->
-    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+
     <!-- Custom Styles-->
-    <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <link href="assets/css/custom-styles1.css" rel="stylesheet"/>
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
@@ -49,199 +49,150 @@
 </head>
 
 <body>
-<div id="wrapper">
-    <nav class="navbar navbar-default top-navbar" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中泸财务</strong></a>
-        </div>
-
-        <ul class="nav navbar-top-links navbar-right">
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                 <li><a href="/zc/updateUser.html"><i class="fa fa-sign-out fa-fw"></i> 密码设置</a>
-                    </li>
-                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        </ul>
-    </nav>
-    <!--/. NAV TOP  -->
-    <nav class="navbar-default navbar-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav" id="main-menu">
-                <li>
-                    <a href="#"><i class="fa fa-sitemap"></i> 客户信息<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="Main.html">客户列表信息</a>
-                        </li>
-                        <li>
-                            <a href="AddInfo.html">添加客户信息</a>
-                        </li>
-                        <li id="userhide">
-                            <a href="user.html">员工管理信息</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- /. NAV SIDE  -->
-    <div id="page-wrapper">
-        <!-- /. PAGE WRAPPER  -->
-        <div class="header">
-            <h1 class="page-header">客户列表信息</h1>
-        </div>
+<section class="content">
+    <div class="header">
+        <h1 class="page-header">客户列表信息</h1>
+    </div>
 
 
-        <div id="page-inner">
-  
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">个人信息</div>
-                            </div>
+    <div id="page-inner">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="card-title">
+                            <div class="title">个人信息</div>
                         </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
-                                        data-search="true"
-                                       data-show-refresh="true" data-show-toggle="true"
-                                       data-side-pagination="server" data-pagination="true"
-                                       data-show-columns="true" data-sort-order="desc">
-                                    <thead>
-                                    <tr>
-                                        <th data-field="state" data-checkbox="true"></th>
-                                        <th data-align="left" data-field="id" data-sortable="true">id</th>
-                                        <th data-align="left" data-field="guid" data-formatter="actionDetail">详情</th>
-                                        <th data-align="left" data-field="userName">姓名</th>
-                                        <th data-align="left" data-field="userOldname" data-visible="false">曾用名</th>
-                                        <th data-align="left" data-field="userAge">年龄</th>
-                                        <th data-align="left" data-field="userSex">性别</th>
-                                        <th data-align="left" data-field="userEducation" data-visible="false">学历</th>
-                                        <th data-align="left" data-field="userMarriage" data-visible="false">婚姻状况</th>
-                                        <th data-align="left" data-field="useridCard">证件号</th>
-                                        <th data-align="left" data-field="guid" data-formatter="actionReport">征信报告</th>
-                                        <th data-align="left" data-field="campusAdmin">录入人员</th>
-                                        <th data-align="left" data-field="updateTime" data-formatter="actionTime" data-visible="false">更新时间</th>
-                                        <th data-align="left" data-field="insertTime" data-formatter="actionTime" data-sortable="true">录入时间</th>
-                                        <th data-align="left" data-field="userProvideNum" data-visible="false">供养人数</th>
-                                        <th data-align="left" data-field="userChildrenNum" data-visible="false">子女数目
-                                        </th>
-                                        <th data-align="left" data-field="usercrAdress" data-visible="false">户籍地址</th>
-                                        <th data-align="left" data-field="userHouseState" data-visible="false">房产状况</th>
-                                        <th data-align="left" data-field="userNowAdress" data-visible="false">现住地址</th>              
-                                        <th data-align="left" data-field="userTelNum" data-visible="false">固话</th>
-                                        <th data-align="left" data-field="userWechat" data-visible="false">微信</th>
-                                        <th data-align="left" data-field="userqqNum" data-visible="false">QQ</th>
-                                        <th data-align="left" data-field="userSocialBase" data-visible="false">
-                                            社保基数/公积金基数
-                                        </th>
-                                        <th data-align="left" data-field="userCreditCard" data-visible="false">最高额度信用卡
-                                        </th>
-                                        <th data-align="left" data-field="userPhoneMonad" data-visible="false">
-                                            近六个月的电话详单
-                                        </th>
-                                        <th data-align="left" data-field="userBankOpen" data-visible="false">划账银行卡开户行
-                                        </th>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
+                                   data-search="true"
+                                   data-show-refresh="true" data-show-toggle="true"
+                                   data-side-pagination="server" data-pagination="true"
+                                   data-show-columns="true" data-sort-order="desc">
+                                <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-align="left" data-field="id" data-sortable="true">id</th>
+                                    <th data-align="left" data-field="guid" data-formatter="actionDetail">详情</th>
+                                    <th data-align="left" data-field="userName">姓名</th>
+                                    <th data-align="left" data-field="userOldname" data-visible="false">曾用名</th>
+                                    <th data-align="left" data-field="userAge">年龄</th>
+                                    <th data-align="left" data-field="userSex">性别</th>
+                                    <th data-align="left" data-field="userEducation" data-visible="false">学历</th>
+                                    <th data-align="left" data-field="userMarriage" data-visible="false">婚姻状况</th>
+                                    <th data-align="left" data-field="useridCard">证件号</th>
+                                    <th data-align="left" data-field="guid" data-formatter="actionReport">征信报告</th>
+                                    <th data-align="left" data-field="campusAdmin">录入人员</th>
+                                    <th data-align="left" data-field="updateTime" data-formatter="actionTime"
+                                        data-visible="false">更新时间
+                                    </th>
+                                    <th data-align="left" data-field="insertTime" data-formatter="actionTime"
+                                        data-sortable="true">录入时间
+                                    </th>
+                                    <th data-align="left" data-field="userProvideNum" data-visible="false">供养人数</th>
+                                    <th data-align="left" data-field="userChildrenNum" data-visible="false">子女数目
+                                    </th>
+                                    <th data-align="left" data-field="usercrAdress" data-visible="false">户籍地址</th>
+                                    <th data-align="left" data-field="userHouseState" data-visible="false">房产状况</th>
+                                    <th data-align="left" data-field="userNowAdress" data-visible="false">现住地址</th>
+                                    <th data-align="left" data-field="userTelNum" data-visible="false">固话</th>
+                                    <th data-align="left" data-field="userWechat" data-visible="false">微信</th>
+                                    <th data-align="left" data-field="userqqNum" data-visible="false">QQ</th>
+                                    <th data-align="left" data-field="userSocialBase" data-visible="false">
+                                        社保基数/公积金基数
+                                    </th>
+                                    <th data-align="left" data-field="userCreditCard" data-visible="false">最高额度信用卡
+                                    </th>
+                                    <th data-align="left" data-field="userPhoneMonad" data-visible="false">
+                                        近六个月的电话详单
+                                    </th>
+                                    <th data-align="left" data-field="userBankOpen" data-visible="false">划账银行卡开户行
+                                    </th>
 
-                                        <th data-align="left" data-field="insCompany" data-visible="false">投保公司</th>
-                                        <th data-align="left" data-field="insNum" data-visible="false">保单号码</th>
-                                        <th data-align="left" data-field="instime" data-visible="false">投保期限</th>
-                                        <th data-align="left" data-field="attatchNum" data-visible="false">附加个数</th>
-                                        <th data-align="left" data-field="payOntime" data-visible="false">缴费准时性</th>
-                                        <th data-align="left" data-field="payMode" data-visible="false">缴费方式</th>
-                                        <th data-align="left" data-field="insMoney" data-visible="false">年缴保费</th>
-                                        <th data-align="left" data-field="payTerm" data-visible="false">已缴期数</th>
+                                    <th data-align="left" data-field="insCompany" data-visible="false">投保公司</th>
+                                    <th data-align="left" data-field="insNum" data-visible="false">保单号码</th>
+                                    <th data-align="left" data-field="instime" data-visible="false">投保期限</th>
+                                    <th data-align="left" data-field="attatchNum" data-visible="false">附加个数</th>
+                                    <th data-align="left" data-field="payOntime" data-visible="false">缴费准时性</th>
+                                    <th data-align="left" data-field="payMode" data-visible="false">缴费方式</th>
+                                    <th data-align="left" data-field="insMoney" data-visible="false">年缴保费</th>
+                                    <th data-align="left" data-field="payTerm" data-visible="false">已缴期数</th>
 
-                                        <th data-align="left" data-field="unitName" data-visible="false">单位全称</th>
-                                        <th data-align="left" data-field="unitAddress" data-visible="false">单位地址</th>
-                                        <th data-align="left" data-field="unitPhone" data-visible="false">单位电话</th>
-                                        <th data-align="left" data-field="postcode" data-visible="false">邮编</th>
-                                        <th data-align="left" data-field="department" data-visible="false">部门</th>
-                                        <th data-align="left" data-field="duty" data-visible="false">职务</th>
-                                        <th data-align="left" data-field="workTime" data-visible="false">现单位工作年限</th>
-                                        <th data-align="left" data-field="industry" data-visible="false">所属行业</th>
-                                        <th data-align="left" data-field="unitNature" data-visible="false">单位性质</th>
-                                        <th data-align="left" data-field="workNature" data-visible="false">工作性质</th>
-                                        <th data-align="left" data-field="monthSalary" data-visible="false">月基本薪资</th>
-                                        <th data-align="left" data-field="salaryStyle" data-visible="false">薪资方式</th>
-                                        <th data-align="left" data-field="payDay" data-visible="false">月发薪日</th>
-                                        <th data-align="left" data-field="otherIncome " data-visible="false">其他月收入</th>
+                                    <th data-align="left" data-field="unitName" data-visible="false">单位全称</th>
+                                    <th data-align="left" data-field="unitAddress" data-visible="false">单位地址</th>
+                                    <th data-align="left" data-field="unitPhone" data-visible="false">单位电话</th>
+                                    <th data-align="left" data-field="postcode" data-visible="false">邮编</th>
+                                    <th data-align="left" data-field="department" data-visible="false">部门</th>
+                                    <th data-align="left" data-field="duty" data-visible="false">职务</th>
+                                    <th data-align="left" data-field="workTime" data-visible="false">现单位工作年限</th>
+                                    <th data-align="left" data-field="industry" data-visible="false">所属行业</th>
+                                    <th data-align="left" data-field="unitNature" data-visible="false">单位性质</th>
+                                    <th data-align="left" data-field="workNature" data-visible="false">工作性质</th>
+                                    <th data-align="left" data-field="monthSalary" data-visible="false">月基本薪资</th>
+                                    <th data-align="left" data-field="salaryStyle" data-visible="false">薪资方式</th>
+                                    <th data-align="left" data-field="payDay" data-visible="false">月发薪日</th>
+                                    <th data-align="left" data-field="otherIncome " data-visible="false">其他月收入</th>
 
-                                        <th data-align="left" data-field="borrowUse" data-visible="false">贷款用途</th>
-                                        <th data-align="left" data-field="applyMoney" data-visible="false">您希望申请的金额</th>
-                                        <th data-align="left" data-field="weekRepayment" data-visible="false">
-                                            您可接受每周还款额
-                                        </th>
-                                        <th data-align="left" data-field="applyTime" data-visible="false">申请期限</th>
+                                    <th data-align="left" data-field="borrowUse" data-visible="false">借款用途</th>
+                                    <th data-align="left" data-field="applyMoney" data-visible="false">您希望申请的金额</th>
+                                    <th data-align="left" data-field="weekRepayment" data-visible="false">
+                                        您可接受每周还款额
+                                    </th>
+                                    <th data-align="left" data-field="applyTime" data-visible="false">申请期限</th>
 
-                                        <th data-align="left" data-field="kinshipName" data-visible="false">亲属姓名</th>
-                                        <th data-align="left" data-field="kinshipRelation" data-visible="false">亲属关系
-                                        </th>
-                                        <th data-align="left" data-field="kinshipUnitName" data-visible="false">亲属单位名称
-                                        </th>
-                                        <th data-align="left" data-field="kinshipPhoneNum" data-visible="false">亲属联系电话
-                                        </th>
-                                        <th data-align="left" data-field="kinshipAddress" data-visible="false">亲属家庭住址
-                                        </th>
+                                    <th data-align="left" data-field="kinshipName" data-visible="false">亲属姓名</th>
+                                    <th data-align="left" data-field="kinshipRelation" data-visible="false">亲属关系
+                                    </th>
+                                    <th data-align="left" data-field="kinshipUnitName" data-visible="false">亲属单位名称
+                                    </th>
+                                    <th data-align="left" data-field="kinshipPhoneNum" data-visible="false">亲属联系电话
+                                    </th>
+                                    <th data-align="left" data-field="kinshipAddress" data-visible="false">亲属家庭住址
+                                    </th>
 
-                                        <th data-align="left" data-field="emergencyName" data-visible="false">紧急联系人姓名
-                                        </th>
-                                        <th data-align="left" data-field="emergencyRelation" data-visible="false">
-                                            紧急联系人关系
-                                        </th>
-                                        <th data-align="left" data-field="emergencyUnitName" data-visible="false">
-                                            紧急联系人单位名称
-                                        </th>
-                                        <th data-align="left" data-field="emergencyPhoneNum" data-visible="false">
-                                            紧急联系人联系电话
-                                        </th>
-                                        <th data-align="left" data-field="emergencyAddress" data-visible="false">
-                                            紧急联系人家庭住址
-                                        </th>
+                                    <th data-align="left" data-field="emergencyName" data-visible="false">紧急联系人姓名
+                                    </th>
+                                    <th data-align="left" data-field="emergencyRelation" data-visible="false">
+                                        紧急联系人关系
+                                    </th>
+                                    <th data-align="left" data-field="emergencyUnitName" data-visible="false">
+                                        紧急联系人单位名称
+                                    </th>
+                                    <th data-align="left" data-field="emergencyPhoneNum" data-visible="false">
+                                        紧急联系人联系电话
+                                    </th>
+                                    <th data-align="left" data-field="emergencyAddress" data-visible="false">
+                                        紧急联系人家庭住址
+                                    </th>
 
-                                        <th data-align="left" data-field="colleagueName" data-visible="false">同事姓名</th>
-                                        <th data-align="left" data-field="colleagueRelation" data-visible="false">同事关系
-                                        </th>
-                                        <th data-align="left" data-field="colleagueUnitName" data-visible="false">
-                                            同事单位名称
-                                        </th>
-                                        <th data-align="left" data-field="colleaguePhoneNum" data-visible="false">
-                                            同事联系电话
-                                        </th>
-                                        <th data-align="left" data-field="colleagueAddress" data-visible="false">
-                                            同事家庭住址
-                                        </th>
+                                    <th data-align="left" data-field="colleagueName" data-visible="false">同事姓名</th>
+                                    <th data-align="left" data-field="colleagueRelation" data-visible="false">同事关系
+                                    </th>
+                                    <th data-align="left" data-field="colleagueUnitName" data-visible="false">
+                                        同事单位名称
+                                    </th>
+                                    <th data-align="left" data-field="colleaguePhoneNum" data-visible="false">
+                                        同事联系电话
+                                    </th>
+                                    <th data-align="left" data-field="colleagueAddress" data-visible="false">
+                                        同事家庭住址
+                                    </th>
 
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
     </div>
-</div>
+</section>
 
 
 <!-- Bootstrap Js -->
@@ -268,21 +219,21 @@
 
 <script type="text/javascript">
 
-function getQueryString(key){
-    var reg = new RegExp("(^|&)"+key+"=([^&]*)(&|$)");
-    var result = window.location.search.substr(1).match(reg);
-    return result?decodeURIComponent(result[2]):null;
-  }
+    function getQueryString(key) {
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        var result = window.location.search.substr(1).match(reg);
+        return result ? decodeURIComponent(result[2]) : null;
+    }
 
-  var useridCard=getQueryString("useridCard");
-  var userName=getQueryString("username");
+    var useridCard = getQueryString("useridCard");
+    var userName = getQueryString("username");
 
-  var url="/zc/clientinfo/getAllQuery.do?useridCard="+useridCard+"&username="+userName;
+    var url = "/zc/clientinfo/getAllQuery.do?useridCard=" + useridCard + "&username=" + userName;
 
-  $("#table").bootstrapTable({
- 	url : url
-  });
-  
+    $("#table").bootstrapTable({
+        url: url
+    });
+
     $(function () {
         $('#userinfo-form').bootstrapValidator({
             message: 'This value is not valid',
@@ -346,7 +297,6 @@ function getQueryString(key){
 </script>
 
 
-
 <script type="text/javascript">
 
     function getcookie(name) {
@@ -381,14 +331,14 @@ function getQueryString(key){
         window.location.href = "UserDetail.html?id=" + id;
     }
 
-    
+
     function actionReport(value, row, index) {
         return [
             '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
             '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             '</a>'].join('');
     }
-    
+
     function report(temp) {
         var hang = $(temp.parentNode).parent().prevAll().length + 1;  //jquery获取td所在的行和列
         //var lie = $(temp.parentNode).prevAll().length+1;
@@ -397,25 +347,25 @@ function getQueryString(key){
         var val = document.getElementById("table").rows[hang].cells[6]; //取得所在列的值
         var useridCard = val.innerHTML;
         val = document.getElementById("table").rows[hang].cells[3]; //取得所在列的值
-        var userName=val.innerHTML;
+        var userName = val.innerHTML;
         val = document.getElementById("table").rows[hang].cells[7]; //取得所在列的值
-        var userPhoneNum=val.innerHTML;
+        var userPhoneNum = val.innerHTML;
 
-        window.location.href = "mobileReportList.html?useridCard=" + useridCard+
-        		"&userName="+userName+"&userPhoneNum="+userPhoneNum;
+        window.location.href = "mobileReportList.html?useridCard=" + useridCard +
+            "&userName=" + userName + "&userPhoneNum=" + userPhoneNum;
     }
-    
 
-    function actionTime(value, row, index){
-	    var date = new Date(value); 
-	    Y = date.getFullYear() + '-';
-	    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-	    D = date.getDate() + ' ';
-	    h = date.getHours() + ':';
-	    m = date.getMinutes() + ':';
-	    s = date.getSeconds(); 
-		return Y+M+D+h+m+s;
-	}
+
+    function actionTime(value, row, index) {
+        var date = new Date(value);
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y + M + D + h + m + s;
+    }
 
 </script>
 </body>

@@ -50,7 +50,7 @@
 
 <body>
         <div class="header">
-            <h1 class="page-header">已拒绝借款客户信息管理</h1>
+            <h1 class="page-header">未审核借款客户信息管理</h1>
         </div>
 
 
@@ -58,54 +58,6 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">查询</div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="userinfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-3 control-label">姓名</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="username"
-                                                   id="username" placeholder="填入姓名">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-3 control-label">身份证</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="useridCard" id="useridCard"
-                                                   placeholder="填入身份证号">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-3 control-label">手机号</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="userPhoneNum"
-                                                   id="userPhoneNum"
-                                                   placeholder="填入手机号">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-sm-3">
-                                        <button type="button" id="queryUser" class="btn btn-success">查询</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">个人信息</div>
-                            </div>
-                        </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <div id="toolbar" class="btn-group">
@@ -125,8 +77,8 @@
                                     <tr>
                                         <th data-field="state" data-checkbox="true"></th>
                                         <th data-align="left" data-field="id" data-sortable="true">id</th>
-                                        <th data-align="left" data-field="guid" data-formatter="actionDetail">详情</th>
-                                        <th data-align="left" data-field="userName">姓名</th>
+                                        <th data-align="left" data-field="userName" data-formatter="actionDetail">姓名</th>
+                                        <th data-align="left" data-field="status" data-formatter="actionStatus">借款状态</th>
                                         <th data-align="left" data-field="userOldname" data-visible="false">曾用名</th>
                                         <th data-align="left" data-field="userAge">年龄</th>
                                         <th data-align="left" data-field="userSex">性别</th>
@@ -239,111 +191,6 @@
         </div>
 
 
-<!-- Bootstrap Js -->
-<script src="assets/js/bootstrap.min.js"></script>
-<!-- Metis Menu Js -->
-<script src="assets/js/jquery.metisMenu.js"></script>
-<!-- Custom Js -->
-<script src="assets/js/custom-scripts.js"></script>
-<script src="assets/js/select2.full.min.js"></script>
-<!-- DATA TABLE SCRIPTS -->
-<script src="assets/js/dataTables/jquery.dataTables.js"></script>
-<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-<script src="assets/js/form-validator/form-validator.js"></script>
-<!-- Bootstrap Js -->
-<script src="assets/js/bootstrap.min.js"></script>
-<!-- Metis Menu Js -->
-<script src="assets/js/jquery.metisMenu.js"></script>
-<!-- Custom Js -->
-<script src="assets/js/custom-scripts.js"></script>
-<script src="assets/js/select2.full.min.js"></script>
-<!-- DATA TABLE SCRIPTS -->
-<script src="assets/js/dataTables/jquery.dataTables.js"></script>
-<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-
-<script type="text/javascript">
-    $(function () {
-        $('#userinfo-form').bootstrapValidator({
-            message: 'This value is not valid',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                username: {
-                    message: '验证失败',
-                    validators: {
-                        notEmpty: {
-                            message: '请填入信息'
-                        }
-                    }
-                },
-                useridCard: {
-                    message: '验证失败',
-                    validators: {
-                        notEmpty: {
-                            message: '请填入信息'
-                        }
-                    }
-                }
-            }
-        })
-    })
-
-    $('#queryUser').click(function () {
-        $('#userinfo-form').bootstrapValidator('validate');
-        if ($('#userinfo-form').bootstrapValidator('validate') == false) {
-            return;
-        }
-
-        var username = $("#username").val().toString();
-        var userPhoneNum = $("#userPhoneNum").val().toString();
-        var useridCard = $("#useridCard").val().toString();
-
-        $.ajax({
-            type: "get",
-            url: "clientinfo/getQuery.do",
-            data: {
-                username: username,
-                userPhoneNum: userPhoneNum,
-                useridCard: useridCard
-            },
-            success: function (data) {
-                var obj = $.parseJSON(data);
-                var state = obj.state;
-                if (state == "false") {
-                    alert("输入错误");
-                } else {
-                    var id = obj.id;
-                    window.location.href = "UserQuery.html?username=" + username+
-                    		"&useridCard="+useridCard;
-                }
-            }
-        });
-    });
-
-</script>
-
-<!-- 警告对话框 -->
-<div class="modal fade" id="alertdialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header blue">
-                <div>
-                    <strong id="alertchar" style="font-size:20px"></strong>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" id="commitFoodDataButton" class="btn btn-primary">确定</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <div class="modal fade" id="loanDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -359,15 +206,7 @@
                                        placeholder="客户名称">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">办理产品</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="interest" onchange="select()">
-                                </select>
-
-                            </div>
-                        </div>
-
+                       
                         <div class="form-group">
                             <label class="col-sm-2 control-label">身份证</label>
                             <div class="col-sm-10">
@@ -391,14 +230,24 @@
                                        placeholder="备注信息">
                             </div>
                         </div>
-
-                        <div class="modal-header">
+						
+						<div class="form-group">
+                            <label class="col-sm-2 control-label">办理产品</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="interest" onchange="select()">
+                                </select>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">产品详情</label>
+												
+						<div class="modal-header">
+                        </div>												 
+						
+						<div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
                         </div>
-
+						
+						
+						
                         <div class="form-group">
                             <label class="col-sm-2 control-label">金额</label>
                             <div class="col-sm-10">
@@ -409,47 +258,103 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">产品周期</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="stage" readonly="readonly">
+                                <select class="form-control" id="cycle" onchange="selectCycle()">
+                                </select>
+                            </div>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">期数</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="nper" onchange="selectNper()">
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">每期服务费</label>
+                            <label class="col-sm-2 control-label">服务费</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="interes" readonly="readonly"
                                        placeholder="每期服务费">
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">期数</label>
+                        
+                       <div class="form-group">
+                            <label class="col-sm-2 control-label">每期服务费</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nper" placeholder="期数">
+                                <input type="text" class="form-control" id="countRepay" readonly="readonly"
+                                       placeholder="每期服务费">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">总还款额</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="countAllRepay" readonly="readonly"
+                                       placeholder="每期服务费">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-2 control-label">还款类型</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="repayStatus" onchange="select()">
-                                    <option>先息后本</option>
-                                    <option>等额本息</option>
-                                </select>
+                                <input type="text" class="form-control" id="repayType" readonly="readonly" placeholder="期数">
                             </div>
                         </div>
-
+                                               
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">产品创建日期</label>
+                            <label class="col-sm-2 control-label">备注</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="should_repay" readonly="readonly">
+                                <input type="text" class="form-control" id="remark" placeholder="填写备注">
                             </div>
                         </div>
 
                     </div>
                 </form>
                 <div class="modal-footer">
+                    <button type="button" onclick="refuseButton();" class="btn btn-danger">拒 绝</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
-                    <button type="button" onclick="commitDataButton();" class="btn btn-primary">添 加</button>
+                    <button type="button" onclick="commitDataButton();" class="btn btn-success">确 定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Js -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script src="assets/js/custom-scripts.js"></script>
+<script src="assets/js/select2.full.min.js"></script>
+<!-- DATA TABLE SCRIPTS -->
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script src="assets/js/form-validator/form-validator.js"></script>
+<!-- Bootstrap Js -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script src="assets/js/custom-scripts.js"></script>
+<script src="assets/js/select2.full.min.js"></script>
+<!-- DATA TABLE SCRIPTS -->
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+
+<!-- 警告对话框 -->
+<div class="modal fade" id="alertdialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header blue">
+                <div>
+                    <strong id="alertchar" style="font-size:20px"></strong>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="commitFoodDataButton" class="btn btn-primary">确定</button>
                 </div>
             </div>
         </div>
@@ -458,11 +363,22 @@
 
 
 <script type="text/javascript">
+  $.ajaxSetup({  
+    async : false  
+   });
+  
+	var idx=0;
+	var default_pro_GUID;
+	var repayType;
 	
-	$.post("loan/upOverdueRepayment.do", { //更新逾期状态
-		}, function(text) {
-		
-	 });
+	for (i = 1; i <= 30; i++) {
+    	$("#cycle").append("<option value='" + i + "'>" + i + " 天</option>");
+	}
+
+	for (i = 1; i <= 50; i++) {
+    	$("#nper").append("<option value='" + i + "'>" + i + "</option>");
+	}
+	
 
     function getcookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
@@ -478,12 +394,62 @@
         $("#userhide").hide();
     }
 
+    function select() {
+        var objS = document.getElementById("interest");
+        var pro_GUID = objS.options[objS.selectedIndex].value;
+
+        $.get("loan/getProduct.do",
+            function (text) {
+                var json = $.parseJSON(text);
+                for (var i = 0; i < json.length; i++) {
+                    if (pro_GUID == json[i].pro_GUID) {
+                        $("#interes").val(json[i].interest+"元(每万元每天)");
+                        repayType=json[i].repay_type;
+                        if(json[i].repay_type==0){
+                        	$("#repayType").val("等额本息");
+                        }else{
+                        	$("#repayType").val("先息后本");
+                        }
+                    }
+                }
+            });
+
+        idx=objS.selectedIndex;
+        countRepay();
+    }
+    
+    function selectCycle(){
+    	countRepay();
+    }
+    
+    function selectNper(){
+    	countRepay();
+    }
+    
+    $("#money").blur(function(){
+    	countRepay();
+    });
+    
     function commitDataButton(){
     	var username = $('#addName').val().toString();
         var pro_GUID = $('#interest').val().toString();
         var useridCard = $('#idCard').val().toString();
         var userPhoneNum = $('#phoneNum').val().toString();
         var GUID =  $('#GUID').val().toString();
+        var money=parseInt($("#money").val().toString());
+        var nper=parseInt($("#nper").val().toString());
+        var cycle=parseInt($("#cycle").val().toString());
+        var remark=$('#remark').val().toString();
+        
+        if($("#money").val().toString()==null||$("#money").val().toString()==""){
+    		alert("金额不能空!");
+    		return;
+    	}
+
+    	if(!(/^[0-9]*$/.test(money))){
+	    	alert("金额格式有问题,检查后重新输入。");
+	    	return;
+	    }
         
         var loanDeal=new Object();
         
@@ -492,8 +458,11 @@
         loanDeal.useridCard=useridCard;
         loanDeal.userPhoneNum=userPhoneNum;
         loanDeal.GUID=GUID;
-
-        
+        loanDeal.money=money;
+        loanDeal.nper=nper
+        loanDeal.cycle=cycle;
+        loanDeal.remark=remark;
+       
     	var loanDealData=JSON.stringify(loanDeal);
     	
         $.post("loan/insertLoanDeal.do", {
@@ -514,14 +483,9 @@
             	  alert("添加失败");
               }
     	});
+
     }
     
-    function actionDetail(value, row, index) {
-        return [
-            '<a  href="javascript:void(0)" onclick="detail(this);" title="点击查看用户详情">',
-            '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
-            '</a>'].join('');
-    }
 
     function detail(temp) {
         var hang = $(temp.parentNode).parent().prevAll().length + 1;  //jquery获取td所在的行和列
@@ -549,7 +513,7 @@
             // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             // '</a>&nbsp;',
             '<button type="button" title="点击查看征信报告" onclick="report(this);" class="btn btn-primary">征信报告</button>&nbsp;',
-            '<button type="button" title="点击通过客户" onclick="loanModel(this);" class="btn btn-success">通 过</button>&nbsp;'
+            '<button type="button" title="点击新增借款业务" onclick="loanModel(this);" class="btn btn-success">办理借款</button>&nbsp;'
         ].join('');
     }
     
@@ -570,9 +534,14 @@
         		"&userName="+userName+"&userPhoneNum="+userPhoneNum;
     }
     
+    //js去掉所有html标记的函数
+    function delHtmlTag(str){
+          return str.replace(/<[^>]+>/g,"");//去掉所有的html标记
+    }
+    
     function loanModel(temp){
         var hang = $(temp.parentNode).parent().prevAll().length + 1;
-        var username =document.getElementById("table").rows[hang].cells[3].innerHTML;
+        var username =delHtmlTag(document.getElementById("table").rows[hang].cells[2].innerHTML);
         var useridCard =document.getElementById("table").rows[hang].cells[6].innerHTML; 
         var userPhoneNum =document.getElementById("table").rows[hang].cells[7].innerHTML;
         
@@ -580,6 +549,7 @@
         
         var val = document.getElementById("table").rows[hang].cells[11]; //取得所在列的值
         var GUID = val.innerHTML;
+        
         
         
         $.get("loan/getProduct.do",
@@ -591,6 +561,9 @@
 						.add(new Option(
 							json[i].proName,
 							json[i].pro_GUID));
+						if(i==idx){
+							default_pro_GUID=json[i].pro_GUID;
+						}
 					}
 		});
         
@@ -599,7 +572,28 @@
         $('#idCard').val(useridCard);
         $('#phoneNum').val(userPhoneNum);
         $('#GUID').val(GUID);
+        
+        
+        $.get("loan/getProduct.do",
+                function (text) {
+        			console.log(idx);
+           		    console.log("default_pro_GUID="+default_pro_GUID);
+                    var json = $.parseJSON(text);
+                    for (var i = 0; i < json.length; i++) {
+                        if (default_pro_GUID == json[i].pro_GUID) {
+                            $("#interes").val(json[i].interest+"元(每万元每天)");  
+                            repayType=json[i].repay_type;
+                            if(json[i].repay_type==0){
+                            	$("#repayType").val("等额本息");
+                            }else{
+                            	$("#repayType").val("先息后本");
+                            }
+                        }
+                    }
+                });
+         
     }
+    
     function repayment(temp){
         var hang = $(temp.parentNode).parent().prevAll().length + 1;
         var username =document.getElementById("table").rows[hang].cells[3].innerHTML;
@@ -648,6 +642,43 @@
 		return Y+M+D+h+m+s;
 	}
 
+    function countRepay(){
+    	var money=parseInt($("#money").val());
+    	var interest=parseInt($("#interes").val());
+    	var nper=parseInt($("#nper").val());
+    	var cycle=parseInt($("#cycle").val());
+
+    	if(repayType==0){
+    		var countRepay=money/nper+money*interest*cycle/10000;
+    		var countAllRepat=money+money*interest*cycle*nper/10000;
+    	}else if(repayType==1){
+    		var countRepay=interest*cycle*money/10000;
+        	var countAllRepat=money+money*interest*cycle*nper/10000;
+    	}
+    	$("#countRepay").val(countRepay);
+    	$("#countAllRepay").val(countAllRepat);
+    	
+    }
+    
+    function actionDetail(value, row, index) {
+        return [
+            '<a  href="javascript:void(0)" onclick="detail(this);" title="点击查看用户详情">',
+            value,
+            '</a>'].join('');
+    }
+    
+    function actionStatus(value, row, index) {
+        if (value == "0") {
+            return "<span>未借款</span>";
+        } else if (value == "1") {
+            return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
+        } else if (value == "2") {
+            return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
+        } else if (value == "3") {
+            return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
+        }
+    }
+    
 </script>
 </body>
 

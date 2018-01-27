@@ -68,6 +68,9 @@ public class LoanDeal implements Serializable{
     @SQLInteger(name="status")
 	private Integer status;
 
+    @SQLString(name="remark")
+	private String remark;
+
 	public void setId(Integer id){
 		this.id = id;
 	}
@@ -218,6 +221,14 @@ public class LoanDeal implements Serializable{
 
 	public Integer getStatus(){
 		return status;
+	}
+
+	public void setRemark(String remark){
+		this.remark = remark;
+	}
+
+	public String getRemark(){
+		return remark;
 	}
 
 

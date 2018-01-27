@@ -1,23 +1,256 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta charset="UTF-8">
-<title>中泸财务</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>中财财务</title>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Morris Chart Styles-->
+
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
 </head>
+<style>
+    /*.content-wrapper{*/
+        /*position: relative;*/
+    /*}*/
+    .frame-box{
+        width: 100%;
+        position:absolute;
+        left:0px;
+        top:0px;
+        bottom:0px;
+        height:100%;
+        background-color: rgb(237, 237, 237);
+        /*overflow-y: scroll;*/
+    }
+
+    .cursss {
+        background:#00a65a;
+        color:#ffffff;
+
+    }
+</style>
+
 <body>
-<p>Hello,World</p>
-<div id="a"></div>
-</body>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" >
-$.post("/zc/clientinfo/getAll.do", {
-	limit:1000,
-	offset:0,
-	sort:null,
-	order:null,
-	search:null
-  },function(text){
-     $("#a").text(text);
-});
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="Main.html"><strong><i class="icon fa fa-plane"></i>中财财务</strong></a>
+
+            <div id="sideNav" href="">
+                <i class="fa fa-bars icon"></i>
+            </div>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-tasks">
+                    <li>
+                        <a href="successRepayment.html">
+                            <div>
+                                <p>
+                                    <strong>已完成</strong>
+                                    <span class="pull-right text-muted" id="">60%</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="needRepayment.html">
+                            <div>
+                                <p>
+                                    <strong>正常还款</strong>
+                                    <span class="pull-right text-muted" id="progress">28%</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="overdueRepayment.html">
+                            <div>
+                                <p>
+                                    <strong>已逾期</strong>
+                                    <span class="pull-right text-muted" id="message3">85%</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                </ul>
+                <!-- /.dropdown-tasks -->
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i><span class="nav-counter"
+                                                                                           id="message2"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="overdueRepayment.html">
+                            <div>
+                                <i class="fa fa-envelope fa-fw"></i> 逾期消息
+                                <span class="pull-right text-muted small" id="message"></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-alerts -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="/zc/updateUser.html"><i class="fa fa-lock fa-fw"></i> 密码设置</a>
+                    </li>
+                    <li><a href="/zc/user/logout.do"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="#"><i class="fa fa-user"></i> 客户信息<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="Main.html" target="mainIframe">客户列表信息</a>
+                        </li>
+                        <li>
+                            <a href="AddInfo.html" target="mainIframe">添加客户信息</a>
+                        </li>
+                        <li>
+                            <a href="genjinList.html" target="mainIframe">客户跟进</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 借款管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="passLoanDeal.html" target="mainIframe">已 通 过</a></li>
+                        <li><a href="notLoanDeal.html" target="mainIframe">已 拒 绝</a></li>
+                        <li><a href="notAudit.html" target="mainIframe">未 审 核</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 还款管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="todayRepayment.html" target="mainIframe">今日须还款</a></li>
+                        <li><a href="todayRepayment.html" target="mainIframe">明日须还款</a></li>
+                        <li><a href="todayRepayment.html" target="mainIframe">所有贷款客户</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 逾期管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="yuqiList.html" target="mainIframe">逾期客户</a></li>
+                        <li><a href="shangmenList.html" target="mainIframe">上门客户</a></li>
+                        <li><a href="huaizhangList.html" target="mainIframe">坏账客户</a></li>
+                    </ul>
+                </li>
+                <li><a href="statistical.html" target="mainIframe"><i class="fa fa-sitemap"></i>财务统计</a></li>
+                <li id="userhide">
+                    <a href="#"><i class="fa fa-sitemap"></i> 系统设置<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="admin/user.html"  target="mainIframe">员工管理信息</a></li>
+                        <li><a href="admin/ProductSet.html"  target="mainIframe"></i> 产 品 设 置</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /. NAV SIDE  -->
+
+    <div id="page-wrapper" style="height:auto">
+                <div class="frame-box" style="background-color: rgb(237, 237, 237);">
+                <!-- 中间页面内容 -->
+        <iframe id="mainIframe" name="mainIframe" frameborder="0" src="Main.html" marginwidth="0" scrolling="auto" seamless="" width="100%" onload="setIframeHeight(this)"></iframe>
+                </div>
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<script>
+    function setIframeHeight(iframe) {
+        if (iframe) {
+            iframe.height = 0;
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            var mm = iframeWin.document.documentElement.scrollHeight;
+
+            if (iframeWin.document.body) {
+                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                var o = document.getElementById('page-wrapper');//获得元素
+                o.style.height = mm + 'px';
+            }
+        }
+    };
+
 </script>
+    <!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="assets/js/jquery-2.1.4.js"></script>
+<!-- Bootstrap Js -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.metisMenu.js"></script>
+
+<script src="assets/js/easypiechart.js"></script>
+<script src="assets/js/easypiechart-data.js"></script>
+
+<script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+
+<!-- Custom Js -->
+<script src="assets/js/custom-scripts.js"></script>
+
+
+<!-- Chart Js -->
+<script type="text/javascript" src="assets/js/chart.min.js"></script>
+<script type="text/javascript" src="assets/js/chartjs.js"></script>
+
+</body>
+
 </html>

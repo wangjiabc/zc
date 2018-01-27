@@ -46,11 +46,38 @@
 <body>
 <section class="content">
     <div class="header">
-        <h1 class="page-header">还款管理</h1>
+        <h1 class="page-header">坏账客户管理</h1>
     </div>
-
-
     <div id="page-inner">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="card-title">
+                            <div class="title">查询</div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" id="userinfo-form">
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label class="col-sm-3 control-label">姓名</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="username"
+                                               id="username" placeholder="填入姓名">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-3">
+                                    <button type="button" id="queryUser" class="btn btn-success">查 询</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default">
@@ -59,28 +86,26 @@
                             <div id="toolbar" class="btn-group">
                             </div>
                             <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
-                                   data-url="" data-search="true"
+                                   data-url="loan/getAllRepayment.do?search2=2" data-search="true"
                                    data-show-refresh="true" data-show-toggle="true"
                                    data-side-pagination="server" data-pagination="true"
                                    data-show-columns="true" data-sort-order="desc">
                                 <thead>
                                 <tr>
-                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="state" data-checkbox="true">选择</th>
                                     <th data-align="left" data-field="id">id</th>
-                                    <th data-align="left" data-field="loan_GUID">借款ID</th>
-                                    <th data-align="left" data-field="proName">产品名称</th>
                                     <th data-align="left" data-field="userName">姓名</th>
-                                    <th data-align="left" data-field="useridCard">身份证</th>
-                                    <th data-align="left" data-field="userPhoneNum">手机号</th>
-                                    <th data-align="left" data-field="campusAdmin">借款人员</th>
+                                    <th data-align="left" data-field="borrowMoney">借款金额</th>
+                                    <th data-align="left" data-field="nper">期数</th>
+                                    <th data-align="left" data-field="principal">实还本金</th>
+                                    <th data-align="left" data-field="fee">实还服务费</th>
+                                    <th data-align="left" data-field="yuqiMoney">逾期金额</th>
+                                    <th data-align="left" data-field="returnMoney">实还金额</th>
+                                    <th data-align="left" data-field="salesman">业务人员</th>
+                                    <th data-align="left" data-field="genjin">跟进(次)</th>
+                                    <th data-align="left" data-field="repaytime" data-formatter="actionTime">借款日期</th>
+                                    <th data-align="left" data-field="status" data-formatter="actionStatus">状态</th>
                                     <th data-align="left" data-field="guid" data-formatter="actionReport">操作</th>
-                                    <th data-align="left" data-field="money">应还本金</th>
-                                    <th data-align="left" data-field="interest">应还服务费</th>
-                                    <th data-align="left" data-field="shouldtime" data-formatter="actionTime">还款开始日期
-                                    </th>
-                                    <th data-align="left" data-field="repaytime" data-formatter="actionTime">还款结束日期</th>
-                                    <th data-align="left" data-field="datetime" data-formatter="actionTime">申请日期</th>
-                                    <th data-align="left" data-field="status" data-formatter="actionStatus">借款状态</th>
 
                                 </tr>
                                 </thead>
@@ -90,12 +115,37 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </section>
 <script type="text/javascript">
 
+    $('#queryUser').click(function () {
+        $('#userinfo-form').bootstrapValidator('validate');
+        if ($('#userinfo-form').bootstrapValidator('validate') == false) {
+            return;
+        }
+
+        var username = $("#username").val().toString();
+
+        $.ajax({
+            type: "get",
+            url: "clientinfo/getQuery.do",
+            data: {
+                username: username
+            },
+            success: function (data) {
+                var obj = $.parseJSON(data);
+                var state = obj.state;
+                if (state == "false") {
+                    alert("输入错误");
+                } else {
+                    var id = obj.id;
+                    window.location.href = "UserQuery.html?username=" + username +
+                        "&useridCard=" + useridCard;
+                }
+            }
+        });
+    });
 
 </script>
 <!-- 删除对话框 -->
@@ -130,7 +180,67 @@
         </div>
     </div>
 </div>
+<!--还款对话框-->
+<div class="modal fade" id="loanDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">还 款</div>
+            <div class="modal-body">
 
+                <form class="form-horizontal" id="product-form">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客户名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="addName" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">每期金额</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="repayMoney" readonly="readonly">
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">截止日期</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="date1" readonly="readonly">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">还款日期</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="repayDate">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">逾期额</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="yuqiMoney">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+                            <div class="col-sm-10">
+                                <input type="textarea" class="form-control" id="note">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button type="button" onclick="commitDataButton();" class="btn btn-danger">还 款</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     function getcookie(name) {
@@ -146,52 +256,6 @@
     if (type != 0) {
         $("#userhide").hide();
     }
-
-    function getQueryString(key) {
-        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
-        var result = window.location.search.substr(1).match(reg);
-        return result ? decodeURIComponent(result[2]) : null;
-    }
-
-    var loan_GUID = getQueryString("loan_GUID");
-
-    var url = "loan/getAllRepayment.do?search4=" + loan_GUID;
-
-    $(" #table").bootstrapTable({
-        url: url
-    });
-
-    $('#queryUser').click(function () {
-        $('#userinfo-form').bootstrapValidator('validate');
-        if ($('#userinfo-form').bootstrapValidator('validate') == false) {
-            return;
-        }
-
-        var username = $("#username").val().toString();
-        var userPhoneNum = $("#userPhoneNum").val().toString();
-        var useridCard = $("#useridCard").val().toString();
-
-        $.ajax({
-            type: "get",
-            url: "clientinfo/getQuery.do",
-            data: {
-                username: username,
-                userPhoneNum: userPhoneNum,
-                useridCard: useridCard
-            },
-            success: function (data) {
-                var obj = $.parseJSON(data);
-                var state = obj.state;
-                if (state == "false") {
-                    alert("输入错误");
-                } else {
-                    var id = obj.id;
-                    window.location.href = "UserQuery.html?username=" + username +
-                        "&useridCard=" + useridCard;
-                }
-            }
-        });
-    });
 
     function actionStatus(value, row, index) {
         if (value == "0") {
@@ -210,7 +274,8 @@
             // '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
             // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             // '</a>&nbsp;',
-            '<button type="button" title="还款" onclick="repayment(this);" class="btn btn-danger">还款</button>'
+            '<button type="button" title="还款" onclick="repayment(this);" class="btn btn-danger">还 款</button>&nbsp;',
+            '<button type="button" title="设置逾期客户" onclick="" class="btn btn-primary">恢复正常</button>'
         ].join('');
     }
 
@@ -229,7 +294,7 @@
             if (text == 1) {
                 alert("操作成功!");
                 $("#table").bootstrapTable('refresh', {
-                    url: url
+                    url: "loan/getAllRepayment.do?search2=2"
                 });
             } else {
                 alert("操作失败!");

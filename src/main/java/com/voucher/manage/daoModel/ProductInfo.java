@@ -20,23 +20,11 @@ public class ProductInfo implements Serializable{
     @SQLString(name="proName")
 	private String proName;
 
-    @SQLDouble(name="money")
-	private Double money;
-
-    @SQLInteger(name="nper")
-	private Integer nper;
-
-    @SQLInteger(name="cycle")
-	private Integer cycle;
-
-    @SQLDouble(name="stage")
-	private Double stage;
+    @SQLDouble(name="repay_type")
+	private Double repay_type;
 
     @SQLDouble(name="interest")
 	private Double interest;
-
-    @SQLDouble(name="should_repay")
-	private Double should_repay;
 
     @SQLDateTime(name="datetime")
 	private Date datetime;
@@ -65,36 +53,12 @@ public class ProductInfo implements Serializable{
 		return proName;
 	}
 
-	public void setMoney(Double money){
-		this.money = money;
+	public void setRepay_type(Double repay_type){
+		this.repay_type = repay_type;
 	}
 
-	public Double getMoney(){
-		return money;
-	}
-
-	public void setNper(Integer nper){
-		this.nper = nper;
-	}
-
-	public Integer getNper(){
-		return nper;
-	}
-
-	public void setCycle(Integer cycle){
-		this.cycle = cycle;
-	}
-
-	public Integer getCycle(){
-		return cycle;
-	}
-
-	public void setStage(Double stage){
-		this.stage = stage;
-	}
-
-	public Double getStage(){
-		return stage;
+	public Double getRepay_type(){
+		return repay_type;
 	}
 
 	public void setInterest(Double interest){
@@ -103,14 +67,6 @@ public class ProductInfo implements Serializable{
 
 	public Double getInterest(){
 		return interest;
-	}
-
-	public void setShould_repay(Double should_repay){
-		this.should_repay = should_repay;
-	}
-
-	public Double getShould_repay(){
-		return should_repay;
 	}
 
 	public void setDatetime(Date datetime){
