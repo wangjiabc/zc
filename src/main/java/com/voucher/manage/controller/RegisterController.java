@@ -194,6 +194,8 @@ public class RegisterController {
 		   return map;
 	   }
 	   
+	   regtlx=regtlx.toLowerCase();
+	   
 	   if(!regtlx.equals(verifyCode)){
 		   map.put("data", "regtlx_error");   //验证码错误
 		   verifyCode=null;
