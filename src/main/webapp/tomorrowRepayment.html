@@ -208,7 +208,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">               
+            <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
                 <button type="button" onclick="repayment();" class="btn btn-danger">还 款</button>
             </div>
@@ -216,84 +216,17 @@
     </div>
 </div>
 
-
-<!--提前还款对话框-->
-<div class="modal fade" id="advanceDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- 逾期对话框 -->
+<div class="modal fade" id="yuqidialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">还 款</div>
+            <div class="modal-header">警 告</div>
             <div class="modal-body">
-
-                <form class="form-horizontal">
-                    <div class="row">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">客户名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="userName2" readonly="readonly">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">应还金额</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="repay2" readonly="readonly">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">借款ID</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="loan_GUID2" readonly="readonly">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">开始日期</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="shouldtime2" readonly="readonly">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">截止日期</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="repaytime2" readonly="readonly">
-                            </div>
-                        </div>
-						<!--  
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">还款日期</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="repayDate">
-                            </div>
-                        </div>
-						-->
-						
-						<div class="form-group">
-                            <label class="col-sm-2 control-label">借款状态</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="type2" readonly="readonly">
-                            </div>
-                        </div>
-						
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">提前还款金额</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="advance">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">备注</label>
-                            <div class="col-sm-10">
-                                <input type="textarea" class="form-control" id="remark2">
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                <span>是否设置为逾期客户</span>
             </div>
-            <div class="modal-footer">               
+            <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
-                <button type="button" onclick="advancerepayment();" class="btn btn-danger">还 款</button>
+                <button type="button" id="" class="btn btn-primary">确 定</button>
             </div>
         </div>
     </div>
@@ -314,15 +247,7 @@
         $("#userhide").hide();
     }
 
-    function getQueryString(key) {
-        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
-        var result = window.location.search.substr(1).match(reg);
-        return result ? decodeURIComponent(result[2]) : null;
-    }
-
-    var loan_GUID = getQueryString("loan_GUID");
-
-    var url = "loan/getAllRepayment.do?search4=" + loan_GUID;
+    var url = "repay/getTomorrowRepayment.do";
 
     $(" #table").bootstrapTable({
         url: url
@@ -379,13 +304,16 @@
             // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             // '</a>&nbsp;',
             	'<button type="button" title="还款" onclick="showdialog(this);" class="btn btn-danger">还款</button>',
-            	'<button type="button" title="提前还款" onclick="advanceDialog(this);" class="btn btn-warning">提前还款</button>'
+                '<button type="button" title="设置逾期客户" onclick="yuqi(this)" class="btn btn-warning">设置逾期客户</button>'
         	].join('');
     	}else{
     		return '<button type="button"  title="已完成" class="btn btn-success">已完成</button>';
     	}
     }
 
+    function yuqi(temp){
+        $('#yuqidialog').modal("show");
+    }
 
   //js去掉所有html标记的函数
     function delHtmlTag(str){
@@ -421,7 +349,6 @@
         var repay=$("#repay").val();
         var overdue=$("#overdue").val();
         var remark=$("#remark").val();
-        var adRepay=0;
         
         $.post("loan/updateRepayment.do", {
             loan_GUID: loan_GUID,
@@ -445,58 +372,6 @@
 
     }
 
-    function advanceDialog(temp){
-    	var hang = $(temp.parentNode).parent().prevAll().length + 1;
-        var loan_GUID = document.getElementById("table").rows[hang].cells[2].innerHTML;
-        var shouldtime = document.getElementById("table").rows[hang].cells[11].innerHTML;
-        var repaytime = document.getElementById("table").rows[hang].cells[12].innerHTML;
-        var userName=document.getElementById("table").rows[hang].cells[4].innerHTML;
-        var type=document.getElementById("table").rows[hang].cells[14].innerHTML;
-        var stage=document.getElementById("table").rows[hang].cells[9].innerHTML;
-        var nper_interest=document.getElementById("table").rows[hang].cells[10].innerHTML;
-        var repay=parseFloat(stage)+parseFloat(nper_interest);
-        
-        $("#userName2").val(userName);
-        $("#repayMoney2").val(repay);
-        $("#loan_GUID2").val(loan_GUID);
-        $("#repay2").val(repay);
-        $("#shouldtime2").val(shouldtime);
-        $("#repaytime2").val(repaytime);
-        $("#type2").val(delHtmlTag(type));
-        
-    	$('#advanceDialog').modal("show");
-    }
-    
-    function advancerepayment(temp) {
-        var loan_GUID = $("#loan_GUID2").val();
-        var shouldtime = $("#shouldtime2").val();
-        var repaytime = $("#repaytime2").val();
-        var repay=$("#repay2").val();
-        var advance=$("#advance").val();
-        var remark=$("#remark2").val();
-        
-        $.post("repay/updateRepayment.do", {
-            loan_GUID: loan_GUID,
-            shouldtime: shouldtime,
-            repaytime: repaytime,
-            repay:repay,
-            advance: advance,
-            remark: remark
-        }, function (text) {
-            if (text == 1) {
-            	$('#advanceDialog').modal("hide");
-                alert("操作成功!");               
-                $("#table").bootstrapTable('refresh', {
-                    url: url
-                });
-            } else {
-            	$('#advanceDialog').modal("hide");
-                alert("操作失败!");
-            }
-        });
-
-    }
-    
     function actionTime(value, row, index) {
         var date = new Date(value);
         Y = date.getFullYear() + '-';

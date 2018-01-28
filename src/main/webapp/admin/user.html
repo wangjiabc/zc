@@ -89,6 +89,56 @@
         </div>
     </div>
 </section>
+<!--员工修改对话框-->
+<div class="modal fade" id="loanDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">员工修改</div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" id="product-form">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">员工名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">手机号</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="phoneNum">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">家庭住址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="address">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">权限修改</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="permission">
+                                    <option>领导</option>
+                                    <option>业务员</option>
+                                    <option>安全人员</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" onclick="" class="btn btn-danger">修 改</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 
     var campusId=1;

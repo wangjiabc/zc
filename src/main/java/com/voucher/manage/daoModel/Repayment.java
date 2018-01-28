@@ -56,6 +56,12 @@ public class Repayment implements Serializable{
     @SQLDouble(name="repay")
 	private Double repay;
 
+    @SQLDouble(name="overdue")
+	private Double overdue;
+
+    @SQLDouble(name="advance")
+	private Double advance;
+
     @SQLDateTime(name="datetime")
 	private Date datetime;
 
@@ -73,6 +79,9 @@ public class Repayment implements Serializable{
 
     @SQLInteger(name="status")
 	private Integer status;
+
+    @SQLString(name="remark")
+	private String remark;
 
 	public void setId(Integer id){
 		this.id = id;
@@ -194,6 +203,22 @@ public class Repayment implements Serializable{
 		return repay;
 	}
 
+	public void setOverdue(Double overdue){
+		this.overdue = overdue;
+	}
+
+	public Double getOverdue(){
+		return overdue;
+	}
+
+	public void setAdvance(Double advance){
+		this.advance = advance;
+	}
+
+	public Double getAdvance(){
+		return advance;
+	}
+
 	public void setDatetime(Date datetime){
 		this.datetime = datetime;
 	}
@@ -240,6 +265,14 @@ public class Repayment implements Serializable{
 
 	public Integer getStatus(){
 		return status;
+	}
+
+	public void setRemark(String remark){
+		this.remark = remark;
+	}
+
+	public String getRemark(){
+		return remark;
 	}
 
 

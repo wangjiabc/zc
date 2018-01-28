@@ -31,4 +31,7 @@ public interface LoanDao {
 	public Map getAllRepayMent(@RequestParam Integer limit,@RequestParam Integer offset,String sort,String order,
 			Map searchMap);
 	
+	public Double getAllRepay(String loan_GUID);
+	
+	public Double getAllOverdue(String loan_GUID);
 }

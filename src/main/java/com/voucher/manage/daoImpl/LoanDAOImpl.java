@@ -1,9 +1,12 @@
 package com.voucher.manage.daoImpl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.voucher.manage.dao.LoanDao;
@@ -15,6 +18,7 @@ import com.voucher.manage.daoSQL.InsertExe;
 import com.voucher.manage.daoSQL.SelectExe;
 import com.voucher.manage.daoSQL.SelectSQL;
 import com.voucher.manage.daoSQL.UpdateExe;
+import com.voucher.manage.tools.MyTestUtil;
 import com.voucher.manage.tools.TransMapToString;
 
 public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
@@ -182,4 +186,40 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 		return map;
 	}
 
+	@Override
+	public Double getAllRepay(String loan_GUID) {
+		// TODO Auto-generated method stub
+		String sql="SELECT SUM(stage)+SUM(nper_interest) "+
+                       " FROM [ZC].[dbo].[Repayment] "+
+				       " where status=1 and "+
+                       " loan_GUID = '"+loan_GUID+"'";
+		
+		 List list=this.getJdbcTemplate().query(sql,new rowMapper());
+		 MyTestUtil.print(list);
+		 
+		 return (Double) list.get(0);
+	}
+
+	class rowMapper implements RowMapper<Double> {
+        //rs涓鸿繑鍥炵粨鏋滈泦锛屼互姣忚涓哄崟浣嶅皝瑁呯潃
+        public Double mapRow(ResultSet rs, int rowNum) throws SQLException {    
+            Double d;
+        	d=(rs.getDouble(1));
+            return d;
+        }
+    }
+
+	@Override
+	public Double getAllOverdue(String loan_GUID) {
+		// TODO Auto-generated method stub
+		String sql="SELECT SUM(overdue)"+
+                " FROM [ZC].[dbo].[Repayment] "+
+			       " where status=1 and "+
+                " loan_GUID = '"+loan_GUID+"'";
+	
+	 List list=this.getJdbcTemplate().query(sql,new rowMapper());
+	 
+	 return (Double) list.get(0);
+	}
+	
 }

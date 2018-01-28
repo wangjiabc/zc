@@ -281,6 +281,30 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 	}
 	
 	@Override
+	public ClientInfo getClientInfoByGUID(String guid) {
+		// TODO Auto-generated method stub
+ClientInfo clientInfo=new ClientInfo();
+		
+		clientInfo.setLimit(10);
+		clientInfo.setOffset(0);
+		clientInfo.setNotIn("id");
+		
+		String[] where={"[GUID] = ",guid};
+		clientInfo.setWhere(where);
+		
+		ClientInfo clientInfo2=null;
+		try{
+		  List<ClientInfo> list=SelectExe.get(this.getJdbcTemplate(), clientInfo);
+		  clientInfo2=list.get(0);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return clientInfo2;
+	}
+	
+	@Override
 	public ClientInfo getClientInfoQuery(String username, String userPhoneNum, String useridCard) {
 		// TODO Auto-generated method stub
         ClientInfo clientInfo=new ClientInfo();

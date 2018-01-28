@@ -93,7 +93,7 @@ public class LoanController {
 			
 			productInfo.setProName(jsonObject.getString("name"));
 			productInfo.setPro_GUID(uuid.toString());
-			productInfo.setRepay_type(jsonObject.getDouble("repay_type"));
+			productInfo.setRepay_type(jsonObject.getInt("repay_type"));
 			productInfo.setInterest(jsonObject.getDouble("interest"));
 			
 			Date date=new Date();
@@ -157,7 +157,7 @@ public class LoanController {
 		  ProductInfo productInfo=null;
 		  String proName;
 		  String pro_GUID;
-		  Double money; //本金
+		  Double money = null; //本金
 		  Double interest; //利息
 		  int nper = 0;   //期数
 		  int cycle = 0;  //周期长度
@@ -195,45 +195,94 @@ public class LoanController {
 			  List list=(List) loanDao.getAllProduct(1, 0, null, null, searchMap).get("rows");
 			  productInfo=(ProductInfo) list.get(0);
 
-			  GUID=jsonObject.getString("GUID");
-			  money=jsonObject.getDouble("money");
-			  nper=jsonObject.getInt("nper");
-			  cycle=jsonObject.getInt("cycle");
-			  stage=money/nper;
-			  interest=money*productInfo.getInterest()/10000;
-			  should_repay=money+nper*cycle*interest;
-			  nper_interest=cycle*interest;
+			  if(productInfo.getRepay_type()==0){
 			  
-			  loanDeal.setGUID(jsonObject.getString("GUID"));
-			  loanDeal.setUserName(jsonObject.getString("username"));
-			  loanDeal.setUserPhoneNum(jsonObject.getString("userPhoneNum"));
-			  loanDeal.setUseridCard(jsonObject.getString("useridCard"));
-			  loanDeal.setPro_GUID(pro_GUID);
-			  loanDeal.setProName(productInfo.getProName());
-			  loanDeal.setMoney(money);
-			  loanDeal.setStage(stage);
-			  loanDeal.setInterest(interest);
-			  loanDeal.setNper(nper);
-			  loanDeal.setCycle(cycle);
-			  loanDeal.setShould_repay(should_repay);
-			  loanDeal.setDatetime(date);
-			  loanDeal.setStatus(2);
-			  loanDeal.setRemark(jsonObject.getString("remark"));
+				  GUID=jsonObject.getString("GUID");
+				  money=jsonObject.getDouble("money");
+				  nper=jsonObject.getInt("nper");
+				  cycle=jsonObject.getInt("cycle");
+				  stage=money/nper;
+				  interest=money*productInfo.getInterest()/10000;
+				  should_repay=money+nper*cycle*interest;
+				  nper_interest=cycle*interest;
 			  
-			  repayment.setGUID(jsonObject.getString("GUID"));
-			  repayment.setUserName(jsonObject.getString("username"));
-			  repayment.setUserPhoneNum(jsonObject.getString("userPhoneNum"));
-			  repayment.setUseridCard(jsonObject.getString("useridCard"));
-			  repayment.setPro_GUID(pro_GUID);
-			  repayment.setProName(productInfo.getProName());
-			  repayment.setMoney(money);
-			  repayment.setStage(stage);
-			  repayment.setInterest(interest);
-			  repayment.setCycle(cycle);
-			  repayment.setNper_interest(nper_interest);
-			  repayment.setDatetime(date);
-			  repayment.setStatus(2);
+				  loanDeal.setGUID(jsonObject.getString("GUID"));
+				  loanDeal.setUserName(jsonObject.getString("username"));
+				  loanDeal.setUserPhoneNum(jsonObject.getString("userPhoneNum"));
+				  loanDeal.setUseridCard(jsonObject.getString("useridCard"));
+				  loanDeal.setPro_GUID(pro_GUID);
+				  loanDeal.setProName(productInfo.getProName());
+				  loanDeal.setMoney(money);
+				  loanDeal.setStage(stage);
+				  loanDeal.setInterest(interest);
+				  loanDeal.setNper(nper);
+				  loanDeal.setCycle(cycle);
+				  loanDeal.setShould_repay(should_repay);
+				  loanDeal.setDatetime(date);
+				  loanDeal.setStatus(2);
+				  loanDeal.setRemark(jsonObject.getString("remark"));
 			  
+				  repayment.setGUID(jsonObject.getString("GUID"));
+				  repayment.setUserName(jsonObject.getString("username"));
+				  repayment.setUserPhoneNum(jsonObject.getString("userPhoneNum"));
+				  repayment.setUseridCard(jsonObject.getString("useridCard"));
+				  repayment.setPro_GUID(pro_GUID);
+				  repayment.setProName(productInfo.getProName());
+				  repayment.setMoney(money);
+				  repayment.setStage(stage);
+				  repayment.setInterest(interest);
+				  repayment.setCycle(cycle);
+				  repayment.setNper_interest(nper_interest);
+				  repayment.setDatetime(date);
+				  repayment.setStatus(2);
+			  }else if(productInfo.getRepay_type()==1){
+				  GUID=jsonObject.getString("GUID");
+				  money=jsonObject.getDouble("money");
+				  nper=jsonObject.getInt("nper");
+				  cycle=jsonObject.getInt("cycle");
+				  stage=0.0;
+				  interest=money*productInfo.getInterest()/10000;
+				  if(nper>1){
+					  should_repay=money+(nper-1)*cycle*interest;
+				  }else {
+					  should_repay=money+nper*cycle*interest;
+				  }				  
+				  nper_interest=cycle*interest;
+			  
+				  loanDeal.setGUID(jsonObject.getString("GUID"));
+				  loanDeal.setUserName(jsonObject.getString("username"));
+				  loanDeal.setUserPhoneNum(jsonObject.getString("userPhoneNum"));
+				  loanDeal.setUseridCard(jsonObject.getString("useridCard"));
+				  loanDeal.setPro_GUID(pro_GUID);
+				  loanDeal.setProName(productInfo.getProName());
+				  loanDeal.setMoney(money);
+				  loanDeal.setStage(stage);
+				  loanDeal.setInterest(interest);
+				  loanDeal.setNper(nper);
+				  loanDeal.setCycle(cycle);
+				  loanDeal.setShould_repay(should_repay);
+				  loanDeal.setDatetime(date);
+				  loanDeal.setStatus(2);
+				  loanDeal.setRemark(jsonObject.getString("remark"));
+			  
+				  repayment.setGUID(jsonObject.getString("GUID"));
+				  repayment.setUserName(jsonObject.getString("username"));
+				  repayment.setUserPhoneNum(jsonObject.getString("userPhoneNum"));
+				  repayment.setUseridCard(jsonObject.getString("useridCard"));
+				  repayment.setPro_GUID(pro_GUID);
+				  repayment.setProName(productInfo.getProName());
+				  repayment.setMoney(money);
+				  repayment.setStage(stage);
+				  repayment.setInterest(interest);
+				  repayment.setCycle(cycle);
+				  repayment.setNper_interest(nper_interest);
+				  repayment.setDatetime(date);
+				  repayment.setStatus(2);
+				  
+			  }else{
+				  return 0;
+			  }
+			  			  
 		  }catch (Exception e) {
 			// TODO: handle exception
 		    e.printStackTrace();
@@ -244,23 +293,75 @@ public class LoanController {
 		  int i=0;
 		  
 
-		  for(;i<nper;i++){			  
+		  if(productInfo.getRepay_type()==0){
+			  for(;i<nper;i++){			  
 			  
-			  shouldtime=calendar.getTime();
+				  shouldtime=calendar.getTime();
 			  
-			  calendar.add(Calendar.DATE,cycle);
+				  calendar.add(Calendar.DATE,cycle);
 			  
-			  repaytime=calendar.getTime();
+				  repaytime=calendar.getTime();
 			  
-			  repayment.setShouldtime(shouldtime);
-			  repayment.setRepaytime(repaytime);
-			  status=loanDao.insertRepayMent(repayment);
-			  if(status==0){
-				  TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-				  return 0;
+				  repayment.setShouldtime(shouldtime);
+				  repayment.setRepaytime(repaytime);
+				  status=loanDao.insertRepayMent(repayment);
+				  if(status==0){
+					  TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					  return 0;
+				  }
 			  }
+		  }else if(productInfo.getRepay_type()==1){
+			  if(nper<=1){
+				  shouldtime=calendar.getTime();
+				  
+				  calendar.add(Calendar.DATE,cycle);
+			  
+				  repaytime=calendar.getTime();
+			  
+				  repayment.setShouldtime(shouldtime);
+				  repayment.setRepaytime(repaytime);
+				  repayment.setStage(money);
+				  status=loanDao.insertRepayMent(repayment);
+				  if(status==0){
+					  TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					  return 0;
+				  }
+			  }else{
+				  for(;i<(nper-1);i++){			  
+				  
+					  shouldtime=calendar.getTime();
+			  
+					  calendar.add(Calendar.DATE,cycle);
+					  
+					  repaytime=calendar.getTime();
+			  
+					  repayment.setShouldtime(shouldtime);
+					  repayment.setRepaytime(repaytime);
+					  					  
+					  status=loanDao.insertRepayMent(repayment);
+					  if(status==0){
+						  TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					  	return 0;
+					  }
+				  }
+				  //最后一期不算利息
+				  shouldtime=calendar.getTime();
+				  calendar.add(Calendar.DATE,cycle);				  
+				  repaytime=calendar.getTime();		  
+				  repayment.setShouldtime(shouldtime);
+				  repayment.setRepaytime(repaytime);
+				  
+				  repayment.setInterest(0.0);
+				  repayment.setNper_interest(0.0);
+				  repayment.setStage(money);
+				  status=loanDao.insertRepayMent(repayment);
+				  if(status==0){
+					  TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					  return 0;
+				  }
+			  }
+			  
 		  }
-		  
 	      status=loanDao.insertLoanDeal(loanDeal);
 	      if(status==0){
 			  TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -300,6 +401,8 @@ public class LoanController {
 		}
 		
 		Map searchMap=new HashMap<>();
+		
+		searchMap.put("LoanDeal.status>", "1");
 		
 		if(search!=null&&!search.trim().equals("")){
 			search="%"+search+"%";  
@@ -370,7 +473,9 @@ public class LoanController {
 	}
 	
 	@RequestMapping("/updateRepayment")
-	public @ResponseBody Integer updateRepayment(@RequestParam String loan_GUID, @RequestParam String shouldtime,
+	public @ResponseBody Integer updateRepayment(@RequestParam String loan_GUID, 
+			@RequestParam Double repay,@RequestParam String shouldtime,
+			@RequestParam Double overdue,String remark,
 			@RequestParam String repaytime,HttpServletRequest request){
 		
 		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
@@ -379,11 +484,16 @@ public class LoanController {
 		Repayment repayment=new Repayment();
 		
 		repayment.setStatus(1);
+		repayment.setRepay(repay);
 		
 		Date date=new Date();
 		
 		repayment.setGivetime(date);
 		repayment.setTransact(campusAdmin);
+		if(overdue!=null){
+			repayment.setOverdue(overdue);
+		}
+		repayment.setRemark(remark);
 		Date shoulddate = null;
 		Date repaydate = null;
 		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -408,6 +518,7 @@ public class LoanController {
 		int status=loanDao.updateRepayMent(repayment);
 		
 		if(status==1){ 		//更新总还款金额
+			
 			Map searchMap=new HashMap<>();
 			
 			searchMap.put("[Repayment].loan_GUID=",loan_GUID);
@@ -419,6 +530,7 @@ public class LoanController {
 			
 			int count=(int) repayMentMap.get("total");
 			
+			/*
 			Repayment repayment2=null;
 			
 			try{
@@ -430,10 +542,14 @@ public class LoanController {
 			
 			Double stage=repayment2.getStage();
 			Double interest=repayment2.getInterest();
+			*/
 			
+			Double allRepay=loanDao.getAllRepay(loan_GUID);
+			Double allOverdue=loanDao.getAllOverdue(loan_GUID);
 			LoanDeal loanDeal=new LoanDeal();
 			
-			loanDeal.setAllrepay(stage*count+interest*count);
+			loanDeal.setAllrepay(allRepay);
+			loanDeal.setShould_overdue(allOverdue);
 			
 			String[] where2={"[LoanDeal].loan_GUID=",loan_GUID};
 			

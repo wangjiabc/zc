@@ -20,8 +20,8 @@ public class ProductInfo implements Serializable{
     @SQLString(name="proName")
 	private String proName;
 
-    @SQLDouble(name="repay_type")
-	private Double repay_type;
+    @SQLInteger(name="repay_type")
+	private Integer repay_type;
 
     @SQLDouble(name="interest")
 	private Double interest;
@@ -53,11 +53,11 @@ public class ProductInfo implements Serializable{
 		return proName;
 	}
 
-	public void setRepay_type(Double repay_type){
+	public void setRepay_type(Integer repay_type){
 		this.repay_type = repay_type;
 	}
 
-	public Double getRepay_type(){
+	public Integer getRepay_type(){
 		return repay_type;
 	}
 

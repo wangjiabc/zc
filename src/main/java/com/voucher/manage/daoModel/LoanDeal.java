@@ -56,6 +56,12 @@ public class LoanDeal implements Serializable{
     @SQLDouble(name="should_repay")
 	private Double should_repay;
 
+    @SQLDouble(name="should_overdue")
+	private Double should_overdue;
+
+    @SQLDouble(name="should_advance")
+	private Double should_advance;
+
     @SQLDateTime(name="datetime")
 	private Date datetime;
 
@@ -189,6 +195,22 @@ public class LoanDeal implements Serializable{
 
 	public Double getShould_repay(){
 		return should_repay;
+	}
+
+	public void setShould_overdue(Double should_overdue){
+		this.should_overdue = should_overdue;
+	}
+
+	public Double getShould_overdue(){
+		return should_overdue;
+	}
+
+	public void setShould_advance(Double should_advance){
+		this.should_advance = should_advance;
+	}
+
+	public Double getShould_advance(){
+		return should_advance;
 	}
 
 	public void setDatetime(Date datetime){

@@ -49,34 +49,34 @@
         <h1 class="page-header">逾期客户管理</h1>
     </div>
     <div id="page-inner">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="card-title">
-                            <div class="title">查询</div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" id="userinfo-form">
-                            <div class="row">
-                                <div class="form-group col-sm-3">
-                                    <label class="col-sm-3 control-label">姓名</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="username"
-                                               id="username" placeholder="填入姓名">
-                                    </div>
-                                </div>
+        <!--<div class="row">-->
+            <!--<div class="col-xs-12">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                        <!--<div class="card-title">-->
+                            <!--<div class="title">查询</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--<form class="form-horizontal" id="userinfo-form">-->
+                            <!--<div class="row">-->
+                                <!--<div class="form-group col-sm-3">-->
+                                    <!--<label class="col-sm-3 control-label">姓名</label>-->
+                                    <!--<div class="col-sm-9">-->
+                                        <!--<input type="text" class="form-control" name="username"-->
+                                               <!--id="username" placeholder="填入姓名">-->
+                                    <!--</div>-->
+                                <!--</div>-->
 
-                                <div class="form-group col-sm-3">
-                                    <button type="button" id="queryUser" class="btn btn-success">查 询</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                <!--<div class="form-group col-sm-3">-->
+                                    <!--<button type="button" id="queryUser" class="btn btn-success">查 询</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="row">
             <div class="col-xs-12">
@@ -94,7 +94,7 @@
                                 <tr>
                                     <th data-field="state" data-checkbox="true">选择</th>
                                     <th data-align="left" data-field="id">id</th>
-                                    <th data-align="left" data-field="userName">姓名</th>
+                                    <th data-align="left" data-field="userName" data-formatter="actionDetail">姓名</th>
                                     <th data-align="left" data-field="borrowMoney">借款金额</th>
                                     <th data-align="left" data-field="nper">期数</th>
                                     <th data-align="left" data-field="principal">实还本金</th>
@@ -106,6 +106,7 @@
                                     <th data-align="left" data-field="repaytime" data-formatter="actionTime">借款日期</th>
                                     <th data-align="left" data-field="status" data-formatter="actionStatus">状态</th>
                                     <th data-align="left" data-field="guid" data-formatter="actionReport">操作</th>
+                                    <th data-align="left" data-field="guid" >客户ID</th>
 
                                 </tr>
                                 </thead>
@@ -233,16 +234,72 @@
                         </div>
                     </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
-                    <button type="button" onclick="commitDataButton();" class="btn btn-danger">还 款</button>
-                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" onclick="commitDataButton();" class="btn btn-danger">还 款</button>
             </div>
         </div>
     </div>
 </div>
+<!--跟进对话框-->
+<div class="modal fade" id="genjinDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">跟 进</div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="genjin-form">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客户名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="addName1" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">跟进方式</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="genjinStyle">
+                                    <option>电话</option>
+                                    <option>上门</option>
+                                </select>
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">跟进人</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="genjinPeople">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">跟进时间</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="genjinTime">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">跟进内容</label>
+                            <div class="col-sm-10">
+                                <input type="textarea" class="form-control" id="genjinNote">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="" class="btn btn-danger">保 存</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
+	function genjinDialog(temp){
+        $('#genjinDialog').modal("show");
+    }
     function getcookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
         if (arr = document.cookie.match(reg))
@@ -256,7 +313,19 @@
     if (type != 0) {
         $("#userhide").hide();
     }
+    function actionDetail(value, row, index) {
+        return [
+            '<a  href="javascript:void(0)" onclick="detail(this);" title="点击查看用户详情">',
+            value,
+            '</a>'].join('');
+    }
+    function detail(temp) {
+        var hang = $(temp.parentNode).parent().prevAll().length + 1;  //jquery获取td所在的行和列
+        var val = document.getElementById("table").rows[hang].cells[14]; //取得所在列的值
+        var guid = val.innerHTML;
 
+        window.location.href = "UserDetail2.html?guid=" + guid;
+    }
     function actionStatus(value, row, index) {
         if (value == "0") {
             return "<span>未借款</span>";
@@ -275,12 +344,14 @@
             // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             // '</a>&nbsp;',
             '<button type="button" title="还款" onclick="repayment(this);" class="btn btn-danger">还 款</button>&nbsp;',
-            '<button type="button" title="还款" onclick="" class="btn btn-success">跟 进</button>&nbsp;',
-            '<button type="button" title="还款" onclick="repayment(this);" class="btn btn-primary">恢复正常</button>&nbsp;',
+            '<button type="button" title="跟进" onclick="genjinDialog(this)" class="btn btn-success">跟 进</button>&nbsp;',
+            '<button type="button" title="恢复正常" onclick="repayment(this);" class="btn btn-primary">恢复正常</button>&nbsp;',
             '<button type="button" title="设置逾期客户" onclick="" class="btn btn-warning">设置为上门客户</button>'
         ].join('');
     }
-
+ function genjin(temp){
+        $('#repayDialog').modal("show");
+    }
 
     function repayment(temp) {
         var hang = $(temp.parentNode).parent().prevAll().length + 1;
