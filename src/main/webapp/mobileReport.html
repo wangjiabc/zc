@@ -1081,23 +1081,7 @@
 
         $.post("/zc/credit/taskMobile.do", {
 
-            username: "13688215543",
-            password: "510213",
-            identityName: "陆薪桦",
-            identityCardNo: "510502199508242213"
 
-            /*
-            username : "18383065362",
-            password :"314159",
-            identityName : "钟群",
-            identityCardNo : "510502198706236821"
-           */
-            /*
-            username : "15884790116",
-            password :"314159",
-            identityName : "王靖",
-            identityCardNo : "510502198111290714"
-            */
         }, function (text) {
             var json = $.parseJSON(text);
             $("#a").text(json.msg);

@@ -63,17 +63,16 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-tasks">
+               <ul class="dropdown-menu dropdown-tasks">
                     <li>
                         <a href="successRepayment.html">
                             <div>
                                 <p>
                                     <strong>已完成</strong>
-                                    <span class="pull-right text-muted" id="">60%</span>
+                                    <span class="pull-right text-muted" id="success">60%</span>
                                 </p>
                                 <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
                                         <span class="sr-only"></span>
                                     </div>
                                 </div>
@@ -89,8 +88,7 @@
                                     <span class="pull-right text-muted" id="progress">28%</span>
                                 </p>
                                 <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
                                         <span class="sr-only"></span>
                                     </div>
                                 </div>
@@ -106,8 +104,7 @@
                                     <span class="pull-right text-muted" id="message3">85%</span>
                                 </p>
                                 <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
                                         <span class="sr-only"></span>
                                     </div>
                                 </div>
@@ -214,22 +211,7 @@
     </div>
     <!-- /. PAGE WRAPPER  -->
 </div>
-<script>
-    function setIframeHeight(iframe) {
-        if (iframe) {
-            iframe.height = 0;
-            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-            var mm = iframeWin.document.documentElement.scrollHeight;
 
-            if (iframeWin.document.body) {
-                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-                var o = document.getElementById('page-wrapper');//获得元素
-                o.style.height = mm + 'px';
-            }
-        }
-    };
-
-</script>
     <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
 <!-- jQuery Js -->
@@ -252,5 +234,49 @@
 <script type="text/javascript" src="assets/js/chartjs.js"></script>
 
 </body>
+<script type="text/javascript">
 
+$.get("loan/overdueRepayment.do", {
+}, function(text) {
+	var obj = $.parseJSON(text);
+	var all=obj.all;
+	var count=obj.count;
+		$("#message").html(count);
+		$("#message2").html(count);
+		$("#message3").html((count/all)*100+"%");
+		$(".progress-bar-danger").width((count/all)*100+"%");
+});
+
+$.get("loan/needRepayment.do", {
+}, function(text) {
+var obj = $.parseJSON(text);
+var all=obj.all;
+var count=obj.count;
+	$("#progress").html((count/all)*100+"%");
+	$(".progress-bar-info").width((count/all)*100+"%");
+});
+
+$.get("loan/successRepayment.do", {
+}, function(text) {
+var obj = $.parseJSON(text);
+var all=obj.all;
+var count=obj.count;
+	$("#success").html((count/all)*100+"%");
+	$(".progress-bar-success").width((count/all)*100+"%");
+});
+
+function setIframeHeight(iframe) {
+    if (iframe) {
+        iframe.height = 0;
+        var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        var mm = iframeWin.document.documentElement.scrollHeight;
+
+        if (iframeWin.document.body) {
+            iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+            var o = document.getElementById('page-wrapper');//获得元素
+            o.style.height = mm + 'px';
+        }
+    }
+};
+</script>
 </html>

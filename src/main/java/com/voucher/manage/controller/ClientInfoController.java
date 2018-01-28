@@ -394,9 +394,9 @@ public class ClientInfoController {
 	}
 	
 	@RequestMapping(value="/delete")
-	public @ResponseBody Integer delete(@RequestParam Integer id){
+	public @ResponseBody Integer delete(@RequestParam String guid){
 				
-		return userDao.deleteClientInfo(id);
+		return userDao.deleteClientInfo(guid);
 		
 	}
 	
@@ -446,6 +446,7 @@ public class ClientInfoController {
 		 if(file!=null&&file.length>0){
 	            //组合image名称，“;隔开”
 	            List<String> fileName =new ArrayList<String>();
+	            String upimage = null;
                 System.out.println("length="+file.length);
 	            try {
 	                for (int i = 0; i < file.length; i++) {
@@ -453,12 +454,13 @@ public class ClientInfoController {
 
 	                        //上传文件，随机名称，";"分号隔开
 	                       // fileName.add(FileUtil.uploadImage(request, "/upload/"+"/", file[i], true));
-	                    	fileName.add(uploadImage(request, "/upload/", file[i],uuid, true));
+	                    	upimage=uploadImage(request, "/upload/", file[i],uuid, true);
+	                    	fileName.add(upimage);
 	                    }
 	                }
 
 	                //上传成功
-	                if(fileName!=null&&fileName.size()>0){
+	                if(fileName!=null&&fileName.size()>0&&!upimage.equals("error")){
 	                	System.out.println(fileName);
 	                    System.out.println("上传成功！");
 	                    return 1;
@@ -496,7 +498,7 @@ public class ClientInfoController {
     public  String uploadImage(HttpServletRequest request,String path_deposit,MultipartFile file,String clientInfo_GUID,boolean isRandomName) {
         //上传
         try {
-            String[] typeImg={"gif","png","jpg","jpeg"};
+            String[] typeImg={"gif","png","jpg","jpeg","ico"};
 
             if(file!=null){
                 String origName=file.getOriginalFilename();// 文件原名称
@@ -553,10 +555,10 @@ public class ClientInfoController {
                         return fileSrc;
                     }
                 }
-            return null;
+            return "error";
         }catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return "error";
         }
     }
 	

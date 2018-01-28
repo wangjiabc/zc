@@ -108,12 +108,12 @@
                         <div id="toolbar" class="btn-group">
                             <button id="plus" type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                            </button>                           
+                            <button id="edit" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
                             </button>
                             <button id="delete" type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>删除
-                            </button>
-                            <button id="edit" type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
                             </button>
                         </div>
                         <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
@@ -486,13 +486,94 @@
     </div>
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+            </div>
+            <div id="preview_box"></div>
+            <div class="modal-body">
+             <input id="img_input" type="file" accept="image/*"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" onclick="upload();" class="btn btn-primary">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
 <script type="text/javascript">
-    var permission = 0;
-    if (permission == 0) {
+var uuid;
+
+$("#img_input").on("change", function(e){
+
+	  var file = e.target.files[0]; //获取图片资源
+
+	  var reader = new FileReader();
+
+	  reader.readAsDataURL(file); // 读取文件
+
+	  // 渲染文件
+	  reader.onload = function(arg) {
+
+	    var img = '<img class="preview" src="' + arg.target.result + '" alt="preview"/>';
+	    $("#preview_box").empty().append(img);
+	  }
+	});
+
+ function upload(){
+
+	 var fileObj = $("#img_input").prop("files")[0];
+	 
+     var FileController = "/zc/clientinfo/inputImage.do?uuid=" + uuid; // 接收上传文件的后台地址
+     
+     if (fileObj){
+         // FormData 对象
+         var form = new FormData();
+         form.append("file", fileObj);// 文件对象
+         form.append("uuid", uuid);
+         // XMLHttpRequest 对象
+         var xhr = new XMLHttpRequest();
+         xhr.open("post", FileController, true);
+         xhr.onload = function () {
+
+         };
+         xhr.send(form);
+         xhr.onreadystatechange=function(){
+         	 if(xhr.readyState == 4 && xhr.status == 200){    
+         	     var b = xhr.responseText;    
+         	        if(b == 1){    
+         	        	 $("#myModal").modal("hide");
+         	          
+         	        }else{    
+         	        	$("#myModal").modal("hide");
+         	            alert("添加图片失败！"); 
+         	           
+         	        }           
+         	    }    
+         };
+     }
+     
+ }
+
+  function getcookie(name) {
+     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+     if (arr = document.cookie.match(reg))
+         return unescape(arr[2]);
+     else
+         return null;
+  }
+
+    var type = getcookie('type');
+    
+    if (type == 0) {
+    	$('#delete').show();
+    } else{
         $('#delete').hide();
-    } else if (permission == 0) {
-        $('#delete').show();
     }
     $.post("loan/upOverdueRepayment.do", { //更新逾期状态
     }, function (text) {
@@ -619,7 +700,7 @@
             // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             // '</a>&nbsp;',
             '<button type="button" title="点击查看征信报告" onclick="report(this);" class="btn btn-primary">征信报告</button>&nbsp;',
-            '<button type="button" title="点击上传图片" onclick="" class="btn btn-success">上传图片</button>&nbsp;'
+            '<button type="file" title="点击上传图片" onclick="image(this);" class="btn btn-success">上传图片</button>&nbsp;'
         ].join('');
     }
 
@@ -629,22 +710,36 @@
         //var lie = $(temp.parentNode).prevAll().length+1;
         //alert("第"+hang+"行"+"	"+"第"+lie+"列");
 
-        var val = document.getElementById("table").rows[hang].cells[6]; //取得所在列的值
+        var val = document.getElementById("table").rows[hang].cells[5]; //取得所在列的值
         var useridCard = val.innerHTML;
         val = document.getElementById("table").rows[hang].cells[3]; //取得所在列的值
         var userName = val.innerHTML;
-        val = document.getElementById("table").rows[hang].cells[7]; //取得所在列的值
+        val = document.getElementById("table").rows[hang].cells[6]; //取得所在列的值
         var userPhoneNum = val.innerHTML;
 
         window.location.href = "mobileReportList.html?useridCard=" + useridCard +
             "&userName=" + userName + "&userPhoneNum=" + userPhoneNum;
     }
 
+    
+    function image(temp) {
+        var hang = $(temp.parentNode).parent().prevAll().length + 1;  //jquery获取td所在的行和列
+        //var lie = $(temp.parentNode).prevAll().length+1;
+        //alert("第"+hang+"行"+"	"+"第"+lie+"列");
+
+        var val = document.getElementById("table").rows[hang].cells[11]; //取得所在列的值
+        
+        uuid = val.innerHTML;
+        
+        $("#myModal").modal("show");
+        
+    }
+    
     function loanModel(temp) {
         var hang = $(temp.parentNode).parent().prevAll().length + 1;
         var username = document.getElementById("table").rows[hang].cells[3].innerHTML;
-        var useridCard = document.getElementById("table").rows[hang].cells[6].innerHTML;
-        var userPhoneNum = document.getElementById("table").rows[hang].cells[7].innerHTML;
+        var useridCard = document.getElementById("table").rows[hang].cells[5].innerHTML;
+        var userPhoneNum = document.getElementById("table").rows[hang].cells[6].innerHTML;
 
         var obj = document.getElementById("interest");
 
@@ -707,7 +802,7 @@
             $("#myModalLabel").text("编辑公众号");
             $("#myModal").modal('show');
 
-            top.location.href = "UpdateInfo.html?uuid=" + array[0].guid;
+            window.location.href = "UpdateInfo.html?uuid=" + array[0].guid;
             /*
             var status=document.getElementsByName("status")
             status[1-array[0].status].checked=true;
@@ -715,6 +810,75 @@
         }
     });
 
+    
+    $('#delete').on('click',function() {
+		var array = $('#table').bootstrapTable('getSelections');
+		tag=1;
+
+		if (array.length > 1) {
+			$('#alertchar').text('删除操作不能同时选中多条记录！');
+			$('#commitFoodDataButton').hide();
+			$('#alertdialog').modal("show");
+		} else if (array.length == 0) {
+			$('#alertchar').text('请先选中要删除的记录！');
+			$('#commitFoodDataButton').hide();
+			$('#alertdialog').modal("show");
+		} else {
+
+			var guid=array[0].guid;
+			//alert(array[0].userName);
+	
+	var foodtext='是否确定要删除 '+array[0].userName+' ? ';
+	
+	$('#alertchar').text(foodtext);
+	$('#commitFoodDataButton').show();
+	$('#alertdialog').modal("show");
+	
+	$('#commitFoodDataButton').click(function(){
+		//做删除的访问请求
+		$.post("clientinfo/delete.do", {
+			guid : guid
+		}, function(text) {
+			var json = $.parseJSON(text);
+			if (json == 1) {				
+				/*
+				for ( var i = array.length - 1; i >= 0; i--) {
+					$('#table').bootstrapTable('remove', {
+						field : 'foodId',
+						values : [ array[i].foodId ]
+					});
+				   }
+					*/
+					
+					/*
+					 * 刷新页面
+					 */
+					var url="clientinfo/getAll.do";
+
+			    	$(" #table").bootstrapTable('refresh',{
+						url : url
+					});
+			    	
+				$('#alertchar').text("删除成功");
+				setTimeout(function(){
+				 $('#alertdialog').modal("hide");
+				},1000);
+			 } else if(json==2){
+				 $('#alertchar').text("已借款的客户不能删除");
+					setTimeout(function(){
+						 $('#alertdialog').modal("hide");
+					},1000);
+			 }else{
+				$('#alertchar').text("删除失败");
+				setTimeout(function(){
+					 $('#alertdialog').modal("hide");
+					},1000);
+			 }
+		  });
+	   }); 
+	
+		}
+	});
 
     function actionTime(value, row, index) {
         var date = new Date(value);

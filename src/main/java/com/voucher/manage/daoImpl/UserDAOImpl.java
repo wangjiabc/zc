@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import com.voucher.manage.dao.UserDAO;
 import com.voucher.manage.daoModel.ClientInfo;
 import com.voucher.manage.daoModel.Image;
+import com.voucher.manage.daoModel.LoanDeal;
 import com.voucher.manage.daoModel.MoblieReport;
 import com.voucher.manage.daoModel.Users;
 import com.voucher.manage.daoSQL.DeleteExe;
@@ -187,15 +188,26 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO{
 	}
 
 	@Override
-	public Integer deleteClientInfo(Integer id) {
+	public Integer deleteClientInfo(String guid) {
 		// TODO Auto-generated method stub
-		ClientInfo clientInfo=new ClientInfo();
+		String[] where={"[GUID] =",guid};
 		
-		String[] where={"id =",String.valueOf(id)};
+		LoanDeal loanDeal=new LoanDeal();
 		
-		clientInfo.setWhere(where);
+		loanDeal.setWhere(where);
 		
-		return DeleteExe.get(this.getJdbcTemplate(), clientInfo);
+		int count=(int) SelectExe.getCount(this.getJdbcTemplate(), loanDeal).get("");
+		
+		if(count>0){
+			return 2;
+		}else{
+		
+			ClientInfo clientInfo=new ClientInfo();
+
+			clientInfo.setWhere(where);
+		
+			return DeleteExe.get(this.getJdbcTemplate(), clientInfo);
+		}
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public interface UserDAO {
 	
 	public ClientInfo getClientInfoQuery(String username,String userPhoneNum,String useridCard);
 	
-	public Integer deleteClientInfo(Integer id);
+	public Integer deleteClientInfo(String guid);
 	
 	public Integer insertIntoImage(Image image);
 	
