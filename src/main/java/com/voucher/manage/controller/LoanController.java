@@ -45,6 +45,16 @@ public class LoanController {
     
     UserDAO userDao=(UserDAO) applicationContext.getBean("dao");
     
+    private final static int general=0;    
+    private final static int complete=1;
+    private final static int notPass=2;
+    private final static int generalRepay=3;
+    private final static int overdueRepay=4;
+    private final static int overdueClient=5;    
+    private final static int callClient=6;
+    private final static int badClient=7;
+
+    
 	@RequestMapping("/getAllProduct")
 	public @ResponseBody Map getAllProduct(@RequestParam Integer limit,@RequestParam Integer offset,String sort,String order,
 			String search,HttpServletRequest request){
@@ -124,7 +134,7 @@ public class LoanController {
 			Map searchMap=new HashMap<>();
 			
 			searchMap.put("[LoanDeal].pro_GUID=",pro_GUID);
-			searchMap.put("[LoanDeal].status>","1");
+			searchMap.put("[LoanDeal].status>",""+notPass+"");
  			
 			int count=(int) loanDao.getAllLoanDeal(1, 0, null, null, searchMap).get("total");
 			
@@ -219,7 +229,7 @@ public class LoanController {
 				  loanDeal.setCycle(cycle);
 				  loanDeal.setShould_repay(should_repay);
 				  loanDeal.setDatetime(date);
-				  loanDeal.setStatus(2);
+				  loanDeal.setStatus(generalRepay);
 				  loanDeal.setRemark(jsonObject.getString("remark"));
 			  
 				  repayment.setGUID(jsonObject.getString("GUID"));
@@ -234,7 +244,7 @@ public class LoanController {
 				  repayment.setCycle(cycle);
 				  repayment.setNper_interest(nper_interest);
 				  repayment.setDatetime(date);
-				  repayment.setStatus(2);
+				  repayment.setStatus(generalRepay);
 			  }else if(productInfo.getRepay_type()==1){
 				  GUID=jsonObject.getString("GUID");
 				  money=jsonObject.getDouble("money");
@@ -262,7 +272,7 @@ public class LoanController {
 				  loanDeal.setCycle(cycle);
 				  loanDeal.setShould_repay(should_repay);
 				  loanDeal.setDatetime(date);
-				  loanDeal.setStatus(2);
+				  loanDeal.setStatus(generalRepay);
 				  loanDeal.setRemark(jsonObject.getString("remark"));
 			  
 				  repayment.setGUID(jsonObject.getString("GUID"));
@@ -277,7 +287,7 @@ public class LoanController {
 				  repayment.setCycle(cycle);
 				  repayment.setNper_interest(nper_interest);
 				  repayment.setDatetime(date);
-				  repayment.setStatus(2);
+				  repayment.setStatus(generalRepay);
 				  
 			  }else{
 				  return 0;
@@ -370,7 +380,7 @@ public class LoanController {
 	      
 	      ClientInfo clientInfo=new ClientInfo();
 	      
-	      clientInfo.setStatus(2);
+	      clientInfo.setStatus(generalRepay);
 	      
 	      String[] where={"[clientInfo].GUID=",GUID};
 	      clientInfo.setWhere(where);
@@ -615,6 +625,8 @@ public class LoanController {
 				
 			}
 			
+		}else{
+			 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return status;
@@ -647,7 +659,7 @@ public class LoanController {
 		Repayment repayment2=new Repayment();
 		
 		Map searchMap=new HashMap<>();
-		searchMap.put("[Repayment].status >","2");
+		searchMap.put("[Repayment].status >",""+generalRepay+"");
 		
 		if(type!=0){
 			searchMap.put("[Repayment].campusAdmin =",campusAdmin);
@@ -690,7 +702,7 @@ public class LoanController {
 		
 		Map searchMap=new HashMap<>();
 		Map allSearchMap=new HashMap<>();
-		searchMap.put("[Repayment].status >","2");
+		searchMap.put("[Repayment].status >",""+generalRepay+"");
 		
 		if(type!=0){
 			searchMap.put("[Repayment].campusAdmin =",campusAdmin);
@@ -723,7 +735,7 @@ public class LoanController {
 		
 		Map searchMap=new HashMap<>();
 		Map allSearchMap=new HashMap<>();
-		searchMap.put("[Repayment].status =","2");
+		searchMap.put("[Repayment].status =",""+generalRepay+"");
 		
 		if(type!=0){
 			searchMap.put("[Repayment].campusAdmin =",campusAdmin);

@@ -82,6 +82,7 @@
                                     <th data-align="left" data-field="datetime" data-formatter="actionTime">申请日期</th>
                                     <th data-align="left" data-field="status" data-formatter="actionStatus">借款状态</th>
                                     <th data-align="left" data-field="overdue">逾期额</th>
+                                    <th data-align="left" data-field="advance">提前还款额</th>
                                     <th data-align="left" data-field="remark">备注</th>
 
                                 </tr>
@@ -365,9 +366,9 @@
             return "<span>未借款</span>";
         } else if (value == "1") {
             return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
-        } else if (value == "2") {
-            return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
         } else if (value == "3") {
+            return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
+        } else if (value > "3") {
             return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
         }
     }

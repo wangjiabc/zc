@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -11,16 +10,6 @@
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet"
           href="assets/bootstrap-table/bootstrap-table.css">
-    <link rel="stylesheet"
-          href="assets/bootstrap-table/bootstrap-editable.css">
-    <script src="assets/bootstrap-table/jquery.min.js"></script>
-    <link rel="stylesheet" href="assets/bootstrap-table/bootstrap.min.css">
-    <script src="assets/bootstrap-table/bootstrap-table.js"></script>
-    <script src="assets/bootstrap-table/bootstrap-table-export.js"></script>
-    <script src="assets/bootstrap-table/tableExport.js"></script>
-    <script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>
-
-    <script src="js/bootstrap-table-zh-CN.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
     <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
@@ -45,88 +34,46 @@
 </head>
 
 <body>
-        <div class="header">
-            <h1 class="page-header">客户跟进</h1>
-        </div>
-        <div id="page-inner">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
+<div class="header">
+    <h1 class="page-header">客户跟进</h1>
+</div>
+<div id="page-inner">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body" id="template">
+                    <div id="panel" v-for="item in info" class="panel panel-success">
+                        <div class="panel-heading">{{item.name}}
+                            <span style="float:right;margin-left: 20px">{{item.minutes}}</span>
+                            <span style="float:right;color: red">{{item.year}}</span>
+                        </div>
                         <div class="panel-body">
-                            <div id="panel" class="panel panel-success">
-                                <div class="panel-heading">张三
-                                <span style="float:right;margin-left: 20px">18:41</span>
-                                <span style="float:right;color: red">2018-01-25</span>
-                                </div>
-                                <div class="panel-body">
-                                    电话关机，已跑路
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div id="panel" class="panel panel-success">
-                                <div class="panel-heading">张三
-                                    <span style="float:right;margin-left: 20px">18:41</span>
-                                    <span style="float:right;color: red">2018-01-25</span>
-                                </div>
-                                <div class="panel-body">
-                                    电话关机，已跑路
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div id="panel" class="panel panel-success">
-                            <div class="panel-heading">张三
-                                <span style="float:right;margin-left: 20px">18:41</span>
-                                <span style="float:right;color: red">2018-01-25</span>
-                            </div>
-                            <div class="panel-body">
-                                电话关机，已跑路
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div id="panel" class="panel panel-success">
-                            <div class="panel-heading">张三
-                                <span style="float:right;margin-left: 20px">18:41</span>
-                                <span style="float:right;color: red">2018-01-25</span>
-                            </div>
-                            <div class="panel-body">
-                                电话关机，已跑路
-                            </div>
+                            {{item.content}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-
-        </div>
-
-
+<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
 <script type="text/javascript">
-    var color=["panel panel-primary","panel panel-danger","panel panel-warning","panel panel-success"];
-    function rnd(n, m){
-        var random = Math.floor(Math.random()*(m-n+1)+n);
+    var a = '{ "data": {  "info": [{ "name": "张三", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"},{ "name": "李四", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"},{ "name": "王麻子", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"}]}}';
+    var json = $.parseJSON(a);
+    var data = json.data;
+    var app3 = new Vue({
+        el: '#template',
+        data: data
+    })
+    var color = ["panel panel-primary", "panel panel-danger", "panel panel-warning", "panel panel-success"];
+
+    function rnd(n, m) {
+        var random = Math.floor(Math.random() * (m - n + 1) + n);
         return random;
     }
-    var i=rnd(0,3);
+
+    var i = rnd(0, 3);
     console.log(i);
     $('#panel').addClass(color[i]);
 </script>

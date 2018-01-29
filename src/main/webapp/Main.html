@@ -143,6 +143,7 @@
                                     data-sortable="true">录入时间
                                 </th>
                                 <th data-align="left" data-field="guid" data-sortable="true">客户ID</th>
+                                <th data-align="left" data-field="remark" data-sortable="true">备注</th>
                                 <th data-align="left" data-field="userProvideNum" data-visible="false">供养人数</th>
                                 <th data-align="left" data-field="userChildrenNum" data-visible="false">子女数目
                                 </th>
@@ -659,9 +660,9 @@ $("#img_input").on("change", function(e){
             return "<span>未借款</span>";
         } else if (value == "1") {
             return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
-        } else if (value == "2") {
-            return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
         } else if (value == "3") {
+            return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
+        } else if (value > "3") {
             return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
         }
     }

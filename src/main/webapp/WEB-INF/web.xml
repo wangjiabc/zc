@@ -187,9 +187,6 @@
 		<res-auth>Container</res-auth>
 	</resource-ref> -->
 
-	<welcome-file-list>
-	    <welcome-file>/index.html</welcome-file>
-	</welcome-file-list>
 	<!-- 配置session超时时间，单位分钟 -->
 	<session-config>
 		<session-timeout>1440</session-timeout>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ import com.voucher.manage.dao.UserDAO;
 import com.voucher.manage.daoModel.ClientInfo;
 import com.voucher.manage.daoModel.LoanDeal;
 import com.voucher.manage.daoModel.Repayment;
+import com.voucher.manage.tools.MyTestUtil;
 import com.voucher.sqlserver.context.Connect;
 
 @Controller
@@ -37,6 +39,15 @@ public class RepayController {
     
     UserDAO userDao=(UserDAO) applicationContext.getBean("dao");
 	
+    private final static int general=0;    
+    private final static int complete=1;
+    private final static int notPass=2;
+    private final static int generalRepay=3;
+    private final static int overdueRepay=4;
+    private final static int overdueClient=5;    
+    private final static int callClient=6;
+    private final static int badClient=7;
+    
 	@RequestMapping("/getTodayRepayment")
 	public @ResponseBody Map getTodayRepayment(@RequestParam Integer limit,@RequestParam Integer offset,String sort,String order,
 			String search,HttpServletRequest request){
@@ -171,7 +182,7 @@ public class RepayController {
 		
 		Repayment repayment=new Repayment();
 		
-		repayment.setStatus(1);
+		repayment.setStatus(complete);
 		repayment.setRepay(repay);
 		
 		Date date=new Date();
@@ -197,13 +208,14 @@ public class RepayController {
 		String shouldTime= sdf.format(shoulddate);
 		String repayTime= sdf.format(repaydate);
 		
-		String[] where={"[Repayment].loan_GUID=",loan_GUID};
+		String[] where={"[Repayment].loan_GUID=",loan_GUID,"convert(varchar(20),[Repayment].shouldtime,120)=",shouldTime,
+				"convert(varchar(20),[Repayment].repaytime,120)=",repayTime};
 		
 		repayment.setWhere(where);
 		
 		int status=loanDao.updateRepayMent(repayment);
 		System.out.println("status="+status);
-		if(status>1){ 		//更新总还款金额
+		if(status>=1){ 		//更新总还款金额
 			
 			Map searchMap=new HashMap<>();
 			
@@ -220,9 +232,11 @@ public class RepayController {
 			Double allOverdue=loanDao.getAllOverdue(loan_GUID);
 			LoanDeal loanDeal=new LoanDeal();
 			
-			loanDeal.setAllrepay(allRepay);
+			loanDeal.setAllrepay(allRepay+advance);
 			loanDeal.setShould_overdue(allOverdue);
-			
+			loanDeal.setShould_advance(advance);
+			System.out.println("advance="+advance);
+			MyTestUtil.print(loanDeal);
 			String[] where2={"[LoanDeal].loan_GUID=",loan_GUID};
 			
 			loanDeal.setWhere(where2);
@@ -255,7 +269,7 @@ public class RepayController {
 				int nper=loanDeal2.getNper();
 				
 					LoanDeal loanDeal3=new LoanDeal();
-					loanDeal3.setStatus(1);
+					loanDeal3.setStatus(complete);
 					String[] where3={"[LoanDeal].loan_GUID=",loan_GUID};
 					loanDeal3.setWhere(where3);
 					loanDao.updateLoanDeal(loanDeal3);
@@ -263,7 +277,7 @@ public class RepayController {
 					Map searchMap3=new HashMap<>();
 					
 					searchMap3.put("[LoanDeal].GUID=",GUID);				
-					searchMap3.put("[LoanDeal].status>", "1");
+					searchMap3.put("[LoanDeal].status>", ""+complete+"");
 					
 					Map loanDealMap2=loanDao.getAllLoanDeal(10, 0, null, null, searchMap3);
 					
@@ -284,10 +298,45 @@ public class RepayController {
 					
 				}
 	
+				Repayment repayment2=new Repayment();
+			
+				repayment2.setStatus(complete);
+				
+				String[] where5={"[Repayment].loan_GUID=",loan_GUID};
+				
+				repayment2.setWhere(where5);
+				
+				status=loanDao.updateRepayMent(repayment2);
+			
+		 }
+		
+		 if(status==0){
+			 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		 }else{
+			 status=1;
 		 }
 		
 		return status;
 		
 	}
+	
+	
+	@RequestMapping("/updateNotPass")
+	public @ResponseBody Integer updateNotPass(@RequestParam String GUID,
+			String remark){
+		
+		ClientInfo clientInfo=new ClientInfo();
+		
+		clientInfo.setStatus(notPass);
+		clientInfo.setRemark(remark);
+		
+		String[] where={"clientInfo.GUID=",GUID};
+		
+		clientInfo.setWhere(where);
+		
+		return userDao.updateClientInfoByGUID(clientInfo);
+		
+	}
+	
 	
 }

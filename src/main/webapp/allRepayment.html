@@ -76,13 +76,14 @@
                                         <th data-align="left" data-field="useridCard">身份证</th>
                                         <th data-align="left" data-field="userPhoneNum">手机号</th>
                                         <th data-align="left" data-field="campusAdmin">借款人员</th>
-                                        <th data-align="left" data-field="guid" data-formatter="actionReport">操作</th>
+                                        <th data-align="left" data-field="status" data-formatter="actionReport">操作</th>
                                         <th data-align="left" data-field="should_repay">应还款总金额</th>
                                         <th data-align="left" data-field="allrepay">已还款总金额</th>
                                         <th data-align="left" data-field="should_overdue">逾期总金额</th>
                                         <th data-align="left" data-field="should_advance">提前还款总金额</th>
                                         <th data-align="left" data-field="datetime" data-formatter="actionTime">申请日期</th>                               
                                         <th data-align="left" data-field="status" data-formatter="actionStatus">借款状态</th>
+                                        <th data-align="left" data-field="remark">备注</th>
 
                                     </tr>
                                     </thead>
@@ -183,20 +184,29 @@
     		return "<span>未借款</span>";
     	}else if (value == "1") {
     		return "<img src='img/right.jpg' width='15px' height='13px' title='已完成'></i><span>已完成</span>";
-    	}else if(value=="2"){
-    		return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
     	}else if(value=="3"){
+    		return "<img src='img/start.jpg' width='13px' height='13px' title='正常还款'></i><span>正常还款</span>";
+    	}else if(value>"3"){
     		return "<img src='img/wrong.jpg' width='13px' height='13px' title='已逾期'></i><span>已逾期</span>";
     	}
     }
     
     function actionReport(value, row, index) {
-        return [
-            // '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
-            // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
-            // '</a>&nbsp;',
-            '<button type="button" title="点击办理还款业务" onclick="repayment(this);" class="btn btn-danger">办理还款</button>'
-        ].join('');
+    	if(value==1){
+    		return [
+                	// '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
+                	// '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
+                	// '</a>&nbsp;',
+                	'<button type="button" title="查看还款明细" onclick="repayment(this);" class="btn btn-success">查看还款</button>'
+            		].join('');
+    	}else{
+        	return [
+            	// '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
+            	// '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
+            	// '</a>&nbsp;',
+            	'<button type="button" title="点击办理还款业务" onclick="repayment(this);" class="btn btn-danger">办理还款</button>'
+        		].join('');
+    	}
     }
 
     function repayment(temp){
