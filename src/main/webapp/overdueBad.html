@@ -46,7 +46,7 @@
 
 <body>
         <div class="header">
-            <h1 class="page-header">逾期客户管理</h1>
+            <h1 class="page-header">坏帐客户管理</h1>
         </div>
 
 
@@ -62,7 +62,7 @@
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
-                                       data-url="repay/getAllLoanDeal.do?search2=3" data-search="true"
+                                       data-url="repay/getAllLoanDeal.do?search2=5" data-search="true"
                                        data-show-refresh="true" data-show-toggle="true"
                                        data-side-pagination="server" data-pagination="true"
                                        data-show-columns="true" data-sort-order="desc">
@@ -273,8 +273,7 @@
             // '</a>&nbsp;',
             '<button type="button" title="还款" onclick="repayment(this);" class="btn btn-danger">还 款</button>&nbsp;',
             '<button type="button" title="跟进" onclick="genjinDialog(this)" class="btn btn-success">跟 进</button>&nbsp;',
-            '<button type="button" title="恢复正常" onclick="resume(this);" class="btn btn-primary">恢复正常</button>&nbsp;',
-            '<button type="button" title="设置逾期客户" onclick="overdue(this);" class="btn btn-warning">设置为上门客户</button>'
+            '<button type="button" title="恢复正常" onclick="resume(this);" class="btn btn-primary">恢复正常</button>&nbsp;'
         ].join('');
     }
 
@@ -312,7 +311,7 @@
         	 ginjin_content:ginjin_content
     	}, function(text) {
     		if(text==1){
-          	  var url="repay/getAllLoanDeal.do?search2=1";
+          	  var url="repay/getAllLoanDeal.do?search2=5";
 
           	  $('#genjinDialog').modal("hide");
           	  
@@ -341,7 +340,7 @@
        	 	ginjin_status:0
    		  }, function(text) {
    			if(text==1){
-            	  var url="repay/getAllLoanDeal.do?search2=3";
+            	  var url="repay/getAllLoanDeal.do?search2=5";
 
             	  $('#genjinDialog').modal("hide");
             	  
@@ -365,7 +364,7 @@
         
     	$.post("repay/updateGinJinStatus.do", {
        	 	loan_GUID:loan_GUID,
-       	 	status:5
+       	 	ginjin_status:1
    		  }, function(text) {
    			if(text==1){
             	  var url="repay/getAllLoanDeal.do?search2=1";

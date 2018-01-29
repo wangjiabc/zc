@@ -24,725 +24,725 @@
 </head>
 
 <body>
-        <!-- /. PAGE WRAPPER  -->
-        <div class="header">
-            <h1 class="page-header col-sm-11">新增客户信息</h1>
-            <button type="button" class="btn btn-success btn-lg col-sm-1" style="margin-top: 50px" onclick="addInfo();">
-                添加
-            </button>
-        </div>
-        <div id="page-inner">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">个人信息</div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="userinfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">姓名</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control required" name="username"
-                                                   id="username" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">曾用名</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="oldname" id="oldname"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">年齡</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userage" id="userage"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">性别</label>
-                                        <div class="col-sm-8">
-                                            <label class="radio-inline">
-                                                <input type="radio" name="usersex" checked="checked" id="usersex"
-                                                       value="男"> 男
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="usersex" value="女"> 女
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">学历</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="userEducation">
-                                                <option>硕士及以上</option>
-                                                <option>本科</option>
-                                                <option>大专</option>
-                                                <option>中专</option>
-                                                <option>高中及以下</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">婚姻状况</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="userMarriage">
-                                                <option>未婚</option>
-                                                <option>已婚</option>
-                                                <option>离异</option>
-                                                <option>再婚</option>
-                                                <option>其他</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">证件号</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="useridCard" id="useridCard"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">供养人数</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userProvideNum"
-                                                   id="userProvideNum" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">子女数目</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userChildrenNum"
-                                                   id="userChildrenNum" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">户籍地址</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="usercrAdress"
-                                                   id="usercrAdress" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">房产状况</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="userHouseState">
-                                                <option>亲属产权</option>
-                                                <option>自建房</option>
-                                                <option>无按揭房产</option>
-                                                <option>按揭房产</option>
-                                                <option>单位宿舍</option>
-                                                <option>租房</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">现住地址</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userNowAdress"
-                                                   id="userNowAdress" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">手机号</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userPhoneNum"
-                                                   id="userPhoneNum" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">固话</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userTelNum" id="userTelNum"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">微信</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userWechat" id="userWechat"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">QQ</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userqqNum" id="userqqNum"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">社保基数/公积金积数</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userSocialBase"
-                                                   id="userSocialBase" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">最高额度信用卡</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userCreditCard"
-                                                   id="userCreditCard" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">划账银行卡开户行</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="userBankOpen"
-                                                   id="userBankOpen" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">近六个月的电话详单</label>
-                                        <div class="col-sm-8">
-                                            <label class="radio-inline">
-                                                <input type="radio" name="userPhoneMonad" checked="checkeed"
-                                                       id="userPhoneMonad" value="有"> 有
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="userPhoneMonad" value="无"> 无
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+<!-- /. PAGE WRAPPER  -->
+<div class="header">
+    <h1 class="page-header col-sm-11">新增客户信息</h1>
+    <button type="button" class="btn btn-success btn-lg col-sm-1" style="margin-top: 50px" onclick="addInfo();">
+        添加
+    </button>
+</div>
+<div id="page-inner">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">个人信息</div>
                     </div>
                 </div>
-            </div>
-
-            <!-- 寿险保单信息 -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">寿险保单信息</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="userinfo-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">姓名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control required" name="username"
+                                           id="username" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">曾用名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="oldname" id="oldname"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">年齡</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userage" id="userage"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">性别</label>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="usersex" checked="checked" id="usersex"
+                                               value="男"> 男
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="usersex" value="女"> 女
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="insuranceInfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">投保公司</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="insCompany" id="insCompany"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">保单号码</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="insNum" id="insNum"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">投保期限</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="instime" id="instime"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">附加个数</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="attatchNum" id="attatchNum"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">学历</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="userEducation">
+                                        <option>硕士及以上</option>
+                                        <option>本科</option>
+                                        <option>大专</option>
+                                        <option>中专</option>
+                                        <option>高中及以下</option>
+                                    </select>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">缴费准时性</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="payOntime">
-                                                <option>按时缴纳</option>
-                                                <option>提前缴纳</option>
-                                                <option>过期缴纳</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">缴费方式</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="payMode">
-                                                <option>按月</option>
-                                                <option>按季度</option>
-                                                <option>按年</option>
-                                                <option>其他</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">年缴保费</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="insMoney" id="insMoney"
-                                                   placeholder="元">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">已缴期数</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="payTerm" id="payTerm"
-                                                   placeholder="期">
-                                        </div>
-                                    </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">婚姻状况</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="userMarriage">
+                                        <option>未婚</option>
+                                        <option>已婚</option>
+                                        <option>离异</option>
+                                        <option>再婚</option>
+                                        <option>其他</option>
+                                    </select>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 职业信息 -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">职业信息</div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">证件号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="useridCard" id="useridCard"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">供养人数</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userProvideNum"
+                                           id="userProvideNum" placeholder="">
+                                </div>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="occupationInfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">单位全称</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="unitName" id="unitName"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">单位地址</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="unitAddress"
-                                                   id="unitAddress" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">单位电话</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="unitPhone" id="unitPhone"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">邮编</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="postcode" id="postcode"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">子女数目</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userChildrenNum"
+                                           id="userChildrenNum" placeholder="">
                                 </div>
-
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">部门</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="department"
-                                                   id="department" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">职务</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="duty" id="duty"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">现单位工作年限</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="workTime" id="workTime"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">所属行业</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="industry" id="industry"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">户籍地址</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="usercrAdress"
+                                           id="usercrAdress" placeholder="">
                                 </div>
-
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">单位性质</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="unitNature">
-                                                <option>政府机构</option>
-                                                <option>企事业单位</option>
-                                                <option>民营</option>
-                                                <option>外资/合资</option>
-                                                <option>个体户</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">工作性质</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="workNature">
-                                                <option>自雇</option>
-                                                <option>管理人员</option>
-                                                <option>正式职员</option>
-                                                <option>合同制</option>
-                                                <option>其他</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">月基本薪资</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="monthSalary"
-                                                   id="monthSalary" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">薪资方式</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="salaryStyle">
-                                                <option>打卡</option>
-                                                <option>现金</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">房产状况</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="userHouseState">
+                                        <option>亲属产权</option>
+                                        <option>自建房</option>
+                                        <option>无按揭房产</option>
+                                        <option>按揭房产</option>
+                                        <option>单位宿舍</option>
+                                        <option>租房</option>
+                                    </select>
                                 </div>
-
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">月发薪日</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="payDay" id="payDay"
-                                                   placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">其他月收入</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="otherIncome"
-                                                   id="otherIncome" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                    </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">现住地址</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userNowAdress"
+                                           id="userNowAdress" placeholder="">
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <!-- 借款信息 -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">借款信息</div>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="borrowInfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">借款用途</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="borrowUse">
-                                                <option>资金周转</option>
-                                                <option>购物</option>
-                                                <option>教育</option>
-                                                <option>装修</option>
-                                                <option>旅游</option>
-                                                <option>扩大经营</option>
-                                                <option>医疗</option>
-                                                <option>其他</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">您希望申请的金额</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="applyMoney"
-                                                   id="applyMoney" placeholder="万元">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">您可接受每周还款额</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="weekRepayment"
-                                                   id="weekRepayment" placeholder="元">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">申请期限</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="applyTime">
-                                                <option>15周</option>
-                                                <option>30周</option>
-                                                <option>50周</option>
-                                            </select>
-                                        </div>
-                                    </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">手机号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userPhoneNum"
+                                           id="userPhoneNum" placeholder="">
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 亲属联系人信息 -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">亲属联系人信息</div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">固话</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userTelNum" id="userTelNum"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">微信</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userWechat" id="userWechat"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">QQ</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userqqNum" id="userqqNum"
+                                           placeholder="">
+                                </div>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="kinshipInfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">姓名</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="kinshipName"
-                                                   id="kinshipName" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">亲属关系</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="kinshipRelation">
-                                                <option>父母</option>
-                                                <option>配偶</option>
-                                                <option>子女</option>
-                                                <option>其他</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">单位名称</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="kinshipUnitName"
-                                                   id="kinshipUnitName" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">联系电话</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="kinshipPhoneNum"
-                                                   id="kinshipPhoneNum" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">家庭住址</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="kinshipAddress"
-                                                   id="kinshipAddress" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-8">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-
-            <!-- 紧急联系人信息 -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">紧急联系人信息</div>
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">社保基数/公积金积数</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userSocialBase"
+                                           id="userSocialBase" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">最高额度信用卡</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userCreditCard"
+                                           id="userCreditCard" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">划账银行卡开户行</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="userBankOpen"
+                                           id="userBankOpen" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">近六个月的电话详单</label>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="userPhoneMonad" checked="checkeed"
+                                               id="userPhoneMonad" value="有"> 有
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="userPhoneMonad" value="无"> 无
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="emergencyInfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">姓名</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="emergencyName"
-                                                   id="emergencyName" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">亲属关系</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="emergencyRelation">
-                                                <option>同事</option>
-                                                <option>朋友</option>
-                                                <option>亲属</option>
-                                                <option>其他</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">单位名称</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="emergencyUnitName"
-                                                   id="emergencyUnitName" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">联系电话</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="emergencyPhoneNum"
-                                                   id="emergencyPhoneNum" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">家庭住址</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="emergencyAddress"
-                                                   id="emergencyAddress" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-8">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 同事联系人信息 -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">同事联系人信息</div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="colleaguesInfo-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">姓名</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="colleagueName"
-                                                   id="colleagueName" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">亲属关系</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="colleagueRelation">
-                                                <option>同事</option>
-                                                <option>朋友</option>
-                                                <option>亲属</option>
-                                                <option>其他</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">单位名称</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="colleagueUnitName"
-                                                   id="colleagueUnitName" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">联系电话</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="colleaguePhoneNum"
-                                                   id="colleaguePhoneNum" placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">家庭住址</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="colleagueAddress"
-                                                   id="colleagueAddress" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-8">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="card-title">
-                                <div class="title">其他信息</div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" id="-form">
-                                <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">介绍人</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="references"
-                                                   id="references" placeholder="介绍人">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">所属业务员</label>
-                                        <div class="col-sm-8">
-											<input type="text" class="form-control" name="salesman"
-                                                   id="salesman" placeholder="介绍人">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">负债情况</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="fuzai"
-                                                   id="fuzai" placeholder="负债情况">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">客户备注</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="note" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- 寿险保单信息 -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">寿险保单信息</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="insuranceInfo-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">投保公司</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="insCompany" id="insCompany"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">保单号码</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="insNum" id="insNum"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">投保期限</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="instime" id="instime"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">附加个数</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="attatchNum" id="attatchNum"
+                                           placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">缴费准时性</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="payOntime">
+                                        <option>按时缴纳</option>
+                                        <option>提前缴纳</option>
+                                        <option>过期缴纳</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">缴费方式</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="payMode">
+                                        <option>按月</option>
+                                        <option>按季度</option>
+                                        <option>按年</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">年缴保费</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="insMoney" id="insMoney"
+                                           placeholder="元">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">已缴期数</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="payTerm" id="payTerm"
+                                           placeholder="期">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 职业信息 -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">职业信息</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="occupationInfo-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">单位全称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="unitName" id="unitName"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">单位地址</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="unitAddress"
+                                           id="unitAddress" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">单位电话</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="unitPhone" id="unitPhone"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">邮编</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="postcode" id="postcode"
+                                           placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">部门</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="department"
+                                           id="department" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">职务</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="duty" id="duty"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">现单位工作年限</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="workTime" id="workTime"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">所属行业</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="industry" id="industry"
+                                           placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">单位性质</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="unitNature">
+                                        <option>政府机构</option>
+                                        <option>企事业单位</option>
+                                        <option>民营</option>
+                                        <option>外资/合资</option>
+                                        <option>个体户</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">工作性质</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="workNature">
+                                        <option>自雇</option>
+                                        <option>管理人员</option>
+                                        <option>正式职员</option>
+                                        <option>合同制</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">月基本薪资</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="monthSalary"
+                                           id="monthSalary" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">薪资方式</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="salaryStyle">
+                                        <option>打卡</option>
+                                        <option>现金</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">月发薪日</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="payDay" id="payDay"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">其他月收入</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="otherIncome"
+                                           id="otherIncome" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- 借款信息 -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">借款信息</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="borrowInfo-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">借款用途</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="borrowUse">
+                                        <option>资金周转</option>
+                                        <option>购物</option>
+                                        <option>教育</option>
+                                        <option>装修</option>
+                                        <option>旅游</option>
+                                        <option>扩大经营</option>
+                                        <option>医疗</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">您希望申请的金额</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="applyMoney"
+                                           id="applyMoney" placeholder="万元">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">您可接受每周还款额</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="weekRepayment"
+                                           id="weekRepayment" placeholder="元">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">申请期限</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="applyTime">
+                                        <option>15周</option>
+                                        <option>30周</option>
+                                        <option>50周</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 亲属联系人信息 -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">亲属联系人信息</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="kinshipInfo-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">姓名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="kinshipName"
+                                           id="kinshipName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">亲属关系</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="kinshipRelation">
+                                        <option>父母</option>
+                                        <option>配偶</option>
+                                        <option>子女</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">单位名称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="kinshipUnitName"
+                                           id="kinshipUnitName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">联系电话</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="kinshipPhoneNum"
+                                           id="kinshipPhoneNum" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">家庭住址</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="kinshipAddress"
+                                           id="kinshipAddress" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-8">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 紧急联系人信息 -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">紧急联系人信息</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="emergencyInfo-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">姓名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="emergencyName"
+                                           id="emergencyName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">亲属关系</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="emergencyRelation">
+                                        <option>同事</option>
+                                        <option>朋友</option>
+                                        <option>亲属</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">单位名称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="emergencyUnitName"
+                                           id="emergencyUnitName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">联系电话</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="emergencyPhoneNum"
+                                           id="emergencyPhoneNum" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">家庭住址</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="emergencyAddress"
+                                           id="emergencyAddress" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-8">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 同事联系人信息 -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">同事联系人信息</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="colleaguesInfo-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">姓名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="colleagueName"
+                                           id="colleagueName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">亲属关系</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="colleagueRelation">
+                                        <option>同事</option>
+                                        <option>朋友</option>
+                                        <option>亲属</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">单位名称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="colleagueUnitName"
+                                           id="colleagueUnitName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">联系电话</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="colleaguePhoneNum"
+                                           id="colleaguePhoneNum" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">家庭住址</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="colleagueAddress"
+                                           id="colleagueAddress" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-8">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card-title">
+                        <div class="title">其他信息</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" id="-form">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">介绍人</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="references"
+                                           id="references" placeholder="介绍人">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">所属业务员</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="salesman"
+                                           id="salesman" placeholder="介绍人">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">负债情况</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="fuzai"
+                                           id="fuzai" placeholder="负债情况">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="col-sm-4 control-label">客户备注</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" id="remark" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="assets/js/jquery-1.10.2.js"></script>
 <!-- <script src="assets/js/jquery-3.2.1.min.js"></script> -->
@@ -1451,7 +1451,6 @@
         clientInfo.usercrAdress = $("#usercrAdress").val().toString();
         clientInfo.userHouseState = $("#userHouseState").val().toString();
         clientInfo.userNowAdress = $("#userNowAdress").val().toString();
-        clientInfo.remark = $("#remark").val().toString();
 
         clientInfo.userTelNum = $("#userTelNum").val().toString();
         clientInfo.userWechat = $("#userWechat").val().toString();
@@ -1507,13 +1506,13 @@
         clientInfo.colleagueUnitName = $("#colleagueUnitName").val().toString();
         clientInfo.colleaguePhoneNum = $("#colleaguePhoneNum").val().toString();
         clientInfo.colleagueAddress = $("#colleagueAddress").val().toString();
-		
-		 clientInfo.references = $("#references").val().toString();
-		  clientInfo.salesman = $("#salesman").val().toString();
-		   clientInfo.fuzai = $("#fuzai").val().toString();
-		    clientInfo.note = $("#note").val().toString();
-		
-		
+
+        clientInfo.references = $("#references").val().toString();
+        clientInfo.salesman = $("#salesman").val().toString();
+        clientInfo.fuzai = $("#fuzai").val().toString();
+        clientInfo.remark = $("#remark").val().toString();
+
+
         console.debug(clientInfo)
 
         var clientInfodata = JSON.stringify(clientInfo);
@@ -1532,6 +1531,7 @@
                     alert("请确认信息填写完整");
                     return false;
                 } else {
+                	/*
                     var uuid = obj.data;
 
                     var fileObj1 = document.getElementById("zx_img1").files[0]; // 获取文件对象
@@ -1563,17 +1563,22 @@
                                 if (b == 1) {
                                     alert("添加成功");
                                     top.location.href = "Main.html";
-                                } else {
+                               	 } else {
                                     alert("添加图片失败！");
                                     top.location.href = "Main.html";
-                                }
-                            }
-                        };
-                    } else {
-                        alert("添加成功");
-                        top.location.href = "Main.html";
-                    }
-                }
+                                	}
+                             	 }
+                         	  };
+                           	} else {
+                            alert("添加成功");
+                            top.location.href = "Main.html";
+                    		}
+                    	*/
+                    	
+                	  alert("添加成功");
+                      window.location.href = "Main.html";
+                    	
+                	}
             }
         })
 

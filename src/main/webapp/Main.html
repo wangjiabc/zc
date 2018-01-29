@@ -267,32 +267,6 @@
 
 <script type="text/javascript">
 
-    $.get("loan/overdueRepayment.do", {}, function (text) {
-        var obj = $.parseJSON(text);
-        var all = obj.all;
-        var count = obj.count;
-        $("#message").html(count);
-        $("#message2").html(count);
-        $("#message3").html((count / all) * 100 + "%");
-        $(".progress-bar-danger").width((count / all) * 100 + "%");
-    });
-
-    $.get("loan/needRepayment.do", {}, function (text) {
-        var obj = $.parseJSON(text);
-        var all = obj.all;
-        var count = obj.count;
-        $("#progress").html((count / all) * 100 + "%");
-        $(".progress-bar-info").width((count / all) * 100 + "%");
-    });
-
-    $.get("loan/successRepayment.do", {}, function (text) {
-        var obj = $.parseJSON(text);
-        var all = obj.all;
-        var count = obj.count;
-        $("#success").html((count / all) * 100 + "%");
-        $(".progress-bar-success").width((count / all) * 100 + "%");
-    });
-
     $(function () {
         $('#userinfo-form').bootstrapValidator({
             message: 'This value is not valid',

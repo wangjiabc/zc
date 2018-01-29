@@ -76,8 +76,7 @@
                                 <tr>
                                     <th data-field="state" data-checkbox="true"></th>
                                     <th data-align="left" data-field="id" data-sortable="true">id</th>
-                                    <th data-align="left" data-field="guid" data-formatter="actionDetail">详情</th>
-                                    <th data-align="left" data-field="userName">姓名</th>
+                                    <th data-align="left" data-field="userName" data-formatter="actionDetail">姓名</th>
                                     <th data-align="left" data-field="userOldname" data-visible="false">曾用名</th>
                                     <th data-align="left" data-field="userAge">年龄</th>
                                     <th data-align="left" data-field="userSex">性别</th>
@@ -316,7 +315,7 @@
     function actionDetail(value, row, index) {
         return [
             '<a  href="javascript:void(0)" onclick="detail(this);" title="点击查看用户详情">',
-            '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
+            value,
             '</a>'].join('');
     }
 

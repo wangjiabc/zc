@@ -77,6 +77,24 @@ public class LoanDeal implements Serializable{
     @SQLString(name="remark")
 	private String remark;
 
+    @SQLInteger(name="ginjin_status")
+	private Integer ginjin_status;
+
+    @SQLInteger(name="ginjin_level")
+	private Integer ginjin_level;
+
+    @SQLString(name="ginjin_style")
+	private String ginjin_style;
+
+    @SQLString(name="ginjin_user")
+	private String ginjin_user;
+
+    @SQLString(name="ginjin_content")
+	private String ginjin_content;
+
+    @SQLDateTime(name="ginjin_time")
+	private Date ginjin_time;
+
 	public void setId(Integer id){
 		this.id = id;
 	}
@@ -251,6 +269,54 @@ public class LoanDeal implements Serializable{
 
 	public String getRemark(){
 		return remark;
+	}
+
+	public void setGinjin_status(Integer ginjin_status){
+		this.ginjin_status = ginjin_status;
+	}
+
+	public Integer getGinjin_status(){
+		return ginjin_status;
+	}
+
+	public void setGinjin_level(Integer ginjin_level){
+		this.ginjin_level = ginjin_level;
+	}
+
+	public Integer getGinjin_level(){
+		return ginjin_level;
+	}
+
+	public void setGinjin_style(String ginjin_style){
+		this.ginjin_style = ginjin_style;
+	}
+
+	public String getGinjin_style(){
+		return ginjin_style;
+	}
+
+	public void setGinjin_user(String ginjin_user){
+		this.ginjin_user = ginjin_user;
+	}
+
+	public String getGinjin_user(){
+		return ginjin_user;
+	}
+
+	public void setGinjin_content(String ginjin_content){
+		this.ginjin_content = ginjin_content;
+	}
+
+	public String getGinjin_content(){
+		return ginjin_content;
+	}
+
+	public void setGinjin_time(Date ginjin_time){
+		this.ginjin_time = ginjin_time;
+	}
+
+	public Date getGinjin_time(){
+		return ginjin_time;
 	}
 
 

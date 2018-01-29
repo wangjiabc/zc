@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -137,7 +138,7 @@ public class RepayController {
 	
 	@RequestMapping("/getAllLoanDeal")
 	public @ResponseBody Map getAllLoanDeal(@RequestParam Integer limit,@RequestParam Integer offset,String sort,String order,
-			String search,HttpServletRequest request){
+			String search,String search2,HttpServletRequest request){
 		
 		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
 		String campusAdmin=(String) session.getAttribute("campusAdmin");
@@ -156,6 +157,12 @@ public class RepayController {
 		
 		Map searchMap=new HashMap<>();
 		
+		if(search2!=null&&!search2.trim().equals("")){
+			searchMap.put("[LoanDeal].status>", search2);
+			order="desc";
+			sort="status";
+		}
+		
 		if(search!=null&&!search.trim().equals("")){
 			search="%"+search+"%";  
 			searchMap.put("[LoanDeal].userName like ", search);
@@ -163,7 +170,7 @@ public class RepayController {
 		
 				
 		if(type!=0){
-			searchMap.put("[Repayment].campusAdmin =",campusAdmin);
+			searchMap.put("[LoanDeal].campusAdmin =",campusAdmin);
 		}
 		
 		Map map=loanDao.getAllLoanDeal(limit, offset, sort, order, searchMap);
@@ -338,5 +345,153 @@ public class RepayController {
 		
 	}
 	
+	
+	@RequestMapping("/updateGinJin")
+	public @ResponseBody Integer updateGinJin(@RequestParam String loan_GUID,
+			@RequestParam String ginjinStyle,@RequestParam String ginjinUser,
+			@RequestParam String ginjin_content){
+
+		LoanDeal loanDeal=new LoanDeal();
+		
+		loanDeal.setGinjin_status(1);
+		loanDeal.setGinjin_style(ginjinStyle);
+		loanDeal.setGinjin_user(ginjinUser);
+		loanDeal.setGinjin_content(ginjin_content);
+		
+		String[] where={"LoanDeal.loan_GUID=",loan_GUID};
+		
+		Date date=new Date();
+		
+		loanDeal.setGinjin_time(date);
+		
+		loanDeal.setWhere(where);
+		
+		return loanDao.updateLoanDeal(loanDeal);
+	}
+	
+	@RequestMapping("/resumeGenerally")
+	public @ResponseBody Integer resumeGenerally(@RequestParam String loan_GUID,
+			@RequestParam String guid,@RequestParam Integer ginjin_status,
+			HttpServletRequest request){
+		
+		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
+		String campusAdmin=(String) session.getAttribute("campusAdmin");
+		Integer type=(Integer) session.getAttribute("type");
+		
+		Map searchMap=new HashMap<>();
+		searchMap.put("[Repayment].status >=",""+generalRepay+"");
+		searchMap.put("Repayment.GUID=", guid);
+		
+		if(type!=0){
+			searchMap.put("[Repayment].campusAdmin =",campusAdmin);
+		}
+		
+		Map RepaymentMap=loanDao.getAllRepayMent(10, 0, null, null, searchMap);
+		
+		int count=(int) RepaymentMap.get("total");
+		
+		System.out.println("111count="+count);
+		
+		ClientInfo clientInfo=new ClientInfo();
+		String[] where={"clientInfo.GUID=",guid};
+		clientInfo.setWhere(where);
+		
+		LoanDeal loanDeal=new LoanDeal();
+		String[] where2={"LoanDeal.GUID=",guid};
+		loanDeal.setWhere(where2);
+		
+		if(count>0){
+			clientInfo.setStatus(generalRepay);
+			loanDeal.setStatus(generalRepay);
+			loanDeal.setGinjin_status(general);
+		}else{
+			clientInfo.setStatus(general);
+			loanDeal.setStatus(complete);
+			loanDeal.setGinjin_status(general);
+		}
+		
+		int status=userDao.updateClientInfoByGUID(clientInfo);
+		
+		if(status>0){
+		   status=loanDao.updateLoanDeal(loanDeal);
+		   if(status>0){
+			   return 1;
+		   }else{
+			   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				  return 0;
+		   }
+		}else{
+			 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			  return 0;
+		}
+		
+	}
+	
+	@RequestMapping("/updateGinJinStatus")
+	public @ResponseBody Integer updateGinJinStatus(@RequestParam String loan_GUID,
+			@RequestParam Integer status){
+		
+		LoanDeal loanDeal=new LoanDeal();
+		
+		loanDeal.setStatus(status);
+		
+		String[] where={"LoanDeal.loan_GUID=",loan_GUID};
+		
+		Date date=new Date();
+		
+		loanDeal.setGinjin_time(date);
+		
+		loanDeal.setWhere(where);
+		
+		return loanDao.updateLoanDeal(loanDeal);
+		
+	}
+	
+	@RequestMapping("/getAllGenJin")
+	public @ResponseBody Map getAllGenJin(String search,HttpServletRequest request){
+		
+		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
+		String campusAdmin=(String) session.getAttribute("campusAdmin");
+		Integer type=(Integer) session.getAttribute("type");
+		
+		Integer limit=100;
+		
+		Integer offset=0;
+		
+		String order="desc";
+		String sort="ginjin_time";
+		
+		if(order!=null&&order.equals("asc")){
+			order="asc";
+		}
+	
+		if(order!=null&&order.equals("desc")){
+			order="desc";
+		}
+		
+		Map searchMap=new HashMap<>();
+		
+		searchMap.put("LoanDeal.ginjin_status=", "1");
+		
+		if(search!=null&&!search.trim().equals("")){
+			search="%"+search+"%";  
+			searchMap.put("[LoanDeal].userName like ", search);
+		}
+		
+				
+		if(type!=0){
+			searchMap.put("[LoanDeal].campusAdmin =",campusAdmin);
+		}
+		
+		Map map=loanDao.getAllLoanDeal(limit, offset, sort, order, searchMap);
+		
+		List list=(List) map.get("rows");
+		
+		Map map2=new HashMap<>();
+		
+		map2.put("info", list);
+		
+		return map2;
+	}
 	
 }

@@ -421,7 +421,7 @@ public class LoanController {
 		
 				
 		if(type!=0){
-			searchMap.put("[Repayment].campusAdmin =",campusAdmin);
+			searchMap.put("[LoanDeal].campusAdmin =",campusAdmin);
 		}
 		
 		Map map=loanDao.getAllLoanDeal(limit, offset, sort, order, searchMap);
@@ -650,7 +650,7 @@ public class LoanController {
 		String[] where={"[Repayment].repaytime < ",time,
 				"[Repayment].status >","1"};		
 		
-		repayment.setStatus(3);
+		repayment.setStatus(overdueRepay);
 		
 		repayment.setWhere(where);
 		
@@ -678,13 +678,13 @@ public class LoanController {
 		    String loan_GUID=repayment3.getLoan_GUID();
 		    
 		    ClientInfo clientInfo=new ClientInfo();
-		    clientInfo.setStatus(3);		    
+		    clientInfo.setStatus(overdueRepay);		    
 		    String[] where1={"[clientInfo].GUID=",GUID};
 		    clientInfo.setWhere(where1);
 		    userDao.updateClientInfoByGUID(clientInfo);
 		    
 		    LoanDeal loanDeal=new LoanDeal();
-		    loanDeal.setStatus(3);
+		    loanDeal.setStatus(overdueRepay);
 		    String[] where2={"[LoanDeal].loan_GUID=",loan_GUID};
 		    loanDeal.setWhere(where2);
 		    loanDao.updateLoanDeal(loanDeal);		    

@@ -39,6 +39,7 @@
                 </div>
                 <div class="panel-body">
                     <div id="flot-placeholder1"></div>
+                    <div id="flot-memo" style="text-align:center;height:30px;width:250px;height:20px;text-align:center;margin:0 auto;"></div>
                 </div>
             </div>
         </div>
@@ -49,6 +50,7 @@
                 </div>
                 <div class="panel-body">
                     <div id="flot-placeholder"></div>
+                    <div id="flot-memo1" style="text-align:center;height:30px;width:250px;height:20px;text-align:center;margin:0 auto;"></div>
                 </div>
             </div>
         </div>
@@ -60,15 +62,16 @@
 <script src="js/jquery.flot.pie.js"></script>
 <script>
     var data = [
-        { label: "签约合同金额",  data: 70},
-        { label: "剩余合同金额",  data: 30},
+        { label: "签约合同金额",  data: 722},
+        { label: "剩余合同金额",  data: 223},
     ];
     var data1 = [
         { label: "实际放款金额",  data: 70},
         { label: "剩余本金",  data: 30},
     ];
+    // var data2 = '{ "data": {  "info": [{ label: "签约合同金额",  data: 70},{ label: "剩余合同金额",  data: 30}, { label: "实际放款金额",  data: 70}, { label: "剩余本金",  data: 30}]}}';
 
-    $.plot($("#flot-placeholder1"), data1, {
+    var option={
         series: {
             pie: {
                 show: true,
@@ -82,9 +85,12 @@
                     threshold: 0.03  //这个值小于0.03，也就是3%时，label就会隐藏
                 }
             }
+        },
+        grid:{
+            hoverable: true
         }
-    });
-    $.plot($("#flot-placeholder"), data, {
+    }
+    var option1={
         series: {
             pie: {
                 show: true,
@@ -98,8 +104,48 @@
                     threshold: 0.03  //这个值小于0.03，也就是3%时，label就会隐藏
                 }
             }
+        },
+        legend: {
+            show: true
+        },
+        grid:{
+            hoverable: true
         }
+    }
+    $(document).ready(function () {
+        $.plot($("#flot-placeholder"), data, option);
+        $.plot($("#flot-placeholder1"), data1, option1);
+        $("#flot-placeholder").showMemo();
+        $("#flot-placeholder1").showMemo1();
     });
+    $.fn.showMemo = function () {
+        $(this).bind("plothover", function (event, pos, item) {
+            if (!item) { return; }
+
+            var html = [];
+            html.push(
+                "<span style=\"color:red\">",
+                item.series.label,
+                " : ",
+                item.series.data[0][1],
+                "</span>");
+            $("#flot-memo1").html(html.join(''));
+        });
+    }
+    $.fn.showMemo1 = function () {
+        $(this).bind("plothover", function (event, pos, item) {
+            if (!item) { return; }
+
+            var html = [];
+            html.push(
+                "<span style=\"color:red\">",
+                item.series.label,
+                " : ",
+                item.series.data[0][1],
+                "</span>");
+            $("#flot-memo").html(html.join(''));
+        });
+    }
 </script>
 
 

@@ -43,12 +43,12 @@
             <div class="panel panel-default">
                 <div class="panel-body" id="template">
                     <div id="panel" v-for="item in info" class="panel panel-success">
-                        <div class="panel-heading">{{item.name}}
-                            <span style="float:right;margin-left: 20px">{{item.minutes}}</span>
-                            <span style="float:right;color: red">{{item.year}}</span>
+                        <div class="panel-heading">{{item.userName}}
+                            <span style="float:right;margin-left: 20px">{{new Date(item.ginjin_time)}}</span>
+                            <span style="float:right;color: red">{{item.ginjin_style}}</span>
                         </div>
                         <div class="panel-body">
-                            {{item.content}}
+                            {{item.ginjin_content}}
                         </div>
                     </div>
                 </div>
@@ -59,13 +59,25 @@
 
 <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
 <script type="text/javascript">
-    var a = '{ "data": {  "info": [{ "name": "张三", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"},{ "name": "李四", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"},{ "name": "王麻子", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"}]}}';
-    var json = $.parseJSON(a);
-    var data = json.data;
-    var app3 = new Vue({
-        el: '#template',
-        data: data
-    })
+   
+   
+    var a = '{  "info": [{ "name": "张三", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"},{ "name": "李四", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"},{ "name": "王麻子", "year": "2018-01-29", "minutes": "10:24", "content": "地的是贩民时要的是国同人放的民"}]}';
+    
+    $.post("repay/getAllGenJin.do", {
+
+		  }, function(text) {
+    
+  			  var json = $.parseJSON(text);
+    		  var app3 = new Vue({
+        		  el: '#template',
+        	 	  data: json
+    	     	})
+    		  
+    		  $('#panel').addClass(color[i]);
+	  });
+    
+    
+    
     var color = ["panel panel-primary", "panel panel-danger", "panel panel-warning", "panel panel-success"];
 
     function rnd(n, m) {
@@ -75,7 +87,19 @@
 
     var i = rnd(0, 3);
     console.log(i);
-    $('#panel').addClass(color[i]);
+    
+    
+    function actionTime(value) {
+        var date = new Date(value);
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y + M + D + h + m + s;
+    }
+    
 </script>
 </body>
 
