@@ -133,6 +133,25 @@ public class ClientInfoController {
 			clientInfo.setColleaguePhoneNum(jsonObject.getString("colleaguePhoneNum"));
 			clientInfo.setColleagueAddress(jsonObject.getString("colleagueAddress"));
 
+			
+			clientInfo.setEmergencyName1(jsonObject.getString("emergencyName1"));
+			clientInfo.setEmergencyRelation1(jsonObject.getString("emergencyRelation1"));
+			clientInfo.setEmergencyUnitName1(jsonObject.getString("emergencyUnitName1"));
+			clientInfo.setEmergencyPhoneNum1(jsonObject.getString("emergencyPhoneNum1"));
+			clientInfo.setEmergencyAddress1(jsonObject.getString("emergencyAddress1"));
+			
+			clientInfo.setReference(jsonObject.getString("reference"));
+			clientInfo.setSalesman(jsonObject.getString("salesman"));
+			clientInfo.setFuzai(jsonObject.getString("fuzai"));
+			clientInfo.setCompany(jsonObject.getString("company"));
+			clientInfo.setCompany1(jsonObject.getString("company1"));
+			clientInfo.setProductName(jsonObject.getString("productName"));
+			clientInfo.setProductName1(jsonObject.getString("productName1"));
+			clientInfo.setMoney(jsonObject.getString("money"));
+			clientInfo.setMoney1(jsonObject.getString("money1"));
+			clientInfo.setRepay(jsonObject.getString("repay"));
+			clientInfo.setRepay1(jsonObject.getString("repay1"));
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -262,6 +281,25 @@ public class ClientInfoController {
 			clientInfo.setColleaguePhoneNum(jsonObject.getString("colleaguePhoneNum"));
 			clientInfo.setColleagueAddress(jsonObject.getString("colleagueAddress"));
 
+			
+			clientInfo.setEmergencyName1(jsonObject.getString("emergencyName1"));
+			clientInfo.setEmergencyRelation1(jsonObject.getString("emergencyRelation1"));
+			clientInfo.setEmergencyUnitName1(jsonObject.getString("emergencyUnitName1"));
+			clientInfo.setEmergencyPhoneNum1(jsonObject.getString("emergencyPhoneNum1"));
+			clientInfo.setEmergencyAddress1(jsonObject.getString("emergencyAddress1"));
+			
+			clientInfo.setReference(jsonObject.getString("reference"));
+			clientInfo.setSalesman(jsonObject.getString("salesman"));
+			clientInfo.setFuzai(jsonObject.getString("fuzai"));
+			clientInfo.setCompany(jsonObject.getString("company"));
+			clientInfo.setCompany1(jsonObject.getString("company1"));
+			clientInfo.setProductName(jsonObject.getString("productName"));
+			clientInfo.setProductName1(jsonObject.getString("productName1"));
+			clientInfo.setMoney(jsonObject.getString("money"));
+			clientInfo.setMoney1(jsonObject.getString("money1"));
+			clientInfo.setRepay(jsonObject.getString("repay"));
+			clientInfo.setRepay1(jsonObject.getString("repay1"));
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -399,6 +399,12 @@ ClientInfo clientInfo=new ClientInfo();
 		return UpdateExe.get(this.getJdbcTemplate(), users);
 	}
 
+	@Override
+	public Integer deleteUser(Users users) {
+		// TODO Auto-generated method stub
+		return DeleteExe.get(this.getJdbcTemplate(), users);
+	}
+
 
 
 }

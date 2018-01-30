@@ -44,7 +44,7 @@ public class CreditController {
 
 	@RequestMapping(value = "/taskMobile")
 	public @ResponseBody JSONObject taskMobile(@RequestParam String username,@RequestParam String password,
-			@RequestParam String identityName,@RequestParam String identityCardNo,
+			@RequestParam String identityName,@RequestParam String identityCardNo,String clientInfo,
 			HttpServletRequest request){
 		   String json;
 		   JSONObject jsonObject;
@@ -52,7 +52,7 @@ public class CreditController {
 		   MobileDemo mobileDemo=new MobileDemo();
 		   
 		   try {
-			   jsonObject=mobileDemo.process(username, password, identityName, identityCardNo);
+			   jsonObject=mobileDemo.process(username, password, identityName, identityCardNo,clientInfo);
 			   	   
 			   return jsonObject;
 			   

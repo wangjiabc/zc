@@ -221,5 +221,39 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 	 
 	 return (Double) list.get(0);
 	}
+
+	@Override
+	public Double getAllStatistical1(String campusAdmin, Integer type) {
+		// TODO Auto-generated method stub
+		String sql;
+		if(type==0){
+		  sql="SELECT SUM(should_repay) "+
+				  		" FROM [ZC].[dbo].[LoanDeal]";	
+		}else{
+			sql="SELECT SUM(should_repay) "+
+			  		" FROM [ZC].[dbo].[LoanDeal] where campusAdmin="+campusAdmin;	
+		}
+		
+		List list=this.getJdbcTemplate().query(sql,  new rowMapper());
+		
+		return (Double) list.get(0);
+	}
+
+	@Override
+	public Double getAllStatistical2(String campusAdmin, Integer type) {
+		// TODO Auto-generated method stub
+		String sql;
+		if(type==0){
+		  sql="SELECT SUM(allrepay) "+
+				  		" FROM [ZC].[dbo].[LoanDeal]";	
+		}else{
+			sql="SELECT SUM(allrepay) "+
+			  		" FROM [ZC].[dbo].[LoanDeal] where campusAdmin="+campusAdmin;	
+		}
+		
+		List list=this.getJdbcTemplate().query(sql,  new rowMapper());
+		
+		return (Double) list.get(0);
+	}
 	
 }

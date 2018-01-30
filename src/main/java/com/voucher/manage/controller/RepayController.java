@@ -500,4 +500,21 @@ public class RepayController {
 		return map2;
 	}
 	
+	@RequestMapping("/getStatistical")
+	public @ResponseBody Map getStatistical(HttpServletRequest request){
+		Map map=new HashMap<>();
+		
+		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
+		String campusAdmin=(String) session.getAttribute("campusAdmin");
+		Integer type=(Integer) session.getAttribute("type");
+		
+		Double s1=loanDao.getAllStatistical1(campusAdmin, type);
+		Double s2=loanDao.getAllStatistical2(campusAdmin, type);
+		
+		map.put("s1", s1);
+		map.put("s2", s2);
+		
+		return map;
+	}
+	
 }

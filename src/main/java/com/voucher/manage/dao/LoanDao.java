@@ -34,4 +34,9 @@ public interface LoanDao {
 	public Double getAllRepay(String loan_GUID);
 	
 	public Double getAllOverdue(String loan_GUID);
+	
+	public Double getAllStatistical1(String campusAdmin,Integer type);
+	
+	public Double getAllStatistical2(String campusAdmin,Integer type);
+	
 }

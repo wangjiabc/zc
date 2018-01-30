@@ -237,6 +237,20 @@
 </body>
 <script type="text/javascript">
 
+function getcookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+
+var type = getcookie('type');
+
+if (type != 0) {
+    $("#userhide").hide();
+}
+
 $.get("loan/overdueRepayment.do", {
 }, function(text) {
 	var obj = $.parseJSON(text);

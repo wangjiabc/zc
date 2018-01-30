@@ -242,6 +242,54 @@ public class ClientInfo implements Serializable{
     @SQLInteger(name="status")
 	private Integer status;
 
+    @SQLString(name="emergencyName1")
+	private String emergencyName1;
+
+    @SQLString(name="emergencyRelation1")
+	private String emergencyRelation1;
+
+    @SQLString(name="emergencyUnitName1")
+	private String emergencyUnitName1;
+
+    @SQLString(name="emergencyPhoneNum1")
+	private String emergencyPhoneNum1;
+
+    @SQLString(name="emergencyAddress1")
+	private String emergencyAddress1;
+
+    @SQLString(name="reference")
+	private String reference;
+
+    @SQLString(name="salesman")
+	private String salesman;
+
+    @SQLString(name="fuzai")
+	private String fuzai;
+
+    @SQLString(name="company")
+	private String company;
+
+    @SQLString(name="company1")
+	private String company1;
+
+    @SQLString(name="productName1")
+	private String productName1;
+
+    @SQLString(name="productName")
+	private String productName;
+
+    @SQLString(name="money1")
+	private String money1;
+
+    @SQLString(name="money")
+	private String money;
+
+    @SQLString(name="repay")
+	private String repay;
+
+    @SQLString(name="repay1")
+	private String repay1;
+
 	public void setId(Integer id){
 		this.id = id;
 	}
@@ -856,6 +904,134 @@ public class ClientInfo implements Serializable{
 
 	public Integer getStatus(){
 		return status;
+	}
+
+	public void setEmergencyName1(String emergencyName1){
+		this.emergencyName1 = emergencyName1;
+	}
+
+	public String getEmergencyName1(){
+		return emergencyName1;
+	}
+
+	public void setEmergencyRelation1(String emergencyRelation1){
+		this.emergencyRelation1 = emergencyRelation1;
+	}
+
+	public String getEmergencyRelation1(){
+		return emergencyRelation1;
+	}
+
+	public void setEmergencyUnitName1(String emergencyUnitName1){
+		this.emergencyUnitName1 = emergencyUnitName1;
+	}
+
+	public String getEmergencyUnitName1(){
+		return emergencyUnitName1;
+	}
+
+	public void setEmergencyPhoneNum1(String emergencyPhoneNum1){
+		this.emergencyPhoneNum1 = emergencyPhoneNum1;
+	}
+
+	public String getEmergencyPhoneNum1(){
+		return emergencyPhoneNum1;
+	}
+
+	public void setEmergencyAddress1(String emergencyAddress1){
+		this.emergencyAddress1 = emergencyAddress1;
+	}
+
+	public String getEmergencyAddress1(){
+		return emergencyAddress1;
+	}
+
+	public void setReference(String reference){
+		this.reference = reference;
+	}
+
+	public String getReference(){
+		return reference;
+	}
+
+	public void setSalesman(String salesman){
+		this.salesman = salesman;
+	}
+
+	public String getSalesman(){
+		return salesman;
+	}
+
+	public void setFuzai(String fuzai){
+		this.fuzai = fuzai;
+	}
+
+	public String getFuzai(){
+		return fuzai;
+	}
+
+	public void setCompany(String company){
+		this.company = company;
+	}
+
+	public String getCompany(){
+		return company;
+	}
+
+	public void setCompany1(String company1){
+		this.company1 = company1;
+	}
+
+	public String getCompany1(){
+		return company1;
+	}
+
+	public void setProductName1(String productName1){
+		this.productName1 = productName1;
+	}
+
+	public String getProductName1(){
+		return productName1;
+	}
+
+	public void setProductName(String productName){
+		this.productName = productName;
+	}
+
+	public String getProductName(){
+		return productName;
+	}
+
+	public void setMoney1(String money1){
+		this.money1 = money1;
+	}
+
+	public String getMoney1(){
+		return money1;
+	}
+
+	public void setMoney(String money){
+		this.money = money;
+	}
+
+	public String getMoney(){
+		return money;
+	}
+
+	public void setRepay(String repay){
+		this.repay = repay;
+	}
+
+	public String getRepay(){
+		return repay;
+	}
+
+	public void setRepay1(String repay1){
+		this.repay1 = repay1;
+	}
+
+	public String getRepay1(){
+		return repay1;
 	}
 
 

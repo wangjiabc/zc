@@ -137,4 +137,56 @@ public class UserController {
 		
 	}
 	
+	
+	@RequestMapping(value="/deleteUser")
+	public @ResponseBody Integer deleteUser(@RequestParam String CampusAdmins,
+			HttpServletRequest request){
+		Integer type;
+		
+		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
+		type=(Integer) session.getAttribute("type");
+
+		if(type>0){
+			return 0;
+		}
+		
+		String[] campusAdmins = CampusAdmins.split(",");
+		
+		int status = 0;
+		try{
+		  for (String campusAdmin : campusAdmins) {
+
+			Map searchMap=new HashMap<>();
+			
+			searchMap.put("clientInfo.campusAdmin=",campusAdmin);
+ 			
+			int count=(int) userDao.getAllClientInfo(10, 0, null, null, searchMap).get("total");
+			
+			System.out.println("count="+count);
+			
+			if(count>0){
+				return 2;
+			}else{
+			  Users users=new Users();
+			
+			  String[] where={"Users.campusAdmin=",campusAdmin};
+			  
+			  users.setWhere(where);
+			
+			  status=userDao.deleteUser(users);
+			  
+			}
+			
+		   }
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return 0;
+		}
+		
+		return status;
+		
+		
+	}
+	
 }

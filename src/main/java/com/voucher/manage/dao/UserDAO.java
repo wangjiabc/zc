@@ -59,4 +59,6 @@ public interface UserDAO {
 	
 	public Integer updateUser(Users users);
 	
+	public Integer deleteUser(Users users);
+	
 }
