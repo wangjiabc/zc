@@ -73,8 +73,9 @@
                                data-show-columns="true" data-sort-order="desc">
                                 <thead>
                                 <tr>
-                                     <th data-field="state" data-checkbox="true"></th>
-                                    <th data-align="left" data-field="campusAdmin">姓名</th>
+                                    <th  data-checkbox="true"></th>
+                                    <th data-align="left" data-field="campusAdmin">帐号</th>
+                                    <th data-align="left" data-field="name">姓名</th>
                                     <th data-align="left" data-field="telePhone">手机号</th>
                                     <th data-align="left" data-field="address">家庭住址</th>
                                     <th data-align="left" data-field="lastLoginDate" data-formatter="actionTime">最后登陆时间</th>
@@ -102,8 +103,14 @@
 
                 <form class="form-horizontal" id="product-form">
                     <div class="row">
+                       <div class="form-group">
+                            <label class="col-sm-2 control-label">员工帐号</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="admin" readonly="readonly">
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">员工名称</label>
+                            <label class="col-sm-2 control-label">员工姓名</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="name">
                             </div>
@@ -141,7 +148,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
-                <button type="button" onclick="" class="btn btn-danger">修 改</button>
+                <button type="button" onclick="updateUser();" class="btn btn-danger">修 改</button>
             </div>
         </div>
     </div>
@@ -181,13 +188,48 @@ $('#edit').on('click', function () {
         $('#commitFoodDataButton').hide();
         $('#alertdialog').modal("show");
     } else {
-        $("#myModalLabel").text("编辑公众号");
+        
+    	var campusAdmin = array[0].campusAdmin;
+    	var name = array[0].name;
+    	var telePhone=array[0].telePhone;
+    	var address=array[0].address;
+    	
+    	$("#admin").val(campusAdmin);
+    	$("#name").val(name);
+    	$("#phoneNum").val(telePhone);
+    	$("#address").val(address);
         $("#myModal").modal('show');
-
 
     }
 });
 
+   function updateUser(){
+	   
+	   var campusAdmin = $("#admin").val();
+   	   var name = $("#name").val();
+   	   var telePhone=$("#phoneNum").val();
+   	   var address=$("#address").val();
+   	   
+   		$.post("/zc/user/updateUser.do", {
+   			campusAdmin:campusAdmin,
+   			name :name,
+   			telePhone:telePhone,
+   			address:address
+		}, function(text) {
+			if(text==1){
+				var url="/zc/user/getAllUser.do";
+
+	    		$(" #table").bootstrapTable('refresh',{
+					url : url
+				});
+	    		$("#myModal").modal('hide');
+			}else{
+				$("#myModal").modal('hide');
+				alert("更新失败");
+			}
+    	});
+    }
+   
     var campusId=1;
 
     function statusSex(value, row, index) {

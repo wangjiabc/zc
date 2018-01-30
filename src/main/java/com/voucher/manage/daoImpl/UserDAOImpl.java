@@ -393,6 +393,12 @@ ClientInfo clientInfo=new ClientInfo();
 		return SelectExe.get(this.getJdbcTemplate(), moblieReport);
 	}
 
+	@Override
+	public Integer updateUser(Users users) {
+		// TODO Auto-generated method stub
+		return UpdateExe.get(this.getJdbcTemplate(), users);
+	}
+
 
 
 }

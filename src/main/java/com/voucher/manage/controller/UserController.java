@@ -117,4 +117,24 @@ public class UserController {
 		}
 	}
 	
+	
+	@RequestMapping(value="/updateUser")
+	public @ResponseBody Integer updateUser(@RequestParam String campusAdmin,
+			@RequestParam String name,@RequestParam String telePhone,
+			@RequestParam String address,HttpServletRequest request){
+		    
+			Users users=new Users();
+			
+			users.setName(name);
+			users.setTelePhone(telePhone);
+			users.setAddress(address);
+			
+			String[] where={"Users.campusAdmin=",campusAdmin};
+			
+			users.setWhere(where);
+			
+			return userDao.updateUser(users);
+		
+	}
+	
 }

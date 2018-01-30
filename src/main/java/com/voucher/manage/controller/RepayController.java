@@ -138,7 +138,7 @@ public class RepayController {
 	
 	@RequestMapping("/getAllLoanDeal")
 	public @ResponseBody Map getAllLoanDeal(@RequestParam Integer limit,@RequestParam Integer offset,String sort,String order,
-			String search,String search2,HttpServletRequest request){
+			String search,String search2,String search3,HttpServletRequest request){
 		
 		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
 		String campusAdmin=(String) session.getAttribute("campusAdmin");
@@ -159,6 +159,12 @@ public class RepayController {
 		
 		if(search2!=null&&!search2.trim().equals("")){
 			searchMap.put("[LoanDeal].status>", search2);
+			order="desc";
+			sort="status";
+		}
+		
+		if(search3!=null&&!search3.trim().equals("")){
+			searchMap.put("[LoanDeal].status=", search3);
 			order="desc";
 			sort="status";
 		}

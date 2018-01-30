@@ -3,11 +3,8 @@ package com.voucher.manage.daoModel;
 import java.util.Date;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 
 import com.voucher.manage.daoSQL.annotations.*;
-
-import javafx.beans.property.SimpleStringProperty;
 
 @DBTable(name="[ZC].[dbo].[Users]")
 public class Users implements Serializable{
@@ -15,7 +12,7 @@ public class Users implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @SQLInteger(name="id")
-	private Integer id;
+   	private Integer id;
 
     @SQLString(name="campusAdmin")
 	private String campusAdmin;
@@ -28,19 +25,22 @@ public class Users implements Serializable{
 
     @SQLInteger(name="state")
 	private Integer state;
-    
+
+    @SQLString(name="name")
+	private String name;
+
     @SQLInteger(name="cityId")
 	private Integer cityId;
 
     @SQLString(name="telePhone")
-   	private String telePhone;
+	private String telePhone;
 
     @SQLString(name="address")
 	private String address;
 
     @SQLDateTime(name="lastLoginDate")
 	private Date lastLoginDate;
-    
+
     @SQLDateTime(name="registerTime")
 	private Date registerTime;
 
@@ -71,7 +71,14 @@ public class Users implements Serializable{
 		return password;
 	}
 
-	
+	public void setType(Integer type){
+		this.type = type;
+	}
+
+	public Integer getType(){
+		return type;
+	}
+
 	public void setState(Integer state){
 		this.state = state;
 	}
@@ -79,13 +86,13 @@ public class Users implements Serializable{
 	public Integer getState(){
 		return state;
 	}
-	
-	public void setType(Integer type){
-		this.type = type;
+
+	public void setName(String name){
+		this.name = name;
 	}
 
-	public Integer getType(){
-		return type;
+	public String getName(){
+		return name;
 	}
 
 	public void setCityId(Integer cityId){
@@ -213,9 +220,6 @@ public class Users implements Serializable{
 	public String getWhereTerm(){
 		return whereTerm;
 	}
-
-
-
 
 }
 
