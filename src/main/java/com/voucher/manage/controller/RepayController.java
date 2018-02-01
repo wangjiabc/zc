@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.bouncycastle.jce.provider.asymmetric.ec.Signature.ecCVCDSA;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -515,6 +516,151 @@ public class RepayController {
 		map.put("s2", s2);
 		
 		return map;
+	}
+	
+	@RequestMapping("/quashRepay")
+	public @ResponseBody Integer quashRepay(@RequestParam String loan_GUID, 
+			@RequestParam String shouldtime,
+			@RequestParam String repaytime,HttpServletRequest request){
+		
+		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
+		String campusAdmin=(String) session.getAttribute("campusAdmin");
+		
+		Double repay;
+		Double advance;
+		Double overdue;
+		String GUID;
+		
+		Date date=new Date();
+
+		Date shoulddate = null;
+		Date repaydate = null;
+		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			shoulddate = fmt.parse(shouldtime);
+			repaydate = fmt.parse(repaytime);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String shouldTime= sdf.format(shoulddate);
+		String repayTime= sdf.format(repaydate);
+		
+		Repayment oldRepayment=new Repayment();
+		
+		Map searchMap=new HashMap<>();
+		
+		searchMap.put("[Repayment].loan_GUID=",loan_GUID);
+		searchMap.put("convert(varchar(20),[Repayment].shouldtime,120)=",shouldTime);
+		searchMap.put("convert(varchar(20),[Repayment].repaytime,120)=",repayTime);
+		
+		List list=(List) loanDao.getAllRepayMent(5, 0, null, null, searchMap).get("rows");
+		
+		try{
+			oldRepayment=(Repayment) list.get(0);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return 0;
+		}
+		
+		repay=oldRepayment.getRepay();
+		advance=oldRepayment.getAdvance();
+		overdue=oldRepayment.getOverdue();
+
+		Repayment repayment=new Repayment();
+		
+		repayment.setStatus(generalRepay);
+		repayment.setRepay(0.0);
+		repayment.setAdvance(0.0);
+		repayment.setOverdue(0.0);
+		repayment.setQuashtime(date);
+		repayment.setQuashtransact(campusAdmin);
+		
+		String[] where={"[Repayment].loan_GUID=",loan_GUID,"convert(varchar(20),[Repayment].shouldtime,120)=",shouldTime,
+				"convert(varchar(20),[Repayment].repaytime,120)=",repayTime};
+		
+		repayment.setWhere(where);
+		
+		int status=loanDao.updateRepayMent(repayment);
+		
+		if(status>0){
+			LoanDeal oldloanDeal=new LoanDeal();
+			
+			Map searchMap2=new HashMap<>();
+			
+			searchMap2.put("[LoanDeal].loan_GUID=", loan_GUID);
+			
+			List list2=(List) loanDao.getAllLoanDeal(5, 0, null, null, searchMap2).get("rows");
+			
+			try{
+				oldloanDeal=(LoanDeal) list2.get(0);
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				return 0;
+			}
+			
+			Double oldAllRepay=oldloanDeal.getAllrepay();
+			GUID=oldloanDeal.getGUID();
+			Double allRepay=oldAllRepay-repay-advance-overdue;
+			System.out.println("GUID===="+GUID);
+			LoanDeal loanDeal=new LoanDeal();
+			
+			loanDeal.setAllrepay(allRepay);
+			loanDeal.setStatus(generalRepay);
+			
+			String[] where2={"[LoanDeal].loan_GUID=", loan_GUID};
+			
+			loanDeal.setWhere(where2);
+			
+			status=loanDao.updateLoanDeal(loanDeal);
+			
+			if(status>0){
+				ClientInfo oldClientInfo=new ClientInfo();
+				
+				Map searchMap3=new HashMap<>();
+				
+				searchMap3.put("[clientInfo].GUID=",GUID);
+				
+				List list3=(List) userDao.getAllClientInfo(5, 0, null, null, searchMap3).get("rows");
+				
+				try{
+					oldClientInfo=(ClientInfo) list3.get(0);
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					return 0;
+				}
+				
+				int clientStatus=oldClientInfo.getStatus();
+				
+				if(clientStatus<generalRepay){
+					ClientInfo clientInfo=new ClientInfo(); 
+					
+					clientInfo.setStatus(generalRepay);
+					
+					String[] where3={"[clientInfo].GUID=",GUID};
+					
+					clientInfo.setWhere(where3);
+					
+					status=userDao.updateClientInfoByGUID(clientInfo);
+					
+					if(status==0){
+						TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					}
+				}
+				
+			}
+			
+		}
+		
+		return 1;
+		
 	}
 	
 }

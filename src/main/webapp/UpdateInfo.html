@@ -1740,8 +1740,9 @@ function getcookie(name) {
         clientInfo.emergencyPhoneNum = $("#emergencyPhoneNum").val().toString();
         clientInfo.emergencyAddress = $("#emergencyAddress").val().toString();
 
+        try{
         clientInfo.emergencyName1 = $("#emergencyName1").val().toString();
-        clientInfo.emergencyRelation1 = $("#emergencyRelation1").val().toString();
+        clientInfo.emergencyRelation1 = $("#emergencyRelation1").val();
         clientInfo.emergencyUnitName1 = $("#emergencyUnitName1").val().toString();
         clientInfo.emergencyPhoneNum1 = $("#emergencyPhoneNum1").val().toString();
         clientInfo.emergencyAddress1 = $("#emergencyAddress1").val().toString();
@@ -1765,7 +1766,9 @@ function getcookie(name) {
         clientInfo.money = $("#money").val().toString();
         clientInfo.repay = $("#repay").val().toString();
         clientInfo.repay1 = $("#repay1").val().toString();
-
+        }catch(err){
+        	console.log(err);
+        }
 
         var clientInfodata = JSON.stringify(clientInfo);
 

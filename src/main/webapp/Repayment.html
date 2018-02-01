@@ -384,7 +384,10 @@
             	'<button type="button" title="提前还款" onclick="advanceDialog(this);" class="btn btn-warning">提前还款</button>'
         	].join('');
     	}else{
-    		return '<button type="button"  title="已完成" class="btn btn-success">已完成</button>';
+    		return [
+    		        '<button type="button"  title="已完成" class="btn btn-success">已完成</button>',
+    		        '<button type="button"  title="撤消还款" onclick="quashRepay(this);" class="btn btn-default">撤消还款</button>'
+    		].join('');
     	}
     }
 
@@ -497,6 +500,29 @@
             }
         });
 
+    }
+    
+    function quashRepay(temp){
+    	var hang = $(temp.parentNode).parent().prevAll().length + 1;
+        var loan_GUID = document.getElementById("table").rows[hang].cells[2].innerHTML;
+        var shouldtime = document.getElementById("table").rows[hang].cells[11].innerHTML;
+        var repaytime = document.getElementById("table").rows[hang].cells[12].innerHTML;
+       
+        $.post("repay/quashRepay.do", {
+            loan_GUID: loan_GUID,
+            shouldtime: shouldtime,
+            repaytime: repaytime
+        }, function (text) {
+            if (text == 1) {           	
+                alert("操作成功!");               
+                $("#table").bootstrapTable('refresh', {
+                    url: url
+                });
+            } else {
+                alert("操作失败!");
+            }
+        });
+ 
     }
     
     function actionTime(value, row, index) {

@@ -231,7 +231,7 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 				  		" FROM [ZC].[dbo].[LoanDeal]";	
 		}else{
 			sql="SELECT SUM(should_repay) "+
-			  		" FROM [ZC].[dbo].[LoanDeal] where campusAdmin="+campusAdmin;	
+			  		" FROM [ZC].[dbo].[LoanDeal] where campusAdmin= '"+campusAdmin+"'";	
 		}
 		
 		List list=this.getJdbcTemplate().query(sql,  new rowMapper());
@@ -248,7 +248,7 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 				  		" FROM [ZC].[dbo].[LoanDeal]";	
 		}else{
 			sql="SELECT SUM(allrepay) "+
-			  		" FROM [ZC].[dbo].[LoanDeal] where campusAdmin="+campusAdmin;	
+			  		" FROM [ZC].[dbo].[LoanDeal] where campusAdmin= '"+campusAdmin+"'";	
 		}
 		
 		List list=this.getJdbcTemplate().query(sql,  new rowMapper());

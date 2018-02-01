@@ -188,11 +188,11 @@
                                                     <td colspan="84">
                                                         <table border="0" cellspacing="0" cellpadding="0" width="100%"
                                                                class="child_table" style="table-layout: fixed;">
-                                                            <tbody>
+                                                            <tbody >
                                                             <tr style="position:relative;">
                                                                 <td colspan="3" id="mobile">
                                                                     {{ basicInfo.mobile }}
-                                                                    <span class="valid ml_20">已实名认证</span>
+                                                                    <span class="valid ml_20">{{basicInfoCheck[1].resultDesc}}</span>
                                                                 </td>
                                                                 <td colspan="2" style="position:absolute;left:50%;">入网时间
                                                                     <span class="ml_10" id="regTime">{{ basicInfo.regTime }}</span></td>
@@ -201,7 +201,7 @@
                                                                 <td colspan="5">手机号是否命中风险清单
 
 
-                                                                    <span class="unmingzhong ml_20">未命中</span>
+                                                                    <span class="unmingzhong ml_20"></span>
 
 
                                                                 </td>
@@ -229,26 +229,28 @@
                                                         <table border="0" cellspacing="0" cellpadding="0" width="100%"
                                                                class="child_table mt_14"
                                                                style="table-layout: fixed;margin-top: 0px;">
-                                                            <tbody>
-                                                            <tr>
-                                                                <td style="padding-right: 10px;">{{contactInfo.name}}</td>
+                                                            <tbody v-for="info in contactInfo">
+                                                            <tr >
+                                                                <td style="padding-right: 10px;">{{info.name}}</td>
                                                                 <td style="text-align: center;position: relative;padding:0 10px;"
-                                                                    class="phoneLine">{{contactInfo.mobile}}
+                                                                    class="phoneLine">{{info.mobile}}
                                                                 </td>
 
-
+															<!--  
                                                                 <td style="text-align: center;position: relative;padding:0 10px;">
-                                                                    {{contactInfo.relationship}}
+                                                                    {{contactInfo[0].relationship}}
                                                                 </td>
+                                                                -->
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="14">有该联系人通话记录，通话次数<span class="col_green">{{contactInfo.callCnt}}</span>
-                                                                    ，通话时长<span class="col_green">{{contactInfo.callTime}}</span>秒
-                                                                    ，通话排名 第<span class="col_green">{{contactInfo.callRank}}</span>位
-                                                                    ，<span class="col_green">{{contactInfo.isHitRiskList}}</span>风险清单
+                                                                <td colspan="14">通话次数<span class="col_green">{{info.callCnt}}</span>
+                                                                    ，通话时长<span class="col_green">{{info.callTime}}</span>秒
+                                                                    ，通话排名 第<span class="col_green">{{info.callRank}}</span>位
+                                                                    ，<span class="col_green">{{info.isHitRiskList}}</span>风险清单
                                                                 </td>
                                                             </tr>
-                                                            </tbody>
+                                                            </tbody>                                                            
+                                                            
                                                         </table>
                                                     </td>
                                                 </tr>
@@ -637,7 +639,10 @@
                                                 <tr v-for="item in multiLendCheck">
                                                     <th colspan="26" rowspan="1" style="padding-top: 0;padding-bottom: 0;vertical-align: middle;">{{item.desc}}
                                                     </th>
-                                                    <td colspan="74">借贷平台类型:{{item.details.lendType}}<span class="ml_10 col_red">借贷次数:{{item.details.lendCnt}}</span>
+                                                    <td colspan="74" v-for="det in item.details">
+                                                         <span class="ml_10 col_red">
+                                                          {{det.lendType}}
+                                                                                                                   次数:{{det.lendCnt}}</span>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -650,16 +655,32 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="card-title">
-                                        <div class="title" href="#aa6" data-toggle="collapse">风险电话检测</div>
+                                        <div class="title" href="#aa6" data-toggle="collapse">风险通话检测</div>
                                         <div id="aa6" class="mt_14 credit_table panel-collapse collapse in">
                                             <table border="0" cellspacing="0" cellpadding="0">
                                                 <tbody>
                                                 <tr v-for="item in riskCallCheck">
                                                     <th colspan="26">{{item.desc}}</th>
                                                     <td colspan="74">
-                                                        <div class="dis_line" style="width: 180px;">
-                                                            {{item.hitDesc}}
+                                                        <div class="dis_line" style="width: 280px;">
+                                                            {{item.hitDesc}} 通话{{item.cnt}}次，时长{{item.duration/60}}分钟
                                                         </div>
+                                                        <div class="credit_toggleTable" style="display: block;">
+																	<table border="0" cellspacing="0" cellpadding="0">
+																		<tbody><tr >
+																				<th>银行</th>
+																				<th>主被叫</th>
+																				<th>通话次数</th>
+																				<th>通话时长</th>
+																			</tr>
+																			<tr v-for="det in item.details">
+																				<td rowspan="1">{{det.callTag}}</td>
+																				<td>{{det.callType}}</td>
+																				<td>{{det.callTime}}<span>次</span></td>
+																				<td>{{det.callCnt}}<span>分钟</span></td>
+																			</tr>				
+																		</tbody></table>
+																</div>
                                                     </td>
                                                 </tr>
                                                 </tbody>

@@ -77,6 +77,12 @@ public class Repayment implements Serializable{
     @SQLDateTime(name="givetime")
 	private Date givetime;
 
+    @SQLString(name="quashtransact")
+	private String quashtransact;
+
+    @SQLDateTime(name="quashtime")
+	private Date quashtime;
+
     @SQLInteger(name="status")
 	private Integer status;
 
@@ -257,6 +263,22 @@ public class Repayment implements Serializable{
 
 	public Date getGivetime(){
 		return givetime;
+	}
+
+	public void setQuashtransact(String quashtransact){
+		this.quashtransact = quashtransact;
+	}
+
+	public String getQuashtransact(){
+		return quashtransact;
+	}
+
+	public void setQuashtime(Date quashtime){
+		this.quashtime = quashtime;
+	}
+
+	public Date getQuashtime(){
+		return quashtime;
 	}
 
 	public void setStatus(Integer status){
