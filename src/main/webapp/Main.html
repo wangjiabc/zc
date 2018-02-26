@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta content="" name="description"/>
     <meta content="webthemez" name="author"/>
-    <title>中财财务</title>
+    <title>泸州信息</title>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet"
           href="assets/bootstrap-table/bootstrap-table.css">
@@ -115,6 +115,8 @@
                             <button id="delete" type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>删除
                             </button>
+                            <select id="select" onchange="gradeChange();" class="btn btn-default dropdown-toggle" type="select" data-toggle="dropdown">
+                   			</select>
                         </div>
                         <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
                                data-url="/zc/clientinfo/getAll.do" data-search="true"
@@ -567,6 +569,7 @@ $("#img_input").on("change", function(e){
 
     if (type != 0) {
         $("#userhide").hide();
+        $("#select").hide();
     }
 
     function select() {
@@ -868,6 +871,52 @@ $("#img_input").on("change", function(e){
         return Y + M + D + h + m + s;
     }
 
+    
+    $.get("user/getAllUser.do", {
+    		limit:100,
+			offset:0
+    	}, function(text) {
+    	  var select= document.getElementById("select"); 
+    	  var option = document.createElement("option");
+  		  option.innerHTML="全部员工";
+  		  option.setAttribute("value","");
+  		  select.appendChild(option);
+  		  
+  		  var data=JSON.parse(text);
+  		  var users=data.rows;
+    	  
+  		 for(var i=0;i<users.length;i++){
+			  	var option = document.createElement("option");
+			  	option.innerHTML=users[i].name;
+			  	option.setAttribute("value",users[i].campusAdmin);
+			  	select.appendChild(option);
+		  }
+  		  
+     });
+    
+    
+    function gradeChange(){ 
+        var objS = document.getElementById("select"); 
+        var grade = objS.options[objS.selectedIndex].value; 
+        //console.log(objS.options[objS.selectedIndex]);
+        //alert(grade); 
+        var campusAdmin=grade;
+        
+        if(campusAdmin!=null){
+        	var url="clientinfo/getAll.do?search3="+campusAdmin;
+
+    		$(" #table").bootstrapTable('refresh',{
+				url : url
+				});
+         }else{
+        	 var url="clientinfo/getAll.do";
+
+     		$(" #table").bootstrapTable('refresh',{
+ 				url : url
+ 				});
+         }
+       } 
+    
 </script>
 </body>
 
