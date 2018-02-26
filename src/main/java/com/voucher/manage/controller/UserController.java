@@ -52,7 +52,7 @@ public class UserController {
 			searchMap.put("campusAdmin like ",search);
 		}		
          
-		searchMap.put("type >", "0");
+		searchMap.put("type >", "0");            //防止管理员把自己禁用
 		
 		HttpSession session=request.getSession();  //取得session的type变量，判断是否为公众号管理员
 		type=session.getAttribute("type").toString();

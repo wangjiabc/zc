@@ -35,8 +35,15 @@ public interface LoanDao {
 	
 	public Double getAllOverdue(String loan_GUID);
 	
-	public Double getAllStatistical1(String campusAdmin,Integer type);
+	public Double getAllStatisticalMoney(String campusAdmin,Integer type);
 	
-	public Double getAllStatistical2(String campusAdmin,Integer type);
+	public Double getAllStatisticalShould_repay(String campusAdmin,Integer type);
 	
+	public Double getAllStatisticalAllRepay(String campusAdmin,Integer type);
+	
+	public Double getAllStatisticalRepay1(String campusAdmin,Integer type);
+	
+	public Double getAllStatisticalRepay3(String campusAdmin,Integer type);
+	
+	public Double getAllStatisticalRepay4(String campusAdmin,Integer type);
 }

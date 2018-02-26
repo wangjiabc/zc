@@ -302,6 +302,10 @@ public class LoanController {
 		  int status=0;
 		  int i=0;
 		  
+		  calendar.set(Calendar.HOUR_OF_DAY, 0);  
+	      calendar.set(Calendar.SECOND, 0);  
+	      calendar.set(Calendar.MINUTE, 0);  
+	      calendar.set(Calendar.MILLISECOND, 0); 
 
 		  if(productInfo.getRepay_type()==0){
 			  for(;i<nper;i++){			  

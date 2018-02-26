@@ -67,12 +67,12 @@
 	}, function (text) {
 		var json = $.parseJSON(text);
    		 var data = [
-       		 { label: "签约合同金额",  data: json.s1},
-       	 	{ label: "剩余合同金额",  data: json.s2},
+       		 { label: "签约合同金额",  data: json.s2},
+       	 	{ label: "剩余合同金额",  data: (json.s2-json.r1)}
     		];
     	var data1 = [
         	{ label: "实际放款金额",  data: json.s1},
-        	{ label: "剩余本金",  data: json.s2},
+        	{ label: "已还金额",  data: json.r1},
    		 	];
     	 $.plot($("#flot-placeholder"), data, option);
          $.plot($("#flot-placeholder1"), data1, option1);

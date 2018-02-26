@@ -223,7 +223,24 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 	}
 
 	@Override
-	public Double getAllStatistical1(String campusAdmin, Integer type) {
+	public Double getAllStatisticalMoney(String campusAdmin, Integer type) {
+		// TODO Auto-generated method stub
+		String sql;
+		if(type==0){
+		  sql="SELECT SUM(money) "+
+				  		" FROM [ZC].[dbo].[LoanDeal]";	
+		}else{
+			sql="SELECT SUM(money) "+
+			  		" FROM [ZC].[dbo].[LoanDeal] where campusAdmin= '"+campusAdmin+"'";	
+		}
+		
+		List list=this.getJdbcTemplate().query(sql,  new rowMapper());
+		
+		return (Double) list.get(0);
+	}
+
+	@Override
+	public Double getAllStatisticalShould_repay(String campusAdmin, Integer type) {
 		// TODO Auto-generated method stub
 		String sql;
 		if(type==0){
@@ -238,9 +255,9 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 		
 		return (Double) list.get(0);
 	}
-
+	
 	@Override
-	public Double getAllStatistical2(String campusAdmin, Integer type) {
+	public Double getAllStatisticalAllRepay(String campusAdmin, Integer type) {
 		// TODO Auto-generated method stub
 		String sql;
 		if(type==0){
@@ -255,5 +272,76 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 		
 		return (Double) list.get(0);
 	}
+
+	@Override
+	public Double getAllStatisticalRepay1(String campusAdmin, Integer type) {
+		// TODO Auto-generated method stub
+		String sql;
+		if(type==0){
+		  sql="SELECT SUM(repay) "+
+				  		" FROM [ZC].[dbo].[Repayment]";	
+		}else{
+			sql="SELECT SUM(repay) "+
+			  		" FROM [ZC].[dbo].[Repayment] where campusAdmin= '"+campusAdmin+"'";	
+		}
+		
+		List list=this.getJdbcTemplate().query(sql,  new rowMapper());
+		
+		return (Double) list.get(0);
+	}
+
+	@Override
+	public Double getAllStatisticalRepay3(String campusAdmin, Integer type) {
+		// TODO Auto-generated method stub
+		String sql,sql2;
+		if(type==0){
+		  sql="SELECT SUM(stage)"+
+				  		" FROM [ZC].[dbo].[Repayment] where status = 3 ";	
+		  sql2="SELECT SUM(interest) "+
+			  		" FROM [ZC].[dbo].[Repayment] where status = 3 ";
+		}else{
+			sql="SELECT SUM(stage) "+
+			  		" FROM [ZC].[dbo].[Repayment] where where status = 3 AND campusAdmin= '"+campusAdmin+"'";	
+			sql2="SELECT SUM(interest) "+
+					" FROM [ZC].[dbo].[Repayment] where where status = 3 AND campusAdmin= '"+campusAdmin+"'";
+		}
+		
+		List list=this.getJdbcTemplate().query(sql,  new rowMapper());
+		
+		List list2=this.getJdbcTemplate().query(sql2,  new rowMapper());
+		
+		Double d=(Double) list.get(0);
+		Double d1=(Double) list2.get(0);
+		
+		return d+d1;
+	}
+
+	@Override
+	public Double getAllStatisticalRepay4(String campusAdmin, Integer type) {
+		// TODO Auto-generated method stub
+		String sql,sql2;
+		if(type==0){
+		  sql="SELECT SUM(stage)"+
+				  		" FROM [ZC].[dbo].[Repayment] where status > 3 ";	
+		  sql2="SELECT SUM(interest) "+
+			  		" FROM [ZC].[dbo].[Repayment] where status > 3 ";
+		}else{
+			sql="SELECT SUM(stage) "+
+			  		" FROM [ZC].[dbo].[Repayment] where where status > 3 AND campusAdmin= '"+campusAdmin+"'";	
+			sql2="SELECT SUM(interest) "+
+					" FROM [ZC].[dbo].[Repayment] where where status > 3 AND campusAdmin= '"+campusAdmin+"'";
+		}
+		
+		List list=this.getJdbcTemplate().query(sql,  new rowMapper());
+		
+		List list2=this.getJdbcTemplate().query(sql2,  new rowMapper());
+		
+		Double d=(Double) list.get(0);
+		Double d1=(Double) list2.get(0);
+		
+		return d+d1;
+	}
+
+	
 	
 }

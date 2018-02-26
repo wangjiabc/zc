@@ -509,11 +509,21 @@ public class RepayController {
 		String campusAdmin=(String) session.getAttribute("campusAdmin");
 		Integer type=(Integer) session.getAttribute("type");
 		
-		Double s1=loanDao.getAllStatistical1(campusAdmin, type);
-		Double s2=loanDao.getAllStatistical2(campusAdmin, type);
+		Double s1=loanDao.getAllStatisticalMoney(campusAdmin, type);
+		Double s2=loanDao.getAllStatisticalShould_repay(campusAdmin, type);
+		Double s3=loanDao.getAllStatisticalAllRepay(campusAdmin, type);
+		
+		Double r1=loanDao.getAllStatisticalRepay1(campusAdmin, type);
+		Double r3=loanDao.getAllStatisticalRepay3(campusAdmin, type);
+		Double r4=loanDao.getAllStatisticalRepay4(campusAdmin, type);
 		
 		map.put("s1", s1);
 		map.put("s2", s2);
+		map.put("s3", s3);
+		
+		map.put("r1", r1);
+		map.put("r3", r3);
+		map.put("r4", r4);
 		
 		return map;
 	}

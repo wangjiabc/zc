@@ -339,7 +339,7 @@ public class ClientInfoController {
 	
 	@RequestMapping(value = "/getAll")
 	public @ResponseBody Map getAllClientInfo(@RequestParam Integer limit,@RequestParam Integer offset,String sort,String order,
-			String search,String search2,HttpServletRequest request) {
+			String search,String search2,String search3,HttpServletRequest request) {
 		Integer type=(Integer) request.getSession().getAttribute("type");
 	    String campusAdmin=(String) request.getSession().getAttribute("campusAdmin");
 		if(order!=null&&order.equals("asc")){
@@ -360,6 +360,10 @@ public class ClientInfoController {
 		if(search2!=null&&!search2.trim().equals("")){
 			searchMap.put("[ZC].[dbo].[clientInfo].status = ", search2);
 		}	
+		
+		if(search3!=null&&!search3.trim().equals("")){
+			searchMap.put("[ZC].[dbo].[clientInfo].campusAdmin =", search3);
+		}
 		
 		if(type>0){
 			searchMap.put("[ZC].[dbo].[clientInfo].campusAdmin =", campusAdmin);
