@@ -692,14 +692,21 @@ $("#img_input").on("change", function(e){
 
         var val = document.getElementById("table").rows[hang].cells[5]; //取得所在列的值
         var useridCard = val.innerHTML;
-        val = document.getElementById("table").rows[hang].cells[3]; //取得所在列的值
-        var userName = val.innerHTML;
+        val = document.getElementById("table").rows[hang].cells[2]; //取得所在列的值
+        var userName = repalceHtml(val.innerHTML);
         val = document.getElementById("table").rows[hang].cells[6]; //取得所在列的值
         var userPhoneNum = val.innerHTML;
 
         window.location.href = "mobileReportList.html?useridCard=" + useridCard +
             "&userName=" + userName + "&userPhoneNum=" + userPhoneNum;
     }
+
+  	//js去掉html标签只去文字内容
+    function repalceHtml(str){  
+        var dd=str.replace(/<\/?.+?>/g,"");  
+        var dds=dd.replace(/ /g,"");//dds为得到后的内容  
+        return dds;  
+    }  
 
     
     function image(temp) {
