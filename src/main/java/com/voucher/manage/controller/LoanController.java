@@ -510,7 +510,7 @@ public class LoanController {
 		repayment.setRemark(remark);
 		Date shoulddate = null;
 		Date repaydate = null;
-		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			shoulddate = fmt.parse(shouldtime);
 			repaydate = fmt.parse(repaytime);
@@ -519,12 +519,12 @@ public class LoanController {
 			e1.printStackTrace();
 		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String shouldTime= sdf.format(shoulddate);
 		String repayTime= sdf.format(repaydate);
 		
-		String[] where={"[Repayment].loan_GUID=",loan_GUID,"convert(varchar(20),[Repayment].shouldtime,120)=",shouldTime,
-				"convert(varchar(20),[Repayment].repaytime,120)=",repayTime};
+		String[] where={"[Repayment].loan_GUID=",loan_GUID,"convert(varchar(10),[Repayment].shouldtime,120)=",shouldTime,
+				"convert(varchar(10),[Repayment].repaytime,120)=",repayTime};
 		repayment.setWhere(where);
 		
 		System.out.println("shouldtime="+shouldTime);
@@ -791,6 +791,78 @@ public class LoanController {
 		map.put("all", allCount);
 		
 		map.put("count", count);
+		
+		return map;
+	}
+	
+	
+	@RequestMapping("/contractInfo")
+	public @ResponseBody Map contractInfo(@RequestParam String loan_GUID,HttpServletRequest request){
+		
+		LoanDeal loanDeal = null;
+		
+		ClientInfo clientInfo = null;
+		
+		Date repayTime = null;
+		
+		int term = 0;
+		
+		Map searchMap=new HashMap<>();
+		
+		searchMap.put("[LoanDeal].loan_GUID=",loan_GUID);
+		
+		List list=(List) loanDao.getAllLoanDeal(2, 0, null, null, searchMap).get("rows");
+		
+		try{
+			
+			loanDeal=(LoanDeal) list.get(0);
+			
+			String GUID=loanDeal.getGUID();
+			
+			Map searchMap2=new HashMap<>();
+			
+			searchMap2.put("[clientInfo].GUID=", GUID);
+			
+			clientInfo=userDao.getClientInfoByGUID(GUID);
+			
+			Date datetime=loanDeal.getDatetime();
+			
+			int day=loanDeal.getNper()*loanDeal.getCycle();
+			
+			Calendar cal = Calendar.getInstance();
+			
+			cal.setTime(datetime);
+			
+			cal.add(Calendar.DATE, day);
+			
+			repayTime=cal.getTime();
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+			Calendar c1 = Calendar.getInstance();
+	        Calendar c2 = Calendar.getInstance();
+	        
+	        c1.setTime(datetime);
+	        c2.setTime(repayTime);
+			
+	        int result=c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
+	        
+	        term=result == 0 ? 1 : Math.abs(result);
+	        
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		Map  map = new HashMap<>();
+		
+		map.put("loanDeal", loanDeal);
+		
+		map.put("clientInfo", clientInfo);
+		
+		map.put("repayTime", repayTime);
+		
+		map.put("term", term);
 		
 		return map;
 	}

@@ -41,6 +41,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
 
+	<script src="js/jquery.table2excel.js"></script>
+
 </head>
 
 <body>
@@ -57,6 +59,9 @@
                     <div class="panel-body">
                         <div class="table-responsive">
                             <div id="toolbar" class="btn-group">
+                            <button id="export" type="button" class="btn btn-default">
+                                		导出数据到excel
+                            </button>
                             </div>
                             <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
                                    data-url="" data-search="true"
@@ -79,6 +84,7 @@
                                     <th data-align="left" data-field="shouldtime" data-formatter="actionTime">还款开始日期
                                     </th>
                                     <th data-align="left" data-field="repaytime" data-formatter="actionTime">还款结束日期</th>
+                                    <th data-align="left" data-field="givetime" data-formatter="actionTime">实际还款日期</th>
                                     <th data-align="left" data-field="datetime" data-formatter="actionTime">申请日期</th>
                                     <th data-align="left" data-field="status" data-formatter="actionStatus">借款状态</th>
                                     <th data-align="left" data-field="repay">实际还款</th>
@@ -330,6 +336,18 @@
         url: url
     });
 
+    $("#export").click(function(){
+    	alert("aaa");
+        $("#table").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "myFile.xls",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true
+        });
+    })
+    
     $('#queryUser').click(function () {
         $('#userinfo-form').bootstrapValidator('validate');
         if ($('#userinfo-form').bootstrapValidator('validate') == false) {
@@ -533,7 +551,7 @@
         h = date.getHours() + ':';
         m = date.getMinutes() + ':';
         s = date.getSeconds();
-        return Y + M + D + h + m + s;
+        return Y + M + D;
     }
 
 </script>

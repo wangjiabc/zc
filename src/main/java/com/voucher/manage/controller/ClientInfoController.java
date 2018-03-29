@@ -389,6 +389,13 @@ public class ClientInfoController {
 		return clientInfo;
 	}
 	
+	@RequestMapping(value="/getByUseridCard")
+	public @ResponseBody ClientInfo getClientInfoByIdCard(@RequestParam String guid,HttpServletRequest request){
+		ClientInfo clientInfo=userDao.getClientInfoByIdCard(guid);
+		
+		return clientInfo;
+	}
+	
 	@RequestMapping(value="/getByGuid")
 	public @ResponseBody ClientInfo getClientInfoByGuid(@RequestParam String guid,HttpServletRequest request){
 		ClientInfo clientInfo=userDao.getClientInfoByGUID(guid);

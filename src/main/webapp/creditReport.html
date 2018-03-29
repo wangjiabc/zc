@@ -207,14 +207,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">第一联系人姓名</label>
+                                        <label class="col-sm-4 control-label">第三联系人姓名</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control"
                                                    id="contactName3rd" placeholder="第三联系人姓名">
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-3">
-                                        <label class="col-sm-4 control-label">第一联系人身份证号</label>
+                                        <label class="col-sm-4 control-label">第三联系人身份证号</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control"
                                                    id="contactIdentityNo3rd"
@@ -266,10 +266,30 @@ function getQueryString(key){
   var useridCard=getQueryString("useridCard");
   var userName=getQueryString("userName");
   var userPhoneNum=getQueryString("userPhoneNum");
+  var guid=getQueryString("guid");
 
   $("#username").val(userName);  
   $("#identityCardNo").val(useridCard);
   $("#userPhoneNum").val(userPhoneNum);
+  
+  $.ajax({
+      type: "get",
+      url: "clientinfo/getByUseridCard.do",
+      data: {guid: guid},
+      success: function (data) {
+          var obj = $.parseJSON(data);
+          console.log(obj);
+          $("#contactName1st").val(obj.kinshipName);
+          $("#contactMobile1st").val(obj.kinshipPhoneNum);
+          $("#contactRelationship1st").val(obj.kinshipRelation);
+          $("#contactName2nd").val(obj.emergencyName);
+          $("#contactMobile2nd").val(obj.emergencyPhoneNum);
+          $("#contactRelationship2nd").val(obj.emergencyRelation);
+          $("#contactName3rd").val(obj.emergencyName1);
+          $("#contactMobile3rd").val(obj.emergencyPhoneNum1);
+          $("#contactRelationship3rd").val(obj.emergencyRelation1);
+      	}
+      });
   
    var control = document.getElementById("control");
 
@@ -283,6 +303,7 @@ function getQueryString(key){
         var password=$("#password").val().toString();
         var clientInfo = new Object();
 
+        try{
         clientInfo.contactName1st=$("#contactName1st").val().toString();
         clientInfo.contactIdentityNo1st=$("#contactIdentityNo1st").val().toString();
         clientInfo.contactMobile1st=$("#contactMobile1st").val().toString();
@@ -297,6 +318,10 @@ function getQueryString(key){
         clientInfo.contactIdentityNo3rd=$("#contactIdentityNo3rd").val().toString();
         clientInfo.contactMobile3rd=$("#contactMobile3rd").val().toString();
         clientInfo.contactRelationship3rd=$("#contactRelationship3rd").val().toString();
+        }catch (e) {
+			// TODO Auto-generated catch block
+			alert("紧急联系人错误");
+		}
         var clientInfodata = JSON.stringify(clientInfo);
 
         if(password==""){

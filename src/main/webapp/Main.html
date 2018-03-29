@@ -696,9 +696,11 @@ $("#img_input").on("change", function(e){
         var userName = repalceHtml(val.innerHTML);
         val = document.getElementById("table").rows[hang].cells[6]; //取得所在列的值
         var userPhoneNum = val.innerHTML;
+        val = document.getElementById("table").rows[hang].cells[11]; //取得所在列的值
+        var guid = val.innerHTML;
 
         window.location.href = "mobileReportList.html?useridCard=" + useridCard +
-            "&userName=" + userName + "&userPhoneNum=" + userPhoneNum;
+            "&userName=" + userName + "&userPhoneNum=" + userPhoneNum+"&guid="+guid;
     }
 
   	//js去掉html标签只去文字内容

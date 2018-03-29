@@ -193,7 +193,8 @@
             // '<a  href="javascript:void(0)" onclick="report(this);" title="点击查看征信报告">',
             // '&nbsp;<img src="img/detail.jpg" width="25px" height="25px">&nbsp;',
             // '</a>&nbsp;',
-            '<button type="button" title="点击办理还款业务" onclick="repayment(this);" class="btn btn-danger">办理还款</button>'
+            '<button type="button" title="点击办理还款业务" onclick="repayment(this);" class="btn btn-danger">办理还款</button>',
+            '<button type="file" title="打印合同" onclick="contract(this);" class="btn btn-success">打印合同</button>&nbsp;'
         ].join('');
     }
 
@@ -202,6 +203,13 @@
         var loan_GUID =document.getElementById("table").rows[hang].cells[2].innerHTML;
         var useridCard =document.getElementById("table").rows[hang].cells[5].innerHTML;
         window.location.href = "Repayment.html?loan_GUID="+loan_GUID+"&useridCard="+useridCard;
+    }
+    
+    function contract(temp){
+    	var hang = $(temp.parentNode).parent().prevAll().length + 1;
+        var loan_GUID =document.getElementById("table").rows[hang].cells[2].innerHTML;
+        var useridCard =document.getElementById("table").rows[hang].cells[5].innerHTML;
+        window.location.href = "contract.html?loan_GUID="+loan_GUID+"&useridCard="+useridCard;
     }
     
     function actionTime(value, row, index){

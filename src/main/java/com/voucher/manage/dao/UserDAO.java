@@ -37,6 +37,8 @@ public interface UserDAO {
 	
 	public ClientInfo getClientInfoById(String id);
 	
+	public ClientInfo getClientInfoByIdCard(String useridCard);
+	
 	public ClientInfo getClientInfoByGUID(String guid);
 	
 	public ClientInfo getClientInfoQuery(String username,String userPhoneNum,String useridCard);

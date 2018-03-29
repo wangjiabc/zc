@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>泸州信息</title>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet"
+          href="assets/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet"
+          href="assets/bootstrap-table/bootstrap-editable.css">
+    <script src="assets/bootstrap-table/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap-table/bootstrap.min.css">
+    <script src="assets/bootstrap-table/bootstrap-table.js"></script>
+    <script src="assets/bootstrap-table/bootstrap-table-export.js"></script>
+    <script src="assets/bootstrap-table/tableExport.js"></script>
+    <script src="assets/bootstrap-table/bootstrap-table-editable.js"></script>
+
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+    <script src="assets/js/select2.full.min.js"></script>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <link href="assets/css/checkbox3.min.css" rel="stylesheet">
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles1.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+
+</head>
+
+<body>
+<section class="content">
+    <div class="header">
+        <h1 class="page-header">产品设置</h1>
+    </div>
+
+
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="card-title">
+                            <div class="title">产品信息</div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <div id="toolbar" class="btn-group">
+                                <button id="plus" type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新 增
+                                </button>
+                                <button id="delete" type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>删 除
+                                </button>
+                            </div>
+                            <table id="table" class="table " data-toggle="table" data-toolbar="#toolbar"
+                                   data-url="loan/getAllProduct.do" data-search="true"
+                                   data-show-refresh="true" data-show-toggle="true"
+                                   data-side-pagination="server" data-pagination="true"
+                                   data-show-columns="true" data-sort-order="desc">
+                                <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-align="left" data-field="id">id</th>
+                                    <th data-align="left" data-field="proName">产品名称</th>
+                                    <!--<th data-align="left" data-field="money" data-formatter="actionInterest">借款金额</th>-->
+                                    <!--<th data-align="left" data-field="nper" >期数</th>-->
+                                    <!--<th data-align="left" data-field="cycle" data-formatter="actionCycle">产品周期</th>-->
+                                    <!--<th data-align="left" data-field="should_repay" data-formatter="actionInterest">应还款总额</th>-->
+                                    <!--<th data-align="left" data-field="stage" data-formatter="actionInterest">每期应还本金</th>-->
+                                    <th data-align="left" data-field="repay_type" data-formatter="actionType">还款类型</th>
+                                    <th data-align="left" data-field="interest" data-formatter="actionInterest">服务费
+                                    </th>
+                                    <th data-align="left" data-field="datetime" data-formatter="actionTime">产品创建日期</th>
+                                    <th data-align="left" data-field="pro_GUID">产品编号</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+<!--对话框-->
+<div class="modal fade" id="myDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <h3 class="modal-title" id="myModalLabel">产品添加</h3>
+            <div class="modal-body">
+
+                <form class="form-horizontal" id="product-form">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">产品名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="proName"
+                                       placeholder="产品名称">
+                            </div>
+                        </div>
+                        
+                        <!--  
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">产品周期</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="cycle">
+                                </select>
+                            </div>
+                        </div>
+                        -->
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">服务费</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="interest">
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">产品类型</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="repayType" onchange="selectType()">
+                                	<option value="0">等额本息</option>
+                                    <option value="1">先息后本</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button type="button" onclick="commitDataButton();" class="btn btn-primary">添 加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除对话框 -->
+<div class="modal fade" id="deldialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                警 告
+            </div>
+            <div class="modal-body">确定要删除这条语句？</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" id="deleteBtn" class="btn btn-danger">确 定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- 警告对话框 -->
+<div class="modal fade" id="alertdialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header blue">
+                <div>
+                    <strong id="alertchar" style="font-size:20px"></strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button type="button" id="commitFoodDataButton" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var repayType=0;
+
+    for (var a = 1; a <= 500; a++) {
+        $("#interest").append("<option value='" + a + "'>每万元日息" + a + "元 </option>");
+    }
+
+    function getcookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+
+    var type = getcookie('type');
+
+    if (type != 0) {
+        $("#userhide").hide();
+    }
+
+    function selectType(){
+    	 var objS = document.getElementById("repayType");
+         repayType = objS.options[objS.selectedIndex].value;
+    }
+    
+    function commitDataButton() {
+        var name = $('#proName').val().toString();
+        var interest = $('#interest').val().toString();
+
+        if (name == "") {
+            alert("产品名称不能空!");
+            return;
+        }
+
+
+        if (!(/^\d+(\.\d{1,2})?$/).test(interest)) {
+            alert("金额只能为数字,检查后重新输入!");
+            return;
+        }
+
+        var product = new Object();
+
+        product.name = name;
+        product.interest = interest;
+        product.repay_type=repayType;
+
+        var productData = JSON.stringify(product);
+
+        $.post("loan/insertProduct.do", {
+            productData: productData
+        }, function (text) {
+            if (text == 1) {
+                alert("添加成功");
+
+                var url = "loan/getAllProduct.do";
+
+                $('#myDialog').modal("hide");
+
+                $(" #table").bootstrapTable('refresh', {
+                    url: url
+                });
+
+            } else {
+                alert("添加失败");
+            }
+        });
+        
+        
+    }
+
+    $('#plus').click(function () {
+        $('#myDialog').modal("show");
+
+    });
+
+
+    $('#edit').on('click', function () {
+        var array = $('#table').bootstrapTable('getSelections');
+        tag = 1;
+        if (array.length > 1) {
+            $('#alertchar').text('编辑操作不能同时选中多条记录！');
+            $('#commitFoodDataButton').hide();
+            $('#alertdialog').modal("show");
+        } else if (array.length == 0) {
+            $('#alertchar').text('请先选中某条记录！');
+            $('#commitFoodDataButton').hide();
+            $('#alertdialog').modal("show");
+        } else {
+            $("#myModalLabel").text("编辑产品");
+            $("#myDialog").modal('show');
+
+            // top.location.href = "UpdateInfo.html?uuid=" + array[0].guid;
+            /*
+            var status=document.getElementsByName("status")
+            status[1-array[0].status].checked=true;
+            */
+        }
+    });
+
+
+    $('#delete').click(function () {
+        var array = $('#table').bootstrapTable('getSelections'); //获取选中的所有记录
+        console.log(array);
+        var foodIdString = "";
+        var deltext = "";
+        if (array.length == 0) {
+
+            $('#alertchar').text('请先选中要删除的记录！');
+            $('#commitFoodDataButton').hide();
+            $('#alertdialog').modal("show");
+
+        } else {
+            for (var i = array.length - 1; i >= 0; i--) {
+                if (i == 0) {
+                    foodIdString += array[i].pro_GUID; //连接最末不加，号
+                    deltext += array[i].proName;
+                } else {
+                    foodIdString += array[i].pro_GUID + ","; //id用逗号连接
+                    deltext += array[i].proName + ",";
+                }
+            }
+
+
+            var foodtext = '是否确定要删除 ' + deltext + ' ? ';
+
+            $('#alertchar').text(foodtext);
+            $('#commitFoodDataButton').show();
+            $('#alertdialog').modal("show");
+
+            $('#commitFoodDataButton').click(function () {
+                //做删除的访问请求
+                $.post("loan/delProduct.do", {
+                    pro_GUIDs: foodIdString
+                }, function (text) {
+                    if (text == 1) {
+                        /*
+                         * 刷新页面
+                         */
+                        var url = "loan/getAllProduct.do";
+                        $(" #table").bootstrapTable('refresh', {
+                            url: url
+                        });
+
+                        $('#alertchar').text("删除成功");
+                        setTimeout(function () {
+                            $('#alertdialog').modal("hide");
+                        }, 1000);
+                    } else if (text = 2) {
+                        $('#alertchar').text("正在使用的产品不能删除");
+                    } else {
+                        $('#alertchar').text("删除失败");
+                        setTimeout(function () {
+                            $('#alertdialog').modal("hide");
+                        }, 1000);
+                    }
+                });
+            });
+        }
+    });
+
+
+    function actionTime(value, row, index) {
+        var date = new Date(value);
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y + M + D + h + m + s;
+    }
+
+
+    function actionInterest(value, row, index) {
+        var text = "每万元日息"+value + "元";
+        return text;
+    }
+
+    function actionCycle(value, row, index) {
+        var text = value + " 天";
+        return text;
+    }
+
+    function actionType(value, row, index) {
+        if(value==0){
+        	return "等额本息";  
+        }else if(value==1){
+        	return "先息后本";
+        }
+    }
+</script>
+</body>
+
+</html>

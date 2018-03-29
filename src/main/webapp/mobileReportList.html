@@ -106,7 +106,8 @@
     var useridCard = getQueryString("useridCard");
     var userName = getQueryString("userName");
     var userPhoneNum = getQueryString("userPhoneNum");
-
+    var guid = getQueryString("guid");
+    
     console.log(userName);
 
     var url = "/zc/credit/getReportByIdCard.do?useridCard=" + useridCard;
@@ -148,7 +149,7 @@
     $("#plus").click(function () {
 
         window.location.href = "creditReport.html?useridCard=" + useridCard +
-            "&userName=" + userName + "&userPhoneNum=" + userPhoneNum;
+            "&userName=" + userName + "&userPhoneNum=" + userPhoneNum+"&guid="+guid;
 
     })
 

@@ -517,13 +517,20 @@ public class RepayController {
 		Double r3=loanDao.getAllStatisticalRepay3(campusAdmin, type);
 		Double r4=loanDao.getAllStatisticalRepay4(campusAdmin, type);
 		
-		map.put("s1", s1);
-		map.put("s2", s2);
-		map.put("s3", s3);
+		double ds1=s1;
+		double ds2=s2;
+		double ds3=s3;
+		double dr1=r1;
+		double dr3=r3;
+		double dr4=r4;
 		
-		map.put("r1", r1);
-		map.put("r3", r3);
-		map.put("r4", r4);
+		map.put("s1", (int)ds1);
+		map.put("s2", (int)ds2);
+		map.put("s3", (int)ds3);
+		
+		map.put("r1", (int)dr1);
+		map.put("r3", (int)dr3);
+		map.put("r4", (int)dr4);
 		
 		return map;
 	}
@@ -545,7 +552,7 @@ public class RepayController {
 
 		Date shoulddate = null;
 		Date repaydate = null;
-		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			shoulddate = fmt.parse(shouldtime);
 			repaydate = fmt.parse(repaytime);
@@ -554,7 +561,7 @@ public class RepayController {
 			e1.printStackTrace();
 		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String shouldTime= sdf.format(shoulddate);
 		String repayTime= sdf.format(repaydate);
 		
@@ -563,8 +570,8 @@ public class RepayController {
 		Map searchMap=new HashMap<>();
 		
 		searchMap.put("[Repayment].loan_GUID=",loan_GUID);
-		searchMap.put("convert(varchar(20),[Repayment].shouldtime,120)=",shouldTime);
-		searchMap.put("convert(varchar(20),[Repayment].repaytime,120)=",repayTime);
+		searchMap.put("convert(varchar(10),[Repayment].shouldtime,120)=",shouldTime);
+		searchMap.put("convert(varchar(10),[Repayment].repaytime,120)=",repayTime);
 		
 		List list=(List) loanDao.getAllRepayMent(5, 0, null, null, searchMap).get("rows");
 		
@@ -589,8 +596,8 @@ public class RepayController {
 		repayment.setQuashtime(date);
 		repayment.setQuashtransact(campusAdmin);
 		
-		String[] where={"[Repayment].loan_GUID=",loan_GUID,"convert(varchar(20),[Repayment].shouldtime,120)=",shouldTime,
-				"convert(varchar(20),[Repayment].repaytime,120)=",repayTime};
+		String[] where={"[Repayment].loan_GUID=",loan_GUID,"convert(varchar(10),[Repayment].shouldtime,120)=",shouldTime,
+				"convert(varchar(10),[Repayment].repaytime,120)=",repayTime};
 		
 		repayment.setWhere(where);
 		
