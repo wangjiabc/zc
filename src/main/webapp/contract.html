@@ -697,7 +697,7 @@ style='font-size:12.0pt'><span class="sMonth"></span></span></u></b><span style=
 font-family:宋体;mso-ascii-font-family:Calibri;mso-ascii-theme-font:minor-latin;
 mso-fareast-font-family:宋体;mso-fareast-theme-font:minor-fareast;mso-hansi-font-family:
 Calibri;mso-hansi-theme-font:minor-latin'>月</span><b><u><span lang=EN-US
-style='font-size:12.0pt'><span class="eDay"></span></span></u></b><span style='font-size:12.0pt;
+style='font-size:12.0pt'><span class="sDay"></span></span></u></b><span style='font-size:12.0pt;
 font-family:宋体;mso-ascii-font-family:Calibri;mso-ascii-theme-font:minor-latin;
 mso-fareast-font-family:宋体;mso-fareast-theme-font:minor-fareast;mso-hansi-font-family:
 Calibri;mso-hansi-theme-font:minor-latin'>日签署的《借款》借款人民币（大写）</span><span
@@ -1033,8 +1033,8 @@ lang=EN-US style='font-size:14.0pt'><o:p></o:p></span></u></p>
 			$(".useridCard").text(clientInfo.useridCard);
 			$(".date").text(actionTime(loanDeal.datetime));
 		   
-			$(".money").text(loanDeal.money);
-			$(".bigMoney").text(toChars(loanDeal.money));
+			$(".money").text(loanDeal.should_repay);
+			$(".bigMoney").text(toChars(loanDeal.should_repay));
 			
 			
 			$(".term").text(json.term);

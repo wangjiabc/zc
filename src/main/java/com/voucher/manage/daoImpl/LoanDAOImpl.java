@@ -115,6 +115,7 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 		}
 		
 		if(order!=null){
+			order=order+" , datetime desc ";
 			loanDeal.setOrder(order);
 		}		
 		
@@ -165,6 +166,7 @@ public class LoanDAOImpl extends JdbcDaoSupport implements LoanDao{
 		}
 		
 		if(order!=null){
+			order=order+" , repaytime asc ";
 			repayment.setOrder(order);
 		}
 		

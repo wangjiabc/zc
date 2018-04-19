@@ -209,7 +209,7 @@ public class RepayController {
 		repayment.setRemark(remark);
 		Date shoulddate = null;
 		Date repaydate = null;
-		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			shoulddate = fmt.parse(shouldtime);
 			repaydate = fmt.parse(repaytime);
@@ -218,12 +218,12 @@ public class RepayController {
 			e1.printStackTrace();
 		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String shouldTime= sdf.format(shoulddate);
 		String repayTime= sdf.format(repaydate);
 		
-		String[] where={"[Repayment].loan_GUID=",loan_GUID,"convert(varchar(20),[Repayment].shouldtime,120)=",shouldTime,
-				"convert(varchar(20),[Repayment].repaytime,120)=",repayTime};
+		String[] where={"[Repayment].loan_GUID=",loan_GUID,"convert(varchar(10),[Repayment].shouldtime,120)=",shouldTime,
+				"convert(varchar(10),[Repayment].repaytime,120)=",repayTime};
 		
 		repayment.setWhere(where);
 		
@@ -245,6 +245,8 @@ public class RepayController {
 			Double allRepay=loanDao.getAllRepay(loan_GUID);
 			Double allOverdue=loanDao.getAllOverdue(loan_GUID);
 			LoanDeal loanDeal=new LoanDeal();
+			
+			System.out.println("allRepay="+allRepay);
 			
 			loanDeal.setAllrepay(allRepay+advance);
 			loanDeal.setShould_overdue(allOverdue);

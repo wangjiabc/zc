@@ -498,6 +498,11 @@
         var advance=$("#advance").val();
         var remark=$("#remark2").val();
         
+        if(advance==null||advance==0){
+        	alert("提前还款金额不能为0");
+        	return;
+        }
+        
         $.post("repay/updateRepayment.do", {
             loan_GUID: loan_GUID,
             shouldtime: shouldtime,
@@ -544,6 +549,9 @@
     }
     
     function actionTime(value, row, index) {
+    	if(value==null){
+    		return null;
+    	}
         var date = new Date(value);
         Y = date.getFullYear() + '-';
         M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
@@ -551,6 +559,7 @@
         h = date.getHours() + ':';
         m = date.getMinutes() + ':';
         s = date.getSeconds();
+
         return Y + M + D;
     }
 
